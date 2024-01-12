@@ -1,13 +1,14 @@
 class Product{
     static lastID = 0;
+    static imgPath = "products imgs/"
     #id; #name; #price; #quantity; #description; #image; #sellerID;
-    constructor(id, name, price, quantity, description, image, sellerID){
+    constructor(name, price, quantity, description, image, sellerID){
         this.#id = ++Product.lastID;
         this.#name = name;
         this.#price = price;
         this.#quantity = quantity;
         this.#description = description;
-        this.#image = image;
+        this.#image = Product.imgPath + image;
         this.#sellerID = sellerID;
     }
     set quantity(_quantity){
@@ -31,7 +32,7 @@ class Product{
             this.#name = "No name";
         }
         else{
-            this.#name = name;
+            this.#name = name.trim();
         }
     }
     set description(_description){
@@ -55,7 +56,7 @@ class Product{
             this.#sellerID = 0;
         }
         else{
-            this.#sellerID = _sellerID;
+            this.#sellerID = +_sellerID;
         }
     }
     get quantity(){
@@ -75,6 +76,17 @@ class Product{
     }
     get sellerID(){
         return this.#sellerID;
+    }
+    getProduct(){
+        return {
+            id: this.#id,
+            name: this.#name,
+            price: this.#price,
+            quantity: this.#quantity,
+            description: this.#description,
+            image: this.#image,
+            sellerID: this.#sellerID
+        }
     }
 }
 export { Product };
