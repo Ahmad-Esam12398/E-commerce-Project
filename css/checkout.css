@@ -1,0 +1,152 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color: rgba(245, 245, 245, 0.822);
+}
+
+.customerandorder{
+    width: 80vw;
+    margin: auto;
+    margin-top: 10vh;
+}
+.customer h4{
+    margin-top: 3vh;
+}
+.form-control{
+    width: 40vw;
+    margin-top: 3vh;
+}
+.fname ,.lname{
+    width: 19vw; 
+}
+.lname{
+    margin-left: 2vw;
+}
+input:active{
+    border: 1px dashed rgb(202, 151, 97);
+}
+.form-select{
+    width: 40vw;
+    margin-top: 3vh;
+}
+.accordion{
+    width: 40vw;
+}
+.accordion p{
+    margin-left: 2vw;
+    margin-top: 2vh;
+    color: black;
+    font-size: 15px;
+}
+hr {
+    width: 37vw;
+    font-size: 50px;
+    margin-left: 1vw;
+    color: black;
+    margin-top: 2vh;
+}
+.payment{
+    border-top: 2px solid black;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    width: 37vw;
+     margin-left: 2vw;
+     margin-top: 2vh;
+     background-color:rgba(245, 245, 245, 0.822);
+}
+.footer1 {
+    width: 99.7vw;
+    height: 15vh;
+    margin-top: 50px; 
+}
+
+.footer1 p {
+    margin-left: 7vw;
+    margin-top: 5vh;
+}
+.table-container {
+    margin-top: 30px;
+    border-radius: 50px; 
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+  
+    border: 2px solid rgb(176, 173, 173);
+   
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+td {
+    border-top: 1px solid  rgb(176, 173, 173); 
+    border-bottom: 1px solid  rgb(176, 173, 173); 
+}
+
+@media only screen and (max-width: 768px) {
+    /* Add your tablet-specific styles here */
+    .form-select,
+    .accordion,
+    .payment,
+    .footer1 {
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .orders {
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    hr {
+        width: 78vw;
+    }
+}
+
+
+
+
+/* Media Query for Mobiles */
+@media only screen and (max-width: 480px) {
+    /* Add your mobile-specific styles here */
+    .customerandorder{
+        width: 90;
+    }
+    .form-control,
+    .form-select,
+    .accordion,
+    .payment,
+    .footer1 {
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fname,
+    .lname {
+        width: 450%; 
+        /* margin-bottom: 1vh; */
+    }
+
+    .orders {
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    hr {
+        width: 88vw;
+    }
+}
+
+
+
+
