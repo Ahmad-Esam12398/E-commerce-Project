@@ -1,5 +1,5 @@
         body {
-            background-color: blanchedalmond;
+            background-color: rgba(245, 245, 245, 0.822);
             align-items: center;
             justify-content: center;
             width: 100vw;
@@ -62,13 +62,9 @@
             font-weight: bold;
             color: highlight;
         }
-
-        .navbar li {
-            font-family: cursive;
-            font-size: larger;
-            font-weight: bolder;
+        .navbar{
+            background-color: white;
         }
-
         .navbar img {
             width: 40%;
         }

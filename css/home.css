@@ -1,5 +1,5 @@
 body {
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.822);
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -32,7 +32,6 @@ body {
     color: white;
     background-color: grey;
 }
-
 .navbar img {
     width: 35%;
 }
