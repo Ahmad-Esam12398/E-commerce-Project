@@ -1,14 +1,21 @@
 class Person{
     static lastID = 0;
     #id; #name; #email; #password; #address; #phone; #role;
-    constructor(id, name, email, password, address, phone, role){
+    constructor(name, email, password, address, phone, role){
         this.#id = ++Person.lastID;
         this.#name = name;
         this.#email = email;
         this.#password = password;
         this.#address = address;
         this.#phone = phone;
+        if(role != "Seller" && role != "Customer" && role != "Admin" && role != "Guest"){
+            console.log("Invalid role");
+            this.#role = "Guest";
+            // throw new Error("Invalid role");
+        }
+        else{
         this.#role = role;
+        }
     }
     set name(name){
         if(name.trim() == ""){

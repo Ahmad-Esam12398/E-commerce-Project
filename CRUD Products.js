@@ -1,4 +1,4 @@
-import {products} from "./data.js";
+import {persons, products} from "./data.js";
 import {Product} from "./products module.js";
 function createTableProducts(){
     let myTable = document.getElementById("myTable");
@@ -59,42 +59,59 @@ function createTableProducts(){
 
 createTableProducts();
 function AddButton(){
-    let upperTable = document.getElementById("upperTable");
-    upperTable.innerHTML = "";
+    let lowerTable = document.getElementById("lowerTable");
+    lowerTable.innerHTML = "";
     let addButton = document.createElement("i");
-    addButton.className = "fas fa-plus";
-    addButton.style.cursor = "pointer";
-    upperTable.appendChild(addButton);
-    addButton.addEventListener("click", addProductRow);
+    addButton.innerHTML = "Add";
+    addButton.className = "btn btn-primary";
+    addButton.setAttribute("data-bs-toggle", "modal");
+    addButton.setAttribute("data-bs-target", "#staticBackdrop");
+    addButton.onclick = getOptions;
+    lowerTable.appendChild(addButton);
 }
-
-function addProductRow() {
-    let myTableBody = document.querySelectorAll('tbody')[0];
-    let newRow = document.createElement("tr");
-
-    for(let key in products[0].getProduct()) {
-        let td = document.createElement('td');
-        if(key === 'id') {
-            td.innerHTML = Product.lastID + 1;
+function getOptions(){
+    let sellersIds = [];
+    for(let i = 0; i < persons.length; i++){
+        if(persons[i].role == "Seller"){
+            sellersIds.push(persons[i].id);
         }
-        if(key !== 'id') {
-            let input = document.createElement('input');
-            input.type = 'text';
-            input.placeholder = key;
-            input.style.width = '100%';
-            td.appendChild(input);
-        }
-        newRow.appendChild(td);
     }
-    let td = document.createElement('td');
-    let saveButton = document.createElement('i');
-    saveButton.className = 'fa-regular fa-floppy-disk';
-    saveButton.style.cursor = 'pointer';
-    saveButton.addEventListener('click', saveNewRow);
-    td.appendChild(saveButton);
-    newRow.appendChild(td);
-    myTableBody.appendChild(newRow);
+    document.getElementById("sellerID").innerHTML = "";
+    sellersIds.forEach(id => {
+        let option = document.createElement("option");
+        option.value = id;
+        option.innerHTML = id;
+        document.getElementById("sellerID").appendChild(option);
+    });
 }
+function validateForm() {
+    let name = document.getElementById("floatingName").value;
+    let price = document.getElementById("floatingPrice").value;
+    let quantity = document.getElementById("floatingQuantity").value;
+    let description = document.getElementById("floatingDescription").value;
+    let image = document.getElementById("floatingImage").value;
+    if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
+        alert("Please Input valid data");
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+function addProductRow() {
+    if(validateForm()){
+        let name = document.getElementById("floatingName").value;
+        let price = document.getElementById("floatingPrice").value;
+        let quantity = document.getElementById("floatingQuantity").value;
+        let description = document.getElementById("floatingDescription").value;
+        let image = document.getElementById("floatingImage").value;
+        let sellerID = document.getElementById("sellerID").value;
+        let newProduct = new Product(name, price, quantity, description, image, sellerID);
+        products.push(newProduct);
+        createTableProducts();
+    }
+}
+
 
 function editRow(e) {
     let row = e.target.parentElement.parentElement;
@@ -158,4 +175,69 @@ function deleteRow(e) {
     let row = e.target.parentElement.parentElement;
     row.remove();
 }
+document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Check if the form is valid
+    if(!event.target.checkValidity()){
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    else{
+        addProductRow();
+    }
+    event.target.classList.add('was-validated');
+});
+document.getElementById("floatingName").addEventListener("input", function(){
+    // console.log(this);
+    if(this.value.trim().length < 2){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
+document.getElementById("floatingPrice").addEventListener("input", function(){
+    // console.log(this);
+    if(isNaN(this.value) || +this.value <= 0){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
+document.getElementById("floatingQuantity").addEventListener("input", function(){
+    // console.log(this);
+    if(isNaN(this.value) || +this.value <= 0){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
+document.getElementById("floatingDescription").addEventListener("input", function(){
+    // console.log(this);
+    if(this.value.trim().length < 10){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
+document.getElementById("floatingImage").addEventListener("input", function(){
+    // console.log(this);
+    if(this.value.trim().indexOf(".") == -1){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
+document.getElementById("sellerID").addEventListener("input", function(){
+    if(this.value.trim() == ""){
+        this.classList.add("is-invalid");
+    }
+    else{
+        this.classList.remove("is-invalid");
+    }
+});
 

@@ -13,6 +13,7 @@ var persons = [
     new Person("Person 3", "Email 3", "Password 3", "Address 3", "Phone 3", "Seller"),
     new Person("Person 4", "Email 4", "Password 4", "Address 4", "Phone 4", "Guest"),
     new Person("Person 5", "Email 5", "Password 5", "Address 5", "Phone 5", "Admin"),
+    new Person("Person 6", "Email 6", "Password 6", "Address 6", "Phone 6", "customer"),
 ];
 
 export { products, persons };
