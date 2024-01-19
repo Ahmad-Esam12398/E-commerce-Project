@@ -1,13 +1,14 @@
 class Product{
     static lastID = 0;
-    #id; #name; #price; #quantity; #description; #image; #sellerID;
-    constructor(id, name, price, quantity, description, image, sellerID){
+    #id; #name; #price; #quantity; #description; #image; #sellerID;#category;
+    constructor(name, price, quantity, description, image, sellerID,category){
         this.#id = ++Product.lastID;
         this.#name = name;
         this.#price = price;
         this.#quantity = quantity;
         this.#description = description;
-        this.#image = image;
+        this.#image =image;
+        this.#category=category;
         this.#sellerID = sellerID;
     }
     set quantity(_quantity){
@@ -23,7 +24,7 @@ class Product{
             this.#price = 0;
         }
         else{
-            this.#price = +_price;
+            this.#price = _price;
         }
     }
     set name(name){
@@ -31,7 +32,7 @@ class Product{
             this.#name = "No name";
         }
         else{
-            this.#name = name;
+            this.#name = name.trim();
         }
     }
     set description(_description){
@@ -55,8 +56,19 @@ class Product{
             this.#sellerID = 0;
         }
         else{
-            this.#sellerID = _sellerID;
+            this.#sellerID = +_sellerID;
         }
+    }
+    set category(_category){
+        if(_category.trim()==""){
+            this.#category="No catogray";
+        }
+        else {
+            this.#category=_category.trim();
+        }
+    }
+    get category(){
+        return this.#category;
     }
     get quantity(){
         return this.#quantity;
@@ -76,5 +88,20 @@ class Product{
     get sellerID(){
         return this.#sellerID;
     }
+    getProduct(){
+        return {
+            id: this.#id,
+            name: this.#name,
+            price: this.#price,
+            quantity: this.#quantity,
+            description: this.#description,
+            image: this.#image,
+            sellerID: this.#sellerID,
+            category:this.#category,
+        }
+    }
 }
 export { Product };
+
+
+
