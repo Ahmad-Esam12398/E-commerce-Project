@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body1 {
+    background-color: rgba(245, 245, 245, 0.822);
+}
+
+nav img {
+    margin-top: 1vw;
+    margin-left: 15vw;
+}
+
+
+
+.container{
+    width: 700px;
+    max-width: 70vw;
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.listProduct .item img {
+    width: 90%;
+}
+.listProduct .item{
+    width: 80%;
+    height: 100%;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.listProduct {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.listProduct .item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  }
+ 
+.listProduct .item h2 {
+    font-size: large;
+    text-decoration: none;
+    color:#Bc9127;
+}
+.listProduct .item p{
+    color: #6c6c6c;
+    font-size: small;
+}
+.listProduct .item .price{
+    color: #6c6c6c;
+    font-size: small;
+}
+/*tabalet*/
+@media screen and (max-width: 992px) {
+    .listProduct {
+      grid-template-columns: repeat(3, 1fr);
+      width: 90vw;
+      margin: 0 -60px; /* Center the container horizontally instead of using a negative margin */
+      gap: 3px;
+    }
+  
+    .listProduct .item {
+      width: calc(100% - 30px); /* Adjusted width considering padding on both sides */
+      padding: 15px;
+      box-sizing: border-box;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .listProduct {
+      grid-template-columns: repeat(2, 1fr);
+      width: 90vw; /* Adjusted width for better responsiveness */
+      margin: 0 -60px; /* Center the container horizontally */
+      gap: 5px; /* Adjusted gap for smaller screens */
+    }
+  
+    /* You may need to further adjust styles for smaller screens if necessary */
+  }
+  

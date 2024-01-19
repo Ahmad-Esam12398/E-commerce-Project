@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+    <!--start nav-->
+    <nav class="p-3 mb-2 bg-white text">
+        <img class=" rounded mx-auto d-block" src="images/kayuu-logo-dark.svg" width="100" alt="" srcset="">
+    </nav>
+    <!--End of nav-->
+
+    <div class="customerandorder p-3 mb-2 bg-white row" >
+        <p id="perror"></p>
+        <p id="perror1"></p>
+        <p id="perror2"></p>
+        <p id="perror3"></p>
+        <p id="perror4"></p>
+        <p id="generalError"></p>
+        
+        <div class="col-12 col-md-8 row customer">
+            <h4>Customer infromation</h4>
+            <form id="myForm">
+           <input type="email" id="email" class="form-control" width="100" placeholder="Email Address" >  
+           <h4>Billing Details</h4>
+           <input type="text" id="fname" class="form-control fname  col-2" placeholder="First Name">
+           <input type="text" id="lname" class="form-control lname  col-2" placeholder="Last Name">
+           <input type="email" id="email" class="form-control" width="100" placeholder="Company email">
+           <select class="form-select"   aria-label="size 3 select example" id="countrySelect"></select>
+           <input type="text" id="hnum" class="form-control fname  col-2" placeholder="House number and street name">
+           <input type="text" class="form-control lname  col-2" placeholder="Apertment,Suite,unit,etc(option)">
+           <input type="text"id="phone" class="form-control" width="100" placeholder="Phone" >  
+           <h4>Additional information</h4>
+           <textarea class="form-control" placeholder="Nodes about Your order" id="floatingTextarea"></textarea>
+           <h4>Payment</h4>
+           <div class="payment p-3 mb-2 ">
+            <p>Sorry, it seems that there are no available payment methods. 
+                Please contact us if you require assistance or wish to make alternate arrangements.</p>
+           </div>
+           <input type="submit" value=" submit" id="submit">
+        </form>
+           
+        </div>
+        <!--End of customer-->
+        <div class="col-12 col-md-4 p-3 mb-2 orders" >
+            <h3>Your order</h3>
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>broducts</th>
+                        <th>subtotal</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>broducts</td>
+                        <td>subtotal</td>
+                        
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--End of order -->
+    </div>
+    <!--End of customer and order-->
+    <footer class="row footer1 text-white bg-dark">
+        <p class="col-5">Copyright © 2024 Online Furniture Store</p>
+        <p class="col-5">Powered by Online Furniture Storee</p>
+    </footer >
+    <script src="js/checkout.js"></script>
+
+    
+</body>
+</html>
