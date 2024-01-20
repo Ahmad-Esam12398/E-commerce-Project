@@ -4,12 +4,12 @@ class Product{
     #id; #name; #price; #quantity; #description; #image; #sellerID;
     constructor(name, price, quantity, description, image, sellerID){
         this.#id = ++Product.lastID;
-        this.#name = name;
-        this.#price = price;
-        this.#quantity = quantity;
-        this.#description = description;
-        this.#image = Product.imgPath + image;
-        this.#sellerID = sellerID;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.image = Product.imgPath + image;
+        this.sellerID = sellerID;
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -59,6 +59,9 @@ class Product{
             this.#sellerID = +_sellerID;
         }
     }
+    get id(){
+        return this.#id;
+    }
     get quantity(){
         return this.#quantity;
     }
@@ -87,6 +90,14 @@ class Product{
             image: this.#image,
             sellerID: this.#sellerID
         }
+    }
+    setProduct(name, price, quantity, description, image, sellerID){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.image = image;
+        this.sellerID = sellerID;
     }
 }
 export { Product };
