@@ -1,13 +1,13 @@
-import {products, persons} from "./data.js";
-import {Product} from "./products module.js";
-function createTableProducts(){
+import { persons } from "./data.js";
+import { Person } from "./person.js";
+function createTablePersons(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
     let tableBody = document.getElementsByTagName("tbody")[0];
     tableHead.innerHTML = "";
     tableBody.innerHTML = "";
     let tableRow = document.createElement("tr");
-    for(let key in products[0].getProduct()){
+    for(let key in persons[0].getPerson()){
         let tableHeadData = document.createElement("th");
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
@@ -17,22 +17,13 @@ function createTableProducts(){
     tableRow.appendChild(tableHeadData);
     tableHead.appendChild(tableRow);
     myTable.appendChild(tableHead);
-    for(let i = 0; i < products.length; i++){
+    for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
-        for(let key in products[i].getProduct()){
-            if(key == "image"){
-                let img = document.createElement("img");
-                img.src = products[i].image;
-                img.alt = "Main Product Img";
-                let tableData = document.createElement("td");
-                tableData.appendChild(img);
-                tableRow.appendChild(tableData);
-            }
-            else{
-                let tableData = document.createElement("td");
-                tableData.innerHTML = products[i].getProduct()[key];
-                tableRow.appendChild(tableData);
-            }
+        for(let key in persons[i].getPerson()){
+
+            let tableData = document.createElement("td");
+            tableData.innerHTML = persons[i].getPerson()[key];
+            tableRow.appendChild(tableData);
         }
         let tableData = document.createElement("td");
         tableData.style.alignItems = "center";
@@ -43,9 +34,9 @@ function createTableProducts(){
         editButton.style.marginRight = "5px";
         editButton.style.cursor = "pointer";
         editButton.addEventListener("click", editRow);
-        editButton.setAttribute("data-bs-toggle", "modal");
-        editButton.setAttribute("data-bs-target", "#staticBackdrop");
-        editButton.onclick = getOptions;
+        // editButton.setAttribute("data-bs-toggle", "modal");
+        // editButton.setAttribute("data-bs-target", "#staticBackdrop");
+        // editButton.onclick = getOptions;
         let deleteButton = document.createElement("button");
         deleteButton.className = "btn btn-outline-danger";
         deleteButton.innerHTML = "Delete";
@@ -61,16 +52,16 @@ function createTableProducts(){
     AddButton();
 }
 let operation = "";
-createTableProducts();
+createTablePersons();
 function AddButton(){
     let lowerTable = document.getElementById("lowerTable");
     lowerTable.innerHTML = "";
     let addButton = document.createElement("i");
     addButton.innerHTML = "Add";
     addButton.className = "btn btn-outline-primary";
-    addButton.setAttribute("data-bs-toggle", "modal");
-    addButton.setAttribute("data-bs-target", "#staticBackdrop");
-    addButton.onclick = getOptions;
+    // addButton.setAttribute("data-bs-toggle", "modal");
+    // addButton.setAttribute("data-bs-target", "#staticBackdrop");
+    // addButton.onclick = getOptions;
     addButton.addEventListener("click", function(){
         operation = "add";
         let button = document.querySelectorAll("button[type='submit']")[0];
@@ -79,35 +70,35 @@ function AddButton(){
     });
     lowerTable.appendChild(addButton);
 }
-function getOptions(){
-    let sellersIds = [];
-    for(let i = 0; i < persons.length; i++){
-        if(persons[i].role == "Seller"){
-            sellersIds.push(persons[i].id);
-        }
-    }
-    document.getElementById("sellerID").innerHTML = "";
-    sellersIds.forEach(id => {
-        let option = document.createElement("option");
-        option.value = id;
-        option.innerHTML = id;
-        document.getElementById("sellerID").appendChild(option);
-    });
-}
-function validateForm() {
-    let name = document.getElementById("floatingName").value;
-    let price = document.getElementById("floatingPrice").value;
-    let quantity = document.getElementById("floatingQuantity").value;
-    let description = document.getElementById("floatingDescription").value;
-    let image = document.getElementById("floatingImage").value;
-    if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
-        alert("Please Input valid data");
-        return false;
-    }
-    else{
-        return true;
-    }
-}
+// function getOptions(){
+//     let sellersIds = [];
+//     for(let i = 0; i < persons.length; i++){
+//         if(persons[i].role == "Seller"){
+//             sellersIds.push(persons[i].id);
+//         }
+//     }
+//     document.getElementById("sellerID").innerHTML = "";
+//     sellersIds.forEach(id => {
+//         let option = document.createElement("option");
+//         option.value = id;
+//         option.innerHTML = id;
+//         document.getElementById("sellerID").appendChild(option);
+//     });
+// }
+// function validateForm() {
+//     let name = document.getElementById("floatingName").value;
+//     let price = document.getElementById("floatingPrice").value;
+//     let quantity = document.getElementById("floatingQuantity").value;
+//     let description = document.getElementById("floatingDescription").value;
+//     let image = document.getElementById("floatingImage").value;
+//     if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
+//         alert("Please Input valid data");
+//         return false;
+//     }
+//     else{
+//         return true;
+//     }
+// }
 function addProductRow() {
     if(validateForm()){
         let name = document.getElementById("floatingName").value;

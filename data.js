@@ -1,5 +1,6 @@
 import { Product } from "./products module.js";
 import { Person } from "./person.js";
+// debugger;
 var products = [
     new Product("Product 1", 100, 10, "Description 1", "1-1.png", 1),
     new Product("Product 2", 200, 20, "Description 2", "1-1.png", 1),
