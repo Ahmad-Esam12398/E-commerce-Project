@@ -59,7 +59,8 @@ function createTableProducts(){
     }
     myTable.appendChild(tableHead);
     AddButton();
-}
+};
+createTableProducts();
 let operation = "";
 createTableProducts();
 function AddButton(){
