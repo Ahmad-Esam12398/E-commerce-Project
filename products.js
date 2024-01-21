@@ -1,5 +1,5 @@
 //products.js
-import { Product } from './productsmodule.js';
+import { Product } from './products module.js';
 
 const productsData = [
   {
