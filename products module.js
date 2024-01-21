@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //products module.js
 class Product {
     static lastID = 1;
@@ -24,6 +25,20 @@ class Product {
         else{
             this.#id=_id;
         }
+=======
+class Product{
+    static lastID = 0;
+    static imgPath = "products imgs/"
+    #id; #name; #price; #quantity; #description; #image; #sellerID;
+    constructor(name, price, quantity, description, image, sellerID){
+        this.#id = ++Product.lastID;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.image = Product.imgPath + image;
+        this.sellerID = sellerID;
+>>>>>>> 578c9dbcb983c9d9440d279ccae8f1a0109b7a84
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -73,6 +88,7 @@ class Product {
             this.#sellerID = +_sellerID;
         }
     }
+<<<<<<< HEAD
     set category(_category){
         if(_category.trim()==""){
             this.#category="No catogray";
@@ -98,6 +114,11 @@ class Product {
     get category(){
         return this.#category;
     }
+=======
+    get id(){
+        return this.#id;
+    }
+>>>>>>> 578c9dbcb983c9d9440d279ccae8f1a0109b7a84
     get quantity(){
         return this.#quantity;
     }
@@ -116,6 +137,7 @@ class Product {
     get sellerID(){
         return this.#sellerID;
     }
+<<<<<<< HEAD
     getQuantity() {
         return this.#quantity;
     }
@@ -145,6 +167,28 @@ class Product {
         }
       }
     }
+=======
+    getProduct(){
+        return {
+            id: this.#id,
+            name: this.#name,
+            price: this.#price,
+            quantity: this.#quantity,
+            description: this.#description,
+            image: this.#image,
+            sellerID: this.#sellerID
+        }
+    }
+    setProduct(name, price, quantity, description, image, sellerID){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.image = image;
+        this.sellerID = sellerID;
+    }
+}
+>>>>>>> 578c9dbcb983c9d9440d279ccae8f1a0109b7a84
 export { Product };
 
 

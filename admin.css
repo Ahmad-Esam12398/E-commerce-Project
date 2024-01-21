@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img{
+    max-width: 80px;
+}
+thead{
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+/* tr{
+    display: flex;
+    align-items: center;
+} */
