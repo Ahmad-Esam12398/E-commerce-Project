@@ -1,15 +1,29 @@
-class Product{
-    static lastID = 0;
-    #id; #name; #price; #quantity; #description; #image; #sellerID;#category;
-    constructor(name, price, quantity, description, image, sellerID,category){
-        this.#id = ++Product.lastID;
-        this.#name = name;
+//products module.js
+class Product {
+    static lastID = 1;
+    #id; #name; #price; #quantity; #description; #image; #sellerID; #category;#categorypath;
+
+    constructor(id, name, price, quantity, description, image, sellerID, category,categorypath) {
+        this.#id = Product.lastID++;
+        this.#name = name.trim();
         this.#price = price;
-        this.#quantity = quantity;
-        this.#description = description;
-        this.#image =image;
-        this.#category=category;
-        this.#sellerID = sellerID;
+        this.#quantity = +quantity;
+        this.#description = description.trim();
+        this.#image = image.trim();
+        this.#category = category.trim();
+        this.#sellerID = +sellerID;
+        this.#categorypath= categorypath;
+        
+    }
+    
+    
+    set id(_id){
+        if (id<0){
+            this.#id=0;
+        }
+        else{
+            this.#id=_id;
+        }
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -67,6 +81,20 @@ class Product{
             this.#category=_category.trim();
         }
     }
+    set categorypath(_categorypath){
+        if(_categorypath.trim()=""){
+            this.#categorypath="NO Catograypath"
+        }
+        else{
+            this.#categorypath=_categorypath.trim()
+        }
+    }
+    get categorypath(){
+        return this.#categorypath;
+    }
+    get id(){
+        return this.#id;
+    }
     get category(){
         return this.#category;
     }
@@ -88,20 +116,35 @@ class Product{
     get sellerID(){
         return this.#sellerID;
     }
-    getProduct(){
-        return {
-            id: this.#id,
-            name: this.#name,
-            price: this.#price,
-            quantity: this.#quantity,
-            description: this.#description,
-            image: this.#image,
-            sellerID: this.#sellerID,
-            category:this.#category,
-        }
+    getQuantity() {
+        return this.#quantity;
     }
-}
-export { Product };
 
+    getProductId() {
+        return this.#id;
+    }
+    getProduct() {
+        return {
+          id: this.#id,
+          name: this.#name,
+          price: this.#price,
+          quantity: this.#quantity,
+          description: this.#description,
+          image: this.#image,
+          sellerID: this.#sellerID,
+          category: this.#category,
+          categorypath:this.#categorypath,
+        };
+      }
+      addClickEvent(callback) {
+        const productDiv = document.getElementById(`product-${this.#id}`);
+        if (productDiv) {
+          productDiv.addEventListener('click', () => {
+            callback(this.#id);
+          });
+        }
+      }
+    }
+export { Product };
 
 
