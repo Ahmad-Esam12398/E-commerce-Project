@@ -5,12 +5,12 @@ class Product {
 
     constructor(id, name, price, quantity, description, image, sellerID, category,categorypath) {
         this.#id = Product.lastID++;
-        this.#name = name.trim();
+        this.#name = name;
         this.#price = price;
         this.#quantity = +quantity;
-        this.#description = description.trim();
-        this.#image = image.trim();
-        this.#category = category.trim();
+        this.#description = description;
+        this.#image = image;
+        this.#category = category;
         this.#sellerID = +sellerID;
         this.#categorypath= categorypath;
         
@@ -145,6 +145,8 @@ class Product {
         }
       }
     }
-export { Product };
+
+    
+export { Product};
 
 

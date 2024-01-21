@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let productDetails; 
+    let productDetails;
 
     const productId = getProductIdFromLocalStorage();
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             num.innerText = number;
             console.log(number);
         } else {
-            console.log("Cannot add more, reached maximum quantity");
+            console.log("Cannot add more, reached the maximum quantity");
         }
     });
 
@@ -42,17 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getProductIdFromLocalStorage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id');
-    // localStorage.getItem('id');
-
-  
+    return localStorage.getItem('selectedProductId');
 }
 
 function getProductDetails(productId) {
+
     const productJSON = localStorage.getItem(productId);
     return productJSON ? JSON.parse(productJSON) : null;
+
+
 }
+
 
 function updateProductDetailPage(productDetails) {
     document.getElementById('product-category').innerText = `${productDetails.categorypath}`;
@@ -61,7 +61,5 @@ function updateProductDetailPage(productDetails) {
     document.getElementById('product-description').innerText = ` ${productDetails.description}`;
     document.getElementById('product-image').src = productDetails.image;
 }
-
-
 
 
