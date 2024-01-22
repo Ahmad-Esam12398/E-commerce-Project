@@ -70,32 +70,3 @@
         .navbar img {
             width: 40%;
         }
-
-        #FooterTop {
-            color: white;
-            padding: 50px;
-            background-color: rgb(21, 21, 21);
-        }
-
-        #FooterBottom {
-            font-size: 16px;
-            font-weight: 450;
-            color: white;
-            padding: 50px;
-            background-color: rgb(21, 21, 21);
-        }
-
-        #FooterTop a {
-            color: white;
-            text-decoration: none;
-        }
-
-        #FooterTop .Socials i {
-            color: white;
-            border: 0;
-            border-radius: 0;
-            font-size: 20px;
-            text-align: center;
-            justify-content: center;
-            background-color: rgb(43, 43, 43);
-        }
