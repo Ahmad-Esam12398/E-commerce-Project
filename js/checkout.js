@@ -18,48 +18,51 @@ document.addEventListener("DOMContentLoaded", () => {
     submitButton.addEventListener('click', function (event) {
         event.preventDefault();
 
-       
-       clearError("perror");
-       clearError("perror1");
-       clearError("perror2");
-       clearError("perror3");
-       clearError("perror4");
-       clearError("generalError");
 
-       var hasError = false;
+        clearError("perror");
+        clearError("perror1");
+        clearError("perror2");
+        clearError("perror3");
+        clearError("perror4");
+        clearError("generalError");
+        var hasError = false;
 
-       if (!isEmailValid("email", "perror")) {
-           console.log("sorry");
-           hasError = true;
-       }
-       if (!isNameValid("fname", "perror1")) {
-           console.log("sorry");
-           hasError = true;
-       }
-       if (!isNameValid("lname", "perror2")) {
-           console.log("sorry");
-           hasError = true;
-       }
-       if (!isHouseNumberValid("hnum", "perror3")) {
-           console.log("sorry");
-           hasError = true;
-       }
-       if (!isPhoneValid("phone", "perror4")) {
-           console.log("sorry");
-           hasError = true;
-       }
+        var emailinput = document.getElementById("email");
+        var nameinput = document.getElementById("name");
+        var houseinput = document.getElementById("houseNumber");
+        var phoneinput = document.getElementById("phone");
+
+        if (!isEmailValid(emailinput, "perror")) {
+            console.log("sorry");
+            hasError = true;
+        }
+        if (!isNameValid(nameinput, "perror1")) {
+            console.log("sorry");
+            hasError = true;
+        }
+        if (!isNameValid(nameinput, "perror2")) {
+            console.log("sorry");
+            hasError = true;
+        }
+        if (!isHouseNumberValid(houseinput, "perror3")) {
+            console.log("sorry");
+            hasError = true;
+        }
+        if (!isPhoneValid(phoneinput, "perror4")) {
+            console.log("sorry");
+            hasError = true;
+        }
 
         else {
-           form.submit();
-       }
-   });
+            form.submit();
+        }
+    });
 });
 
-function isEmailValid(emailId, errorId) {
-    var emailtext = document.getElementById(emailId);
+function isEmailValid(emailElement, errorId) {
     var errorElement = document.getElementById(errorId);
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailtext.value)) {
+    if (!emailElement.value.trim().match(/@gmail\.com$/ && /^[0-9a-zA-Z]/) || emailElement.value.trim() === "") {
         console.log("Sorry");
         errorElement.innerHTML = "Sorry, you must write a valid email";
         return false;
@@ -68,11 +71,10 @@ function isEmailValid(emailId, errorId) {
     return true;
 }
 
-function isNameValid(nameId, errorId) {
-    var nametext = document.getElementById(nameId);
+function isNameValid(nameElement, errorId) {
     var errorElement = document.getElementById(errorId);
 
-    if (!/^[a-zA-Z]+$/.test(nametext.value)) {
+    if (!nameElement.value.trim().match(/^[a-zA-Z]+$/) || nameElement.value.trim() === "") {
         console.log("Sorry");
         errorElement.innerHTML = "Sorry, please enter a valid name";
         return false;
@@ -81,11 +83,10 @@ function isNameValid(nameId, errorId) {
     return true;
 }
 
-function isHouseNumberValid(houseNumberId, errorId) {
-    var hnumtext = document.getElementById(houseNumberId);
+function isHouseNumberValid(housenumber, errorId) {
     var errorElement = document.getElementById(errorId);
 
-    if (hnumtext.value.trim() === "") {
+    if (housenumber.value.trim() === "") {
         console.log("Sorry");
         errorElement.innerHTML = "Sorry, please enter a valid house number";
         return false;
@@ -94,11 +95,11 @@ function isHouseNumberValid(houseNumberId, errorId) {
     return true;
 }
 
-function isPhoneValid(phoneId, errorId) {
-    var phonetext = document.getElementById(phoneId);
-    var errorElement = document.getElementById(errorId);
 
-    if (!/^\d{10}$/.test(phonetext.value)) {
+function isPhoneValid(phoneElement, errorId) {
+      var errorElement = document.getElementById(errorId);
+
+      if (!phoneElement.value.trim().match(/^\d{10}$/) || phoneElement.value.trim() === "") {
         console.log("Sorry");
         errorElement.innerHTML = "Sorry, please enter a valid phone number";
         return false;
