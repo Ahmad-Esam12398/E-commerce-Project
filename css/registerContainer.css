@@ -24,7 +24,6 @@
 
         .input-group i {
             height: 100%;
-            background-color: rgb(196, 196, 196);
         }
 
         .input-group {
@@ -69,4 +68,11 @@
 
         .navbar img {
             width: 40%;
+        } 
+        .eye{
+
+        }
+        #password,#passwordCheck{
+            border: 0px;
+            box-shadow: inset -2px 0 gray;
         }
