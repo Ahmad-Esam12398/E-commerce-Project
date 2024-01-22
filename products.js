@@ -1,4 +1,4 @@
-
+//products.js
 import { Product } from './productsmodule.js';
 import { products } from './main.js'
 

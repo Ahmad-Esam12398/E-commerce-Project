@@ -1,7 +1,6 @@
 // main .js
 import { Product } from "./productsmodule.js";
 import { Person } from "./person.js";
-
 var products = [
     new Product(1, 'Bathroom Golden Ring Mirror', 124.25, 15, 'Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.', 'images/bathroom-circle-mirror.png', 1, 'Bathroom', 'Home / Living Room / Chair / Modern Emerald Fabric Chair', 'Chair, Living Room'),
     new Product(2, 'Bathroom Wooden Table', 550.00, 8, 'Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis.', 'images/bathroom-wooden-table.png', 2, 'Bathroom', 'Home / Living Room / Chair / Modern Emerald Fabric Chair', 'Chair, Living Room'),
@@ -23,6 +22,8 @@ var products = [
     new Product(18, 'Wooden Console Table', 1.200 , 8, 'Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.', 'images/wooden-console-table-.png', 18, 'Bedroom', 'Home / Home Office / Wooden Console Table', ' Bedroom, Home Office'),
    
 ];
+
+
 var persons = [
     new Person("Person 1", "Email 1", "Password 1", "Address 1", "Phone 1", "Admin"),
     new Person("Person 2", "Email 2", "Password 2", "Address 2", "Phone 2", "Customer"),
@@ -75,7 +76,4 @@ function addProductRow(){
     myTableBody.appendChild(newRow);
 }
 addProductRow();
- 
-export {products}
-
-
+export { products, persons };
