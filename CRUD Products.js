@@ -87,7 +87,7 @@ function getOptions(){
             sellersIds.push(persons[i].id);
         }
     }
-    document.getElementById("sellerID").innerHTML = "";
+    document.getElementById("sellerID").innerHTML = `<option selected disabled value="">Seller ID</option>`;
     sellersIds.forEach(id => {
         let option = document.createElement("option");
         option.value = id;
