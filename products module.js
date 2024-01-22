@@ -102,4 +102,3 @@ class Product{
 }
 export { Product };
 
-
