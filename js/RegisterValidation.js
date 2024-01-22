@@ -2,9 +2,7 @@
 // ====================== Sign-Up Validation ======================
 // name
 window.addEventListener("load", function () {
-    
-});
-document.getElementById("name").addEventListener("input", function () {
+    document.getElementById("name").addEventListener("input", function () {
         if (this.value.trim().length < 3) {
             this.classList.add("is-invalid");
         }
@@ -91,3 +89,4 @@ document.getElementById("name").addEventListener("input", function () {
             x.type = "password";
         }
     });
+});
