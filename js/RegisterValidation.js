@@ -54,20 +54,15 @@ window.addEventListener("load", function () {
             // console.log(usersArr[1].phoneNumber.constructor.name)
             em = 0;
             this.classList.add("is-invalid");
-            console.log(checkEmail(this.value) + " " + e)
         }
-        else if (checkEmail(this.value) && this.value.match(/^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$/)) {
+        else if (checkEmail(this.value)) {
             em = 0;
-            console.log("Valid and Found")
+            // console.log("Valid and Found")
             alert("Email is already used");
             this.classList.add("is-invalid");
         }
         else {
-            for (let i = 0; i < usersArr.length; i++) {
-                console.log(usersArr[i].email1);
-
-            }
-            console.log(this.value + " " + checkEmail(this.value) + " " + e)
+            // for (let i = 0; i < usersArr.length; i++) { console.log(usersArr[i].email1); }
             em = 1;
             this.classList.remove("is-invalid");
         }
@@ -138,13 +133,13 @@ window.addEventListener("load", function () {
         var valid = n && em && p1 && p2 && ph && ad;
         // Check if the form is valid
         if (!valid) {
-            console.log("Invalid" + valid);
+            // console.log("Invalid" + valid);
             e.preventDefault();
             e.stopPropagation();
         }
         else {
-            alert(e)
-            console.log("valid" + valid);
+            // alert(e)
+            // console.log("valid" + valid);
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
