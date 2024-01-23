@@ -29,7 +29,6 @@ function checkEmail(mail) {
 
 let e = 0, p = 0;
 window.addEventListener("load", function () {
-
     // email
     document.getElementById("email").addEventListener("input", function () {
         if (!checkEmail(this.value)) {
@@ -56,7 +55,7 @@ window.addEventListener("load", function () {
             // user didn't enter the correct password
             if (this.value != userpass) {
                 p = 0;
-                console.log("ValidEmail"+userEmail+" "+userIndex+" "+userpass)
+                console.log("ValidEmail" + userEmail + " " + userIndex + " " + userpass)
                 this.classList.add("is-invalid");
             } else {
                 p = 1;
