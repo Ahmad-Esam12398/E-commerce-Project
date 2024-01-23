@@ -32,7 +32,7 @@
         <!-- NavBar -->
         <nav class="navbar col-12 navbar-expand-md fs-5 fw-bold">
             <div class="container-fluid">
-                <a class="navbar-brand ms-5" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
+                <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
                         alt="logo"></a>
                 <!-- Toggle button for good response in small media -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -64,17 +64,18 @@
                             </button>
                             <ul class="dropdown-menu ">
                                 <li>
-                                    <p style="font-size: small;" class="fw-bold bg-warning text-white dropdown-item">
+                                    <p style="font-size: small;"
+                                        class="pe-none fw-bold bg-warning text-white dropdown-item">
                                         Customer
                                     </p>
                                 </li>
                                 <li>
-                                    <p id="CustomerName" class="fw-bold dropdown-item"></p>
+                                    <p id="CustomerName" class="pe-none fw-bold dropdown-item"></p>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="logout dropdown-item" href="login.html">Log Out</a></li>
+                                <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                             </ul>
                         </li>
                         <!-- admin -->
@@ -84,11 +85,12 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <p style="font-size: small;" class="fw-bold bg-warning text-white dropdown-item">
+                                    <p style="font-size: small;"
+                                        class="pe-none fw-bold bg-warning text-white dropdown-item">
                                         Admin</p>
                                 </li>
                                 <li>
-                                    <p id="AdminName" class="fw-bold dropdown-item"></p>
+                                    <p id="AdminName" class="pe-none fw-bold dropdown-item"></p>
                                 </li>
                                 <li>
                                     <a class="fw-bold dropdown-item" href="#">
@@ -97,7 +99,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="logout dropdown-item" href="login.html">Log Out</a></li>
+                                <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                             </ul>
                         </li>
                         <!-- seller -->
@@ -107,20 +109,21 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu">
                                 <li>
-                                    <p style="font-size: small;" class="fw-bold bg-warning text-white dropdown-item">
+                                    <p style="font-size: small;"
+                                        class="pe-none fw-bold bg-warning text-white dropdown-item">
                                         Seller</p>
                                 </li>
                                 <li>
-                                    <p id="SellerName" class="fw-bold dropdown-item"></p>
+                                    <p id="SellerName" class="pe-none fw-bold dropdown-item"></p>
                                 </li>
                                 <li>
-                                    <a class="fw-bold dropdown-item">Seller Dashboard
+                                    <a class="fw-bold dropdown-item" href="#">Seller Dashboard
                                         <i class="text-primary fa-solid fa-chart-simple"></i></a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="logout dropdown-item" href="login.html">Log Out</a></li>
+                                <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
@@ -196,30 +199,47 @@
     <!-- Our Shop Sections -->
     <div id="sections" class="d-flex flex-wrap col-12 mt-5">
         <div class="card col-12 col-sm-12 col-md-6 col-lg">
-            <img class="card-img-top sectionimg" src="images/LivingRoom.jpg" alt="Living Room">
-            <p href="home.html" class="card-img-overlay fw-bold fs-4 d-flex align-content-end flex-wrap">
-                <a href="home.html">Living Room <i class="fa-solid fa-arrow-right"></i></a>
-            </p>
+            <a href="products.html" class="card-link">
+                <img class="card-img-top sectionimg" src="images/LivingRoom.jpg" alt="Living Room">
+                <div class="card-img-overlay">
+                    <p class="fw-bold fs-4">
+                        Living Room <i class="m-2 fa-solid fa-arrow-right"></i>
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="card col-12 col-sm-12 col-md-6 col-lg">
-            <img class="card-img-top sectionimg" src="images/Bedroom.png" alt="Bedroom">
-            <p href="home.html" class="card-img-overlay fw-bold fs-4 d-flex align-content-end flex-wrap">
-                <a href="home.html"> Bedroom <i class="fa-solid fa-arrow-right"></i></a>
-            </p>
+            <a href="products.html" class="card-link">
+                <img class="card-img-top sectionimg" src="images/Bedroom.png" alt="Bedroom">
+                <div class="card-img-overlay">
+                    <p class="fw-bold fs-4">
+                        Bedroom <i class="m-2 fa-solid fa-arrow-right"></i>
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="card col-12 col-sm-12 col-md-6 col-lg">
-            <img class="card-img-top sectionimg" src="images/Kitchen.jpg" alt="Kitchen">
-            <p href="home.html" class="card-img-overlay fw-bold fs-4 d-flex align-content-end flex-wrap">
-                <a href="home.html"> Kitchen <i class="fa-solid fa-arrow-right"></i></a>
-            </p>
+            <a href="products.html" class="card-link">
+                <img class="card-img-top sectionimg" src="images/Kitchen.jpg" alt="Kitchen">
+                <div class="card-img-overlay">
+                    <p class="fw-bold fs-4">
+                        Kitchen <i class="m-2 fa-solid fa-arrow-right"></i>
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="card col-12 col-sm-12 col-md-6 col-lg">
-            <img class="card-img-top sectionimg" src="images/Bathroom.jpg" alt="Bathroom">
-            <p class="card-img-overlay fw-bold fs-4 d-flex align-content-end flex-wrap">
-                <a href="home.html"> Bathroom<i class="fa-solid fa-arrow-right"></i></a>
-            </p>
+            <a href="products.html" class="card-link">
+                <img class="card-img-top sectionimg" src="images/Bathroom.jpg" alt="Bathroom">
+                <div class="card-img-overlay">
+                    <p class="fw-bold fs-4">
+                        Bathroom <i class="m-2 fa-solid fa-arrow-right"></i>
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
+
 
     <!-- Best Seller -->
     <div class="row mt-5 col-12">
