@@ -32,8 +32,8 @@ function checkPhone(phone) {
     }
     return false;
 }
-var n = 0, e = 0, p1 = 0, p2 = 0, ph = 0, ad = 0;
-// ====================== Sign-Up Validation ======================
+var n = 0, em = 0, p1 = 0, p2 = 0, ph = 0, ad = 0;
+// ====================== Register Validation ======================
 
 window.addEventListener("load", function () {
     // name
@@ -52,17 +52,23 @@ window.addEventListener("load", function () {
     document.getElementById("email").addEventListener("input", function () {
         if (!this.value.match(/^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$/)) {
             // console.log(usersArr[1].phoneNumber.constructor.name)
-            e = 0;
+            em = 0;
             this.classList.add("is-invalid");
-            console.log(checkEmail(this.value))
+            console.log(checkEmail(this.value) + " " + e)
         }
-        else if (checkEmail(this.value)) {
-            e = 0
-            alert("E-mail is already used");
+        else if (checkEmail(this.value) && this.value.match(/^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$/)) {
+            em = 0;
+            console.log("Valid and Found")
+            alert("Email is already used");
             this.classList.add("is-invalid");
         }
         else {
-            e = 1
+            for (let i = 0; i < usersArr.length; i++) {
+                console.log(usersArr[i].email1);
+
+            }
+            console.log(this.value + " " + checkEmail(this.value) + " " + e)
+            em = 1;
             this.classList.remove("is-invalid");
         }
     });
@@ -128,8 +134,8 @@ window.addEventListener("load", function () {
     });
 
     // sumbit button
-    document.querySelectorAll('form')[0].addEventListener('submit', function (e) {
-        var valid = n && e && p1 && p2 && ph && ad;
+    document.querySelector('form').addEventListener('submit', function (e) {
+        var valid = n && em && p1 && p2 && ph && ad;
         // Check if the form is valid
         if (!valid) {
             console.log("Invalid" + valid);
@@ -137,6 +143,7 @@ window.addEventListener("load", function () {
             e.stopPropagation();
         }
         else {
+            alert(e)
             console.log("valid" + valid);
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
