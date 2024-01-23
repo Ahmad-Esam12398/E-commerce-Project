@@ -15,15 +15,15 @@ body{
     margin-top: 3vh;
 }
 .form-control{
-    width: 40vw;
+  
+    width: 45vw;
     margin-top: 3vh;
 }
 .fname ,.lname{
-    width: 19vw; 
+    width: 20vw;
+    margin-top: 10px; 
 }
-.lname{
-    margin-left: 2vw;
-}
+
 input:active{
     border: 1px dashed rgb(202, 151, 97);
 }

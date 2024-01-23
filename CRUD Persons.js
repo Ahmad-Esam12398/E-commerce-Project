@@ -34,9 +34,8 @@ function createTablePersons(){
         editButton.style.marginRight = "5px";
         editButton.style.cursor = "pointer";
         editButton.addEventListener("click", editRow);
-        // editButton.setAttribute("data-bs-toggle", "modal");
-        // editButton.setAttribute("data-bs-target", "#staticBackdrop");
-        // editButton.onclick = getOptions;
+        editButton.setAttribute("data-bs-toggle", "modal");
+        editButton.setAttribute("data-bs-target", "#staticBackdrop");
         let deleteButton = document.createElement("button");
         deleteButton.className = "btn btn-outline-danger";
         deleteButton.innerHTML = "Delete";
@@ -50,83 +49,75 @@ function createTablePersons(){
     }
     myTable.appendChild(tableHead);
     AddButton();
-}
-let operation = "";
+};
 createTablePersons();
+let operation = "";
 function AddButton(){
     let lowerTable = document.getElementById("lowerTable");
     lowerTable.innerHTML = "";
     let addButton = document.createElement("i");
     addButton.innerHTML = "Add";
     addButton.className = "btn btn-outline-primary";
-    // addButton.setAttribute("data-bs-toggle", "modal");
-    // addButton.setAttribute("data-bs-target", "#staticBackdrop");
-    // addButton.onclick = getOptions;
+    addButton.setAttribute("data-bs-toggle", "modal");
+    addButton.setAttribute("data-bs-target", "#staticBackdrop");
     addButton.addEventListener("click", function(){
+        // console.log(document.forms[0]);
+        document.forms[0].classList.remove("was-validated");
         operation = "add";
         let button = document.querySelectorAll("button[type='submit']")[0];
         // console.log(button);
         button.innerHTML = "Add";
+        let inputs = document.querySelectorAll(".inputs");
+        for(let i = 0; i < inputs.length; i++) {
+            inputs[i].classList.remove("is-valid");
+            inputs[i].classList.remove("is-invalid");
+        }
     });
     lowerTable.appendChild(addButton);
 }
-// function getOptions(){
-//     let sellersIds = [];
-//     for(let i = 0; i < persons.length; i++){
-//         if(persons[i].role == "Seller"){
-//             sellersIds.push(persons[i].id);
-//         }
-//     }
-//     document.getElementById("sellerID").innerHTML = "";
-//     sellersIds.forEach(id => {
-//         let option = document.createElement("option");
-//         option.value = id;
-//         option.innerHTML = id;
-//         document.getElementById("sellerID").appendChild(option);
-//     });
-// }
-// function validateForm() {
-//     let name = document.getElementById("floatingName").value;
-//     let price = document.getElementById("floatingPrice").value;
-//     let quantity = document.getElementById("floatingQuantity").value;
-//     let description = document.getElementById("floatingDescription").value;
-//     let image = document.getElementById("floatingImage").value;
-//     if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
-//         alert("Please Input valid data");
-//         return false;
-//     }
-//     else{
-//         return true;
-//     }
-// }
-function addProductRow() {
-    if(validateForm()){
-        let name = document.getElementById("floatingName").value;
-        let price = document.getElementById("floatingPrice").value;
-        let quantity = document.getElementById("floatingQuantity").value;
-        let description = document.getElementById("floatingDescription").value;
-        let image = document.getElementById("floatingImage").value;
-        let sellerID = document.getElementById("sellerID").value;
-        let newProduct = new Product(name, price, quantity, description, image, sellerID);
-        products.push(newProduct);
-        createTableProducts();
+function validateForm() {
+    // debugger;
+    let name = document.getElementById("floatingName").value;
+    let password = document.getElementById("floatingPassword").value;
+    let address = document.getElementById("floatingAddress").value;
+    let phone = document.getElementById("floatingPhone").value;
+    let role = document.getElementById("PersonRole").value;
+    let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    console.log(address.trim().length == 0);
+    console.log(phone.trim().length < 11);
+    console.log(role != "Seller" && role != "Admin" && role != "Guest");
+    console.log(name.trim() == "");
+    console.log(!passwordStrengthRegex.test(password));
+    if(name.trim() == "" || password.length < 8 || address.trim().length == 0 || phone.trim().length < 11 || (role != "Seller" && role != "Admin" && role != "Guest")){
+        alert("Please Input valid data");
+        return false;
+    }
+    else{
+        return true;
     }
 }
-
+function addPersonRow() {
+    if(validateForm()){
+        let name = document.getElementById("floatingName").value;
+        let email = document.getElementById("floatingEmail").value;
+        let password = document.getElementById("floatingPassword").value;
+        let address = document.getElementById("floatingAddress").value;
+        let phone = document.getElementById("floatingPhone").value;
+        let role = document.getElementById("PersonRole").value;
+        let newPerson = new Person(name, email, password, address, phone, role);
+        persons.push(newPerson);
+        createTablePersons();
+    }
+}
 let id = -1;
 function editRow(e) {
+    document.forms[0].classList.remove("was-validated");
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
     let rowChildrenLength = rowChildren.length;
     let rowChildrenValues = [];
     for(let i = 0; i < rowChildrenLength - 1; i++) {
-        if(i == 5){
-            let img = rowChildren[i].children[0];
-            rowChildrenValues.push(img.src);
-        }
-        else{
-            rowChildrenValues.push(rowChildren[i].innerText);
-        }
+        rowChildrenValues.push(rowChildren[i].innerText);
         // console.log(rowChildren[i]);
     }
     //want to replace the row with a form modal like one in add product
@@ -140,30 +131,36 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
+    for(let i = 0; i < inputs.length; i++) {
+        inputs[i].classList.remove("is-valid");
+        inputs[i].classList.remove("is-invalid");
+    }
     // console.log(products);
 }
 
 function saveNewRow() {
-    if(confirm("Are you sure you want to save this product?")) {
-        let index = products.findIndex(product => product.id == id);
-        let rowChildrenValues = [];
-        let inputs = document.querySelectorAll(".inputs");
-        for(let i = 0; i < inputs.length; i++) {
-            rowChildrenValues.push(inputs[i].value);
+    if(validateForm()){
+        if(confirm("Are you sure you want to save this Person?")) {
+            let index = persons.findIndex(Person => Person.id == id);
+            let rowChildrenValues = [];
+            let inputs = document.querySelectorAll(".inputs");
+            for(let i = 0; i < inputs.length; i++) {
+                rowChildrenValues.push(inputs[i].value);
+            }
+            // console.log(rowChildrenValues);
+            persons[index].setPerson(...rowChildrenValues);
+            createTablePersons();
         }
-        // console.log(rowChildrenValues);
-        products[index].setProduct(...rowChildrenValues);
-        createTableProducts();
     }
 }
 function deleteRow(e) {
     if(confirm("Are you sure you want to delete this product?")) {
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
-        let index = products.findIndex(product => product.id == id);
-        console.log(index);
-        products.splice(index, 1);
-        createTableProducts();
+        let index = persons.findIndex(product => product.id == id);
+        // console.log(index);
+        persons.splice(index, 1);
+        createTablePersons();
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
@@ -179,63 +176,130 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             operation = "";
         }
         else{
-            addProductRow();
+            addPersonRow();
             operation = "";
         }
     }
-    event.target.classList.add('was-validated');
-});
-document.getElementById("floatingName").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 2){
-        this.classList.add("is-invalid");
+    document.forms[0].classList.remove('was-validated');
+    // console.log(event.target);
+    let nameInput = document.getElementById("floatingName");
+    let emailInput = document.getElementById("floatingEmail");
+    let passwordInput = document.getElementById("floatingPassword");
+    let addressInput = document.getElementById("floatingAddress");
+    let phoneInput = document.getElementById("floatingPhone");
+    let roleInput = document.getElementById("PersonRole");
+    if(nameInput.value.trim().length < 2){
+        nameInput.classList.add("is-invalid");
+        nameInput.classList.remove("is-valid");
     }
     else{
-        this.classList.remove("is-invalid");
+        nameInput.classList.remove("is-invalid");
+        nameInput.classList.add("is-valid");
     }
-});
-document.getElementById("floatingPrice").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingQuantity").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
+    if(emailInput.validity.valid){
+        emailInput.classList.remove("is-invalid");
+        emailInput.classList.add("is-valid");
     }
     else{
-        this.classList.remove("is-invalid");
+        emailInput.classList.add("is-invalid");
+        emailInput.classList.remove("is-valid");
     }
-});
-document.getElementById("floatingDescription").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 10){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingImage").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().indexOf(".") == -1){
-        this.classList.add("is-invalid");
+    let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if(passwordStrengthRegex.test(passwordInput.value) == false){
+        passwordInput.classList.add("is-invalid");
+        passwordInput.classList.remove("is-valid");
     }
     else{
-        this.classList.remove("is-invalid");
+        passwordInput.classList.remove("is-invalid");
+        passwordInput.classList.add("is-valid");
     }
-});
-document.getElementById("sellerID").addEventListener("input", function(){
-    if(this.value.trim() == ""){
-        this.classList.add("is-invalid");
+    if(addressInput.value.trim().length == 0){
+        addressInput.classList.add("is-invalid");
+        addressInput.classList.remove("is-valid");
     }
     else{
-        this.classList.remove("is-invalid");
+        addressInput.classList.remove("is-invalid");
+        addressInput.classList.add("is-valid");
+    }
+    if(phoneInput.value.trim().length < 11){
+        phoneInput.classList.add("is-invalid");
+        phoneInput.classList.remove("is-valid");
+    }
+    else{
+        phoneInput.classList.remove("is-invalid");
+        phoneInput.classList.add("is-valid");
+    }
+    if(roleInput.value != "Seller" && roleInput.value != "Customer" && roleInput.value != "Admin" && roleInput.value != "Guest"){
+        roleInput.classList.add("is-invalid");
+        roleInput.classList.remove("is-valid");
+    }
+    else{
+        roleInput.classList.remove("is-invalid");
+        roleInput.classList.add("is-valid");
     }
 });
-
+// document.getElementById("floatingName").addEventListener("keydown", function(){
+//     // console.log(this);
+//     if(this.value.trim().length < 2){
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+//     else{
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }
+// });
+// document.getElementById("floatingEmail").addEventListener("keydown", function(){
+//     if(this.validity.valid){
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }else{
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+// });
+// document.getElementById("floatingPassword").addEventListener("keydown", function(){
+//     // console.log(this);
+//     let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+//     if(passwordStrengthRegex.test(this.value) == false){
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+//     else{
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }
+// });
+// document.getElementById("floatingAddress").addEventListener("input", function(){
+//     // console.log(this);
+//     if(this.value.trim().length == 0){
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+//     else{
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }
+// });
+// document.getElementById("floatingPhone").addEventListener("keydown", function(){
+//     // console.log(this);
+//     if(this.value.trim().length < 11){
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+//     else{
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }
+// });
+// document.getElementById("PersonRole").addEventListener("input", function(){
+//     // console.log(this);
+//     if(this.value != "Seller" && this.value != "Customer" && this.value != "Admin" && this.value != "Guest"){
+//         this.classList.add("is-invalid");
+//         this.classList.remove("is-valid");
+//     }
+//     else{
+//         this.classList.remove("is-invalid");
+//         this.classList.add("is-valid");
+//     }
+// });

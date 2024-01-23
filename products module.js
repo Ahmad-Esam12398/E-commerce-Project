@@ -24,7 +24,7 @@ class Product{
             this.#price = 0;
         }
         else{
-            this.#price = +_price;
+            this.#price = _price;
         }
     }
     set name(name){
@@ -101,3 +101,4 @@ class Product{
     }
 }
 export { Product };
+

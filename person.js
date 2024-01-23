@@ -41,6 +41,9 @@ class Person {
         }else{
             this.#password = password.trim();
         }
+        else{
+            this.#password = password;
+        }
     }
     set address(address) {
         if (address.trim() == "") {
