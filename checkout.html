@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/checkout.css">
 </head>
+
 <body>
     <!--start nav-->
     <nav class="p-3 mb-2 bg-white text">
@@ -14,65 +17,154 @@
     </nav>
     <!--End of nav-->
 
-    <div class="customerandorder p-3 mb-2 bg-white row" >
-        <p id="perror"></p>
-        <p id="perror1"></p>
-        <p id="perror2"></p>
-        <p id="perror3"></p>
-        <p id="perror4"></p>
-        <p id="generalError"></p>
-        
-        <div class="col-12 col-md-8 row customer">
-            <h4>Customer infromation</h4>
-            <form id="myForm">
-           <input type="email" id="email" class="form-control" width="100" placeholder="Email Address" >  
-           <h4>Billing Details</h4>
-           <input type="text" id="name" class="form-control fname  col-2" placeholder="First Name">
-           <input type="text" id="name" class="form-control lname  col-2" placeholder="Last Name">
-           <input type="email" id="email" class="form-control" width="100" placeholder="Company email">
-           <select class="form-select"   aria-label="size 3 select example" id="countrySelect"></select>
-           <input type="text" id="houseNumber" class="form-control fname  col-2" placeholder="House number and street name">
-           <input type="text" class="form-control lname  col-2" placeholder="Apertment,Suite,unit,etc(option)">
-           <input type="text"id="phone" class="form-control" width="100" placeholder="Phone" >  
-           <h4>Additional information</h4>
-           <textarea class="form-control" placeholder="Nodes about Your order" id="floatingTextarea"></textarea>
-           <h4>Payment</h4>
-           <div class="payment p-3 mb-2 ">
-            <p>Sorry, it seems that there are no available payment methods. 
-                Please contact us if you require assistance or wish to make alternate arrangements.</p>
-           </div>
-           <input type="submit" value=" submit" id="submit">
-        </form>
-           
-        </div>
-        <!--End of customer-->
-        <div class="col-12 col-md-4 p-3 mb-2 orders" >
-            <h3>Your order</h3>
-            <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>broducts</th>
-                        <th>subtotal</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        
-                        
-                    </tr>
-                    <tr>
-                        <td>broducts</td>
-                        <td>subtotal</td>
-                        
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
+
+    <div class="col-12 col-md-8 bg-white customer">
+        <h4>Customer infromation</h4>
+
+        <form class="row g-3 needs-validation" novalidate>
+            <!-- Email -->
+            <div class="col-md-8">
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="validationCustomEmail" placeholder="Email"
+                        aria-describedby="inputGroupPrepend" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+            </div>
+            <!-- End of Email -->
+            <h4>Billing Details</h4>
+            <div class="username">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="FirstName" id="validationCustomufname" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid FirstName.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+
+                <div  class="col-md-8">
+                    <input type="text" class="form-control" placeholder="LastName" id="validationCustomlname" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid LasttName.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+            </div>
+            <!-- End of username -->
+            <!-- CompanyNAME -->
+            <div class="col-md-8">
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="validationCustomCompany" placeholder="CompanyName"
+                        aria-describedby="inputGroupPrepend" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid CompanyName.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+            </div>
+            <!-- End of COMPANY NAME -->
+            <div class="col-md-8">
+                <select class="form-select" id="validationCustomcountry" required>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid state.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+            <!--End of country select-->
+            <div class="housenumber">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="HouseNumber and StreetName"
+                        id="validationCustomhousestreet" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid House NUmber and street.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Apertment,Suite,Unit,etc. (optional)"
+                        id="validationCustom02" > 
             </div>
         </div>
-        <!--End of order -->
+            <!-- End of hosue number -->
+            <div class="city">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Town/City" id="validationCustomutown" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid Town/city.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+
+                <div  class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Zipcode" id="validationCustomZip" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid ZipCode.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                </div>
+            
+            <!-- End of username -->
+            <!-- username -->
+               <!-- phone -->
+               <div class="col-md-8">
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="validationCustomphone" placeholder="PhoneNumber"
+                        aria-describedby="inputGroupPrepend" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid Phone Number.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+            </div>
+            <!-- End of phone -->
+            <h4>Additional information</h4>
+            <textarea class="form-controlnodes" placeholder="Nodes about Your order" id="floatingTextarea"></textarea>
+            <p>Have A capon?</p>
+            <h4>Payment</h4>
+            <div class="payment p-3 mb-2 ">
+                <p>Sorry, it seems that there are no available payment methods.
+                    Please contact us if you require assistance or wish to make alternate arrangements.</p>
+            </div>
+            
+
+            <div class="col-12">
+                <button id="submitBtn" class="btn" type="submit">Place Order</button>
+
+                <div class="popup" id="popup">
+                    <img src="images/sumbit.png">
+                    <h2>Thank You!</h2>
+                    <p>Your Details has been succfully submitted , Thank You</p>
+                    <button onclick="closspop()">OK</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!--End of customer-->
+
     </div>
     <!--End of customer and order-->
     <footer class="row footer1 text-white bg-dark">
@@ -81,6 +173,9 @@
     </footer >
     <script src="js/checkout.js"></script>
 
-    
+
+
 </body>
 </html>
+
+
