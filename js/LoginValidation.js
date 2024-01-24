@@ -1,42 +1,25 @@
 import { Person } from "../person.js";
 
-// Load Array of users if existed and if not creat one with default user as admin.
-if (localStorage.getItem("users") == null) {
-    let admin = new Person("admin1", "admin@jsg2.com", "adminjsg2", "masr-heya-omi", "01000000000", "admin");
-    let usersArr1 = new Array;
-    usersArr1.push(
-        {
-            ID: admin.id,
-            name: admin.name,
-            email1: admin.email,
-            password: admin.password,
-            address: admin.address,
-            phoneNumber: admin.phone,
-            role: admin.role
-        }
-    );
-    localStorage.setItem("users", JSON.stringify(usersArr1));
-} else {
-    var usersArr = JSON.parse(localStorage.getItem("users"));
-}
+// Load Array of users
+var usersArr = JSON.parse(localStorage.getItem("users"));
 
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].email1 == mail) { return (i + 1); }
+        if (usersArr[i].email == mail) { return (i + 1); }
     }
     return false;
 }
 
-let e = 0, p = 0;
+let em = 0, p = 0;
 window.addEventListener("load", function () {
     // email
     document.getElementById("email").addEventListener("input", function () {
         if (!checkEmail(this.value)) {
-            e = 0;
+            em = 0;
             this.classList.add("is-invalid");
         }
         else {
-            e = 1
+            em = 1
             this.classList.remove("is-invalid");
         }
     });// end of email
@@ -44,7 +27,7 @@ window.addEventListener("load", function () {
     //password
     document.getElementById("password").addEventListener("input", function () {
 
-        if (!e) {// User didn't entered a valid email
+        if (!em) {// User didn't entered a valid email
             p = 0;
             this.classList.add("is-invalid");
         }
@@ -52,10 +35,10 @@ window.addEventListener("load", function () {
             let userEmail = document.getElementById("email").value;
             let userIndex = checkEmail(userEmail) - 1;
             let userpass = usersArr[userIndex].password;
+            console.log(userIndex);
             // user didn't enter the correct password
             if (this.value != userpass) {
                 p = 0;
-                console.log("ValidEmail" + userEmail + " " + userIndex + " " + userpass)
                 this.classList.add("is-invalid");
             } else {
                 p = 1;
@@ -66,7 +49,7 @@ window.addEventListener("load", function () {
 
     // sumbit button
     document.querySelector('form').addEventListener('submit', function (e) {
-        var valid = e && p;
+        var valid = em && p;
         // Check if the form is valid
         if (!valid) {
             e.preventDefault();

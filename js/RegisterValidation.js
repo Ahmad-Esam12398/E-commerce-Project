@@ -1,34 +1,19 @@
 import { Person } from "../person.js";
-if (localStorage.getItem("users") == null) {
-    let admin = new Person("admin1", "admin@jsg2.com", "adminjsg2", "masr-heya-omi", "01000000000", "admin");
-    let usersArr1 = new Array;
-    usersArr1.push(
-        {
-            ID: admin.id,
-            name: admin.name,
-            email1: admin.email,
-            password: admin.password,
-            address: admin.address,
-            phoneNumber: admin.phone,
-            role: admin.role
-        }
-    );
-    localStorage.setItem("users", JSON.stringify(usersArr1));
-} else {
-    var usersArr = JSON.parse(localStorage.getItem("users"));
-}
+
+var usersArr = JSON.parse(localStorage.getItem("users"));
 
 // function to check E-mail
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].email1 == mail) { return true; }
+        console.log(usersArr[i])
+        if (usersArr[i].email == mail) { return true; }
     }
     return false;
 }
 // function to check E-mail
 function checkPhone(phone) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].phoneNumber == phone) { return true; }
+        if (usersArr[i].phone == phone) { return true; }
     }
     return false;
 }
@@ -150,12 +135,12 @@ window.addEventListener("load", function () {
             let newuser = new Person(name, email, password, address, phone, "customer");
             usersArr.push(
                 {
-                    ID: newuser.id,
+                    id: newuser.id,
                     name: newuser.name,
-                    email1: newuser.email,
+                    email: newuser.email,
                     password: newuser.password,
                     address: newuser.address,
-                    phoneNumber: newuser.phone,
+                    phone: newuser.phone,
                     role: newuser.role
                 }
             );

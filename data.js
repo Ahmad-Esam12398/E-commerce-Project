@@ -25,11 +25,16 @@ var products = [
 
 // debugger;
 var persons = [
-    new Person("Ahmad Esam", "Ahmad.esam1231998@gmail.com", `9__%39]\Vr`, "Mahalla Kubra", "01015328933", "Admin"),
-    new Person("AbdUllah Aiman", "Abdallah_aiman122@gmail.com", `5p3Hv'P-9(`, "Mahalla Kubra", "01128461703", "Customer"),
-    new Person("Bothina Ahmed", "bothina_Ahmed332@gmail.com", `7%Fq'b2%4b`, "Mansoura", "01054921533", "Admin"),
-    new Person("Sara Mohamed", "sara_M23@gmail.com", `6>H_3S9HZn`, "Mansoura", "01156897221", "Customer"),
-    new Person("Ahmad Mostafa", "AhmedMostafa1221@gmail.com", `7Cq,C75|u(`, "Fayoum", "012365992370", "Seller"),
-    new Person("Fady Masoud", "FadyM122@gmail.com", `gj}:56rZh8`, "Talkha","01255891102", "Guest"),
+    new Person("Ahmad Esam", "Ahmad.esam1231998@gmail.com", "12345678", "Mahalla-Kubra-qqw", "01015328933", "Admin"),
+    new Person("AbdUllah Aiman", "Abdallah_aiman122@gmail.com", "12345678", "Mahalla-Kubra-q11", "01128461703", "Customer"),
+    new Person("Bothina Ahmed", "bothina_Ahmed332@gmail.com", "12345678", "Mansoura-qww-www", "01054921533", "Admin"),
+    new Person("Sara Mohamed", "sara_M23@gmail.com", `12345678`, "Mansoura-sasa-saqw", "01156897221", "Customer"),
+    new Person("Ahmad Mostafa", "AhmedMostafa1221@gmail.com", "12345678", "Fayoum-sass-qwee", "012365992370", "Seller"),
+    new Person("Fady Masoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq","01255891102", "Seller"),
 ];
+let users = [];
+for (let i = 0; i < persons.length; i++) {
+    users.push(persons[i].getPerson());
+}
+localStorage.setItem("users",JSON.stringify(users))
 export {products}
