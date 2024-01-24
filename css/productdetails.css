@@ -59,14 +59,14 @@ nav img {
 
 button {
      margin-left: 8vw;
-    padding: 10px 20px;
+    padding: 8px 10px;
     font-size: 1.2vw;
     cursor: pointer;
-    background: #bc9127;
+    background: #eab839;
     color: black;
     border: none;
-    border-radius: 5px;
-    margin-top: -2vw; 
+    /* border-radius: 5px; */
+    margin-top: -2.3vw; 
     position: absolute;
 }
 
