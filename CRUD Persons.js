@@ -12,6 +12,7 @@ function createTablePersons(){
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
     }
+    // debugger;
     let tableHeadData = document.createElement("th");
     tableHeadData.innerHTML = "Actions";
     tableRow.appendChild(tableHeadData);
@@ -20,7 +21,6 @@ function createTablePersons(){
     for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
         for(let key in persons[i].getPerson()){
-
             let tableData = document.createElement("td");
             tableData.innerHTML = persons[i].getPerson()[key];
             tableRow.appendChild(tableData);
@@ -82,12 +82,11 @@ function validateForm() {
     let address = document.getElementById("floatingAddress").value;
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
-    let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    console.log(address.trim().length == 0);
-    console.log(phone.trim().length < 11);
-    console.log(role != "Seller" && role != "Admin" && role != "Guest");
-    console.log(name.trim() == "");
-    console.log(!passwordStrengthRegex.test(password));
+    // console.log(address.trim().length == 0);
+    // console.log(phone.trim().length < 11);
+    // console.log(role != "Seller" && role != "Admin" && role != "Guest");
+    // console.log(name.trim() == "");
+    // console.log(!passwordStrengthRegex.test(password));
     if(name.trim() == "" || password.length < 8 || address.trim().length == 0 || phone.trim().length < 11 || (role != "Seller" && role != "Admin" && role != "Guest")){
         alert("Please Input valid data");
         return false;
@@ -111,6 +110,7 @@ function addPersonRow() {
 }
 let id = -1;
 function editRow(e) {
+    // debugger;
     document.forms[0].classList.remove("was-validated");
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
@@ -173,11 +173,9 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
     else{
         if(operation == "edit"){
             saveNewRow(event);
-            operation = "";
         }
-        else{
+        else if(operation == "add"){
             addPersonRow();
-            operation = "";
         }
     }
     document.forms[0].classList.remove('was-validated');
@@ -204,8 +202,7 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         emailInput.classList.add("is-invalid");
         emailInput.classList.remove("is-valid");
     }
-    let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if(passwordStrengthRegex.test(passwordInput.value) == false){
+    if(passwordInput.length < 8){
         passwordInput.classList.add("is-invalid");
         passwordInput.classList.remove("is-valid");
     }
