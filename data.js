@@ -30,7 +30,7 @@ var persons = [
     new Person("Bothina Ahmed", "bothina_Ahmed332@gmail.com", "12345678", "Mansoura-qww-www", "01054921533", "Admin"),
     new Person("Sara Mohamed", "sara_M23@gmail.com", `12345678`, "Mansoura-sasa-saqw", "01156897221", "Customer"),
     new Person("Ahmad Mostafa", "AhmedMostafa1221@gmail.com", "12345678", "Fayoum-sass-qwee", "012365992370", "Seller"),
-    new Person("Fady Masoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq", "01255891102", "Seller"),
+    new Person("Fady Masoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq", "01255891102", "Seller")
 ];
 function setLocalStorage()
 {
