@@ -1,22 +1,14 @@
 class Person {
     static lastID = 0;
     #id; #name; #email; #password; #address; #phone; #role;
-    constructor(name="", email="", password="", address="", phone="", role="") {
+    constructor(_name, _email, _password, _address, _phone, _role) {
         this.#id = ++(Person.lastID);
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.phone = phone;
-        let srole = role.toLowerCase().trim();
-        if (srole != "seller" && srole != "customer" && srole != "admin" && srole != "guest") {
-            console.log("Invalid role");
-            this.#role = "guest";
-            // throw new Error("Invalid role");
-        }
-        else {
-            this.#role = role;
-        }
+        this.name = _name;
+        this.email = _email;
+        this.password = _password;
+        this.address = _address;
+        this.phone = _phone;
+        this.role = _role;
     }
     set name(name) {
 
@@ -27,19 +19,17 @@ class Person {
             this.#name = name.trim();
         }
     }
-    set email(email) {
-        if (email.trim() == "") {
+    set email(_email) {
+        if (_email.trim() == "") {
             this.#email = "No email";
         }
         else {
-            this.#email = email.trim();
+            this.#email = _email.trim();
         }
     }
     set password(password) {
         if (password == "") {
             this.#password = "password";
-        }else{
-            this.#password = password.trim();
         }
         else{
             this.#password = password;
@@ -61,13 +51,13 @@ class Person {
             this.#phone = phone.trim();
         }
     }
-    set role(role) {
-        const validRoles = ["admin", "customer", "seller", "guest"];
-        if (validRoles.includes(role.trim().toLowerCase()) == false) {
-            this.#role = "guest";
+    set role(_role) {
+        const validRoles = ["Admin", "Customer", "Seller", "Guest"];
+        if (!validRoles.includes(_role.trim())) {
+            this.#role = "Guest";
         }
         else {
-            this.#role = role.trim().toLowerCase();
+            this.#role = _role;
         }
     }
     get id() {

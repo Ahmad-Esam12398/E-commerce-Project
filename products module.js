@@ -1,6 +1,5 @@
 class Product{
     static lastID = 0;
-    static imgPath = "products imgs/"
     #id; #name; #price; #quantity; #description; #image; #sellerID;
     constructor(name, price, quantity, description, image, sellerID){
         this.#id = ++Product.lastID;
@@ -8,7 +7,7 @@ class Product{
         this.price = price;
         this.quantity = quantity;
         this.description = description;
-        this.image = Product.imgPath + image;
+        this.image = image;
         this.sellerID = sellerID;
     }
     set quantity(_quantity){
@@ -27,12 +26,12 @@ class Product{
             this.#price = _price;
         }
     }
-    set name(name){
-        if(name == ""){
+    set name(_name){
+        if(_name == ""){
             this.#name = "No name";
         }
         else{
-            this.#name = name.trim();
+            this.#name = _name.trim();
         }
     }
     set description(_description){
