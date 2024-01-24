@@ -186,11 +186,9 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
     else{
         if(operation == "edit"){
             saveNewRow(event);
-            operation = "";
         }
-        else{
+        else if(operation == "add"){
             addProductRow();
-            operation = "";
         }
     }
     event.target.classList.add('was-validated');

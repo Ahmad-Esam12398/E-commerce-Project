@@ -17,7 +17,9 @@ thead{
 .btn{
     border-color:#edb932 !important;
 }
-/* tr{
-    display: flex;
-    align-items: center;
-} */
+body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input, #lowerTable > i{
+    color: #edb932 !important;
+}
+body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input:hover, #lowerTable > i:hover{
+    color: white !important;
+}

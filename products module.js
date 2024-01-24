@@ -1,15 +1,15 @@
 class Product{
     static lastID = 0;
-    static imgPath = "products imgs/"
-    #id; #name; #price; #quantity; #description; #image; #sellerID;
-    constructor(name, price, quantity, description, image, sellerID){
+    #id; #name; #price; #quantity; #description; #image; #sellerID; #room;
+    constructor(name, price, quantity, description, image, sellerID, room){
         this.#id = ++Product.lastID;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
-        this.image = Product.imgPath + image;
+        this.image = image;
         this.sellerID = sellerID;
+        this.room = room;
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -27,12 +27,12 @@ class Product{
             this.#price = _price;
         }
     }
-    set name(name){
-        if(name == ""){
+    set name(_name){
+        if(_name == ""){
             this.#name = "No name";
         }
         else{
-            this.#name = name.trim();
+            this.#name = _name.trim();
         }
     }
     set description(_description){
@@ -57,6 +57,15 @@ class Product{
         }
         else{
             this.#sellerID = +_sellerID;
+        }
+    }
+    set room(_room){
+        const validRooms = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
+        if(validRooms.includes(_room)){
+            this.#room = _room;
+        }
+        else{
+            this.#room = 'Other';
         }
     }
     get id(){
