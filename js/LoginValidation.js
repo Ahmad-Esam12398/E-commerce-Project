@@ -1,4 +1,4 @@
-import { setLocalStorage } from "../person.js";
+import { setLocalStorage } from "../data.js";
 
 setLocalStorage();
 // Load Array of users
@@ -18,9 +18,11 @@ window.addEventListener("load", function () {
         if (!checkEmail(this.value)) {
             em = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             em = 1
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });// end of email
@@ -31,6 +33,7 @@ window.addEventListener("load", function () {
         if (!em) {// User didn't entered a valid email
             p = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {// User has entered a valid email
             let userEmail = document.getElementById("email").value;
@@ -40,9 +43,11 @@ window.addEventListener("load", function () {
             // user didn't enter the correct password
             if (this.value != userpass) {
                 p = 0;
-                this.classList.add("is-invalid");
+                this.classList.add("is-valid");
+                this.classList.remove("is-invalid");
             } else {
                 p = 1;
+                this.classList.add("is-valid");
                 this.classList.remove("is-invalid");
             }
         }
