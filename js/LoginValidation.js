@@ -1,5 +1,6 @@
-import { Person } from "../person.js";
+import { setLocalStorage } from "../person.js";
 
+setLocalStorage();
 // Load Array of users
 var usersArr = JSON.parse(localStorage.getItem("users"));
 

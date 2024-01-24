@@ -1,5 +1,7 @@
+import {persons, setLocalStorage } from "../data.js";
 import { Person } from "../person.js";
 
+setLocalStorage();
 var usersArr = JSON.parse(localStorage.getItem("users"));
 
 // function to check E-mail
@@ -132,19 +134,22 @@ window.addEventListener("load", function () {
             let address = document.getElementById("address").value;
 
 
-            let newuser = new Person(name, email, password, address, phone, "customer");
-            usersArr.push(
-                {
-                    id: newuser.id,
-                    name: newuser.name,
-                    email: newuser.email,
-                    password: newuser.password,
-                    address: newuser.address,
-                    phone: newuser.phone,
-                    role: newuser.role
-                }
-            );
-            localStorage.setItem("users", JSON.stringify(usersArr));
+            let newuser = new Person(name, email, password, address, phone, "Customer");
+            persons.push(new Person(name, email, password, address, phone, "Customer"));
+            // usersArr.push(
+            //     {
+            //         id: newuser.id,
+            //         name: newuser.name,
+            //         email: newuser.email,
+            //         password: newuser.password,
+            //         address: newuser.address,
+            //         phone: newuser.phone,
+            //         role: newuser.role
+            //     }
+            // );
+            // localStorage.setItem("users", JSON.stringify(usersArr));
+            setLocalStorage();
+            alert(JSON.stringify(localStorage.getItem("users")))
             e.target.classList.add('was-validated');
 
         }
