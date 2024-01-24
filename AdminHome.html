@@ -9,6 +9,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="AdminDashBoard.js"></script>
+    <script>
+        window.onload = function(){
+            document.querySelectorAll("input[value='DashBoard']")[0].addEventListener("click", function(){
+            location.href = "AdminHome.html";
+            });
+            document.querySelectorAll("input[value='Users']")[0].addEventListener("click", function(){
+            location.href = "AdminPersons.html";
+            });
+            document.querySelectorAll("input[value='Products']")[0].addEventListener("click", function(){
+            location.href = "AdminProducts.html";
+            });
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -19,7 +32,7 @@
             <aside class="leftSide col-6 col-md-2 d-flex flex-md-column flex-row bg-light m-2">
                 <div class="p-3 mb-2 text-white text-center w-100" style="background-color: #edb932;">Menu</div>
                 <ul class="list-group list-group-flush flex-row flex-md-column">
-                    <li class="list-group-item"><input type="button" value="Home" class="btn btn-outline-primary w-100"></li>
+                    <li class="list-group-item"><input type="button" value="DashBoard" class="btn btn-outline-primary w-100"></li>
                     <li class="list-group-item"><input type="button" value="Users" class="btn btn-outline-primary w-100"></li>
                     <li class="list-group-item"><input type="button" value="Products" class="btn btn-outline-primary w-100"></li>
                 </ul>
