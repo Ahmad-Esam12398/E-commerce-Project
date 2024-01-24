@@ -25,13 +25,14 @@ var products = [
 
 
 var persons = [
-    new Person("Person 1", "Email 1", "Password 1", "Address 1", "Phone 1", "Admin"),
-    new Person("Person 2", "Email 2", "Password 2", "Address 2", "Phone 2", "Customer"),
-    new Person("Person 3", "Email 3", "Password 3", "Address 3", "Phone 3", "Seller"),
-    new Person("Person 4", "Email 4", "Password 4", "Address 4", "Phone 4", "Guest"),
-    new Person("Person 5", "Email 5", "Password 5", "Address 5", "Phone 5", "Admin"),
-    new Person("Person 6", "Email 6", "Password 6", "Address 6", "Phone 6", "customer"),
+    new Person("Person 1", "Email@1.com", "Password 1", "Address-251-145", "01000000011", "admin"),
+    new Person("Person 2", "Email@2.com", "Password 2", "Address-252-145", "01000000012", "customer"),
+    new Person("Person 3", "Email@3.com", "Password 3", "Address-253-145", "01000000013", "seller"),
+    new Person("Person 4", "Email@4.com", "Password 4", "Address-254-145", "01000000014", "guest"),
+    new Person("Person 5", "Email@5.com", "Password 5", "Address-255-145", "01000000014", "admin"),
+    new Person("Person 6", "Email@6.com", "Password 6", "Address-256-145", "01000000015", "customer"),
 ];
+localStorage.setItem("users",JSON.stringify(persons));
 function createTableProducts(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
