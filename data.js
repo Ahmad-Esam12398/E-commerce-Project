@@ -32,6 +32,4 @@ var persons = [
     new Person("Ahmad Mostafa", "AhmedMostafa1221@gmail.com", `7Cq,C75|u(`, "Fayoum", "012365992370", "Seller"),
     new Person("Fady Masoud", "FadyM122@gmail.com", `gj}:56rZh8`, "Talkha","01255891102", "Guest"),
 ];
-export { products, persons };
-
-
+export {products}

@@ -5,40 +5,29 @@
 body{
     background-color: rgba(245, 245, 245, 0.822);
 }
-
-.customerandorder{
-    width: 80vw;
-    margin: auto;
-    margin-top: 10vh;
+.customer{
+  height: 100%;
+   margin: auto;
+   margin-top: 4vh;
+   padding: 15px 15px;
 }
-.customer h4{
-    margin-top: 3vh;
+.invalid-feedback {
+    color: red;
 }
-.form-control{
-  
-    width: 45vw;
-    margin-top: 3vh;
+.valid-feedback {
+    color: green;
 }
-.fname ,.lname{
-    width: 20vw;
-    margin-top: 10px; 
+.username{
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
 }
-
-input:active{
-    border: 1px dashed rgb(202, 151, 97);
+.housenumber{
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
 }
-.form-select{
-    width: 40vw;
-    margin-top: 3vh;
-}
-.accordion{
-    width: 40vw;
-}
-.accordion p{
-    margin-left: 2vw;
-    margin-top: 2vh;
-    color: black;
-    font-size: 15px;
+.city{
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
 }
 hr {
     width: 37vw;
@@ -46,6 +35,16 @@ hr {
     margin-left: 1vw;
     color: black;
     margin-top: 2vh;
+}
+.form-control{
+  
+    width: 21vw;
+    margin-top: 3vh;
+}
+.form-controlnodes{
+    margin-left: 0.5vw;
+    width: 42vw;
+    margin-top: 3vh;
 }
 .payment{
     border-top: 2px solid black;
@@ -56,16 +55,6 @@ hr {
      margin-left: 2vw;
      margin-top: 2vh;
      background-color:rgba(245, 245, 245, 0.822);
-}
-.footer1 {
-    width: 99.7vw;
-    height: 15vh;
-    margin-top: 50px; 
-}
-
-.footer1 p {
-    margin-left: 7vw;
-    margin-top: 5vh;
 }
 .table-container {
     margin-top: 30px;
@@ -88,65 +77,61 @@ td {
     border-top: 1px solid  rgb(176, 173, 173); 
     border-bottom: 1px solid  rgb(176, 173, 173); 
 }
-
-@media only screen and (max-width: 768px) {
-    /* Add your tablet-specific styles here */
-    .form-select,
-    .accordion,
-    .payment,
-    .footer1 {
-        width: 100vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .orders {
-        width: 100vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    hr {
-        width: 78vw;
-    }
+.btn{
+    padding: 0.5vw 17vw;
+    margin-left: 1vw;
+    background-color: #EDB932;
+    border-radius: none;
+    border: 1px solid #EDB932 ;
+    cursor: pointer;
 }
-
-
-
-
-/* Media Query for Mobiles */
-@media only screen and (max-width: 480px) {
-    /* Add your mobile-specific styles here */
-    .customerandorder{
-        width: 90;
-    }
-    .form-control,
-    .form-select,
-    .accordion,
-    .payment,
-    .footer1 {
-        width: 100vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .fname,
-    .lname {
-        width: 450%; 
-        /* margin-bottom: 1vh; */
-    }
-
-    .orders {
-        width: 100vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    hr {
-        width: 88vw;
-    }
+.btn:hover{
+    background-color: #EDB932;
+    color: white;
+    cursor: pointer;
 }
+.popup{
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+    z-index: 1000; 
 
-
-
+    
+}
+.popup.open-popup {
+    visibility: visible;
+    top: 80%;
+    transform: translate(-50%, -50%) scale(1);
+}
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+.popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background-color: #EDB932;
+    color: black;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
