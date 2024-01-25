@@ -32,12 +32,4 @@ var persons = [
     new Person("Ahmad Mostafa", "AhmedMostafa1221@gmail.com", "12345678", "Fayoum-sass-qwee", "012365992370", "Seller"),
     new Person("Fady Masoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq", "01255891102", "Seller")
 ];
-function setLocalStorage()
-{
-    let users = [];
-    for (let i = 0; i < persons.length; i++) {
-        users.push(persons[i].getPerson());
-    }
-    localStorage.setItem("users", JSON.stringify(users));
-};
-export { products,persons,setLocalStorage};
+export {products, persons};

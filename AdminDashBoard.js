@@ -24,33 +24,26 @@ function generateRandomColors(numColors) {
   }
   return colors;
 }
-// let noOfProductsInEachCategory = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-// products.forEach(product => {
-//   if(product.category == "Bathroom") noOfProductsInEachCategory[0]++;
-//   if(product.category == "Bedroom") noOfProductsInEachCategory[1]++;
-//   if(product.category == "Cabinet") noOfProductsInEachCategory[2]++;
-//   if(product.category == "Chair") noOfProductsInEachCategory[3]++;
-//   if(product.category == "Home Office") noOfProductsInEachCategory[4]++;
-//   if(product.category == "Kitchen") noOfProductsInEachCategory[5]++;
-//   if(product.category == "Living Room") noOfProductsInEachCategory[6]++;
-//   if(product.category == "Sofa") noOfProductsInEachCategory[7]++;
-//   if(product.category == "Stool") noOfProductsInEachCategory[8]++;
-//   if(product.category == "Table") noOfProductsInEachCategory[9]++;
-//   if(product.category == "Wall Hanging") noOfProductsInEachCategory[10]++;
-//   if(product.category == "Wooden") noOfProductsInEachCategory[11]++;
-//   if(product.category == "Home") noOfProductsInEachCategory[12]++;
-//   if(product.category == "Office") noOfProductsInEachCategory[13]++;
-// });
-
+const category = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
+let noOfProductsInEachCategory = [0,0,0,0,0,0];
+products.forEach(product => {
+	if(product.category == category[0]) noOfProductsInEachCategory[0]++;
+	if(product.category == category[1]) noOfProductsInEachCategory[1]++;
+	if(product.category == category[2]) noOfProductsInEachCategory[2]++;
+	if(product.category == category[3]) noOfProductsInEachCategory[3]++;
+	if(product.category == category[4]) noOfProductsInEachCategory[4]++;
+	if(product.category == category[5]) noOfProductsInEachCategory[5]++;
+});
+console.log(noOfProductsInEachCategory);
 let ctx = document.getElementById('myFirstChart').getContext('2d');
 
 let firstChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: category,
         datasets: [{
-            label: '# Trending Products',
-            data: [12, 19, 3, 5, 2, 3],
+            label: '# Product in Each Category',
+            data: noOfProductsInEachCategory,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
