@@ -239,6 +239,12 @@ document.getElementById("floatingImage").addEventListener("input", function(){
         this.classList.remove("is-invalid");
     }
 });
+let searchdiv = document.getElementsByClassName("searchbutton")[0];
+searchdiv.children[0].addEventListener("keyup", function(event){
+    if(event.keyCode == 13){
+        searchTable();
+    }
+});
 document.getElementById("sellerID").addEventListener("input", function(){
     if(this.value.trim() == ""){
         this.classList.add("is-invalid");
@@ -247,4 +253,59 @@ document.getElementById("sellerID").addEventListener("input", function(){
         this.classList.remove("is-invalid");
     }
 });
-
+searchdiv.children[1].addEventListener("click", searchTable);
+function searchTable(){
+    let searchInput = searchdiv.children[0].value.trim();
+    if (searchInput.trim() == "") {
+        createTableProducts();
+        document.querySelectorAll(".form-check div input").forEach(input => input.checked = true);
+        return;
+    }
+    let allTableRows = [...document.querySelectorAll("tbody tr")];
+    let tableRows = allTableRows.filter(tr => tr.classList.contains("d-none") == false); 
+    tableRows.forEach(tr => tr.style.display = "");   
+    // console.log(tableRows);
+    // console.log(allTableRows);
+    let found = false;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        for(let j = 0; j < tableData.length; j++){
+            if(tableData[j].innerHTML.toLowerCase().indexOf(searchInput.toLowerCase()) != -1){
+                found = true;
+                break;
+            }
+        }
+        if(found == false){
+            tableRows[i].style.display = "none";
+        }
+        found = false;
+    }
+}
+document.querySelectorAll(".form-check div input").forEach(input => input.addEventListener("click", function(){
+    if(this.checked){
+        filterTableChecked(this.value);
+    }
+    else{
+        filterTableUnChecked(this.value);
+    }
+}));
+function filterTableChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[7].innerHTML == criteria){
+            tableRows[i].classList.remove("d-none");
+        }
+    }
+}
+function filterTableUnChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[7].innerHTML == criteria){
+            tableRows[i].classList.add("d-none");
+        }
+    }
+}

@@ -10,13 +10,12 @@ class Person {
         this.phone = _phone;
         this.role = _role;
     }
-    set name(name) {
-
-        if (name.trim() == "") {
+    set name(_name) {
+        if (_name.trim() == "") {
             this.#name = "No name";
         }
         else {
-            this.#name = name.trim();
+            this.#name = _name.trim();
         }
     }
     set email(_email) {

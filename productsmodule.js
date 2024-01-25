@@ -71,10 +71,11 @@ class Product {
     }
 
     set category(_category) {
-        if (_category.trim() == "") {
-            this.#category = "No category";
+        const validCategories = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
+        if (validCategories.includes(_category)) {
+            this.#category = _category;
         } else {
-            this.#category = _category.trim();
+            this.#category = "No Category";
         }
     }
 
@@ -143,7 +144,6 @@ class Product {
             categorypath: this.categorypath,
         };
     }
-
     addClickEvent(callback) {
         const productDiv = document.getElementById(`product-${this.#id}`);
         if (productDiv) {
