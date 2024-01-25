@@ -27,9 +27,11 @@ class Person {
             this.#email = _email.trim();
         }
     }
-    set password(password) {
-        if (password == "") {
-            this.#password = "password";
+    set password(_password) {
+        if (_password == "") {
+            this.#password = "No Password";
+        } else {
+            this.#password = _password;
         }
     }
     set address(address) {
