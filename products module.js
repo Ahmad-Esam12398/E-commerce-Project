@@ -100,16 +100,18 @@ class Product{
             quantity: this.#quantity,
             description: this.#description,
             image: this.#image,
-            sellerID: this.#sellerID
+            sellerID: this.#sellerID,
+            category: this.#category
         }
     }
-    setProduct(name, price, quantity, description, image, sellerID){
+    setProduct(name, price, quantity, description, image, sellerID, category){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.image = image;
         this.sellerID = sellerID;
+        this.category = category;
     }
 }
 export { Product };

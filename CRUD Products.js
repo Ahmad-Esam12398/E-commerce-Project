@@ -150,6 +150,7 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
+    console.log(rowChildrenValues[rowChildrenValues.length - 1]);
     // console.log(products);
 }
 
