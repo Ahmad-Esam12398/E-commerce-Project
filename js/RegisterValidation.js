@@ -1,34 +1,19 @@
+import { persons, setLocalStorage } from "../data.js";
 import { Person } from "../person.js";
-if (localStorage.getItem("users") == null) {
-    let admin = new Person("admin1", "admin@jsg2.com", "adminjsg2", "masr-heya-omi", "01000000000", "admin");
-    let usersArr1 = new Array;
-    usersArr1.push(
-        {
-            ID: admin.id,
-            name: admin.name,
-            email1: admin.email,
-            password: admin.password,
-            address: admin.address,
-            phoneNumber: admin.phone,
-            role: admin.role
-        }
-    );
-    localStorage.setItem("users", JSON.stringify(usersArr1));
-} else {
-    var usersArr = JSON.parse(localStorage.getItem("users"));
-}
+
+var usersArr = JSON.parse(localStorage.getItem("users"));
 
 // function to check E-mail
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].email1 == mail) { return true; }
+        if (usersArr[i].email == mail) { return true; }
     }
     return false;
 }
 // function to check E-mail
 function checkPhone(phone) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].phoneNumber == phone) { return true; }
+        if (usersArr[i].phone == phone) { return true; }
     }
     return false;
 }
@@ -41,9 +26,11 @@ window.addEventListener("load", function () {
         if (this.value.trim().length < 3) {
             n = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             n = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
@@ -54,34 +41,41 @@ window.addEventListener("load", function () {
             // console.log(usersArr[1].phoneNumber.constructor.name)
             em = 0;
             this.classList.add("is-invalid");
-            console.log(checkEmail(this.value) + " " + e)
+            this.classList.remove("is-valid");
         }
-        else if (checkEmail(this.value) && this.value.match(/^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$/)) {
+        else if (checkEmail(this.value)) {
             em = 0;
-            console.log("Valid and Found")
             alert("Email is already used");
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
-            for (let i = 0; i < usersArr.length; i++) {
-                console.log(usersArr[i].email1);
-
-            }
-            console.log(this.value + " " + checkEmail(this.value) + " " + e)
+            // for (let i = 0; i < usersArr.length; i++) { console.log(usersArr[i].email1); }
             em = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
     //password
     document.getElementById("password").addEventListener("input", function () {
-        if (this.value.trim().length < 6) {
+        if (this.value.trim().length < 8) {
             p1 = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             var passCheck = document.getElementById("passwordCheck");
-            if (passCheck.value != this.value) { p2 = 0; passCheck.classList.add("is-invalid"); }
+            if (passCheck.value != this.value) {
+                p2 = 0;
+                passCheck.classList.add("is-invalid");
+                passCheck.classList.remove("is-valid");
+            } else {
+                p2 = 1
+                passCheck.classList.add("is-valid");
+                passCheck.classList.remove("is-invalid");
+            }
             p1 = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
@@ -91,9 +85,11 @@ window.addEventListener("load", function () {
         if (password != this.value) {
             p2 = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             p2 = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
@@ -103,14 +99,17 @@ window.addEventListener("load", function () {
         if (this.value.length != 11 || !(this.value.startsWith("010") || this.value.startsWith("011") || this.value.startsWith("012") || this.value.startsWith("015"))) {
             ph = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else if (checkPhone(this.value)) {
             ph = 0;
             alert("Number is already used");
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             ph = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
@@ -122,13 +121,16 @@ window.addEventListener("load", function () {
         if (addressArr.length != 3) {
             ad = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else if (addressArr[0].length < 3 || addressArr[1].length < 3 || addressArr[2].length < 3) {
             ad = 0;
             this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
             ad = 1;
+            this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }
     });
@@ -138,13 +140,14 @@ window.addEventListener("load", function () {
         var valid = n && em && p1 && p2 && ph && ad;
         // Check if the form is valid
         if (!valid) {
-            console.log("Invalid" + valid);
             e.preventDefault();
             e.stopPropagation();
+            this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
         }
         else {
-            alert(e)
-            console.log("valid" + valid);
+            // alert(e)
+            // console.log("valid" + valid);
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
@@ -152,19 +155,10 @@ window.addEventListener("load", function () {
             let address = document.getElementById("address").value;
 
 
-            let newuser = new Person(name, email, password, address, phone, "customer");
-            usersArr.push(
-                {
-                    ID: newuser.id,
-                    name: newuser.name,
-                    email1: newuser.email,
-                    password: newuser.password,
-                    address: newuser.address,
-                    phoneNumber: newuser.phone,
-                    role: newuser.role
-                }
-            );
-            localStorage.setItem("users", JSON.stringify(usersArr));
+            let newuser = new Person(name, email, password, address, phone, "Customer");
+            persons.push(new Person(name, email, password, address, phone, "Customer"));
+
+            setLocalStorage();
             e.target.classList.add('was-validated');
 
         }
