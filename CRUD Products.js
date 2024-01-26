@@ -1,5 +1,27 @@
-import {products, persons} from "./data.js";
+import {products as originalProducts, persons as originalPersons} from "./data.js";
 import {Product} from "./products module.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//     window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+    let plainPersons = originalPersons.map((item)=> item.getPerson());
+    localStorage.setItem("Persons", JSON.stringify(plainPersons));
+    // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+if(localStorage.getItem("products") == null){
+    let plainProducts = originalProducts.map((item)=>item.getProduct());
+    localStorage.setItem("products", JSON.stringify(plainProducts));
+}
+// let plainProducts = products.map((item)=>item.getProduct());
+// localStorage.setItem("products", JSON.stringify(plainProducts));
+let persons = JSON.parse(localStorage.getItem("Persons"));
+let products = JSON.parse(localStorage.getItem("products"));
+function updateProductsLocalStorage(){
+    localStorage.setItem("products", JSON.stringify(products));
+}
+
 function createTableProducts(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
@@ -7,7 +29,7 @@ function createTableProducts(){
     tableHead.innerHTML = "";
     tableBody.innerHTML = "";
     let tableRow = document.createElement("tr");
-    for(let key in products[0].getProduct()){
+    for(let key in products[0]){
         let tableHeadData = document.createElement("th");
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
@@ -19,7 +41,7 @@ function createTableProducts(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < products.length; i++){
         tableRow = document.createElement("tr");
-        for(let key in products[i].getProduct()){
+        for(let key in products[i]){
             if(key == "image"){
                 let img = document.createElement("img");
                 img.src = products[i].image;
@@ -30,7 +52,7 @@ function createTableProducts(){
             }
             else{
                 let tableData = document.createElement("td");
-                tableData.innerHTML = products[i].getProduct()[key];
+                tableData.innerHTML = products[i][key];
                 tableRow.appendChild(tableData);
             }
         }
@@ -81,7 +103,7 @@ function AddButton(){
     lowerTable.appendChild(addButton);
 }
 function getOptions(){
-    debugger;
+    // debugger;
     let sellersIds = [];
     for(let i = 0; i < persons.length; i++){
         if(persons[i].role == "Seller"){
@@ -103,8 +125,11 @@ function addProductRow() {
     let description = document.getElementById("floatingDescription").value;
     let image = document.getElementById("floatingImage").value;
     let sellerID = document.getElementById("sellerID").value;
-    let newProduct = new Product(name, price, quantity, description, image, sellerID);
-    products.push(newProduct);
+    let category = document.getElementById("Room").value;
+    // debugger;
+    let newProduct = new Product(name, price, quantity, description, image, sellerID, category);
+    products.push(newProduct.getProduct());
+    updateProductsLocalStorage();
     createTableProducts();
 }
 
@@ -139,6 +164,15 @@ function editRow(e) {
     saveButton.innerHTML = "Save";
     operation = "edit";
 }
+function setProduct(index, rowChildrenValues){
+    products[index].name = rowChildrenValues[0];
+    products[index].price = rowChildrenValues[1];
+    products[index].quantity = rowChildrenValues[2];
+    products[index].description = rowChildrenValues[3];
+    products[index].image = rowChildrenValues[4];
+    products[index].sellerID = rowChildrenValues[5];
+    products[index].category = rowChildrenValues[6];
+}
 function saveNewRow() {
     if(confirm("Are you sure you want to save this product?")) {
         let index = products.findIndex(product => product.id == id);
@@ -148,7 +182,8 @@ function saveNewRow() {
             rowChildrenValues.push(inputs[i].value);
         }
         // console.log(rowChildrenValues);
-        products[index].setProduct(...rowChildrenValues);
+        setProduct(index, rowChildrenValues);
+        updateProductsLocalStorage();
         createTableProducts();
     }
 }
@@ -159,6 +194,7 @@ function deleteRow(e) {
         let index = products.findIndex(product => product.id == id);
         // console.log(index);
         products.splice(index, 1);
+        updateProductsLocalStorage();
         createTableProducts();
     }
 }

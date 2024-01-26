@@ -1,8 +1,10 @@
 class Person {
-    static lastID = 0;
+    static lastID = localStorage.getItem("lastIDPerson") ? +(localStorage.getItem("lastIDPerson")) : 0;
     #id; #name; #email; #password; #address; #phone; #role;
     constructor(_name, _email, _password, _address, _phone, _role) {
+        // debugger;
         this.#id = ++(Person.lastID);
+        localStorage.setItem("lastIDPerson", Person.lastID);
         this.name = _name;
         this.email = _email;
         this.password = _password;

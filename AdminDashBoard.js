@@ -1,4 +1,21 @@
-import { products, persons } from "./data.js";
+import { products as originalProducts, persons as originalPersons } from "./data.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//   window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+  let plainPersons = originalPersons.map((item)=> item.getPerson());
+  localStorage.setItem("Persons", JSON.stringify(plainPersons));
+  // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+if(localStorage.getItem("products") == null){
+  let plainProducts = originalProducts.map((item)=>item.getProduct());
+  localStorage.setItem("products", JSON.stringify(plainProducts));
+}
+let persons = JSON.parse(localStorage.getItem("Persons"));
+let products = JSON.parse(localStorage.getItem("products"));
+
 let noOfProducts = products.length;
 let noOfPersons = persons.length;
 let noOfGoingOrders = 10;

@@ -33,4 +33,5 @@ var persons = [
     new Person("FadyMasoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq", "01255891102", "Seller"),
     new Person("MohamedAli", "MohamedAli12@gmail.com", "12345678", "Cairo-sad-asq", "01055891102", "Seller"),
 ];
+
 export {products, persons};

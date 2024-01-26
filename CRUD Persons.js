@@ -1,5 +1,20 @@
-import { persons } from "./data.js";
+import { persons as originalPersons } from "./data.js";
 import { Person } from "./person.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//     window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+    let plainPersons = originalPersons.map((item)=> item.getPerson());
+    localStorage.setItem("Persons", JSON.stringify(plainPersons));
+    // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+let persons = JSON.parse(localStorage.getItem("Persons"));
+
+function updatePersonsLocalStorage(){
+    localStorage.setItem("Persons", JSON.stringify(persons));
+}
 function createTablePersons(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
@@ -7,7 +22,7 @@ function createTablePersons(){
     tableHead.innerHTML = "";
     tableBody.innerHTML = "";
     let tableRow = document.createElement("tr");
-    for(let key in persons[0].getPerson()){
+    for(let key in persons[0]){
         let tableHeadData = document.createElement("th");
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
@@ -20,9 +35,9 @@ function createTablePersons(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
-        for(let key in persons[i].getPerson()){
+        for(let key in persons[i]){
             let tableData = document.createElement("td");
-            tableData.innerHTML = persons[i].getPerson()[key];
+            tableData.innerHTML = persons[i][key];
             tableRow.appendChild(tableData);
         }
         let tableData = document.createElement("td");
@@ -83,8 +98,11 @@ function addPersonRow() {
     let address = document.getElementById("floatingAddress").value;
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
+    // debugger;
     let newPerson = new Person(name, email, password, address, phone, role);
-    persons.push(newPerson);
+    console.log(newPerson.getPerson());
+    persons.push(newPerson.getPerson());
+    updatePersonsLocalStorage();
     createTablePersons();
 }
 let id = -1;
@@ -110,11 +128,16 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
-    for(let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove("is-valid");
-        inputs[i].classList.remove("is-invalid");
-    }
     // console.log(products);
+}
+function setPerson(index, values){
+    persons[index].name = values[0];
+    persons[index].email = values[1];
+    persons[index].password = values[2];
+    persons[index].address = values[3];
+    persons[index].phone = values[4];
+    persons[index].role = values[5];
+    updatePersonsLocalStorage();
 }
 
 function saveNewRow() {
@@ -126,7 +149,8 @@ function saveNewRow() {
             rowChildrenValues.push(inputs[i].value);
         }
         // console.log(rowChildrenValues);
-        persons[index].setPerson(...rowChildrenValues);
+        // persons[index].setPerson(...rowChildrenValues);
+        setPerson(index, rowChildrenValues);
         createTablePersons();
     }
 
@@ -138,6 +162,7 @@ function deleteRow(e) {
         let index = persons.findIndex(product => product.id == id);
         // console.log(index);
         persons.splice(index, 1);
+        updatePersonsLocalStorage();
         createTablePersons();
     }
 }
