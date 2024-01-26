@@ -42,10 +42,10 @@ function createTableProducts(){
         editButton.innerHTML = "Edit";
         editButton.style.marginRight = "5px";
         editButton.style.cursor = "pointer";
+        editButton.onclick = getOptions;
         editButton.addEventListener("click", editRow);
         editButton.setAttribute("data-bs-toggle", "modal");
         editButton.setAttribute("data-bs-target", "#staticBackdrop");
-        editButton.onclick = getOptions;
         let deleteButton = document.createElement("button");
         deleteButton.className = "btn btn-outline-danger";
         deleteButton.innerHTML = "Delete";
@@ -81,6 +81,7 @@ function AddButton(){
     lowerTable.appendChild(addButton);
 }
 function getOptions(){
+    debugger;
     let sellersIds = [];
     for(let i = 0; i < persons.length; i++){
         if(persons[i].role == "Seller"){
@@ -95,32 +96,16 @@ function getOptions(){
         document.getElementById("sellerID").appendChild(option);
     });
 }
-function validateForm() {
+function addProductRow() {
     let name = document.getElementById("floatingName").value;
     let price = document.getElementById("floatingPrice").value;
     let quantity = document.getElementById("floatingQuantity").value;
     let description = document.getElementById("floatingDescription").value;
     let image = document.getElementById("floatingImage").value;
-    if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
-        alert("Please Input valid data");
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-function addProductRow() {
-    if(validateForm()){
-        let name = document.getElementById("floatingName").value;
-        let price = document.getElementById("floatingPrice").value;
-        let quantity = document.getElementById("floatingQuantity").value;
-        let description = document.getElementById("floatingDescription").value;
-        let image = document.getElementById("floatingImage").value;
-        let sellerID = document.getElementById("sellerID").value;
-        let newProduct = new Product(name, price, quantity, description, image, sellerID);
-        products.push(newProduct);
-        createTableProducts();
-    }
+    let sellerID = document.getElementById("sellerID").value;
+    let newProduct = new Product(name, price, quantity, description, image, sellerID);
+    products.push(newProduct);
+    createTableProducts();
 }
 
 let id = -1;
@@ -143,17 +128,17 @@ function editRow(e) {
     let inputs = document.querySelectorAll(".inputs");
     id = -1;
     id = rowChildrenValues[0];
-    // console.log(inputs);
+    debugger;
     for(let i = 0; i < inputs.length; i++) {
         inputs[i].value = rowChildrenValues[i + 1];
     }
+    // inputs[5].value = 6;
+    // console.log(inputs[5]);
+    // console.log(inputs[5]);
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
-    console.log(rowChildrenValues[rowChildrenValues.length - 1]);
-    // console.log(products);
 }
-
 function saveNewRow() {
     if(confirm("Are you sure you want to save this product?")) {
         let index = products.findIndex(product => product.id == id);
@@ -172,19 +157,17 @@ function deleteRow(e) {
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
         let index = products.findIndex(product => product.id == id);
-        console.log(index);
+        // console.log(index);
         products.splice(index, 1);
         createTableProducts();
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
     event.preventDefault();
-    // Check if the form is valid
-    if(!event.target.checkValidity()){
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    else{
+    // Check if the form is 
+    event.preventDefault();
+    event.stopPropagation();
+    if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
         }
@@ -192,65 +175,12 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             addProductRow();
         }
     }
-    event.target.classList.add('was-validated');
-});
-document.getElementById("floatingName").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 2){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingPrice").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingQuantity").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingDescription").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 10){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingImage").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().indexOf(".") == -1){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
+    this.classList.add('was-validated');
 });
 let searchdiv = document.getElementsByClassName("searchbutton")[0];
 searchdiv.children[0].addEventListener("keyup", function(event){
     if(event.keyCode == 13){
         searchTable();
-    }
-});
-document.getElementById("sellerID").addEventListener("input", function(){
-    if(this.value.trim() == ""){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
     }
 });
 searchdiv.children[1].addEventListener("click", searchTable);
@@ -309,3 +239,9 @@ function filterTableUnChecked(criteria){
         }
     }
 }
+function resetValidation(){
+    document.forms[0].classList.remove("was-validated");
+    console.log("reset");
+}
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);

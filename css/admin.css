@@ -53,3 +53,6 @@ border-radius: 5px;
 .navbar img {
     width: 35%;
 }
+.table-dark th {
+    background-color: #edb832be !important;
+}

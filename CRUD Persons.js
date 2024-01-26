@@ -52,8 +52,10 @@ function createTablePersons(){
 };
 createTablePersons();
 let operation = "";
+
 function AddButton(){
     let lowerTable = document.getElementById("lowerTable");
+    // document.forms[0].classList.remove("was-validated");
     lowerTable.innerHTML = "";
     let addButton = document.createElement("i");
     addButton.innerHTML = "Add";
@@ -69,44 +71,21 @@ function AddButton(){
         button.innerHTML = "Add";
         let inputs = document.querySelectorAll(".inputs");
         for(let i = 0; i < inputs.length; i++) {
-            inputs[i].classList.remove("is-valid");
-            inputs[i].classList.remove("is-invalid");
+            inputs[i].value = "";
         }
     });
     lowerTable.appendChild(addButton);
 }
-function validateForm() {
-    // debugger;
+function addPersonRow() {
     let name = document.getElementById("floatingName").value;
+    let email = document.getElementById("floatingEmail").value;
     let password = document.getElementById("floatingPassword").value;
     let address = document.getElementById("floatingAddress").value;
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
-    // console.log(address.trim().length == 0);
-    // console.log(phone.trim().length < 11);
-    // console.log(role != "Seller" && role != "Admin" && role != "Guest");
-    // console.log(name.trim() == "");
-    // console.log(!passwordStrengthRegex.test(password));
-    if(name.trim() == "" || password.length < 8 || address.trim().length == 0 || phone.trim().length < 11 || (role != "Seller" && role != "Admin" && role != "Guest")){
-        alert("Please Input valid data");
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-function addPersonRow() {
-    if(validateForm()){
-        let name = document.getElementById("floatingName").value;
-        let email = document.getElementById("floatingEmail").value;
-        let password = document.getElementById("floatingPassword").value;
-        let address = document.getElementById("floatingAddress").value;
-        let phone = document.getElementById("floatingPhone").value;
-        let role = document.getElementById("PersonRole").value;
-        let newPerson = new Person(name, email, password, address, phone, role);
-        persons.push(newPerson);
-        createTablePersons();
-    }
+    let newPerson = new Person(name, email, password, address, phone, role);
+    persons.push(newPerson);
+    createTablePersons();
 }
 let id = -1;
 function editRow(e) {
@@ -139,19 +118,18 @@ function editRow(e) {
 }
 
 function saveNewRow() {
-    if(validateForm()){
-        if(confirm("Are you sure you want to save this Person?")) {
-            let index = persons.findIndex(Person => Person.id == id);
-            let rowChildrenValues = [];
-            let inputs = document.querySelectorAll(".inputs");
-            for(let i = 0; i < inputs.length; i++) {
-                rowChildrenValues.push(inputs[i].value);
-            }
-            // console.log(rowChildrenValues);
-            persons[index].setPerson(...rowChildrenValues);
-            createTablePersons();
+    if(confirm("Are you sure you want to save this Person?")) {
+        let index = persons.findIndex(Person => Person.id == id);
+        let rowChildrenValues = [];
+        let inputs = document.querySelectorAll(".inputs");
+        for(let i = 0; i < inputs.length; i++) {
+            rowChildrenValues.push(inputs[i].value);
         }
+        // console.log(rowChildrenValues);
+        persons[index].setPerson(...rowChildrenValues);
+        createTablePersons();
     }
+
 }
 function deleteRow(e) {
     if(confirm("Are you sure you want to delete this product?")) {
@@ -163,14 +141,38 @@ function deleteRow(e) {
         createTablePersons();
     }
 }
-document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Check if the form is valid
-    if(!event.target.checkValidity()){
-        event.preventDefault();
-        event.stopPropagation();
+function addCustomValidation(element, conditionFun){
+    if(conditionFun()){
+        element.setCustomValidity("invalid");
     }
     else{
+        element.setCustomValidity("");
+    }
+    element.addEventListener('input', function(event) {
+        if(conditionFun()){
+            element.setCustomValidity('invalid');
+        }
+        else{
+            element.setCustomValidity('');
+        }
+    }, false);
+}
+document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
+    // Check if the form is valid
+
+    // let nameInput = document.getElementById("floatingName");
+    // let namePattern = new RegExp("[a-z A-Z]{5, }");
+    // let emailInput = document.getElementById("floatingEmail");
+    // let passwordInput = document.getElementById("floatingPassword");
+    // let addressInput = document.getElementById("floatingAddress");
+    // let phoneInput = document.getElementById("floatingPhone");
+    // let roleInput = document.getElementById("PersonRole");
+    // addCustomValidation(nameInput, ()=> namePattern.test(nameInput.value) == false);
+    event.preventDefault();
+    event.stopPropagation();
+    // debugger;
+    this.classList.add('was-validated');
+    if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
         }
@@ -178,128 +180,7 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             addPersonRow();
         }
     }
-    document.forms[0].classList.remove('was-validated');
-    // console.log(event.target);
-    let nameInput = document.getElementById("floatingName");
-    let emailInput = document.getElementById("floatingEmail");
-    let passwordInput = document.getElementById("floatingPassword");
-    let addressInput = document.getElementById("floatingAddress");
-    let phoneInput = document.getElementById("floatingPhone");
-    let roleInput = document.getElementById("PersonRole");
-    if(nameInput.value.trim().length < 2){
-        nameInput.classList.add("is-invalid");
-        nameInput.classList.remove("is-valid");
-    }
-    else{
-        nameInput.classList.remove("is-invalid");
-        nameInput.classList.add("is-valid");
-    }
-    if(emailInput.validity.valid){
-        emailInput.classList.remove("is-invalid");
-        emailInput.classList.add("is-valid");
-    }
-    else{
-        emailInput.classList.add("is-invalid");
-        emailInput.classList.remove("is-valid");
-    }
-    if(passwordInput.length < 8){
-        passwordInput.classList.add("is-invalid");
-        passwordInput.classList.remove("is-valid");
-    }
-    else{
-        passwordInput.classList.remove("is-invalid");
-        passwordInput.classList.add("is-valid");
-    }
-    if(addressInput.value.trim().length == 0){
-        addressInput.classList.add("is-invalid");
-        addressInput.classList.remove("is-valid");
-    }
-    else{
-        addressInput.classList.remove("is-invalid");
-        addressInput.classList.add("is-valid");
-    }
-    if(phoneInput.value.trim().length < 11){
-        phoneInput.classList.add("is-invalid");
-        phoneInput.classList.remove("is-valid");
-    }
-    else{
-        phoneInput.classList.remove("is-invalid");
-        phoneInput.classList.add("is-valid");
-    }
-    if(roleInput.value != "Seller" && roleInput.value != "Customer" && roleInput.value != "Admin" && roleInput.value != "Guest"){
-        roleInput.classList.add("is-invalid");
-        roleInput.classList.remove("is-valid");
-    }
-    else{
-        roleInput.classList.remove("is-invalid");
-        roleInput.classList.add("is-valid");
-    }
 });
-// document.getElementById("floatingName").addEventListener("keydown", function(){
-//     // console.log(this);
-//     if(this.value.trim().length < 2){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingEmail").addEventListener("keydown", function(){
-//     if(this.validity.valid){
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }else{
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-// });
-// document.getElementById("floatingPassword").addEventListener("keydown", function(){
-//     // console.log(this);
-//     let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-//     if(passwordStrengthRegex.test(this.value) == false){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingAddress").addEventListener("input", function(){
-//     // console.log(this);
-//     if(this.value.trim().length == 0){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingPhone").addEventListener("keydown", function(){
-//     // console.log(this);
-//     if(this.value.trim().length < 11){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("PersonRole").addEventListener("input", function(){
-//     // console.log(this);
-//     if(this.value != "Seller" && this.value != "Customer" && this.value != "Admin" && this.value != "Guest"){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
 
 let searchdiv = document.getElementsByClassName("searchbutton")[0];
 searchdiv.children[0].addEventListener("keyup", function(event){
@@ -382,3 +263,9 @@ function filterTableUnChecked(criteria){
         }
     }
 }
+function resetValidation(){
+    document.forms[0].classList.remove("was-validated");
+    console.log("reset");
+}
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);

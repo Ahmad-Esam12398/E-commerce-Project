@@ -187,13 +187,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control inputs w-75" id="floatingName" placeholder="Person Name" required>
-                        <label for="floatingName">Person Name</label>
+                        <input type="text" class="form-control inputs w-75" id="floatingName" placeholder="User Name" required pattern="^[a-zA-Z]+[a-z_A-Z]{3,}[a-zA-Z0-9]+$">
+                        <label for="floatingName">User Name</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Name can't be less than 2 chars.
+                            Name can't be less than 5 chars And can have only ( _ ) no spaces or special characters.
                         </div>
                     </div>
                     <div class="mb-3 form-floating input-group">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control w-75 inputs" id="floatingPassword" placeholder="Password" required>
+                        <input type="password" class="form-control w-75 inputs" id="floatingPassword" placeholder="Password" required minlength="8">
                         <label for="floatingPassword">Password</label>
                         <div class="valid-feedback">
                             Looks good!
@@ -218,24 +218,24 @@
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control inputs w-75" id="floatingAddress" placeholder="Address" required>
+                        <input type="text" class="form-control inputs w-75" id="floatingAddress" placeholder="Address" required pattern="^[a-z_ \-A-Z0-9]{10,}$">
                         <label for="floatingAddress">Address</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Adress can't be less than 5 characters.
+                            Adress can't be less than 10 characters & can't have special chars(except _ and -).
                         </div>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control w-75 inputs" id="floatingPhone" placeholder="Phone Number" required>
+                        <input type="text" class="form-control w-75 inputs" id="floatingPhone" placeholder="Phone Number" required pattern="^[0-9]{11}$">
                         <label for="floatingPhone">Phone Number </label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Plz Enter valid phone Number.
+                            Phone Number must be 11 digits.
                         </div>
                     </div>
                     <div class="form-floating mb-3">

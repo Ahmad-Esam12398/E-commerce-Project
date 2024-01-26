@@ -201,17 +201,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control inputs" id="floatingName" placeholder="Product Name" required>
+                        <input type="text" class="form-control inputs" id="floatingName" placeholder="Product Name" required pattern="[a-z A-Z0-9]{4,}">
                         <label for="floatingName">Product Name</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Name can't be less than 2 chars.
+                            Name can't be less than 4 chars and can have only chars, digits and spaces.
                         </div>
                     </div>
                     <div class="mb-3 w-50 form-floating input-group">
-                        <input type="number" class="form-control" id="floatingPrice" placeholder="Product Price" min="0" required>
+                        <input type="number" class="form-control inputs" id="floatingPrice" placeholder="Product Price" min="0" required>
                         <label for="floatingPrice">Product Price</label>
                         <span class="input-group-text" id="basic-addon2">EGP</span>
                         <div class="valid-feedback">
@@ -233,7 +233,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <!-- <label for="floatingDescription" class="form-label">Description</label> -->
-                        <textarea class="form-control inputs" id="floatingDescription" rows="5" required></textarea>
+                        <textarea class="form-control inputs" id="floatingDescription" rows="5" required minlength="10"></textarea>
                         <label for="floatingDescription">Description</label>
                         <div class="valid-feedback">
                             Looks good!
@@ -243,13 +243,13 @@
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control w-50 inputs" id="floatingImage" placeholder="Image" required>
+                        <input type="text" class="form-control w-50 inputs" id="floatingImage" placeholder="Image" required pattern=".*\.[a-zA-Z]{3,4}$">
                         <label for="floatingImage">Image(with extension)</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Plz Enter valid photo with extension Added.
+                            Plz Enter valid photo with extension Added.(like .png)
                         </div>
                     </div>
                     <div class="form-floating mb-3">
