@@ -1,7 +1,7 @@
 class Product{
     static lastID = 0;
-    #id; #name; #price; #quantity; #description; #image; #sellerID; #room;
-    constructor(name, price, quantity, description, image, sellerID, room){
+    #id; #name; #price; #quantity; #description; #image; #sellerID; #category;
+    constructor(name, price, quantity, description, image, sellerID, category){
         this.#id = ++Product.lastID;
         this.name = name;
         this.price = price;
@@ -9,7 +9,7 @@ class Product{
         this.description = description;
         this.image = image;
         this.sellerID = sellerID;
-        this.room = room;
+        this.category = category;
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -59,14 +59,17 @@ class Product{
             this.#sellerID = +_sellerID;
         }
     }
-    set room(_room){
+    set category(_category){
         const validRooms = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
-        if(validRooms.includes(_room)){
-            this.#room = _room;
+        if(validRooms.includes(_category)){
+            this.#category = _category;
         }
         else{
-            this.#room = 'Other';
+            this.#category = 'Other';
         }
+    }
+    get category(){
+        return this.#category;
     }
     get id(){
         return this.#id;
