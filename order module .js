@@ -83,11 +83,5 @@ class Order {
         };
     }
 }
-let orders = [
-    { products: [product[1], product[2], product[6]], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
-    { products: [product[4], product[9], product[14]], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
-    { products: [product[7], product[8]], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
-    { products: [product[10], product[15], product[14]], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
-    { products: [product[17]], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
-];
+
 export { Order };

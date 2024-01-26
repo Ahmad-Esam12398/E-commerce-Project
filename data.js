@@ -34,4 +34,18 @@ var persons = [
     new Person("MohamedAli", "MohamedAli12@gmail.com", "12345678", "Cairo-sad-asq", "01055891102", "Seller"),
 ];
 
-export {products, persons};
+let orders = [
+    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
+    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
+    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
+    { products: [products[10], products[15], products[14]], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
+    { products: [products[17]], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
+    { products: [products[18], products[19]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
+    { products: [products[0], products[3], products[5]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
+    { products: [products[11], products[12], products[13]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
+    { products: [products[16]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
+    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
+    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
+    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
+];
+export {products, persons, orders};

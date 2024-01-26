@@ -158,14 +158,34 @@
                         <span class="fs-1" id="noOfOrders"> 300 </span>
                     </div>
                 </div>
-                <div class="d-block  d-md-flex  m-5 justify-content-evenly ">
+                <div class="d-block  d-md-flex  m-5 justify-content-between flex-md-wrap flex-md-row ">
                     <div class="col-10 col-md-5 align-self-center ">
                         <canvas id="myFirstChart"></canvas>
                     </div>
-                    <div class="col-10 col-md-5">
+                    <div class="col-10 col-md-5 ">
                         <canvas id="mySecondChart"></canvas>
                     </div>
-                </div>
+                    <div class="col-10 col-md-5 mt-4">
+                        <h3 class="text-center ">Orders Status</h3>
+                        Pending
+                        <div class="progress mb-3 " role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 10%" id="pending"></div>
+                        </div>
+                        Shipped
+                        <div class="progress mb-3 " role="progressbar" aria-label="Success striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info " style="width: 25%" id="shipped"></div>
+                        </div>
+                        Delivered
+                        <div class="progress" role="progressbar" aria-label="Info striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
+                            <div class="progress-bar progress-bar-striped bg-success " style="width: 50%" id="delivered"></div>
+                        </div>
+                        <!-- <div class="progress mt-2 " role="progressbar" aria-label="Warning striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-striped bg-warning" style="width: 75%"></div>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Danger striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-striped bg-danger" style="width: 100%"></div>
+                        </div> -->
+                    </div>
             </div>
         </div>
         <div class="footer"></div>

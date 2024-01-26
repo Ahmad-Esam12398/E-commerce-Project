@@ -1,4 +1,4 @@
-import { products as originalProducts, persons as originalPersons } from "./data.js";
+import { products as originalProducts, persons as originalPersons, orders as originalOrders } from "./data.js";
 
 // if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
 //   window.location.href = "./home.html";
@@ -116,3 +116,18 @@ const data = {
       Responsive: true,
     }
   });
+
+let pending = 0;
+let shipped = 0;
+let delivered = 0;
+originalOrders.forEach(order => {
+  if(order.status == "pending") pending++;
+  if(order.status == "shipped") shipped++;
+  if(order.status == "deliverd") delivered++;
+});
+document.getElementById("pending").innerText = (pending/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("pending").style.width = pending/originalOrders.length*100 + "%";
+document.getElementById("shipped").innerText = (shipped/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("shipped").style.width = shipped/originalOrders.length*100 + "%";
+document.getElementById("delivered").innerText = (delivered/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("delivered").style.width = delivered/originalOrders.length*100 + "%";
