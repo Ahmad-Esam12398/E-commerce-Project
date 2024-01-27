@@ -1,33 +1,12 @@
-
 import { products } from "../data.js";
 
+
+
+// add to cart functions from Bothina
 const listCard = document.querySelector('.listCard');
 const total = document.querySelector('.total');
 const cardquantity = document.querySelector('.cardquantity');
 let cart = {};
-
-
-// add to cart functions
-function addToCartIcon(productDetails) {
-    const productId = productDetails.id;
-    if (!cart[productId]) {
-        if (!cart[productId]) {
-            cart[productId] = {
-                id: productDetails.id,
-                name: productDetails.name,
-                price: productDetails.price,
-                image: productDetails.image,
-                cardquantity: 1
-            }
-        }
-    } else if (cart[productId].cardquantity >= productDetails.quantity) {
-        console.log("Can't add more.");
-    } else {
-        cart[productId].cardquantity++;
-    }
-    saveCartToLocalStorage();
-    reloadCard();
-}
 
 function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -60,14 +39,14 @@ function reloadCard() {
           <i class="fa-regular fa-circle-xmark"></i>
         </button>
       `;
-        const minus = newDiv.querySelector('.minus');
-        const plus = newDiv.querySelector('.plus');
+        const minuss = newDiv.querySelector('.minus');
+        const pluss = newDiv.querySelector('.plus');
 
-        minus.addEventListener('click', function () {
+        minuss.addEventListener('click', function () {
             changequantity(productId, -1);
         });
 
-        plus.addEventListener('click', function () {
+        pluss.addEventListener('click', function () {
             changequantity(productId, 1);
         });
 
@@ -105,7 +84,6 @@ function reloadCard() {
         });
     });
 }
-
 function removeProductFromCart(productId) {
     if (cart[productId]) {
         delete cart[productId];
@@ -114,25 +92,7 @@ function removeProductFromCart(productId) {
     }
 }
 
-function changequantity(productId, quantityChange) {
-    const product = cart[productId];
 
-    if (product) {
-        if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
-            console.log("Cannot add more.");
-        } else {
-            product.cardquantity += quantityChange;
-
-            if (product.cardquantity <= 0) {
-                delete cart[productId];
-                listCard.innerHTML = " ";
-            }
-
-            saveCartToLocalStorage();
-            reloadCard();
-        }
-    }
-}
 // array of products
 const arrProducts = [];
 for (let i = 0; i < products.length; i++) {
@@ -171,15 +131,12 @@ function createProductCard(product) {
     anchor.appendChild(cardBody);
     anchor.appendChild(cardFooter);
     anchor.style.textDecoration = "none";
-    anchor.style.backgroundColor = "red";
     // create add to cart icon
     const icon = document.createElement("a");
     icon.classList.add("mt-4", "fs-5", "fa-solid", "fa-cart-plus");
 
     icon.style.width = "min-content";
-    icon.style.height = "50px";
     icon.style.color = "#eba900";
-    icon.style.backgroundColor = "blue";
 
     // anchor.setAttribute("href", "productdetail.html")
 
@@ -187,7 +144,26 @@ function createProductCard(product) {
     icon.setAttribute("data-bs-placement", "right")
     icon.setAttribute("data-bs-title", "Add to Cart")
 
-    icon.addEventListener("click", addToCartIcon(product));
+    icon.addEventListener("click", function (e) {
+        const productId = product.id;
+        if (!cart[productId]) {
+            if (!cart[productId]) {
+                cart[productId] = {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    cardquantity: 1
+                }
+            }
+        } else if (cart[productId].cardquantity >= product.quantity) {
+            console.log("Can't add more.");
+        } else {
+            cart[productId].cardquantity++;
+        }
+        saveCartToLocalStorage();
+        reloadCard();
+    });
 
     card.appendChild(icon)
     card.appendChild(anchor);
