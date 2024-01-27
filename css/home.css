@@ -59,22 +59,18 @@ body {
 }
 
 #sections img {
-    height: 350px;
+    height: 450px;
+    filter: brightness(40%);
 }
 
-
-#sections :hover {
-    opacity: 100%;
-}
-
-.card {
+#sections .card {
     border: 0;
-    opacity: 85%;
+    fill: black;
 }
 
-.card:hover {
+#sections .card:hover img {
+    filter: brightness(100%);
     transition: all 1.5s;
-    opacity: 100%;
 }
 
 .card-img-overlay {
@@ -134,26 +130,19 @@ body {
     border: 1px solid black;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
-    box-shadow: -5px 5px 10px gray;
 }
 
-.carousel .card-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border-top: 1px solid black; */
-    height: 120px;
-}
-
-.cardcontainer :hover {
-    box-shadow: 5px 5px 30px gray;
-    /* transform: scale(1.05); */
+.carousel .card:hover {
+    box-shadow: -5px -5px 10px gray, 5px 5px 10px black;
+    transform: scale(1.02);
     transition: all 1s;
 }
 
 nav .cardquantity {
-    color:#edb932 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c29012;
     position: absolute;
     font-size: 12px;
-    transform: translateY(-30%);
 }
