@@ -35,17 +35,102 @@ var persons = [
 ];
 
 let orders = [
-    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
-    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
-    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
-    { products: [products[10], products[15], products[14]], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
-    { products: [products[17]], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
-    { products: [products[18], products[19]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[0], products[3], products[5]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[11], products[12], products[13]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[16]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
-    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
-    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
+    {
+        orderId:1,
+        _products_: [
+            { id: products[1].id, name: products[1].name, quantity: 4 },
+            { id: products[2].id, name: products[2].name, quantity: 5 },
+            { id: products[6].id, name: products[6].name, quantity: 6 }
+        ],
+        Order_date: new Date('2024-01-15'),
+        Delivered_date:new Date('2024-01-20'),
+        status: 'pending',
+        customerId: 2
+    },
+    {
+        orderId:2,
+        _products_: [
+            { id: products[3].id, name: products[3].name, quantity: 2 },
+            { id: products[4].id, name: products[4].name, quantity: 3 },
+            { id: products[5].id, name: products[5].name, quantity: 4 }
+        ],
+        Order_date: new Date('2024-01-18'),
+        Delivered_date:new Date('2024-01-22'),
+        status: 'pending',
+        customerId: 4
+    },
+    {
+        orderId:3,
+        _products_: [
+            { id: products[7].id, name: products[7].name, quantity: 1 },
+            { id: products[9].id, name: products[9].name, quantity: 2 },
+            { id: products[10].id, name: products[10].name, quantity:3 }
+        ],
+        Order_date: new Date('2024-01-19'),
+        Delivered_date:new Date('2024-01-22'),
+        status: 'pending',
+        customerId: 2
+    },
+    {
+        orderId:4,
+        _products_: [
+            { id: products[11].id, name: products[11].name, quantity:4 },
+            { id: products[12].id, name: products[12].name, quantity: 5 },
+            { id: products[16].id, name: products[16].name, quantity: 2 }
+        ],
+        Order_date: new Date('2024-01-20'),
+        Delivered_date:new Date('2024-01-23'),
+        status: 'pending',
+        customerId: 4
+    },
+
+    {
+        orderId:5,
+        _products_: [
+            { id: products[3].id, name: products[3].name, quantity:1 },
+            { id: products[7].id, name: products[7].name, quantity: 3 },
+            { id: products[6].id, name: products[6].name, quantity: 2 }
+        ],
+        Order_date: new Date('2024-01-15'),
+        Delivered_date:new Date('2024-01-17'),
+        status: 'pending',
+        customerId: 2
+    },
+    {
+        orderId:6,
+        _products_: [
+            { id: products[11].id, name: products[11].name, quantity:2 },
+            { id: products[12].id, name: products[12].name, quantity: 3 },
+            { id: products[15].id, name: products[15].name, quantity: 4 }
+        ],
+        Order_date: new Date('2024-01-2'),
+        Delivered_date:new Date('2024-01-4'),
+        status: 'pending',
+        customerId: 4
+    },
+    {
+        orderId:7,
+        _products_: [
+            { id: products[10].id, name: products[10].name, quantity:4 },
+            { id: products[9].id, name: products[9].name, quantity: 5 },
+            { id: products[1].id, name: products[1].name, quantity: 2 }
+        ],
+        Order_date: new Date('2024-01-10'),
+        Delivered_date:new Date('2024-01-13'),
+        status: 'delivered',
+        customerId: 2
+    },
+    {
+        orderId:8,
+        _products_: [
+            { id: products[2].id, name: products[2].name, quantity:4 },
+            { id: products[8].id, name: products[8].name, quantity: 5 },
+            { id: products[14].id, name: products[14].name, quantity: 2 }
+        ],
+        Order_date: new Date('2024-01-2'),
+        Delivered_date:new Date('2024-01-5'),
+        status: 'delivered',
+        customerId: 4
+    }
 ];
 export {products, persons, orders};
