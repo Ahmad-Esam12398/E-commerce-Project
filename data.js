@@ -35,17 +35,17 @@ var persons = [
 ];
 
 let orders = [
-    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
-    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
-    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
-    { products: [products[10], products[15], products[14]], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
-    { products: [products[17]], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
-    { products: [products[18], products[19]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[0], products[3], products[5]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[11], products[12], products[13]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[16]], date: new Date('2024-01-27'), status: 'deliverd', customerName: 'hassan' },
-    { products: [products[1], products[2], products[6]], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
-    { products: [products[4], products[9], products[14]], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
-    { products: [products[7], products[8]], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
+    { id: 1, products: [products[1], products[2], products[6]], quantities:[1, 2, 3], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
+    { id: 2, products: [products[4], products[9], products[14]], quantities:[2, 3, 4], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
+    { id: 3, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
+    { id: 4, products: [products[10], products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
+    { id: 5, products: [products[17]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
+    { id: 6, products: [products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 7, products: [products[0], products[3], products[5]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 8, products: [products[11], products[12], products[13]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 9, products: [products[16]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 10, products: [products[1], products[2], products[6]], quantities: [2, 1, 1], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
+    { id: 11, products: [products[4], products[9], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
+    { id: 12, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
 ];
 export {products, persons, orders};
