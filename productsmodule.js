@@ -2,7 +2,7 @@ class Product {
     static lastID = 1;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath;
 
-    constructor(name, price, quantity, description, image, sellerID, category, categorypath) {
+    constructor(name, price, quantity, description, image, sellerID, category, categorypath = "") {
         this.#id = Product.lastID++;
         this.name = name;
         this.price = price;

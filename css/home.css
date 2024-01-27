@@ -57,7 +57,8 @@ body {
 .Socials a:hover {
     color: rgb(154, 4, 126);
 }
-#sections img{
+
+#sections img {
     height: 350px;
 }
 
@@ -135,15 +136,24 @@ body {
     border-top-left-radius: 15px;
     box-shadow: -5px 5px 10px gray;
 }
-.carousel .card-body{
+
+.carousel .card-body {
     display: flex;
     align-items: center;
     justify-content: center;
     /* border-top: 1px solid black; */
     height: 120px;
 }
+
 .cardcontainer :hover {
-    box-shadow:  5px 5px 30px gray;
+    box-shadow: 5px 5px 30px gray;
     /* transform: scale(1.05); */
     transition: all 1s;
+}
+
+nav .cardquantity {
+    color:#edb932 ;
+    position: absolute;
+    font-size: 12px;
+    transform: translateY(-30%);
 }
