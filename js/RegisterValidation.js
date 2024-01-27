@@ -1,4 +1,4 @@
-import { persons, setLocalStorage } from "../data.js";
+import { persons } from "../data.js";
 import { Person } from "../person.js";
 
 var usersArr = JSON.parse(localStorage.getItem("users"));
@@ -146,8 +146,6 @@ window.addEventListener("load", function () {
             this.classList.remove("is-valid");
         }
         else {
-            // alert(e)
-            // console.log("valid" + valid);
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
@@ -156,9 +154,19 @@ window.addEventListener("load", function () {
 
 
             let newuser = new Person(name, email, password, address, phone, "Customer");
-            persons.push(new Person(name, email, password, address, phone, "Customer"));
+            persons.push(newuser);
+            alert(persons.length);
+            usersArr.push({
+                id:newuser.id,
+                name:newuser.name,
+                email:newuser.email,
+                password:newuser.password,
+                address:newuser.address,
+                phone:newuser.phone,
+                role:newuser.role
+            });
+            localStorage.setItem("users",JSON.stringify(usersArr));
 
-            setLocalStorage();
             e.target.classList.add('was-validated');
 
         }
