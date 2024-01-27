@@ -10,8 +10,8 @@ class Product {
         this.quantity = +quantity;
         this.description = description;
         this.image = image;
-        this.sellerID = +sellerID;
         this.category = category;
+        this.sellerID = +sellerID;
         this.categorypath = categorypath;
     }
 
@@ -156,4 +156,6 @@ class Product {
     }
 }
 export { Product };
+
+
 

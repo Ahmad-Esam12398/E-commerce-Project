@@ -32,7 +32,6 @@ var persons = [
     new Person("Fady Masoud", "FadyM122@gmail.com", "12345678", "Talkha-sad-asq", "01255891102", "Seller"),
     new Person("Hamada Ali", "Hamada111@gmail.com", "12345678", "Tanta-sad-asq", "01099663383", "Seller")
 ];
-<<<<<<< HEAD
 
 let orders = [
     {
@@ -131,10 +130,20 @@ let orders = [
         Delivered_date:new Date('2024-01-5'),
         status: 'delivered',
         customerId: 4
-    }
+    }];
+    let originalOrders = [
+    { id: 1, products: [products[1], products[2], products[6]], quantities:[1, 2, 3], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
+    { id: 2, products: [products[4], products[9], products[14]], quantities:[2, 3, 4], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
+    { id: 3, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
+    { id: 4, products: [products[10], products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
+    { id: 5, products: [products[17]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
+    { id: 6, products: [products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 7, products: [products[0], products[3], products[5]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 8, products: [products[11], products[12], products[13]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 9, products: [products[16]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
+    { id: 10, products: [products[1], products[2], products[6]], quantities: [2, 1, 1], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
+    { id: 11, products: [products[4], products[9], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
+    { id: 12, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
 ];
-export {products, persons,orders};
-=======
-console.log(persons[1].id);
-export {products, persons};
->>>>>>> 341b3dbcc6a390d5428049dbd16ecc8d1feaba73
+export {products, persons,orders, originalOrders};
+

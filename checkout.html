@@ -1,3 +1,4 @@
+<!-- checkout.html  -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,13 +18,14 @@
     </nav>
     <!--End of nav-->
 
+<div style="width: 85vw; margin-left: 100px;" class="bg-white customerandorder">
 
-    <div class="col-12 col-md-8 bg-white customer">
+    <div   class="col-12 col-md-8 bg-white customer">
         <h4>Customer infromation</h4>
 
         <form class="row g-3 needs-validation" novalidate>
             <!-- Email -->
-            <div class="col-md-8">
+            <div class="col-md-8 flow-control2">
                 <div class="input-group has-validation">
                     <input type="text" class="form-control" id="validationCustomEmail" placeholder="Email"
                         aria-describedby="inputGroupPrepend" required>
@@ -38,7 +40,7 @@
             <!-- End of Email -->
             <h4>Billing Details</h4>
             <div class="username">
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-6">
                     <input type="text" class="form-control" placeholder="FirstName" id="validationCustomufname" required>
                     <div class="invalid-feedback">
                         Please enter a valid FirstName.
@@ -49,7 +51,7 @@
                 </div>
 
                 <div  class="col-md-8">
-                    <input type="text" class="form-control" placeholder="LastName" id="validationCustomlname" required>
+                    <input type="text" class="form-control ms-4" placeholder="LastName" id="validationCustomlname" required>
                     <div class="invalid-feedback">
                         Please enter a valid LasttName.
                     </div>
@@ -60,7 +62,7 @@
             </div>
             <!-- End of username -->
             <!-- CompanyNAME -->
-            <div class="col-md-8">
+            <div class="col-md-8 flow-control2">
                 <div class="input-group has-validation">
                     <input type="text" class="form-control" id="validationCustomCompany" placeholder="CompanyName"
                         aria-describedby="inputGroupPrepend" required>
@@ -73,7 +75,7 @@
                 </div>
             </div>
             <!-- End of COMPANY NAME -->
-            <div class="col-md-8">
+            <div class="col-md-8 flow-control2">
                 <select class="form-select" id="validationCustomcountry" required>
                 </select>
                 <div class="invalid-feedback">
@@ -97,7 +99,7 @@
                 </div>
 
                 <div class="col-md-8">
-                    <input type="text" class="form-control" placeholder="Apertment,Suite,Unit,etc. (optional)"
+                    <input type="text" class="form-control ms-4" placeholder="Apertment,Suite,Unit,etc. (optional)"
                         id="validationCustom02" > 
             </div>
         </div>
@@ -114,7 +116,7 @@
                 </div>
 
                 <div  class="col-md-8">
-                    <input type="text" class="form-control" placeholder="Zipcode" id="validationCustomZip" required>
+                    <input type="text" class="form-control ms-4" placeholder="Zipcode" id="validationCustomZip" required>
                     <div class="invalid-feedback">
                         Please enter a valid ZipCode.
                     </div>
@@ -127,7 +129,7 @@
             <!-- End of username -->
             <!-- username -->
                <!-- phone -->
-               <div class="col-md-8">
+               <div class="col-md-8 flow-control2">
                 <div class="input-group has-validation">
                     <input type="text" class="form-control" id="validationCustomphone" placeholder="PhoneNumber"
                         aria-describedby="inputGroupPrepend" required>
@@ -151,6 +153,23 @@
             
 
             <div class="col-12">
+                <div class="cart-details">
+                    <table>
+                        <tr>
+                            <td>Your order</td>
+                            <!-- <td></td>
+                            <td></td> -->
+                           </tr>
+                           <tr class="checkout-list">
+                            <td class="tdimg"></td>
+                            <td class="tdname"></td>
+                            <td class="tdprice"></td>
+                           </tr>
+                    </table>
+                 
+                   
+                    <!-- <div class="subtotal">Subtotal: $<span class="subtotal-value">0</span></div> -->
+                  </div>
                 <button id="submitBtn" class="btn" type="submit">Place Order</button>
 
                 <div class="popup" id="popup">
@@ -166,6 +185,12 @@
     <!--End of customer-->
 
     </div>
+      </div>
+ 
+
+
+</div>
+   
     <!--End of customer and order-->
     <footer class="row footer1 text-white bg-dark">
         <p class="col-5">Copyright © 2024 Online Furniture Store</p>
