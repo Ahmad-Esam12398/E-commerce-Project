@@ -19,6 +19,7 @@ nav img {
     margin-left: 15vw;
 }
 
+
 .product-detail-container {
     width: 80vw;
     margin: 50px auto; 
@@ -58,7 +59,7 @@ nav img {
 }
 
 button {
-     margin-left: 8vw;
+     margin-left: 8vw !important;
     padding: 8px 10px;
     font-size: 1.2vw;
     cursor: pointer;
@@ -109,14 +110,270 @@ button:hover {
     background-color: #bc9127;
     color: white;
 }
-.footer1 {
-    width: 99.7vw;
-    height: 15vh;
-    margin-top: 50px; 
-}
+.card{
+    position: relative;
+    margin-top: 50px;
+   
+    flex-direction: column;
+    width: 100%;
+    border: none !important;
+  }
+  
+  
+  .card .subtotal,
+  .card .total {
+    border: none;
+    color: black;
+    margin-top: 135%;
+    position: absolute;
+    margin-left: 30px;
+  
+  }
+  .card .total {
+    margin-left: 300px;
+  }
+  .card .checkbtn{
+    margin-top: 34%;
+    background-color: #efc040;
+    border: none;
+    width: 24%;
+    margin-left:1px !important ;
+    padding: 10px 10px;
+    position: fixed;
+  }
+  .card .checkbtn a{
+    color: black;
+    text-decoration: none;
+  }
+  .card .checkbtn a:hover{
+    color: white;
+  }
+  
+  .btn-close{
+    margin-left: 340px !important;
+  }
+  
+  .ulcard{
+    list-style-type: none; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    display: block;
+    border: none !important;
+  }
+  .ulcard .minus{
+    margin-left: 20px;
+  }
+   .ulcard img {
+    width: 60px;
+    height: 60px;
+   margin-left: 2px;
+   margin-top: 0px;
+   position: absolute;
+   margin-bottom: 15px;
+  }
+  
+  .ulcard p, .listCard h2 {
+    margin: 0;
+  }
+  
+  
+  
+  .ulcard h2 {
+    color: #333;
+    font-size: 12px;
+    margin-left: 100px;
+   
+  
+  }
+  
+  .ulcard p{
+    font-style: italic;
+    margin-left: 310px;
+    margin-top: -40px;
+    position: absolute;
+    margin-bottom: 10px;
+  }
+  
+  .ulcard .remove-button{
+    margin-left: 310px !important;
+    position: absolute;
+    background-color: transparent;
+    color: #efc040;
+    font-size: 25px;
+    margin-top: -80px;
+    border: none;
+    
+  }
+  .ulcard  .minus{
+   margin-top: 50px;
+   border-radius: 1px;
+   text-align: center;
+   color: gray;
+   border: 1px solid gray;
+   padding: 10px 10px;
+   margin-left: 4px;
+   cursor: pointer;
+   background-color: white;
+  }
+  .ulcard  .minus:hover{
+    background-color: #efc040;
+  }
+  .ulcard  .plus:hover{
+    background-color: #efc040;
+  }
+  .ulcard .num{
+    margin-top: 50px;
+   border-radius: 1px;
+   text-align: center;
+   color: gray;
+   border: 1px solid gray;
+   padding: 10px 10px;
+   margin-left: -4px;
+  
+   cursor: pointer;
+   background-color: white;
+  }
+  .ulcard .plusevent{
+    margin-left: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+   .ulcard .plus{
+    margin-top: 50px;
+    border-radius: 1px;
+    text-align: center;
+    color: gray;
+    border: 1px solid gray;
+    padding: 10px 10px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: white
+  } 
 
-.footer1 p {
-    margin-left: 7vw;
-    margin-top: 5vh;
+
+#FooterTop {
+    margin-top: 50px;
+    width: 100.8%;
+    color: white;
+    padding: 50px;
+    background-color: rgb(21, 21, 21);
+    }
+    #FooterBottom {
+    width: 100.8%;
+    font-size:16px;
+    font-weight: 450;
+    color: white;
+    padding: 50px;
+    background-color: rgb(21, 21, 21);
+    }
+    
+    #FooterTop a {
+    color: white;
+    text-decoration: none;
+    }
+    
+    #FooterTop .Socials i {
+    color: white;
+    border: 0;
+    border-radius: 0;
+    font-size:20px;
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(43, 43, 43);
+    }
+    #First{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    }
+
+@media screen and (max-width: 576px){
+    nav img{
+        margin-top: 15px !important;
+    }
+    .navbar-brand{
+        margin-left: 200px;
+        margin-top: -30px;
+    }
+    .product-detail-container {
+        height: 260vw;
+        width: 100vw;
+        /* width: 100%; */
+        margin: 50px auto; 
+        padding: 10px;
+        background-color: white;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .addtocart1{
+        margin-left: 100px !important;
+        padding: 8px 8px;
+        font-size: 20px;
+        margin-top: -35px;
+    }
+    .product-detail-container .product-info p {
+        margin-top: 10px;
+        line-height: 1.8;
+        font-size: 5vw;
+        color: gray;
+    }
+    
+    .product-detail-container .product-info h1 {
+        font-size: 2.5vw;
+        margin-top: 10px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+}
+@media screen and (min-width: 577px) and (max-width: 1200px) {
+    /* nav img{
+        margin-top: 15px !important;
+    }*/
+    .navbar-expand-md .navbar-collapse{
+        display: flex !important;
+        margin-left: -500px;
+        margin-top: 5px;
+    } 
+    .product-detail-container {
+        /* height: 260vw; */
+        width: 100vw;
+        /* width: 100%; */
+        margin: 50px auto; 
+        padding: 10px;
+        background-color: white;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .addtocart{
+        margin-left: -60px !important;
+        padding: 8px 8px;
+        font-size: 20px;
+        margin-top: 2px !important;
+    }
+    .addtocart1{
+        margin-left: 110px !important;
+        padding: 8px 8px;
+        font-size: 20px;
+        margin-top: -35px;
+    }
+    /* .product-detail-container .product-info p {
+        margin-top: 10px;
+        line-height: 1.8;
+        font-size: 5vw;
+        color: gray;
+    } */
+    
+    .product-detail-container .product-info h1 {
+        font-size: 2.5vw;
+        margin-top: 10px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
 }
 
