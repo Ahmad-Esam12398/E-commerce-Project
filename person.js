@@ -1,81 +1,103 @@
-class Person{
+class Person {
     static lastID = 0;
     #id; #name; #email; #password; #address; #phone; #role;
-    constructor(id, name, email, password, address, phone, role){
-        this.#id = ++Person.lastID;
-        this.#name = name;
-        this.#email = email;
-        this.#password = password;
-        this.#address = address;
-        this.#phone = phone;
-        this.#role = role;
+    constructor(_name, _email, _password, _address, _phone, _role) {
+        this.#id = ++(Person.lastID);
+        this.name = _name;
+        this.email = _email;
+        this.password = _password;
+        this.address = _address;
+        this.phone = _phone;
+        this.role = _role;
     }
-    set name(name){
-        if(name.trim() == ""){
+    set name(name) {
+
+        if (name.trim() == "") {
             this.#name = "No name";
         }
-        else{
+        else {
             this.#name = name.trim();
         }
     }
-    set email(email){
-        if(email.trim() == ""){
+    set email(_email) {
+        if (_email.trim() == "") {
             this.#email = "No email";
         }
-        else{
-            this.#email = email.trim();
+        else {
+            this.#email = _email.trim();
         }
     }
-    set password(password){
-        if(password == ""){
-            this.#password = "password";
+    set password(_password) {
+        if (_password == "") {
+            this.#password = "No Password";
+        } else {
+            this.#password = _password;
         }
     }
-    set address(address){
-        if(address.trim() == ""){
+    set address(address) {
+        if (address.trim() == "") {
             this.#address = "No address";
         }
-        else{
+        else {
             this.#address = address.trim();
         }
     }
-    set phone(phone){
-        if(phone.trim() == ""){
+    set phone(phone) {
+        if (phone.trim() == "") {
             this.#phone = "No phone";
         }
-        else{
+        else {
             this.#phone = phone.trim();
         }
     }
-    set role(role){
-        const validRoles = ["admin", "customer", "seller", "guest"];
-        if(validRoles.includes(role.trim().toLowerCase()) == false){
-            this.#role = "guest";
+    set role(_role) {
+        const validRoles = ["Admin", "Customer", "Seller", "Guest"];
+        if (!validRoles.includes(_role.trim())) {
+            this.#role = "Guest";
         }
-        else{
-            this.#role = role.trim().toLowerCase();
+        else {
+            this.#role = _role;
         }
     }
-    get id(){
+    get id() {
         return this.#id;
     }
-    get name(){
+    get name() {
         return this.#name;
     }
-    get email(){
+    get email() {
         return this.#email;
     }
-    get password(){
+    get password() {
         return this.#password;
     }
-    get address(){
+    get address() {
         return this.#address;
     }
-    get phone(){
+    get phone() {
         return this.#phone;
     }
-    get role(){
+    get role() {
         return this.#role;
+    }
+    getPerson() {
+        return {
+            id: this.#id,
+            name: this.#name,
+            email: this.#email,
+            password: this.#password,
+            address: this.#address,
+            phone: this.#phone,
+            role: this.#role
+        }
+    }
+    setPerson(name, email, password, address, phone, role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.role = role;
     }
 }
 
