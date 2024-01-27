@@ -2,7 +2,7 @@ class Product {
     static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 18;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath;
 
-    constructor(name, price, quantity, description, image, sellerID, category, categorypath) {
+    constructor(name, price, quantity, description, image, sellerID, category, categorypath = "") {
         this.#id = Product.lastID++;
         localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;

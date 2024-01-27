@@ -51,7 +51,7 @@ products.forEach(productInfo => {
   hoverIcon.classList.add('hover-icon');
   hoverIcon.setAttribute('data-product-id', productDetails.id);
 
-  hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
+  hoverIcon.innerHTML = <i class="fa-solid fa-basket-shopping"></i>;
 
   productDiv.appendChild(hoverIcon);
 
@@ -108,7 +108,7 @@ products.forEach(productInfo => {
     reloadCard();
   }
 
-hoverIcon.addEventListener('click',addToCartIcon);
+  hoverIcon.addEventListener('click', addToCartIcon);
 
 
 
@@ -142,7 +142,6 @@ function reloadCard() {
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
     `;
-
     const minus = newDiv.querySelector('.minus');
     const plus = newDiv.querySelector('.plus');
 
@@ -248,7 +247,3 @@ window.display = function (e) {
     });
   }
 }
-
-export{addToCartIcon,saveCartToLocalStorage,reloadCard}
-
-

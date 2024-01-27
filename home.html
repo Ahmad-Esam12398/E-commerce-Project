@@ -105,7 +105,7 @@
                                         <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                                     </ul>
                                 </li>
-                                <!-- seller -->
+                                <!-- sell   er -->
                                 <li id="Seller" class="nav-item dropdown d-none nav-item ms-2">
                                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="mt-1 fs-4 text-primary fw-light fa-solid fa-user"></i></a>
@@ -129,14 +129,33 @@
                                         <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item mx-2">
-                                    <a class="nav-link" href="checkout.html"><i
-                                            class="fa-solid fa-cart-shopping"></i></a>
-                                </li>
                             </ul>
                         </div>
+                        <button class="btn mx-1 mt-2 addtocart" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                            <span class="mb-5 ms-4 cardquantity">0</span>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
                     </div>
                 </nav>
+                <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+                    aria-labelledby="staticBackdropLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="staticBackdropLabel">Shopping Cart</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="card">
+                            <ul class="listCard"></ul>
+                            <div class="subtotal">subtotal</div>
+                            <div class="total">0</div>
+                            <button class="checkbtn"><a href="checkout.html">View checkout</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="listProduct bg-white">
+                </div>
                 <hr>
                 <!-- Text Part -->
                 <div id="First">
@@ -175,9 +194,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-
         <!-- New Collection -->
         <div class="row">
             <div class="row bg-light col-12 py-5">
