@@ -1,8 +1,10 @@
 class Product{
-    static lastID = 0;
+    static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 0;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category;
     constructor(name, price, quantity, description, image, sellerID, category){
+        // debugger;
         this.#id = ++Product.lastID;
+        localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -100,16 +102,18 @@ class Product{
             quantity: this.#quantity,
             description: this.#description,
             image: this.#image,
-            sellerID: this.#sellerID
+            sellerID: this.#sellerID,
+            category: this.#category
         }
     }
-    setProduct(name, price, quantity, description, image, sellerID){
+    setProduct(name, price, quantity, description, image, sellerID, category){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.image = image;
         this.sellerID = sellerID;
+        this.category = category;
     }
 }
 export { Product };

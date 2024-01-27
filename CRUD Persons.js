@@ -1,5 +1,20 @@
-import { persons } from "./data.js";
+import { persons as originalPersons } from "./data.js";
 import { Person } from "./person.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//     window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+    let plainPersons = originalPersons.map((item)=> item.getPerson());
+    localStorage.setItem("Persons", JSON.stringify(plainPersons));
+    // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+let persons = JSON.parse(localStorage.getItem("Persons"));
+
+function updatePersonsLocalStorage(){
+    localStorage.setItem("Persons", JSON.stringify(persons));
+}
 function createTablePersons(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
@@ -7,7 +22,7 @@ function createTablePersons(){
     tableHead.innerHTML = "";
     tableBody.innerHTML = "";
     let tableRow = document.createElement("tr");
-    for(let key in persons[0].getPerson()){
+    for(let key in persons[0]){
         let tableHeadData = document.createElement("th");
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
@@ -20,9 +35,9 @@ function createTablePersons(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
-        for(let key in persons[i].getPerson()){
+        for(let key in persons[i]){
             let tableData = document.createElement("td");
-            tableData.innerHTML = persons[i].getPerson()[key];
+            tableData.innerHTML = persons[i][key];
             tableRow.appendChild(tableData);
         }
         let tableData = document.createElement("td");
@@ -52,8 +67,10 @@ function createTablePersons(){
 };
 createTablePersons();
 let operation = "";
+
 function AddButton(){
     let lowerTable = document.getElementById("lowerTable");
+    // document.forms[0].classList.remove("was-validated");
     lowerTable.innerHTML = "";
     let addButton = document.createElement("i");
     addButton.innerHTML = "Add";
@@ -69,44 +86,24 @@ function AddButton(){
         button.innerHTML = "Add";
         let inputs = document.querySelectorAll(".inputs");
         for(let i = 0; i < inputs.length; i++) {
-            inputs[i].classList.remove("is-valid");
-            inputs[i].classList.remove("is-invalid");
+            inputs[i].value = "";
         }
     });
     lowerTable.appendChild(addButton);
 }
-function validateForm() {
-    // debugger;
+function addPersonRow() {
     let name = document.getElementById("floatingName").value;
+    let email = document.getElementById("floatingEmail").value;
     let password = document.getElementById("floatingPassword").value;
     let address = document.getElementById("floatingAddress").value;
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
-    // console.log(address.trim().length == 0);
-    // console.log(phone.trim().length < 11);
-    // console.log(role != "Seller" && role != "Admin" && role != "Guest");
-    // console.log(name.trim() == "");
-    // console.log(!passwordStrengthRegex.test(password));
-    if(name.trim() == "" || password.length < 8 || address.trim().length == 0 || phone.trim().length < 11 || (role != "Seller" && role != "Admin" && role != "Guest")){
-        alert("Please Input valid data");
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-function addPersonRow() {
-    if(validateForm()){
-        let name = document.getElementById("floatingName").value;
-        let email = document.getElementById("floatingEmail").value;
-        let password = document.getElementById("floatingPassword").value;
-        let address = document.getElementById("floatingAddress").value;
-        let phone = document.getElementById("floatingPhone").value;
-        let role = document.getElementById("PersonRole").value;
-        let newPerson = new Person(name, email, password, address, phone, role);
-        persons.push(newPerson);
-        createTablePersons();
-    }
+    // debugger;
+    let newPerson = new Person(name, email, password, address, phone, role);
+    console.log(newPerson.getPerson());
+    persons.push(newPerson.getPerson());
+    updatePersonsLocalStorage();
+    createTablePersons();
 }
 let id = -1;
 function editRow(e) {
@@ -131,27 +128,32 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
-    for(let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove("is-valid");
-        inputs[i].classList.remove("is-invalid");
-    }
     // console.log(products);
+}
+function setPerson(index, values){
+    persons[index].name = values[0];
+    persons[index].email = values[1];
+    persons[index].password = values[2];
+    persons[index].address = values[3];
+    persons[index].phone = values[4];
+    persons[index].role = values[5];
+    updatePersonsLocalStorage();
 }
 
 function saveNewRow() {
-    if(validateForm()){
-        if(confirm("Are you sure you want to save this Person?")) {
-            let index = persons.findIndex(Person => Person.id == id);
-            let rowChildrenValues = [];
-            let inputs = document.querySelectorAll(".inputs");
-            for(let i = 0; i < inputs.length; i++) {
-                rowChildrenValues.push(inputs[i].value);
-            }
-            // console.log(rowChildrenValues);
-            persons[index].setPerson(...rowChildrenValues);
-            createTablePersons();
+    if(confirm("Are you sure you want to save this Person?")) {
+        let index = persons.findIndex(Person => Person.id == id);
+        let rowChildrenValues = [];
+        let inputs = document.querySelectorAll(".inputs");
+        for(let i = 0; i < inputs.length; i++) {
+            rowChildrenValues.push(inputs[i].value);
         }
+        // console.log(rowChildrenValues);
+        // persons[index].setPerson(...rowChildrenValues);
+        setPerson(index, rowChildrenValues);
+        createTablePersons();
     }
+
 }
 function deleteRow(e) {
     if(confirm("Are you sure you want to delete this product?")) {
@@ -160,17 +162,42 @@ function deleteRow(e) {
         let index = persons.findIndex(product => product.id == id);
         // console.log(index);
         persons.splice(index, 1);
+        updatePersonsLocalStorage();
         createTablePersons();
     }
 }
-document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Check if the form is valid
-    if(!event.target.checkValidity()){
-        event.preventDefault();
-        event.stopPropagation();
+function addCustomValidation(element, conditionFun){
+    if(conditionFun()){
+        element.setCustomValidity("invalid");
     }
     else{
+        element.setCustomValidity("");
+    }
+    element.addEventListener('input', function(event) {
+        if(conditionFun()){
+            element.setCustomValidity('invalid');
+        }
+        else{
+            element.setCustomValidity('');
+        }
+    }, false);
+}
+document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
+    // Check if the form is valid
+
+    // let nameInput = document.getElementById("floatingName");
+    // let namePattern = new RegExp("[a-z A-Z]{5, }");
+    // let emailInput = document.getElementById("floatingEmail");
+    // let passwordInput = document.getElementById("floatingPassword");
+    // let addressInput = document.getElementById("floatingAddress");
+    // let phoneInput = document.getElementById("floatingPhone");
+    // let roleInput = document.getElementById("PersonRole");
+    // addCustomValidation(nameInput, ()=> namePattern.test(nameInput.value) == false);
+    event.preventDefault();
+    event.stopPropagation();
+    // debugger;
+    this.classList.add('was-validated');
+    if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
         }
@@ -178,125 +205,92 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             addPersonRow();
         }
     }
-    document.forms[0].classList.remove('was-validated');
-    // console.log(event.target);
-    let nameInput = document.getElementById("floatingName");
-    let emailInput = document.getElementById("floatingEmail");
-    let passwordInput = document.getElementById("floatingPassword");
-    let addressInput = document.getElementById("floatingAddress");
-    let phoneInput = document.getElementById("floatingPhone");
-    let roleInput = document.getElementById("PersonRole");
-    if(nameInput.value.trim().length < 2){
-        nameInput.classList.add("is-invalid");
-        nameInput.classList.remove("is-valid");
-    }
-    else{
-        nameInput.classList.remove("is-invalid");
-        nameInput.classList.add("is-valid");
-    }
-    if(emailInput.validity.valid){
-        emailInput.classList.remove("is-invalid");
-        emailInput.classList.add("is-valid");
-    }
-    else{
-        emailInput.classList.add("is-invalid");
-        emailInput.classList.remove("is-valid");
-    }
-    if(passwordInput.length < 8){
-        passwordInput.classList.add("is-invalid");
-        passwordInput.classList.remove("is-valid");
-    }
-    else{
-        passwordInput.classList.remove("is-invalid");
-        passwordInput.classList.add("is-valid");
-    }
-    if(addressInput.value.trim().length == 0){
-        addressInput.classList.add("is-invalid");
-        addressInput.classList.remove("is-valid");
-    }
-    else{
-        addressInput.classList.remove("is-invalid");
-        addressInput.classList.add("is-valid");
-    }
-    if(phoneInput.value.trim().length < 11){
-        phoneInput.classList.add("is-invalid");
-        phoneInput.classList.remove("is-valid");
-    }
-    else{
-        phoneInput.classList.remove("is-invalid");
-        phoneInput.classList.add("is-valid");
-    }
-    if(roleInput.value != "Seller" && roleInput.value != "Customer" && roleInput.value != "Admin" && roleInput.value != "Guest"){
-        roleInput.classList.add("is-invalid");
-        roleInput.classList.remove("is-valid");
-    }
-    else{
-        roleInput.classList.remove("is-invalid");
-        roleInput.classList.add("is-valid");
+});
+
+let searchdiv = document.getElementsByClassName("searchbutton")[0];
+searchdiv.children[0].addEventListener("keyup", function(event){
+    if(event.keyCode == 13){
+        searchTable();
     }
 });
-// document.getElementById("floatingName").addEventListener("keydown", function(){
-//     // console.log(this);
-//     if(this.value.trim().length < 2){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingEmail").addEventListener("keydown", function(){
-//     if(this.validity.valid){
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }else{
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-// });
-// document.getElementById("floatingPassword").addEventListener("keydown", function(){
-//     // console.log(this);
-//     let passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-//     if(passwordStrengthRegex.test(this.value) == false){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingAddress").addEventListener("input", function(){
-//     // console.log(this);
-//     if(this.value.trim().length == 0){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("floatingPhone").addEventListener("keydown", function(){
-//     // console.log(this);
-//     if(this.value.trim().length < 11){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
-// document.getElementById("PersonRole").addEventListener("input", function(){
-//     // console.log(this);
-//     if(this.value != "Seller" && this.value != "Customer" && this.value != "Admin" && this.value != "Guest"){
-//         this.classList.add("is-invalid");
-//         this.classList.remove("is-valid");
-//     }
-//     else{
-//         this.classList.remove("is-invalid");
-//         this.classList.add("is-valid");
-//     }
-// });
+searchdiv.children[1].addEventListener("click", searchTable);
+function searchTable(){
+    let searchInput = searchdiv.children[0].value.trim();
+    if (searchInput.trim() == "") {
+        createTablePersons();
+        document.getElementById("flexSwitchCheckAdmin").checked = true;
+        document.getElementById("flexSwitchCheckSeller").checked = true;
+        document.getElementById("flexSwitchCheckCustomer").checked = true;
+        return;
+    }
+
+    let allTableRows = [...document.querySelectorAll("tbody tr")];
+    let tableRows = allTableRows.filter(tr => tr.classList.contains("d-none") == false); 
+    tableRows.forEach(tr => tr.style.display = "");   
+    console.log(tableRows);
+    console.log(allTableRows);
+    let found = false;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        for(let j = 0; j < tableData.length; j++){
+            if(tableData[j].innerHTML.toLowerCase().indexOf(searchInput.toLowerCase()) != -1){
+                found = true;
+                break;
+            }
+        }
+        if(found == false){
+            tableRows[i].style.display = "none";
+        }
+        found = false;
+    }
+}
+document.getElementById("flexSwitchCheckAdmin").addEventListener("click", function(){
+    if(this.checked){
+        filterTableChecked("Admin");
+    }
+    else{
+        filterTableUnChecked("Admin");
+    }
+});
+document.getElementById("flexSwitchCheckSeller").addEventListener("click", function(){
+    if(this.checked){
+        filterTableChecked("Seller");
+    }
+    else{
+        filterTableUnChecked("Seller");
+    }
+});
+document.getElementById("flexSwitchCheckCustomer").addEventListener("click", function(){
+    if(this.checked){
+        filterTableChecked("Customer");
+    }
+    else{
+        filterTableUnChecked("Customer");
+    }
+});
+function filterTableChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[6].innerHTML == criteria){
+            tableRows[i].classList.remove("d-none");
+        }
+    }
+}
+function filterTableUnChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[6].innerHTML == criteria){
+            tableRows[i].classList.add("d-none");
+        }
+    }
+}
+function resetValidation(){
+    document.forms[0].classList.remove("was-validated");
+    console.log("reset");
+}
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);

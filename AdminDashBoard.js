@@ -1,4 +1,21 @@
-import { products, persons } from "./data.js";
+import { products as originalProducts, persons as originalPersons, orders as originalOrders } from "./data.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//   window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+  let plainPersons = originalPersons.map((item)=> item.getPerson());
+  localStorage.setItem("Persons", JSON.stringify(plainPersons));
+  // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+if(localStorage.getItem("products") == null){
+  let plainProducts = originalProducts.map((item)=>item.getProduct());
+  localStorage.setItem("products", JSON.stringify(plainProducts));
+}
+let persons = JSON.parse(localStorage.getItem("Persons"));
+let products = JSON.parse(localStorage.getItem("products"));
+
 let noOfProducts = products.length;
 let noOfPersons = persons.length;
 let noOfGoingOrders = 10;
@@ -99,3 +116,18 @@ const data = {
       Responsive: true,
     }
   });
+
+let pending = 0;
+let shipped = 0;
+let delivered = 0;
+originalOrders.forEach(order => {
+  if(order.status == "pending") pending++;
+  if(order.status == "shipped") shipped++;
+  if(order.status == "deliverd") delivered++;
+});
+document.getElementById("pending").innerText = (pending/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("pending").style.width = pending/originalOrders.length*100 + "%";
+document.getElementById("shipped").innerText = (shipped/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("shipped").style.width = shipped/originalOrders.length*100 + "%";
+document.getElementById("delivered").innerText = (delivered/originalOrders.length*100).toFixed(2) + "%";
+document.getElementById("delivered").style.width = delivered/originalOrders.length*100 + "%";

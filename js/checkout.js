@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     TownInput.addEventListener("input", validateTown);
     ZipInput.addEventListener("input", validateZip);
     phoneinput.addEventListener("input", validatephone);
-   
+
 
     function openpop() {
         popupdiv.classList.add("open-popup");
@@ -50,15 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             saveFormData();
             openpop();
-            clearForm(); 
+            clearForm();
             clearValidationClasses();
         }
     });
 
 
-   
-    
-   
+
+
+
     function saveFormData() {
         var formData = {
             email: emailInput.value,
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Town: TownInput.value,
             Zip: ZipInput.value,
             phone: phoneinput.value,
-        
+
         };
 
         localStorage.setItem("formData", JSON.stringify(formData));
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             TownInput.value = parsedFormData.Town;
             ZipInput.value = parsedFormData.Zip;
             phoneinput.value = parsedFormData.phone;
-            
+
         }
     }
     function clearValidationClasses() {
@@ -101,9 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
         phoneinput.classList.remove("is-valid", "is-invalid");
     }
 
-   
+
     localeForm();
-    // clear page after sumbit
     function clearForm() {
         emailInput.value = "";
         fnameInput.value = "";
@@ -113,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         TownInput.value = "";
         ZipInput.value = "";
         phoneinput.value = "";
-       
+
     }
 
     clearForm();
@@ -125,12 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (emailRegex.test(email)) {
             emailInput.classList.remove("is-invalid")
             emailInput.classList.add("is-valid");
-            return true; 
+            return true;
         } else {
             emailInput.classList.remove("is-valid")
             emailInput.classList.add("is-invalid");
 
-            return false; 
+            return false;
         }
     }
     function validatefname() {
@@ -140,11 +139,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (fnameRegax.test(fname)) {
             fnameInput.classList.remove("is-invalid")
             fnameInput.classList.add("is-valid");
-            return true; 
+            return true;
         } else {
             fnameInput.classList.remove("is-valid")
             fnameInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
     }
     function validatelname() {
@@ -154,11 +153,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (lnameRegax.test(lname)) {
             lnameInput.classList.add("is-valid");
             lnameInput.classList.remove("is-invalid");
-            return true; 
+            return true;
         } else {
             lnameInput.classList.remove("is-valid");
             lnameInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
     }
     function validteCompanyname() {
@@ -168,69 +167,69 @@ document.addEventListener("DOMContentLoaded", function () {
         if (CnameRegax.test(Cname)) {
             CompanyInput.classList.add("is-valid");
             CompanyInput.classList.remove("is-invalid")
-            return true; 
+            return true;
         } else {
             CompanyInput.classList.remove("is-valid");
             CompanyInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
     }
-    function validateHOusennameandnumber(){
-        var Hname=HouseInput.value;
-        var houseRegex=/^[a-zA-Z0-9]+$/;
+    function validateHOusennameandnumber() {
+        var Hname = HouseInput.value;
+        var houseRegex = /^[a-zA-Z0-9]+$/;
 
         if (houseRegex.test(Hname)) {
             HouseInput.classList.add("is-valid");
             HouseInput.classList.remove("is-invalid")
-            return true; 
+            return true;
         } else {
             HouseInput.classList.remove("is-valid");
             HouseInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
-        
+
     }
-    function validateTown(){
-        var tname=TownInput.value;
-        var TownRegax=/^[a-zA-Z0-9]+$/;
+    function validateTown() {
+        var tname = TownInput.value;
+        var TownRegax = /^[a-zA-Z0-9]+$/;
 
         if (TownRegax.test(tname)) {
             TownInput.classList.add("is-valid");
             TownInput.classList.remove("is-invalid")
-            return true; 
+            return true;
         } else {
             TownInput.classList.remove("is-valid");
             TownInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
     }
-    function validateZip(){
-        var znum=ZipInput.value;
+    function validateZip() {
+        var znum = ZipInput.value;
         var zipCodeRegex = /^\d{5}(?:-\d{4})?$/;
 
         if (zipCodeRegex.test(znum)) {
             ZipInput.classList.add("is-valid");
             ZipInput.classList.remove("is-invalid")
-            return true; 
+            return true;
         } else {
             ZipInput.classList.remove("valid")
             ZipInput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
 
     }
-    function validatephone(){
-        var phone=phoneinput.value;
+    function validatephone() {
+        var phone = phoneinput.value;
         var phoneNumberRegex = /^\d{10}$/;
 
         if (phoneNumberRegex.test(phone)) {
             phoneinput.classList.add("is-valid");
             phoneinput.classList.remove("is-invalid")
-            return true; 
+            return true;
         } else {
             phoneinput.classList.remove("is-valid");
             phoneinput.classList.add("is-invalid");
-            return false; 
+            return false;
         }
 
     }
@@ -241,7 +240,51 @@ document.addEventListener("DOMContentLoaded", function () {
     //         return true;
     //     } else {
     //         countries.classList.add("is-invalid")
-           
+
     //     }
     // }
+
+    // Retrieve cart from localStorage
+    const cartString = localStorage.getItem('cart');
+    const cart = JSON.parse(cartString);
+
+    // Display cart details
+    const checkoutTable = document.querySelector('.checkout-list');
+    const subtotalValue = document.querySelector('.btn');
+
+    let total = 0;
+
+    checkoutTable.innerHTML = '';
+
+    for (const productId in cart) {
+        const productDetails = cart[productId];
+
+
+        const newRow = document.createElement('tr');
+        newRow.classList.add('checkout-list');
+
+
+        const tdimg = document.createElement('td');
+        const tdname = document.createElement('td');
+        const tdprice = document.createElement('td');
+
+
+        tdimg.innerHTML = `<img src="${productDetails.image}"width="50" height="50">`;
+        tdname.textContent = productDetails.name;
+        tdprice.textContent = `$${productDetails.price * productDetails.cardquantity}`;
+
+
+        newRow.appendChild(tdimg);
+        newRow.appendChild(tdname);
+        newRow.appendChild(tdprice);
+
+
+        checkoutTable.appendChild(newRow);
+
+
+        total += productDetails.price * productDetails.cardquantity;
+    }
+
+    subtotalValue.textContent = "PlaceOrder" + " " + total.toLocaleString();
 });
+

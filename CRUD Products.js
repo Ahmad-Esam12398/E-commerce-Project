@@ -1,5 +1,27 @@
-import {products, persons} from "./data.js";
+import {products as originalProducts, persons as originalPersons} from "./data.js";
 import {Product} from "./products module.js";
+
+// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+//     window.location.href = "./home.html";
+// }
+
+if(localStorage.getItem("Persons") == null){
+    let plainPersons = originalPersons.map((item)=> item.getPerson());
+    localStorage.setItem("Persons", JSON.stringify(plainPersons));
+    // console.log(JSON.parse(localStorage.getItem("Persons")));
+}
+if(localStorage.getItem("products") == null){
+    let plainProducts = originalProducts.map((item)=>item.getProduct());
+    localStorage.setItem("products", JSON.stringify(plainProducts));
+}
+// let plainProducts = products.map((item)=>item.getProduct());
+// localStorage.setItem("products", JSON.stringify(plainProducts));
+let persons = JSON.parse(localStorage.getItem("Persons"));
+let products = JSON.parse(localStorage.getItem("products"));
+function updateProductsLocalStorage(){
+    localStorage.setItem("products", JSON.stringify(products));
+}
+
 function createTableProducts(){
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
@@ -7,7 +29,7 @@ function createTableProducts(){
     tableHead.innerHTML = "";
     tableBody.innerHTML = "";
     let tableRow = document.createElement("tr");
-    for(let key in products[0].getProduct()){
+    for(let key in products[0]){
         let tableHeadData = document.createElement("th");
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
@@ -19,7 +41,7 @@ function createTableProducts(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < products.length; i++){
         tableRow = document.createElement("tr");
-        for(let key in products[i].getProduct()){
+        for(let key in products[i]){
             if(key == "image"){
                 let img = document.createElement("img");
                 img.src = products[i].image;
@@ -30,7 +52,7 @@ function createTableProducts(){
             }
             else{
                 let tableData = document.createElement("td");
-                tableData.innerHTML = products[i].getProduct()[key];
+                tableData.innerHTML = products[i][key];
                 tableRow.appendChild(tableData);
             }
         }
@@ -42,10 +64,10 @@ function createTableProducts(){
         editButton.innerHTML = "Edit";
         editButton.style.marginRight = "5px";
         editButton.style.cursor = "pointer";
+        editButton.onclick = getOptions;
         editButton.addEventListener("click", editRow);
         editButton.setAttribute("data-bs-toggle", "modal");
         editButton.setAttribute("data-bs-target", "#staticBackdrop");
-        editButton.onclick = getOptions;
         let deleteButton = document.createElement("button");
         deleteButton.className = "btn btn-outline-danger";
         deleteButton.innerHTML = "Delete";
@@ -81,6 +103,7 @@ function AddButton(){
     lowerTable.appendChild(addButton);
 }
 function getOptions(){
+    // debugger;
     let sellersIds = [];
     for(let i = 0; i < persons.length; i++){
         if(persons[i].role == "Seller"){
@@ -95,32 +118,19 @@ function getOptions(){
         document.getElementById("sellerID").appendChild(option);
     });
 }
-function validateForm() {
+function addProductRow() {
     let name = document.getElementById("floatingName").value;
     let price = document.getElementById("floatingPrice").value;
     let quantity = document.getElementById("floatingQuantity").value;
     let description = document.getElementById("floatingDescription").value;
     let image = document.getElementById("floatingImage").value;
-    if(name.trim() == "" || isNaN(price) || +price == 0 || isNaN(quantity) || +quantity == 0 || description.trim() == "" || image.trim() == "" || image.trim().indexOf(".") == -1){
-        alert("Please Input valid data");
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-function addProductRow() {
-    if(validateForm()){
-        let name = document.getElementById("floatingName").value;
-        let price = document.getElementById("floatingPrice").value;
-        let quantity = document.getElementById("floatingQuantity").value;
-        let description = document.getElementById("floatingDescription").value;
-        let image = document.getElementById("floatingImage").value;
-        let sellerID = document.getElementById("sellerID").value;
-        let newProduct = new Product(name, price, quantity, description, image, sellerID);
-        products.push(newProduct);
-        createTableProducts();
-    }
+    let sellerID = document.getElementById("sellerID").value;
+    let category = document.getElementById("Room").value;
+    // debugger;
+    let newProduct = new Product(name, price, quantity, description, image, sellerID, category);
+    products.push(newProduct.getProduct());
+    updateProductsLocalStorage();
+    createTableProducts();
 }
 
 let id = -1;
@@ -143,16 +153,26 @@ function editRow(e) {
     let inputs = document.querySelectorAll(".inputs");
     id = -1;
     id = rowChildrenValues[0];
-    // console.log(inputs);
+    debugger;
     for(let i = 0; i < inputs.length; i++) {
         inputs[i].value = rowChildrenValues[i + 1];
     }
+    // inputs[5].value = 6;
+    // console.log(inputs[5]);
+    // console.log(inputs[5]);
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
-    // console.log(products);
 }
-
+function setProduct(index, rowChildrenValues){
+    products[index].name = rowChildrenValues[0];
+    products[index].price = rowChildrenValues[1];
+    products[index].quantity = rowChildrenValues[2];
+    products[index].description = rowChildrenValues[3];
+    products[index].image = rowChildrenValues[4];
+    products[index].sellerID = rowChildrenValues[5];
+    products[index].category = rowChildrenValues[6];
+}
 function saveNewRow() {
     if(confirm("Are you sure you want to save this product?")) {
         let index = products.findIndex(product => product.id == id);
@@ -162,7 +182,8 @@ function saveNewRow() {
             rowChildrenValues.push(inputs[i].value);
         }
         // console.log(rowChildrenValues);
-        products[index].setProduct(...rowChildrenValues);
+        setProduct(index, rowChildrenValues);
+        updateProductsLocalStorage();
         createTableProducts();
     }
 }
@@ -171,19 +192,18 @@ function deleteRow(e) {
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
         let index = products.findIndex(product => product.id == id);
-        console.log(index);
+        // console.log(index);
         products.splice(index, 1);
+        updateProductsLocalStorage();
         createTableProducts();
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
     event.preventDefault();
-    // Check if the form is valid
-    if(!event.target.checkValidity()){
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    else{
+    // Check if the form is 
+    event.preventDefault();
+    event.stopPropagation();
+    if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
         }
@@ -191,59 +211,73 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             addProductRow();
         }
     }
-    event.target.classList.add('was-validated');
+    this.classList.add('was-validated');
 });
-document.getElementById("floatingName").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 2){
-        this.classList.add("is-invalid");
+let searchdiv = document.getElementsByClassName("searchbutton")[0];
+searchdiv.children[0].addEventListener("keyup", function(event){
+    if(event.keyCode == 13){
+        searchTable();
+    }
+});
+searchdiv.children[1].addEventListener("click", searchTable);
+function searchTable(){
+    let searchInput = searchdiv.children[0].value.trim();
+    if (searchInput.trim() == "") {
+        createTableProducts();
+        document.querySelectorAll(".form-check div input").forEach(input => input.checked = true);
+        return;
+    }
+    let allTableRows = [...document.querySelectorAll("tbody tr")];
+    let tableRows = allTableRows.filter(tr => tr.classList.contains("d-none") == false); 
+    tableRows.forEach(tr => tr.style.display = "");   
+    // console.log(tableRows);
+    // console.log(allTableRows);
+    let found = false;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        for(let j = 0; j < tableData.length; j++){
+            if(tableData[j].innerHTML.toLowerCase().indexOf(searchInput.toLowerCase()) != -1){
+                found = true;
+                break;
+            }
+        }
+        if(found == false){
+            tableRows[i].style.display = "none";
+        }
+        found = false;
+    }
+}
+document.querySelectorAll(".form-check div input").forEach(input => input.addEventListener("click", function(){
+    if(this.checked){
+        filterTableChecked(this.value);
     }
     else{
-        this.classList.remove("is-invalid");
+        filterTableUnChecked(this.value);
     }
-});
-document.getElementById("floatingPrice").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
+}));
+function filterTableChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[7].innerHTML == criteria){
+            tableRows[i].classList.remove("d-none");
+        }
     }
-    else{
-        this.classList.remove("is-invalid");
+}
+function filterTableUnChecked(criteria){
+    let tableRows = document.getElementsByTagName("tbody")[0].children;
+    for(let i = 0; i < tableRows.length; i++){
+        let tableData = tableRows[i].children;
+        // console.log(tableData[6].innerHTML);
+        if(tableData[7].innerHTML == criteria){
+            tableRows[i].classList.add("d-none");
+        }
     }
-});
-document.getElementById("floatingQuantity").addEventListener("input", function(){
-    // console.log(this);
-    if(isNaN(this.value) || +this.value <= 0){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingDescription").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().length < 10){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("floatingImage").addEventListener("input", function(){
-    // console.log(this);
-    if(this.value.trim().indexOf(".") == -1){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-document.getElementById("sellerID").addEventListener("input", function(){
-    if(this.value.trim() == ""){
-        this.classList.add("is-invalid");
-    }
-    else{
-        this.classList.remove("is-invalid");
-    }
-});
-
+}
+function resetValidation(){
+    document.forms[0].classList.remove("was-validated");
+    console.log("reset");
+}
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
+document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);
