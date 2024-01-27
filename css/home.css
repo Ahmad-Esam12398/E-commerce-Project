@@ -142,8 +142,8 @@ body {
     /* border-top: 1px solid black; */
     height: 120px;
 }
-.carousel .card img:hover {
-    box-shadow: inset 5px 5px 30px gray;
-    transform: scale(1.05);
+.cardcontainer :hover {
+    box-shadow:  5px 5px 30px gray;
+    /* transform: scale(1.05); */
     transition: all 1s;
 }

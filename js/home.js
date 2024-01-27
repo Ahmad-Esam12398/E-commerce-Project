@@ -27,8 +27,12 @@ function createProductCard(product) {
     // create anchor to go to the product detail page
     const anchor = document.createElement("a");
     anchor.classList.add("card-link")
-    anchor.setAttribute("href", "products.hmtl");
+    anchor.setAttribute("href", "productdetail.html");
 
+    anchor.addEventListener('click', function () {
+        localStorage.setItem('selectedProductId', product.id);
+        localStorage.setItem(product.id, JSON.stringify(product));
+      });// end of anchor click
     anchor.appendChild(cardImg);
     anchor.appendChild(cardBody);
     anchor.appendChild(cardFooter);
@@ -40,7 +44,7 @@ function createProductCard(product) {
     icon.style.width="min-content";
     icon.style.color="#eba900";
     
-    icon.setAttribute("href","products.html")
+    icon.setAttribute("href","productdetail.html")
     
     icon.setAttribute("data-bs-toggle","tooltip")
     icon.setAttribute("data-bs-placement","right")
