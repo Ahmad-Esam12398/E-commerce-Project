@@ -1,8 +1,14 @@
 import {  persons } from "../data.js";
-// alert(persons.length);
-
 // Load Array of users
-var usersArr = JSON.parse(localStorage.getItem("users"));
+if (localStorage.getItem("persons")==null) {
+    var Persons =[];
+    for (let i = 0; i < persons.length; i++) {
+        Persons.push(persons[i].getPerson());
+    }
+    localStorage.setItem("persons",JSON.stringify(Persons))
+}else{
+    var usersArr = JSON.parse(localStorage.getItem("persons"));
+}
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
         if (usersArr[i].email == mail) { return (i + 1); }
@@ -38,12 +44,12 @@ window.addEventListener("load", function () {
             let userEmail = document.getElementById("email").value;
             let userIndex = checkEmail(userEmail) - 1;
             let userpass = usersArr[userIndex].password;
-            console.log(userIndex);
+
             // user didn't enter the correct password
             if (this.value != userpass) {
                 p = 0;
                 this.classList.add("is-invalid");
-                this.classList.remove("is-  valid");
+                this.classList.remove("is-valid");
             } else {
                 p = 1;
                 this.classList.add("is-valid");

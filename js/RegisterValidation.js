@@ -1,7 +1,15 @@
 import { persons } from "../data.js";
 import { Person } from "../person.js";
 
-var usersArr = JSON.parse(localStorage.getItem("users"));
+if (localStorage.getItem("persons")==null) {
+    var Persons =[];
+    for (let i = 0; i < persons.length; i++) {
+        Persons.push(persons[i].getPerson());
+    }
+    localStorage.setItem("persons",JSON.stringify(Persons))
+}else{
+    var usersArr = JSON.parse(localStorage.getItem("persons"));
+}
 
 // function to check E-mail
 function checkEmail(mail) {
@@ -96,7 +104,7 @@ window.addEventListener("load", function () {
 
     //Phone number
     document.getElementById("phone").addEventListener("input", function () {
-        if (this.value.length != 11 || !(this.value.startsWith("010") || this.value.startsWith("011") || this.value.startsWith("012") || this.value.startsWith("015"))) {
+        if (!this.value.match(/^(010|011|012|015)[0-9]{8}$/)) {
             ph = 0;
             this.classList.add("is-invalid");
             this.classList.remove("is-valid");
@@ -154,8 +162,6 @@ window.addEventListener("load", function () {
 
 
             let newuser = new Person(name, email, password, address, phone, "Customer");
-            persons.push(newuser);
-            alert(persons.length);
             usersArr.push({
                 id:newuser.id,
                 name:newuser.name,
@@ -165,7 +171,7 @@ window.addEventListener("load", function () {
                 phone:newuser.phone,
                 role:newuser.role
             });
-            localStorage.setItem("users",JSON.stringify(usersArr));
+            localStorage.setItem("persons",JSON.stringify(usersArr));
 
             e.target.classList.add('was-validated');
 
