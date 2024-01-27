@@ -466,6 +466,7 @@ width: 50% !important;
   background-color: #efc040;
   border-radius: 5px;
 }
+<<<<<<< HEAD
 .divbutton{
   margin-top: 10px !important;
 }
@@ -480,5 +481,25 @@ width: 50% !important;
 }
 } 
 
+=======
+.offcanvas-body h3{
+  color:  gray;
+  margin-left: -100px;
+  font-size: 25px;
+  font-family: 'Poppins',sans-serif;
+}
+.offcanvas-body p{
+
+  margin-top: 20px;
+  cursor: pointer;
+}
+.offcanvas-container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.offcanvas-body p:hover{
+  color: #efc040;
+ }
+>>>>>>> main
 
   

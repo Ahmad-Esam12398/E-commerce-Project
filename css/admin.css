@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+tbody img{
+    max-width: 80px;
+}
+thead{
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+.btn:hover{
+    background-color: #edb932 !important;
+}
+.btn{
+    border-color:#edb932 !important;
+}
+body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input, #lowerTable > i{
+    color: #edb932 !important;
+}
+body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input:hover, #lowerTable > i:hover{
+    color: white !important;
+}
+.searchbutton{
+    margin-top: 0 2vw;
+    /* margin-left: 55vw; */
+    text-align: end;
+    margin: 10px 0;
+}
+
+.searchbutton input{
+padding: 10px 10px;
+border: 1px solid #b29e68;
+border-radius: 5px;
+}
+.searchbutton input[type=button]{
+margin-left: -10px;
+padding: 10px 20px;
+background-color: #efc040;
+border-radius: 5px;
+}
+.form-check-input:checked{
+    background-color: #edb932 !important;
+    border-color: #edb932 !important;
+}
+.form-check-input:focus{
+    background-color: #edb932 !important;
+    border-color: #edb932 !important;
+    box-shadow: 0 0 0 0.2rem #edb83298 !important;
+}
+.navbar img {
+    width: 35%;
+}
+.table-dark th {
+    background-color: #edb832be !important;
+}
