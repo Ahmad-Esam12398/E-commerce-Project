@@ -1,14 +1,14 @@
 import { persons } from "../data.js";
 import { Person } from "../person.js";
 
-if (localStorage.getItem("persons")==null) {
+if (localStorage.getItem("Persons")==null) {
     var Persons =[];
     for (let i = 0; i < persons.length; i++) {
         Persons.push(persons[i].getPerson());
     }
-    localStorage.setItem("persons",JSON.stringify(Persons))
+    localStorage.setItem("Persons",JSON.stringify(Persons))
 }else{
-    var usersArr = JSON.parse(localStorage.getItem("persons"));
+    var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
 
 // function to check E-mail
@@ -171,7 +171,7 @@ window.addEventListener("load", function () {
                 phone:newuser.phone,
                 role:newuser.role
             });
-            localStorage.setItem("persons",JSON.stringify(usersArr));
+            localStorage.setItem("Persons",JSON.stringify(usersArr));
 
             e.target.classList.add('was-validated');
 

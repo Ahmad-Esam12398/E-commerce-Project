@@ -1,14 +1,15 @@
 import {  persons } from "../data.js";
 // Load Array of users
-if (localStorage.getItem("persons")==null) {
+if (localStorage.getItem("Persons")==null) {
     var Persons =[];
     for (let i = 0; i < persons.length; i++) {
         Persons.push(persons[i].getPerson());
     }
-    localStorage.setItem("persons",JSON.stringify(Persons))
+    localStorage.setItem("Persons",JSON.stringify(Persons))
 }else{
-    var usersArr = JSON.parse(localStorage.getItem("persons"));
+    var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
+
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
         if (usersArr[i].email == mail) { return (i + 1); }

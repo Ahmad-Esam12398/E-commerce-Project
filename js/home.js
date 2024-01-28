@@ -1,7 +1,4 @@
 import { products } from "../data.js";
-
-
-
 // add to cart functions from Bothina
 const listCard = document.querySelector('.listCard');
 const total = document.querySelector('.total');
@@ -102,21 +99,21 @@ for (let i = 0; i < products.length; i++) {
 function createProductCard(product) {
     // Create card
     const card = document.createElement("div");
-    card.classList.add("card", "col-8", "ms-2", "col-md")
+    card.classList.add("card", "col-8", "my-3", "mx-3", "mx-lg-3", "col-md")
+
     // Create img to hold product image
     const cardImg = document.createElement("img");
     cardImg.src = product.image;
     cardImg.alt = product.name;
     cardImg.classList.add("card-img-top", "d-block", "w-100");
-    cardImg.style.height = "250px";
+    cardImg.style.height = "300px";
+
     // Create card body with product name
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "text-center", "text-black");
-    cardBody.innerHTML = `<h5>${product.name}</h5>`;
-    // card footer with product price
-    const cardFooter = document.createElement("div");
-    cardFooter.classList.add("card-footer", "text-center");
-    cardFooter.innerHTML = `<p style="color:#eba900;" class="fw-bold">${product.price} E£</p>`;
+    cardBody.innerHTML = `<p>${product.category}</p>` + `<h5 style="color:#c29012;">${product.name}</h5>` + `<p class="text-dark">Price:$${product.price}</p>`;
+    cardBody.style.fontSize = "14px";
+
     // create anchor to go to the product detail page
     const anchor = document.createElement("a");
     anchor.classList.add("card-link")
@@ -129,14 +126,11 @@ function createProductCard(product) {
 
     anchor.appendChild(cardImg);
     anchor.appendChild(cardBody);
-    anchor.appendChild(cardFooter);
+    // anchor.appendChild(cardFooter);
     anchor.style.textDecoration = "none";
     // create add to cart icon
     const icon = document.createElement("a");
-    icon.classList.add("mt-4", "fs-5", "fa-solid", "fa-cart-plus");
-
-    icon.style.width = "min-content";
-    icon.style.color = "#eba900";
+    icon.classList.add("cardicon", "mt-4", "fs-5", "fa-solid", "fa-basket-shopping");
 
     // anchor.setAttribute("href", "productdetail.html")
 
@@ -208,10 +202,34 @@ const newCollectionCarouselSmall = document.querySelector("#NewCollectionProduct
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
 
-initCarousel(newCollectionCarousel, 0, 8, 4);
+initCarousel(newCollectionCarousel, 0, 8, 3);
 initCarousel(newCollectionCarouselSmall, 0, 8, 1);
-initCarousel(mostSellingCarousel, 9, 20, 4);
+initCarousel(mostSellingCarousel, 9, 20, 3);
 initCarousel(mostSellingCarouselSmall, 9, 20, 1);
+document.querySelector("form").addEventListener("submit", function (e) {
+    document.getElementById("liveToast").classList.add("show");
+    e.preventDefault();
+    this.innerHTML = `<p class="fw-bold">Thanks for contacting us! We will be in touch with you shortly.</p>`;
+});
+
+// Go To Top Button
+
+// Get the button
+let mybutton = document.getElementById("UpButton");
+
+// When the user scrolls down 30px from the top of the document, show the button
+window.onscroll = function () {
+    if (document.documentElement.scrollTop > 30) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+document.getElementById("UpButton").addEventListener("click", function () {
+    document.documentElement.scrollTop = 0;
+});
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

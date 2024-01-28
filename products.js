@@ -1,6 +1,5 @@
-
 import { Product } from './productsmodule.js';
-import { products } from './main.js';
+import { products } from './data.js';
 
 
 const listProduct = document.querySelector('.listProduct');
@@ -51,7 +50,7 @@ products.forEach(productInfo => {
   hoverIcon.classList.add('hover-icon');
   hoverIcon.setAttribute('data-product-id', productDetails.id);
 
-  hoverIcon.innerHTML = <i class="fa-solid fa-basket-shopping"></i>;
+  hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
 
   productDiv.appendChild(hoverIcon);
 
