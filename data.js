@@ -32,12 +32,6 @@ var products = [
     new Product('Wooden Bath Room Stool', 220, 15, 'Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis proident cupiditate habitant assumenda. Pariatur minus nibh necessitatibus sociis minim, consectetur dapibus.', 'images/wooden-stool.png', persons[6].id, 'Bathroom', 'Home / Bathroom / Wooden Bath Room Stool', 'Bathroom'),
     new Product('Wooden Console Table', 120 , 8, 'Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.', 'images/wooden-console-table-.png', persons[5].id, 'Bedroom', 'Home / Home Office / Wooden Console Table', ' Bedroom, Home Office'),
 ];
-export {products}
-
-
-
-
-
 
 let orders = [
     {

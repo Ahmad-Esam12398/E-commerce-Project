@@ -86,6 +86,11 @@ body {
     align-items: end;
     justify-content: end;
 }
+.firstphoto .Socials {
+    position: absolute;
+    right: 0;
+    bottom: -10%;
+}
 
 .Socials a {
     color: white;
