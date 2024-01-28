@@ -1,5 +1,5 @@
 // main .js
-import { Product } from "./products module.js";
+import { Product } from "./productsmodule.js";
 import { Person } from "./person.js";
 // debugger;
 var products = [
@@ -33,3 +33,5 @@ var persons = [
     new Person("Fady Masoud", "FadyM122@gmail.com", `gj}:56rZh8`, "Talkha","01255891102", "Guest"),
 ];
 export {products}
+
+

@@ -1,7 +1,5 @@
-
 import { Product } from './productsmodule.js';
-import { products } from './main.js';
-
+import { products } from './data.js';
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -17,12 +15,8 @@ try {
     cart = JSON.parse(cartString);
   }
 } catch (error) {
-  console.error("can't get  'cart' from localStorage:", error);
+  console.error("can't get 'cart' from localStorage:", error);
 }
-
-
-
-
 
 products.forEach(productInfo => {
   const product = new Product(
@@ -50,8 +44,11 @@ products.forEach(productInfo => {
   const hoverIcon = document.createElement('div');
   hoverIcon.classList.add('hover-icon');
   hoverIcon.setAttribute('data-product-id', productDetails.id);
-
   hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
+
+  hoverIcon.addEventListener('click', function () {
+    addToCart(productDetails.id);
+  });
 
   productDiv.appendChild(hoverIcon);
 
@@ -67,38 +64,15 @@ products.forEach(productInfo => {
   productDiv.appendChild(productDetailsContainer);
 
   listProduct.appendChild(productDiv);
-
-  hoverIcon.style.display = 'none';
-
-  productDiv.addEventListener('mouseenter', () => {
-    hoverIcon.style.display = 'block';
-    hoverIcon.style.marginLeft = '250px';
-    hoverIcon.style.marginTop = '10px';
-    hoverIcon.style.backgroundColor = 'white';
-    hoverIcon.style.boxShadow = '0 0 10px rgba(113, 112, 112, 0.5)';
-    hoverIcon.style.width = '30px';
-    hoverIcon.style.borderRadius = '50%';
-    hoverIcon.style.marginLeft = '19vw';
-    hoverIcon.style.cursor = 'pointer';
-  });
-
-  productDiv.addEventListener('mouseleave', () => {
-    hoverIcon.style.display = 'none';
-  });
-
-
-  function addToCartIcon() {
-    const productId = productDetails.id;
+  function addToCart(productId) {
     if (!cart[productId]) {
-      if (!cart[productId]) {
-        cart[productId] = {
-          id: productDetails.id,
-          name: productDetails.name,
-          price: productDetails.price,
-          image: productDetails.image,
-          cardquantity: 1
-        }
-      }
+      cart[productId] = {
+        id: productDetails.id,
+        name: productDetails.name,
+        price: productDetails.price,
+        image: productDetails.image,
+        cardquantity: 1
+      };
     } else if (cart[productId].cardquantity >= productDetails.quantity) {
       console.log("Can't add more.");
     } else {
@@ -107,12 +81,6 @@ products.forEach(productInfo => {
     saveCartToLocalStorage();
     reloadCard();
   }
-
-hoverIcon.addEventListener('click',addToCartIcon);
-
-
-
-
 });
 
 function reloadCard() {
@@ -123,7 +91,7 @@ function reloadCard() {
   for (const productId in cart) {
     const productDetails = cart[productId];
 
-    totalprice += productDetails.price * productDetails.cardquantity;
+    totalprice += (productDetails.price * productDetails.cardquantity);
     count += productDetails.cardquantity;
 
     const newDiv = document.createElement('div');
@@ -189,7 +157,6 @@ function reloadCard() {
   });
 }
 
-
 function removeProductFromCart(productId) {
   if (cart[productId]) {
     delete cart[productId];
@@ -197,7 +164,6 @@ function removeProductFromCart(productId) {
     reloadCard();
   }
 }
-
 
 function saveCartToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -207,7 +173,6 @@ reloadCard();
 
 const checkoutButton = document.querySelector('.checkbtn');
 checkoutButton.addEventListener('click', function () {
-
   if (Object.keys(cart).length === 0) {
     console.log("cart is empty");
     return;
@@ -216,6 +181,7 @@ checkoutButton.addEventListener('click', function () {
   saveCartToLocalStorage();
   window.location.href = 'checkout.html';
 });
+
 var offcanvas = new bootstrap.Offcanvas(document.getElementById('demo'));
 
 window.search = function () {
@@ -233,6 +199,7 @@ window.search = function () {
     }
   });
 }
+
 window.display = function (e) {
   var target = e.target;
   if (target.tagName === 'P' && target.id === 'poption') {
@@ -249,6 +216,7 @@ window.display = function (e) {
   }
 }
 
-export{addToCartIcon,saveCartToLocalStorage,reloadCard}
+
+
 
 

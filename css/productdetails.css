@@ -9,19 +9,108 @@
 }
 
 nav {
-    margin-top: 2px;
+    /* margin-top: -2px; */
     background-color: white;
-    height: 3vw;
+    /* height: 3vw; */
 }
 
 nav img {
-    margin-top: 1vw;
-    margin-left: 15vw;
+    /* margin-top: 1vw; */
+    /* margin-left: 15vw; */
 }
 
 
+
+.related-products-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background-color: white;
+  width: 95vw;
+  margin: 50px auto;
+  margin-top: -50px; 
+}
+.mainrelatedproducts{
+  background-color: white;
+  margin-top: 0px;
+  width: 95vw;
+  margin: 50px auto;
+  margin-top: -50px;
+}
+.header-container {
+ 
+  padding: 20px; 
+  margin-left: 5vw;
+  margin-bottom: 5vw;
+}
+.related-product {
+  position: relative;
+}
+
+.related-product .hover-icon {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(113, 112, 112, 0.5);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+}
+
+.related-product:hover .hover-icon {
+  display: block;
+}
+
+
+
+.related-product {
+  width: 50%;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-left: 5vw;
+}
+.related-product:hover {
+  transform: scale(1);
+  transition: all 0.6s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  
+  } 
+
+.related-product img {
+  width: 100%;
+  height: auto;
+
+}
+
+.related-product a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.related-product h2 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.related-product p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.related-product p.price {
+  font-weight: bold;
+
+}
 .product-detail-container {
-    width: 80vw;
+    width: 95vw;
     margin: 50px auto; 
     padding: 10px;
     background-color: white;
@@ -37,7 +126,7 @@ nav img {
 }
 
 .product-detail-container .product-info p {
-    margin-top: 10px;
+    margin-top: 50px;
     line-height: 1.8;
     font-size: 1.2vw;
     color: gray;
@@ -58,7 +147,7 @@ nav img {
     transform: scale(1.1);
 }
 
-button {
+.addtocart1 {
      margin-left: 8vw !important;
     padding: 8px 10px;
     font-size: 1.2vw;
@@ -66,14 +155,14 @@ button {
     background: #eab839;
     color: black;
     border: none;
-    /* border-radius: 5px; */
-    margin-top: -2.3vw; 
+    border-radius: 5px; 
+    margin-top: -2.3vw;  
     position: absolute;
 }
 
-button:hover {
+.addtocart1:hover {
   color: white;
-}
+} 
 .main-wrapper{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -118,17 +207,24 @@ button:hover {
     width: 100%;
     border: none !important;
   }
+ 
+  
   
   
   .card .subtotal,
   .card .total {
     border: none;
     color: black;
-    margin-top: 135%;
+    margin-top: 140%;
     position: absolute;
     margin-left: 30px;
   
   }
+  body{
+    overflow-x: hidden;
+  }
+
+
   .card .total {
     margin-left: 300px;
   }
@@ -137,7 +233,7 @@ button:hover {
     background-color: #efc040;
     border: none;
     width: 24%;
-    margin-left:1px !important ;
+    margin-left:-10px !important ;
     padding: 10px 10px;
     position: fixed;
   }
@@ -150,10 +246,10 @@ button:hover {
   }
   
   .btn-close{
-    margin-left: 340px !important;
+    margin-left: 30px !important;
   }
   
-  .ulcard{
+  .listCard{
     list-style-type: none; 
     border: 1px solid #ccc;
     padding: 10px;
@@ -163,10 +259,10 @@ button:hover {
     display: block;
     border: none !important;
   }
-  .ulcard .minus{
+  .listCard .minus{
     margin-left: 20px;
   }
-   .ulcard img {
+   .listCard img {
     width: 60px;
     height: 60px;
    margin-left: 2px;
@@ -175,13 +271,13 @@ button:hover {
    margin-bottom: 15px;
   }
   
-  .ulcard p, .listCard h2 {
+  .listCard p, .listCard h2 {
     margin: 0;
   }
   
   
   
-  .ulcard h2 {
+  .listCard h2 {
     color: #333;
     font-size: 12px;
     margin-left: 100px;
@@ -189,7 +285,7 @@ button:hover {
   
   }
   
-  .ulcard p{
+  .listCard p{
     font-style: italic;
     margin-left: 310px;
     margin-top: -40px;
@@ -197,7 +293,7 @@ button:hover {
     margin-bottom: 10px;
   }
   
-  .ulcard .remove-button{
+  .listCard .remove-button{
     margin-left: 310px !important;
     position: absolute;
     background-color: transparent;
@@ -207,7 +303,7 @@ button:hover {
     border: none;
     
   }
-  .ulcard  .minus{
+  .listCard  .minus{
    margin-top: 50px;
    border-radius: 1px;
    text-align: center;
@@ -218,13 +314,13 @@ button:hover {
    cursor: pointer;
    background-color: white;
   }
-  .ulcard  .minus:hover{
+  .listCard  .minus:hover{
     background-color: #efc040;
   }
-  .ulcard  .plus:hover{
+  .listCard  .plus:hover{
     background-color: #efc040;
   }
-  .ulcard .num{
+  .listCard .num{
     margin-top: 50px;
    border-radius: 1px;
    text-align: center;
@@ -236,13 +332,13 @@ button:hover {
    cursor: pointer;
    background-color: white;
   }
-  .ulcard .plusevent{
+  .listCard .plusevent{
     margin-left: 100px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
   
-   .ulcard .plus{
+   .listCard .plus{
     margin-top: 50px;
     border-radius: 1px;
     text-align: center;
@@ -253,17 +349,26 @@ button:hover {
     cursor: pointer;
     background-color: white
   } 
+  #cartsss .cardquantity {
+    background-color: #efc040;
+    color: white;
+    padding: 0px 5px;
+    border-radius: 30%;
+    position: absolute;
+    font-size: 12px;
+    transform: translateY(-35%);
+  }
 
 
 #FooterTop {
     margin-top: 50px;
-    width: 100.8%;
+    /* width: 100.8%; */
     color: white;
     padding: 50px;
     background-color: rgb(21, 21, 21);
     }
     #FooterBottom {
-    width: 100.8%;
+    /* width: 100.8%; */
     font-size:16px;
     font-weight: 450;
     color: white;
@@ -292,14 +397,18 @@ button:hover {
     align-items: center;
     }
 
-@media screen and (max-width: 576px){
-    nav img{
-        margin-top: 15px !important;
-    }
+@media screen and (min-width: 290px)  and (max-width: 576px){
     .navbar-brand{
-        margin-left: 200px;
-        margin-top: -30px;
+        position: relative;
+        margin-left: -10vw !important;
+        margin-top: 0px !important;
     }
+    
+   
+    body{
+      overflow-x: hidden;
+    }
+    
     .product-detail-container {
         height: 260vw;
         width: 100vw;
@@ -329,16 +438,108 @@ button:hover {
         margin-top: 10px;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
+    .offcanvas-end {
+      /* right: auto !important; */
+      width: 300px !important;
+    }
+  
+    .offcanvas-body {
+      width: 260px !important;
+    }
+    
+  .listCard img {
+    width: 60px;
+    height: 60px;
+    margin-left: -25px;
+    margin-top: 0px;
+    position: absolute;
+    margin-bottom: 15px;
+  }
+
+  .listCard p,
+  .listCard h2 {
+    margin-left: 40px;
+  }
+
+  .listCard p {
+    font-style: italic;
+    margin-left: 180px;
+    margin-top: -30px;
+    position: absolute;
+    margin-bottom: 10px;
+  }
+
+  .listCard .remove-button {
+    margin-left: 190px !important;
+    position: absolute;
+    background-color: white;
+    color: #efc040;
+    font-size: 25px;
+    margin-top: -65px;
+    border: none;
+
+  }
+
+  .listCard .plusevent {
+    margin-left: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .card .subtotal,
+  .card .total {
+    border: none;
+    color: black;
+    margin-top: 165%;
+    position: absolute;
+    margin-left: 30px;
+   
+
+  }
+
+  .card .subtotal {
+    margin-left: 0px;
+  }
+
+  .card .total {
+    margin-left: 200px;
+  }
+  .card .checkbtn {
+    margin-top: 80%;
+    background-color: #efc040;
+    border: none;
+    width: 50%;
+    margin-left: 1px;
+    padding: 10px 10px;
+    position: fixed;
+  }
+  .related-products-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    background-color: white;
+    width: 95vw;
+    margin: 50px auto;
+    margin-top: -50px; 
+  }
+  .related-product {
+    position: relative;
+    margin-left: 100px !important;
+    margin-top: 10px;
+  }
 }
 @media screen and (min-width: 577px) and (max-width: 1200px) {
     /* nav img{
         margin-top: 15px !important;
-    }*/
+    }
     .navbar-expand-md .navbar-collapse{
         display: flex !important;
         margin-left: -500px;
         margin-top: 5px;
-    } 
+    }  */
+    body{
+      overflow-x: hidden;
+    }
     .product-detail-container {
         /* height: 260vw; */
         width: 100vw;
@@ -350,12 +551,7 @@ button:hover {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
-    .addtocart{
-        margin-left: -60px !important;
-        padding: 8px 8px;
-        font-size: 20px;
-        margin-top: 2px !important;
-    }
+    
     .addtocart1{
         margin-left: 110px !important;
         padding: 8px 8px;
@@ -374,6 +570,52 @@ button:hover {
         margin-top: 10px;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
+    
+  .listCard p {
+    font-style: italic;
+    margin-left: 270px;
+    margin-top: -30px;
+    position: absolute;
+    margin-bottom: 10px;
+  } .listCard .remove-button {
+    margin-left: 280px;
+    position: absolute;
+    background-color: white;
+    color: #efc040;
+    font-size: 25px;
+    margin-top: -65px;
+    border: none;
+
+  }
+  .card .subtotal,
+  .card .total {
+    border: none;
+    color: black;
+    margin-top: 100%;
+    position: absolute;
+  
+    
+
+  }
+
+  .card .subtotal {
+    margin-left: 0px;
+    
+  }
+
+  .card .total {
+    margin-left: 200px;
+  }
+  .card .checkbtn {
+    margin-top: 45%;
+    background-color: #efc040;
+    border: none;
+    width: 35%;
+    margin-left: 1px;
+    padding: 10px 10px;
+    position: fixed;
+  }
+
 
 }
 
