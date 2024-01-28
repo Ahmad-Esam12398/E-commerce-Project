@@ -6,7 +6,7 @@ body {
     height: 100vh;
 }
 
-.sidebar {
+/* .sidebar {
     height: 100%;
     background-color: #f8f9fa;
     padding: 20px;
@@ -15,7 +15,7 @@ body {
 .content {
     margin: 10% 25%;
     padding: 20px;
-}
+} */
 
 .profileContainer {
     border: 1px solid #dee2e6;
