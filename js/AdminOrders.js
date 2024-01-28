@@ -1,4 +1,4 @@
-import { orders } from "../data.js";
+import { originalOrders as orders } from "../data.js";
 import { products } from "../data.js";
 // if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
 //     window.location.href = "./home.html";
