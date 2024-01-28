@@ -1,4 +1,4 @@
-import { products as originalProducts, persons as originalPersons, orders as originalOrders } from "./data.js";
+import { products as originalProducts, persons as originalPersons, originalOrders as originalOrders } from "./data.js";
 
 // if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
 //   window.location.href = "./home.html";
@@ -18,7 +18,7 @@ let products = JSON.parse(localStorage.getItem("products"));
 
 let noOfProducts = products.length;
 let noOfPersons = persons.length;
-let noOfGoingOrders = 10;
+let noOfGoingOrders = originalOrders.length;
 $("#noOfProducts").text(noOfProducts);
 $("#noOfUsers").text(noOfPersons);
 $("#noOfOrders").text(noOfGoingOrders);
@@ -123,7 +123,7 @@ let delivered = 0;
 originalOrders.forEach(order => {
   if(order.status == "pending") pending++;
   if(order.status == "shipped") shipped++;
-  if(order.status == "deliverd") delivered++;
+  if(order.status == "delivered") delivered++;
 });
 document.getElementById("pending").innerText = (pending/originalOrders.length*100).toFixed(2) + "%";
 document.getElementById("pending").style.width = pending/originalOrders.length*100 + "%";

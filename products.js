@@ -81,6 +81,7 @@ products.forEach(productInfo => {
     saveCartToLocalStorage();
     reloadCard();
   }
+
 });
 
 function reloadCard() {
@@ -110,7 +111,6 @@ function reloadCard() {
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
     `;
-
     const minus = newDiv.querySelector('.minus');
     const plus = newDiv.querySelector('.plus');
 
@@ -215,6 +215,8 @@ window.display = function (e) {
     });
   }
 }
+
+
 
 
 

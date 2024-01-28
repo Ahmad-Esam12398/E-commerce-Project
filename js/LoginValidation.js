@@ -1,8 +1,14 @@
-import { setLocalStorage } from "../data.js";
-
-setLocalStorage();
+import {  persons } from "../data.js";
 // Load Array of users
-var usersArr = JSON.parse(localStorage.getItem("users"));
+if (localStorage.getItem("Persons")==null) {
+    var Persons =[];
+    for (let i = 0; i < persons.length; i++) {
+        Persons.push(persons[i].getPerson());
+    }
+    localStorage.setItem("Persons",JSON.stringify(Persons))
+}else{
+    var usersArr = JSON.parse(localStorage.getItem("Persons"));
+}
 
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
@@ -39,12 +45,12 @@ window.addEventListener("load", function () {
             let userEmail = document.getElementById("email").value;
             let userIndex = checkEmail(userEmail) - 1;
             let userpass = usersArr[userIndex].password;
-            console.log(userIndex);
+
             // user didn't enter the correct password
             if (this.value != userpass) {
                 p = 0;
-                this.classList.add("is-valid");
-                this.classList.remove("is-invalid");
+                this.classList.add("is-invalid");
+                this.classList.remove("is-valid");
             } else {
                 p = 1;
                 this.classList.add("is-valid");
@@ -66,7 +72,6 @@ window.addEventListener("load", function () {
             let userIndex = checkEmail(userEmail) - 1;
             localStorage.setItem("Active User", JSON.stringify(usersArr[userIndex]));
             e.target.classList.add('was-validated');
-
         }
     });// end of sumbit
     //Show password

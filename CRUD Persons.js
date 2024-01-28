@@ -35,6 +35,9 @@ function createTablePersons(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
+        if(localStorage.getItem("Active User").email == persons[i].email){
+            continue;
+        }
         for(let key in persons[i]){
             let tableData = document.createElement("td");
             tableData.innerHTML = persons[i][key];
@@ -91,6 +94,8 @@ function AddButton(){
     });
     lowerTable.appendChild(addButton);
 }
+let uniqueEmails = new Set();
+let uniquePhoneNumbers = new Set();
 function addPersonRow() {
     let name = document.getElementById("floatingName").value;
     let email = document.getElementById("floatingEmail").value;
@@ -99,8 +104,19 @@ function addPersonRow() {
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
     // debugger;
+    persons.forEach(person => {uniqueEmails.add(person.email.toLowerCase());
+        uniquePhoneNumbers.add(person.phone);
+    })
+    if(uniqueEmails.has(email.toLowerCase())){
+        alert("Email already exists");
+        return;
+    }
+    if(uniquePhoneNumbers.has(phone)){
+        alert("Phone number already exists");
+        return;
+    }
     let newPerson = new Person(name, email, password, address, phone, role);
-    console.log(newPerson.getPerson());
+    // console.log(newPerson.getPerson());
     persons.push(newPerson.getPerson());
     updatePersonsLocalStorage();
     createTablePersons();

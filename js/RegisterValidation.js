@@ -1,7 +1,15 @@
-import { persons, setLocalStorage } from "../data.js";
+import { persons } from "../data.js";
 import { Person } from "../person.js";
 
-var usersArr = JSON.parse(localStorage.getItem("users"));
+if (localStorage.getItem("Persons")==null) {
+    var Persons =[];
+    for (let i = 0; i < persons.length; i++) {
+        Persons.push(persons[i].getPerson());
+    }
+    localStorage.setItem("Persons",JSON.stringify(Persons))
+}else{
+    var usersArr = JSON.parse(localStorage.getItem("Persons"));
+}
 
 // function to check E-mail
 function checkEmail(mail) {
@@ -96,7 +104,7 @@ window.addEventListener("load", function () {
 
     //Phone number
     document.getElementById("phone").addEventListener("input", function () {
-        if (this.value.length != 11 || !(this.value.startsWith("010") || this.value.startsWith("011") || this.value.startsWith("012") || this.value.startsWith("015"))) {
+        if (!this.value.match(/^(010|011|012|015)[0-9]{8}$/)) {
             ph = 0;
             this.classList.add("is-invalid");
             this.classList.remove("is-valid");
@@ -146,8 +154,6 @@ window.addEventListener("load", function () {
             this.classList.remove("is-valid");
         }
         else {
-            // alert(e)
-            // console.log("valid" + valid);
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
@@ -156,9 +162,17 @@ window.addEventListener("load", function () {
 
 
             let newuser = new Person(name, email, password, address, phone, "Customer");
-            persons.push(new Person(name, email, password, address, phone, "Customer"));
+            usersArr.push({
+                id:newuser.id,
+                name:newuser.name,
+                email:newuser.email,
+                password:newuser.password,
+                address:newuser.address,
+                phone:newuser.phone,
+                role:newuser.role
+            });
+            localStorage.setItem("Persons",JSON.stringify(usersArr));
 
-            setLocalStorage();
             e.target.classList.add('was-validated');
 
         }
