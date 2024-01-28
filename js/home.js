@@ -130,13 +130,10 @@ function createProductCard(product) {
     anchor.style.textDecoration = "none";
     // create add to cart icon
     const icon = document.createElement("a");
-    icon.classList.add("mt-4", "fs-5", "fa-solid", "fa-basket-shopping");
-
-    icon.style.width = "min-content";
-    icon.style.color = "#c29012";
+    icon.classList.add("cardicon","mt-4", "fs-5", "fa-solid", "fa-basket-shopping");
 
     // anchor.setAttribute("href", "productdetail.html")
-
+    
     icon.setAttribute("data-bs-toggle", "tooltip")
     icon.setAttribute("data-bs-placement", "right")
     icon.setAttribute("data-bs-title", "Add to Cart")
@@ -210,5 +207,12 @@ initCarousel(newCollectionCarouselSmall, 0, 8, 1);
 initCarousel(mostSellingCarousel, 9, 20, 3);
 initCarousel(mostSellingCarouselSmall, 9, 20, 1);
 
+document.querySelector("form").addEventListener("submit",function(e){
+    
+});
+
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+const toastElList = document.querySelectorAll('.toast');
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option));
