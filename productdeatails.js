@@ -1,4 +1,57 @@
+import { Product } from './productsmodule.js';
+import { products } from './data.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    function updateProductDetailPage(productDetails) {
+        document.getElementById('product-category').innerText = `${productDetails.categorypath}`;
+        document.getElementById('product-name').innerText = productDetails.name;
+        document.getElementById('product-price').innerText = `Price: $${productDetails.price}`;
+        document.getElementById('product-description').innerText = ` ${productDetails.description}`;
+        document.getElementById('product-image').src = productDetails.image;
+
+      
+        displayRelatedProducts(productDetails.category, productDetails.id);
+    }
+
+    function displayRelatedProducts(category, currentProductId) {
+        const relatedProductsContainer = document.getElementById('related-products');
+        relatedProductsContainer.innerHTML = '';
+
+        const relatedProducts = products.filter(product => product.category === category && product.id !== currentProductId);
+
+        let relatedProductDiv;
+
+        
+        relatedProducts.forEach(relatedProduct => {
+            if(relatedProduct.id !== currentProductId)
+            {
+                relatedProductDiv = document.createElement('div');
+            relatedProductDiv.classList.add('related-product');
+            relatedProductDiv.innerHTML = `
+                <img src="${relatedProduct.image}" />
+                <p>${relatedProduct.category}</p>
+                <h2>${relatedProduct.name}</h2>
+                <p>Price: $${relatedProduct.price}</p>
+            `;
+            }
+            else{
+                return;
+            }
+
+            const hoverIcon = document.createElement('div');
+            hoverIcon.classList.add('hover-icon');
+            hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
+
+            hoverIcon.addEventListener('click', function () {
+                addToCart(relatedProduct.id);
+            });
+
+            relatedProductDiv.appendChild(hoverIcon);
+            relatedProductsContainer.appendChild(relatedProductDiv);
+        });
+    }
+
     let productDetails;
     let cart = {};
 
@@ -35,49 +88,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const pluspro = document.querySelector(".plus");
     const minuspro = document.querySelector(".minus");
     const numbe = document.querySelector(".num");
-    
+
     let number = 1;
-    
+
     pluspro.addEventListener("click", () => {
         if (productDetails && number < productDetails.quantity) {
             number++;
             numbe.innerText = number;
-            changequantity(productId, 1); 
+            changequantity(productId, number);
         } else {
             console.log("Cannot add more, reached the maximum quantity");
         }
         reloadCard();
     });
-    
+
     minuspro.addEventListener("click", () => {
         if (number === 1) {
             console.log("Can't decrease below 1");
         } else {
             number--;
             numbe.innerText = number;
-            changequantity(productId, -1); 
+            changequantity(productId, -1);
         }
-        reloadCard(); 
+        reloadCard();
     });
 
-    listCard = document.querySelector('.ulcard');
+    listCard = document.querySelector('.ulCard');
     addtocart.addEventListener('click', function () {
         const productId = productDetails.id;
-    
-        // Use the current value of 'number' as the quantity
+
+        
         if (!cart[productId]) {
             cart[productId] = {
                 id: productDetails.id,
                 name: productDetails.name,
                 price: productDetails.price,
-                image:productDetails.image,
-                cardquantity: number 
-            }}else if (cart[productId].cardquantity >= productDetails.quantity) {
+                image: productDetails.image,
+                cardquantity: number
+            };
+        } else if (cart[productId].cardquantity >= productDetails.quantity) {
             console.log("Can't add more.");
         } else {
             cart[productId].cardquantity += number;
         }
-        number=1;    
+        number = 1;
         saveCartToLocalStorage();
         reloadCard();
     });
@@ -88,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let count = 0;
         let totalprice = 0;
 
-        const listCard = document.querySelector('.ulcard');
+        const listCard = document.querySelector('.listCard');
         listCard.innerHTML = '';
 
         for (const productId in cart) {
@@ -173,14 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function getProductDetails(productId) {
         const productJSON = localStorage.getItem(productId);
         return productJSON ? JSON.parse(productJSON) : null;
-    }
-
-    function updateProductDetailPage(productDetails) {
-        document.getElementById('product-category').innerText = `${productDetails.categorypath}`;
-        document.getElementById('product-name').innerText = productDetails.name;
-        document.getElementById('product-price').innerText = `Price: $${productDetails.price}`;
-        document.getElementById('product-description').innerText = ` ${productDetails.description}`;
-        document.getElementById('product-image').src = productDetails.image;
     }
 
     checkoutButton.addEventListener('click', function () {
