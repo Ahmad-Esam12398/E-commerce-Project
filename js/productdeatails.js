@@ -32,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${relatedProduct.image}" />
                 <p>${relatedProduct.category}</p>
                 <h2>${relatedProduct.name}</h2>
-                <p>Price: $${relatedProduct.price}</p>
-            `;
+                <p>Price: $${relatedProduct.price}</p>`;
             }
             else{
                 return;

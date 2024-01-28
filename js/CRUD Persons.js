@@ -35,9 +35,9 @@ function createTablePersons(){
     myTable.appendChild(tableHead);
     for(let i = 0; i < persons.length; i++){
         tableRow = document.createElement("tr");
-        if(localStorage.getItem("Active User").email == persons[i].email){
-            continue;
-        }
+        // if(localStorage.getItem("Active User").email == persons[i].email){
+        //     continue;
+        // }
         for(let key in persons[i]){
             let tableData = document.createElement("td");
             tableData.innerHTML = persons[i][key];

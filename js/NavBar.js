@@ -1,4 +1,4 @@
-import { Person } from "../person.js";
+import { Person } from "./person.js";
 
 window.addEventListener("load", function () {
     // get the active user if found and set to guest if not

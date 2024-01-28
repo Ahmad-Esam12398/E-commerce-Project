@@ -1,9 +1,7 @@
 // main .js
-// main .js
-import { Product } from "../products module.js";
+import { Product } from "./productsmodule.js";
 import { Person } from "./person.js";
 // debugger;
-
 
 var persons = [
     new Person("Ahmad Esam", "Ahmad.esam1231998@gmail.com", "12345678", "Mahalla-Kubra-qqw", "01015328933", "Admin"),
@@ -148,3 +146,4 @@ let orders = [
     { id: 12, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
 ];
 export {products, persons,orders, originalOrders};
+

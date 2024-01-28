@@ -1,8 +1,8 @@
 
 import { Person } from "./person.js";
 import { products as originalProducts, persons as originalPersons } from "./data.js";
-import { Product } from "../js/products module .js";
-import {orders} from "../js/data.js"
+import { Product } from "./products module.js";
+import {orders} from "./data.js"
 
 if (localStorage.getItem("Persons") == null) {
     let plainPersons = originalPersons.map((item) => item.getPerson());

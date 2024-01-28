@@ -1,6 +1,4 @@
-
-
-
+import { Product } from "./productsmodule.js"
 let SwapSort=true
 let OrderPerSeller=[]
 let SellerProduct=[]

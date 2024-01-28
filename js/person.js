@@ -1,5 +1,5 @@
 class Person {
-    static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 18;
+    static lastID = localStorage.getItem("lastIDPerson") ? +(localStorage.getItem("lastIDPerson")) : 0;
     #id; #name; #email; #password; #address; #phone; #role;
     constructor(_name, _email, _password, _address, _phone, _role) {
         // debugger;

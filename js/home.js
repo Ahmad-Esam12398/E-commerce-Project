@@ -1,4 +1,4 @@
-import { products } from "../data.js";
+import { products } from "./data.js";
 // add to cart functions from Bothina
 const listCard = document.querySelector('.listCard');
 const total = document.querySelector('.total');
