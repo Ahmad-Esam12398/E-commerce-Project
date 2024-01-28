@@ -1,4 +1,4 @@
-import {  persons } from "../data.js";
+import {  persons } from "./data.js";
 // Load Array of users
 if (localStorage.getItem("Persons")==null) {
     var Persons =[];
