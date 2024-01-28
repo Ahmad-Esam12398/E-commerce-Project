@@ -30,6 +30,9 @@
 
 <body>
     <div class="container-fluid">
+        <button class="btn fs-4 text-center" id="UpButton" title="Go to top"><i
+                class="fa-solid fa-arrow-up"></i></button>
+
         <div class="row">
             <div class="firstphoto">
                 <!-- NavBar -->
@@ -58,14 +61,14 @@
                                 <!-- Varies depends on the active user -->
                                 <!-- guest -->
                                 <li id="Guest" class="d-none nav-item mx-2">
-                                    <a class="nav-link" href="login.html"><i class="fa-solid fw-light fa-user"></i></a>
+                                    <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
                                 </li>
                                 <!-- customer -->
-                                <li id="Customer" class="nav-item dropdown d-none nav-item ms-2">
+                                <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
                                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4 text-warning fw-light fa-solid fa-user"></i></a>
+                                        <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
                                     </button>
-                                    <ul class="dropdown-menu ">
+                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                         <li>
                                             <p style="font-size: small;"
                                                 class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -82,11 +85,11 @@
                                     </ul>
                                 </li>
                                 <!-- admin -->
-                                <li id="Admin" class="nav-item dropdown d-none nav-item ms-2">
+                                <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
                                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4 text-danger fw-light fa-solid fa-user"></i></a>
+                                        <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
                                     </button>
-                                    <ul class="dropdown-menu">
+                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                         <li>
                                             <p style="font-size: small;"
                                                 class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -105,12 +108,12 @@
                                         <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                                     </ul>
                                 </li>
-                                <!-- sell   er -->
-                                <li id="Seller" class="nav-item dropdown d-none nav-item ms-2">
+                                <!-- seller -->
+                                <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
                                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4 text-primary fw-light fa-solid fa-user"></i></a>
+                                        <i class="mt-1 fs-4 text-successs fa-solid fa-user"></i></a>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu">
+                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                         <li>
                                             <p style="font-size: small;"
                                                 class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -167,7 +170,8 @@
                         </div>
                         <div class="col-12 col-sm-8 col-md-7 col-lg-6 text-light mt-3">
                             <h1>Make Yourself At Home</h1>
-                            <p class="text-break fw-light mt-4">Vestibulum, diam vulputate amet cras in diam quis turpis curabitur
+                            <p class="text-break fw-light mt-4">Vestibulum, diam vulputate amet cras in diam quis turpis
+                                curabitur
                                 tellus
                                 aliquet tellus iaculis tempus,
                                 sollicitudin massa duis eleifend egestas turpis sit etiam commodo viverra lacinia ipsum
@@ -182,17 +186,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Social Icons -->
                 <div class="Socials mt-3 pt-5 text-white text-end">
-                    <a href="https://www.instagram.com/"> <i
-                            class="fs-4 mx-3 mt-0 fa-brands fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/"> <i
-                            class="fs-4 mx-3 mt-0 fa-brands fa-youtube"></i></a>
-                    <a href="https://www.x.com/"> <i
-                            class="fs-4 mx-3 mt-0 fa-brands fa-square-x-twitter"></i></a>
-                    <a href="https://www.facebook.com/"> <i
-                            class="fs-4 mt-0 mx-3 me-5 fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/"> <i class="fs-4 mx-3 mt-0 fa-brands fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/"> <i class="fs-4 mx-3 mt-0 fa-brands fa-youtube"></i></a>
+                    <a href="https://www.x.com/"> <i class="fs-4 mx-3 mt-0 fa-brands fa-square-x-twitter"></i></a>
+                    <a href="https://www.facebook.com/"> <i class="fs-4 mt-0 mx-3 me-5 fa-brands fa-facebook"></i></a>
                 </div>
             </div>
         </div>
@@ -519,8 +519,6 @@
                                 id="subscribeButton" style="height:50px;" type="submit">
                                 Subscribe
                             </button>
-                            <!-- <input class="shopButton col-12 fw-normal col-sm-auto px-5" id="subscribeButton"
-                                style="height:50px;" type="submit" value="Subscribe"> -->
                             <p class="text-secondary text-nowrap ms-sm-3 col-12">Cras interdum lectus velit nibh
                                 senectus fringilla
                                 ut.
@@ -528,9 +526,20 @@
                         </form>
                     </div>
                 </div>
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <img src="images/kayuu-logo-dark.svg" style="width: 90px;" class="rounded me-2" alt="...">
+                            <strong class="me-auto"></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Thanks for contacting us! We will be in touch with you shortly.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <!-- Footer -->
         <div class="row">
             <footer id="Footer">
