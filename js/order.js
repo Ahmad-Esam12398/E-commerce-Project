@@ -1,4 +1,4 @@
-import { Product } from "./productsmodule.js"
+
 let SwapSort=true
 let OrderPerSeller=[]
 let SellerProduct=[]
@@ -55,7 +55,6 @@ console.log(separatedOrders)
 
 function GetSellerProduct() {   
     let SellerId = activeUser.id        //get Seller Product 
-    
     let SellerProducts = products.filter(item => item.sellerID == SellerId)
     return SellerProducts
 }
@@ -69,7 +68,7 @@ separatedOrders.forEach(order => {
         }
     });
 });
-
+console.log(OrderPerSeller)
 let modifiedOrder = [];
 
 OrderPerSeller.forEach(order => {

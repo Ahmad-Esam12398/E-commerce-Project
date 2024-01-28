@@ -1,7 +1,7 @@
 
 import { Person } from "./person.js";
 import { products as originalProducts, persons as originalPersons } from "./data.js";
-import { Product } from "./products module.js";
+import { Product } from "./productsmodule.js"
 import {orders} from "./data.js"
 
 if (localStorage.getItem("Persons") == null) {
@@ -78,7 +78,8 @@ btn_show_sidebar.addEventListener("click", function () {
 /*---------------------------------------------Get Seller Product to show in table--------------------------------------------------------*/
 
 /*get seller information from persons*/
-let activeUser = persons[5]
+let activeUser = Json.parse(localStorage.getItem("Active User"))
+//let activeUser=persons[4]
 console.log(activeUser.id);
 
 localStorage.setItem("activeuser", JSON.stringify(activeUser));
