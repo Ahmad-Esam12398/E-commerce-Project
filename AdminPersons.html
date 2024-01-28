@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="mb-3 form-floating input-group">
-                        <input type="email" class="form-control inputs w-75" id="floatingEmail" placeholder="Person E-mail" min="0" required>
+                        <input type="email" class="form-control inputs w-75" id="floatingEmail" placeholder="Person E-mail" min="0" required pattern="^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$">
                         <label for="floatingEmail">Person E-mail</label>
                         <!-- <span class="input-group-text" id="basic-addon2">EGP</span> -->
                         <div class="valid-feedback">
@@ -233,13 +233,13 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control w-75 inputs" id="floatingPhone" placeholder="Phone Number" required pattern="^[0-9]{11}$">
+                        <input type="text" class="form-control w-75 inputs" id="floatingPhone" placeholder="Phone Number" required pattern="^(010|011|012|015)[0-9]{8}$">
                         <label for="floatingPhone">Phone Number </label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Phone Number must be 11 digits.
+                            Phone Number must be 11 digits and start with 010|011|012|015.
                         </div>
                     </div>
                     <div class="form-floating mb-3">

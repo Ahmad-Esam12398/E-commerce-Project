@@ -2,6 +2,7 @@
 import { Product } from "./productsmodule.js";
 import { Person } from "./person.js";
 // debugger;
+
 var persons = [
     new Person("Ahmad Esam", "Ahmad.esam1231998@gmail.com", "12345678", "Mahalla-Kubra-qqw", "01015328933", "Admin"),
     new Person("AbdUllah Aiman", "Abdallah_aiman122@gmail.com", "12345678", "Mahalla-Kubra-q11", "01128461703", "Customer"),
@@ -31,6 +32,8 @@ var products = [
     new Product('Wooden Bath Room Stool', 220, 15, 'Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis proident cupiditate habitant assumenda. Pariatur minus nibh necessitatibus sociis minim, consectetur dapibus.', 'images/wooden-stool.png', persons[6].id, 'Bathroom', 'Home / Bathroom / Wooden Bath Room Stool', 'Bathroom'),
     new Product('Wooden Console Table', 120 , 8, 'Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.', 'images/wooden-console-table-.png', persons[5].id, 'Bedroom', 'Home / Home Office / Wooden Console Table', ' Bedroom, Home Office'),
 ];
+
+
 
 
 let orders = [
@@ -146,4 +149,3 @@ let orders = [
     { id: 12, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
 ];
 export {products, persons,orders, originalOrders};
-
