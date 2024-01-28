@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet"  href="./css/newe.css">
+        <link rel="stylesheet"  href="./css/Footer.css">  
+       
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!-- sidebar -->
+            <div class="side-left  pl-2 col-lg-2 " id="sidebar" >
+                <nav class=" mx-auto">
+                    <div class="sidebar-header">
+                        <div class="logo py-4 ">
+                            <img src="./images/kayuu-logo-dark.svg" class="w-50 ms-3  ">
+                        </div>   
+                    </div>
+                    <div class="nav flex-column" id="nav-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link nav-item-overload text-left sidetab" id="nav-product-tab" href="./SellerProduct.html">
+                            <i class="fas fa-shopping-cart card-icon "></i>
+                            <span class="text-dark">Product</span>
+                        </a>
+                        <a class="nav-link nav-item-overload text-left sidetab" id="nav-order-tab" href="./order.html">
+                            <i class="fas fa-shopping-bag card-icon"></i>
+                            <span class="text-dark">Order</span>
+                        </a>
+                        <a class="nav-link nav-item-overload text-left sidetab" id="nav-home-tab" href="./Statstics.html">
+                            <i class="fa-solid fa-chart-simple card-icon"></i>
+                            <span class="text-dark">Statstics</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- main part -->
+            <div class="main-part  min-vh-100 px-0 col-dm-12 col-lg-10 "id="content">
+                <div id="NavContainer">
+
+                </div>
+                <nav class="navbar navbar-expand  main-nav">
+                    <button type="button"   class="d-lg-inline-block d-none btn-collapse-sidebar d-none" >
+                        <i class="fa-solid fa-chevron-left d-block    text-dark   "></i>
+                    </button>
+                    <div class=" navbar-collapse main-nav-icons justify-content-md-center justify-content-center mr-4 " id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link mr-3" href="home.html">
+                                    <i class="fa-solid fa-house fas"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mr-3" href="SellerProfile.html" id="seller-profile">
+                                    <i class="fas fa-user" ></i>
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link notification  mr-3" href="#" data-bs-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">1</span>
+                                </a> 
+                                    <div class="btn-group">
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">You logged into your page</a></li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-bars d-inline-block d-lg-none ml-auto more-button text-dark " id="toggle-sidebar"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                    <div class="tab-content" id="nav-tabContent">
+            
+
+                                    <!-- Modal -->
+                            <div class="Order">
+                                <table class="table align-top table-hover" id="order-table">
+                                </table>
+                                
+                            </div>
+                            <span  class="floatingTable"><i class="fa fa-table" aria-hidden="true"></i></span>
+                    </div>
+                </p>
+            </div>    
+        </div>
+        <footer id="Footer">
+            <div id="FooterTop" class="row">
+                <div class="col-1"></div>
+                <div id="ContactInfo" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
+                    <img style="width: 150px;" src="images/kayuu-logo-white.svg" alt="">
+                    <div class="mt-5">
+                        <div class="mt-2">3538 Torrance Blvd, Torrance, CA 90503, USA</div>
+                        <div class="mt-2">+20 101 234 5678</div>
+                        <div class="mt-2">info@example.com</div>
+                        <div class="mt-2">Visit Our Store</div>
+                    </div>
+                </div>
+                <div id="UsefulLinks" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
+                    <p class="fs-5 fw-bold">Useful Links</p>
+                    <div class="mt-4">
+                        <div class="mt-2"><a href="home.html">Home</a> </div>
+                        <div class="mt-2"><a href="products.html">Products</a> </div>
+                        <div class="mt-2"><a href="products.html">Rooms</a> </div>
+                        <div class="mt-2"><a href="#Footer">About Us</a> </div>
+                        <div class="mt-2"><a href="#Footer">Contact Us</a> </div>
+                    </div>
+                </div>
+                <div id="Rooms" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
+                    <p class="fs-5 fw-bold">Rooms</p>
+                    <div class="mt-4">
+                        <div class="mt-2"><a href="home.html"> Living Room</a></div>
+                        <div class="mt-2"><a href="products.html">Bedroom</a> </div>
+                        <div class="mt-2"><a href="products.html">Kitchen</a> </div>
+                        <div class="mt-2"><a href="#Footer"> Bathroom</a> </div>
+                        <div class="mt-2"><a href="#Footer"> Home Office</a> </div>
+                    </div>
+                </div>
+                <div id="StayInTouch" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
+                    <p class="fs-5 fw-bold">Stay In Touch</p>
+                    <p class="col-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="Socials Footer input-group mt-3">
+                        <a href="https://www.instagram.com/"> <i
+                                class="input-group-text me-1 fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/"> <i class="input-group-text me-1 fa-brands fa-youtube"></i></a>
+                        <a href="https://www.x.com/"> <i
+                                class="input-group-text me-1 fa-brands fa-square-x-twitter"></i></a>
+                        <a href="https://www.facebook.com/"> <i class="input-group-text fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="col-12" style="height: 1px;"></div>
+            <div id="FooterBottom" class="row">
+                <div class="mt-3 d-none d-md-block"></div>
+                <div class="mt-3 col-12 text-center col-sm-4">Copyright &copy; 2024 Online Furniture Store</div>
+                <div class="mt-0 mt-md-3 col col-sm-1"></div>
+                <div class="mt-3 col-8 text-end col-sm-6">Powered by Online Furniture Store</div>
+                <div class="mt-3 col"></div>
+    
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="./js/order.js" type="module"></script>
+    <script>
+    
+</script>
+    </script>
+</body>
+</html>
