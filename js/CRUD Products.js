@@ -31,6 +31,9 @@ function createTableProducts(){
     let tableRow = document.createElement("tr");
     for(let key in products[0]){
         let tableHeadData = document.createElement("th");
+        if(key == "categoryPath" || key == "otherCategory" || key == "description"){
+            continue;
+        }
         tableHeadData.innerHTML = key;
         tableRow.appendChild(tableHeadData);
     }
@@ -42,6 +45,9 @@ function createTableProducts(){
     for(let i = 0; i < products.length; i++){
         tableRow = document.createElement("tr");
         for(let key in products[i]){
+            if(key == "categoryPath" || key == "otherCategory" || key == "description"){
+                continue;
+            }
             if(key == "image"){
                 let img = document.createElement("img");
                 img.src = products[i].image;
@@ -95,10 +101,15 @@ function AddButton(){
     addButton.setAttribute("data-bs-target", "#staticBackdrop");
     addButton.onclick = getOptions;
     addButton.addEventListener("click", function(){
+        document.forms[0].classList.remove("was-validated");
         operation = "add";
         let button = document.querySelectorAll("button[type='submit']")[0];
         // console.log(button);
         button.innerHTML = "Add";
+        let inputs = document.querySelectorAll(".inputs");
+        for(let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
     });
     lowerTable.appendChild(addButton);
 }

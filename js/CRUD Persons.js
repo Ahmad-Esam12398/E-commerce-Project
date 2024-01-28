@@ -96,6 +96,7 @@ function AddButton(){
 }
 let uniqueEmails = new Set();
 let uniquePhoneNumbers = new Set();
+
 function addPersonRow() {
     let name = document.getElementById("floatingName").value;
     let email = document.getElementById("floatingEmail").value;
@@ -108,10 +109,12 @@ function addPersonRow() {
         uniquePhoneNumbers.add(person.phone);
     })
     if(uniqueEmails.has(email.toLowerCase())){
+        resetValidation();
         alert("Email already exists");
         return;
     }
     if(uniquePhoneNumbers.has(phone)){
+        resetValidation();
         alert("Phone number already exists");
         return;
     }
@@ -310,3 +313,12 @@ function resetValidation(){
 }
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);
+//Show password
+document.getElementById("ShowPassword").addEventListener("click", function () {
+    var x = document.getElementById("floatingPassword");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+});
