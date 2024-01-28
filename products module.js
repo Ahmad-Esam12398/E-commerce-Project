@@ -1,14 +1,17 @@
 class Product{
-    static lastID = 0;
-    #id; #name; #price; #quantity; #description; #image; #sellerID;
-    constructor(name, price, quantity, description, image, sellerID){
+    static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 0;
+    #id; #name; #price; #quantity; #description; #image; #sellerID; #category;
+    constructor(name, price, quantity, description, image, sellerID, category){
+        // debugger;
         this.#id = ++Product.lastID;
+        localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.image = image;
         this.sellerID = sellerID;
+        this.category = category;
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -58,6 +61,18 @@ class Product{
             this.#sellerID = +_sellerID;
         }
     }
+    set category(_category){
+        const validRooms = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
+        if(validRooms.includes(_category)){
+            this.#category = _category;
+        }
+        else{
+            this.#category = 'Other';
+        }
+    }
+    get category(){
+        return this.#category;
+    }
     get id(){
         return this.#id;
     }
@@ -87,16 +102,18 @@ class Product{
             quantity: this.#quantity,
             description: this.#description,
             image: this.#image,
-            sellerID: this.#sellerID
+            sellerID: this.#sellerID,
+            category: this.#category
         }
     }
-    setProduct(name, price, quantity, description, image, sellerID){
+    setProduct(name, price, quantity, description, image, sellerID, category){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.image = image;
         this.sellerID = sellerID;
+        this.category = category;
     }
 }
 export { Product };

@@ -1,9 +1,10 @@
 class Product {
-    static lastID = 1;
+    static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 18;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath;
 
     constructor(name, price, quantity, description, image, sellerID, category, categorypath) {
         this.#id = Product.lastID++;
+        localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;
         this.price = price;
         this.quantity = +quantity;
@@ -12,14 +13,6 @@ class Product {
         this.category = category;
         this.sellerID = +sellerID;
         this.categorypath = categorypath;
-    }
-
-    set id(_id) {
-        if (_id < 0) {
-            this.#id = 0;
-        } else {
-            this.#id = _id;
-        }
     }
 
     set quantity(_quantity) {
@@ -71,10 +64,11 @@ class Product {
     }
 
     set category(_category) {
-        if (_category.trim() == "") {
-            this.#category = "No category";
+        const validCategories = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet'];
+        if (validCategories.includes(_category)) {
+            this.#category = _category;
         } else {
-            this.#category = _category.trim();
+            this.#category = "No Category";
         }
     }
 
@@ -143,7 +137,15 @@ class Product {
             categorypath: this.categorypath,
         };
     }
-
+    setProduct(_name, _price, _quantity, _description, _image, _sellerID, _category){
+        this.name = _name;
+        this.price = _price;
+        this.quantity = _quantity;
+        this. description = _description;
+        this.image = _image;
+        this.sellerID = _sellerID;
+        this.category = _category;
+    }
     addClickEvent(callback) {
         const productDiv = document.getElementById(`product-${this.#id}`);
         if (productDiv) {
@@ -153,7 +155,6 @@ class Product {
         }
     }
 }
-
 export { Product };
 
 
