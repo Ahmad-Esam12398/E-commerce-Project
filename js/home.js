@@ -217,25 +217,19 @@ document.querySelector("form").addEventListener("submit", function (e) {
 // Get the button
 let mybutton = document.getElementById("UpButton");
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function () { scrollFunction() };
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+// When the user scrolls down 30px from the top of the document, show the button
+window.onscroll = function () {
+    if (document.documentElement.scrollTop > 30) {
         mybutton.style.display = "block";
     } else {
         mybutton.style.display = "none";
     }
-}
+};
 
 // When the user clicks on the button, scroll to the top of the document
 document.getElementById("UpButton").addEventListener("click", function () {
-    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 });
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-
-// const toastElList = document.querySelectorAll('.toast');
-// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option));

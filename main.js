@@ -1,4 +1,4 @@
-import { Product } from "./productsmodule.js";
+import { Product } from "./products module.js";
 import { Person } from "./person.js";
 var products = [
     new Product('Bathroom Golden Ring Mirror', 124.25, 15, 'Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.', 'images/bathroom-circle-mirror.png', 1, 'Bathroom', 'Home / Living Room / Chair / Modern Emerald Fabric Chair', 'Chair, Living Room'),
