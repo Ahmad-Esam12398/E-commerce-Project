@@ -1,4 +1,5 @@
-import { Product } from "./productsmodule.js"
+
+
 let SwapSort=true
 let OrderPerSeller=[]
 let SellerProduct=[]
@@ -55,7 +56,6 @@ console.log(separatedOrders)
 
 function GetSellerProduct() {   
     let SellerId = activeUser.id        //get Seller Product 
-    
     let SellerProducts = products.filter(item => item.sellerID == SellerId)
     return SellerProducts
 }
@@ -69,7 +69,7 @@ separatedOrders.forEach(order => {
         }
     });
 });
-
+console.log(OrderPerSeller)
 let modifiedOrder = [];
 
 OrderPerSeller.forEach(order => {
@@ -234,6 +234,43 @@ TableIcon.addEventListener("click",function(){
     drawTable(modifiedOrder, SelectedTable, true);
     TableIcon.style.display="none"
 })
+/*-----------------------------------------------------------Entry---------------------------------------------------- */
+let SelectedEntry=document.getElementById("entry")
+                SelectedEntry.addEventListener("change", ShowEntry)
+                function ShowEntry () {
+                    let size=0
+                    if(SelectedEntry.value=="Full"){
+                        size=modifiedOrder.length
+                    }
+                    else{
+                        size = parseInt(SelectedEntry.value)
+                    }
+                    let ShownArrayEntry = []
+                    for (let i = 0; i < size; i++) {
+                        ShownArrayEntry.push( modifiedOrder[i]);
+                    }
+                    drawTable(ShownArrayEntry, SelectedTable, true);
+            
+                }
+/*-----------------------------------------------------------Search---------------------------------------------------- */
+let SearchedProduct = document.getElementsByClassName("search-input")[0]
+SearchedProduct.addEventListener("keyup", function () {
+    let inputValue = SearchedProduct.value.toLowerCase();
+    let filterProduct = [];
+    if (inputValue.trim() !== "") {
+        filterProduct = modifiedOrder.filter(function (item) {
+            if (item.productName.toLowerCase().includes(inputValue) || item.status.toLowerCase().includes(inputValue)) {
+                return item;
+            }
+        });
+    }
+    else {
+        filterProduct = modifiedOrder
+    }
+    console.log(filterProduct)
+    drawTable(filterProduct, SelectedTable, true);
+});
+
 /*-----------------------------------------------------------Statistics---------------------------------------------------- */
 let orderedProduct = [];
 let repeated = [];
@@ -253,15 +290,9 @@ for (let i = 0; i < modifiedOrder.length ; i++) {
     repeated.push(modifiedOrder[i].productName);
 }
 
-
-
-
-
-
 console.log(orderedProduct)
 let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
                               .reduce((total, order) => total + order.TotalPrice-50,0)   //assume 50$ for each poduct for expense(transport+paltfrom fee)
-
                     
     let LessOrder=[]
     let found=false
@@ -303,12 +334,5 @@ let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
         }
 
             console.log(LessOrder.map(item=>item.productname))
-        
-        
-        
-    
-    
-    
-    console.log(LessOrder)
-        console.log(OrderStat)
+
 localStorage.setItem("OrderStat",JSON.stringify(OrderStat))

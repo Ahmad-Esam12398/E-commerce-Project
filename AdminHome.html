@@ -50,19 +50,22 @@
                         <a class="nav-link" href="products.html">Products</a>
                     </li>
                     <li class="nav-item col-auto ms-2">
+                        <a class="nav-link" href="#Testimonials">About Us</a>
+                    </li>
+                    <li class="nav-item col-auto ms-2">
                         <a class="nav-link" href="#Footer">Contact Us</a>
                     </li>
                     <!-- Varies depends on the active user -->
                     <!-- guest -->
                     <li id="Guest" class="d-none nav-item mx-2">
-                        <a class="nav-link" href="login.html"><i class="fa-solid fw-light fa-user"></i></a>
+                        <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
                     </li>
                     <!-- customer -->
-                    <li id="Customer" class="nav-item dropdown d-none nav-item ms-2">
+                    <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
                         <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mt-1 fs-4 text-warning fw-light fa-solid fa-user"></i></a>
+                            <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
                         </button>
-                        <ul class="dropdown-menu ">
+                        <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -79,11 +82,11 @@
                         </ul>
                     </li>
                     <!-- admin -->
-                    <li id="Admin" class="nav-item dropdown d-none nav-item ms-2">
+                    <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
                         <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mt-1 fs-4 text-danger fw-light fa-solid fa-user"></i></a>
+                            <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -103,11 +106,11 @@
                         </ul>
                     </li>
                     <!-- seller -->
-                    <li id="Seller" class="nav-item dropdown d-none nav-item ms-2">
+                    <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
                         <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mt-1 fs-4 text-primary fw-light fa-solid fa-user"></i></a>
+                            <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu">
+                        <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
@@ -118,7 +121,7 @@
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="#">Seller Dashboard
-                                    <i class="text-primary fa-solid fa-chart-simple"></i></a>
+                                    <i class="text-success fa-solid fa-chart-simple"></i></a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -126,11 +129,13 @@
                             <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="checkout.html"><i class="fa-solid fa-cart-shopping"></i></a>
-                    </li>
                 </ul>
             </div>
+            <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+                aria-controls="staticBackdrop">
+                <span class="mb-5 ms-4 cardquantity">0</span>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>
         </div>
     </nav>
     <hr>

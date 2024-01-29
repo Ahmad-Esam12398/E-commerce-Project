@@ -56,7 +56,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mr-3" href="SellerProfile.html" id="seller-profile">
+                                <a class="nav-link mr-3" href="CustomerProfile.html" id="seller-profile">
                                     <i class="fas fa-user" ></i>
                                 </a>
                             </li>
@@ -80,7 +80,31 @@
                     <div class="tab-content" id="nav-tabContent">
             
 
-                                    <!-- Modal -->
+                       
+                        <div class="row mt-5 mx-auto">
+                            
+                            
+                            <!-- Entry -->
+                            <div class="col-md-6">
+                                <div class="table-entry text-md-right mt-md-0 mt-3">
+                                    <span>Row Count</span>
+                                    <select id="entry" class="form-control">
+                                        <option value="2">2</option>
+                                        <option value="4">4</option>
+                                        <option value="Full">Full</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Search -->
+                            <div class="col-md-6 mx-auto ml-5">
+                                <div class="search-container">
+                                    <input type="text" class="search-input form-control" placeholder="Search for name or status">
+                                    <button class="search-button btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            
+                        </div>
                             <div class="Order">
                                 <table class="table align-top table-hover" id="order-table">
                                 </table>

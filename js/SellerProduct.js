@@ -1,7 +1,7 @@
 
 import { Person } from "./person.js";
 import { products as originalProducts, persons as originalPersons } from "./data.js";
-import { Product } from "./products module.js";
+import { Product } from "./productsmodule.js"
 import {orders} from "./data.js"
 
 if (localStorage.getItem("Persons") == null) {
@@ -41,6 +41,7 @@ let ProductPrice = document.getElementById("floatingprice")
 let ProductQuantity = document.getElementById("floatingQuantity")
 let ProductCatagory = document.getElementById("floatingcatagory")
 let ProductDescription = document.getElementById("floatingdescription")
+let ProductImage = document.getElementById("floatingImage")
 let CloseButton = document.getElementById("close")
 let CloseIcon = document.getElementsByClassName("btn-close")[0]
 let DeleteBtn = document.getElementById("delete")
@@ -78,7 +79,8 @@ btn_show_sidebar.addEventListener("click", function () {
 /*---------------------------------------------Get Seller Product to show in table--------------------------------------------------------*/
 
 /*get seller information from persons*/
-let activeUser = persons[5]
+let activeUser = JSON.parse(localStorage.getItem("Active User"))
+// let activeUser=persons[4]
 console.log(activeUser.id);
 
 localStorage.setItem("activeuser", JSON.stringify(activeUser));
@@ -105,11 +107,11 @@ function drawTable(_array, Parent) {
         Parent.innerHTML = "";
         let thead = document.createElement("thead");
         let tbody = document.createElement("tbody");
-        drawHeaderRow(_array, thead, true, "description", "sellerID","categorypath");        // draw header of table
+        drawHeaderRow(_array, thead, true, "description", "sellerID","categoryPath","otherCategory");        // draw header of table
         Parent.appendChild(thead);
         for (let i = 0; i < _array.length; i++) {
             let row = document.createElement("tr");
-            drawRow(_array, i, row, true, "description", "sellerID","categorypath");             // draw each Row of table
+            drawRow(_array, i, row, true, "description", "sellerID","categoryPath","otherCategory");             // draw each Row of table
             tbody.appendChild(row);
         }
         Parent.appendChild(tbody);
@@ -191,14 +193,15 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
 /* -----------------------------------------------make crud operation on product(Create-Update-Delete)---------------------------*/
 
 /*------------------Toggle between Create and Update---------- */
-stbBtn.addEventListener("click", function (event) {
+stbBtn.addEventListener("click", function (event) {                    //here create
     let OutOfForum = false;
     if (!IsEdit) {
         if (validatename(ProductName.value, ProductName) ||
             validatename(ProductCatagory.value, ProductCatagory) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
-            validatDescription(ProductDescription.value, ProductDescription)
+            validatDescription(ProductDescription.value, ProductDescription)||
+            validateImagePath(ProductImage.value,ProductImage)
         ) {
             event.preventDefault();
         } else {
@@ -221,23 +224,34 @@ stbBtn.addEventListener("click", function (event) {
             drawTable(GetSellerProduct(), SelectedTable, true);
             $('#form').modal('hide');
         }
-    } else {
-        SetProduct(products[CurrentIndex]);
-        notifaction("updated", products[CurrentIndex].name)
-        localStorage.setItem('products', JSON.stringify(products));
-        drawTable(GetSellerProduct(), SelectedTable, true);
-        $('#form').modal('hide');
-        deleteInput(ProductName, ProductCatagory, ProductPrice, ProductDescription, ProductQuantity);
-        IsEdit = false;
+    } else {                                                        //here Update
+        if (validatename(ProductName.value, ProductName) ||
+            validatename(ProductCatagory.value, ProductCatagory) ||
+            validatePrice(ProductPrice.value, ProductPrice) ||
+            validateQuantity(ProductQuantity.value, ProductQuantity) ||
+            validatDescription(ProductDescription.value, ProductDescription)||
+            validateImagePath(ProductImage.value,ProductImage)
+        ) {
+            event.preventDefault();
+        } else {
+            SetProduct(products[CurrentIndex]);
+            notifaction("updated", products[CurrentIndex].name);
+            localStorage.setItem('products', JSON.stringify(products));
+            drawTable(GetSellerProduct(), SelectedTable, true);
+            $('#form').modal('hide');
+            deleteInput(ProductName, ProductCatagory, ProductPrice, ProductDescription, ProductQuantity);
+            IsEdit = false;
+        }
     }
 });
-/*----------------------------------------Make Validition------------------------*/ 
+/*----------------------------------------Make Validition-----------------------------------------------------------------*/ 
 function SetProduct(pro) {
     pro.name = document.getElementById("floatingname").value;
     pro.category = document.getElementById("floatingcatagory").value;
     pro.price = document.getElementById("floatingprice").value;
     pro.quantity = document.getElementById("floatingQuantity").value;
     pro.description = document.getElementById("floatingdescription").value;
+    pro.image=document.getElementById("floatingImage").value;
     pro.sellerID = activeUser.id;
 }
 
@@ -293,6 +307,20 @@ function validateQuantity(_num, input) {
     }
 }
 
+
+function validateImagePath(text, input) {
+    let descriptionPattern = /^images\/.*\.png$/;
+    if (text.match(descriptionPattern)) {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+        return false;
+    } else {
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        return true;
+    }
+}
+// ProductImage
 /*delete input value after submit*/
 function deleteInput(form) {
     document.getElementById("floatingname").value = "";
@@ -300,6 +328,7 @@ function deleteInput(form) {
     document.getElementById("floatingprice").value = "";
     document.getElementById("floatingQuantity").value = "";
     document.getElementById("floatingdescription").value = "";
+    document.getElementById("floatingImage").value = "";
     form.querySelectorAll('.is-valid, .is-invalid').forEach(input => {
         input.classList.remove('is-valid', 'is-invalid');
     });
@@ -311,7 +340,7 @@ CloseButton.addEventListener("click", function () {
 CloseIcon.addEventListener("click", function () {
     deleteInput(form);
 })
-/*update*/
+/*-------------------------------------------------------------------------update---------------------------------------------------*/
 SelectedTable.addEventListener("click", function (e) {
     stbBtn.value = "Save"
     if (e.target.classList.contains('fa-pen')) {
@@ -323,11 +352,12 @@ SelectedTable.addEventListener("click", function (e) {
         document.getElementById("floatingprice").value = products[CurrentIndex].price
         document.getElementById("floatingQuantity").value = products[CurrentIndex].quantity
         document.getElementById("floatingdescription").value = products[CurrentIndex].description
+        document.getElementById("floatingImage").value = products[CurrentIndex].image
         IsEdit = true
     }
 })
 
-/*--------------------------Delete--------------------------------*/
+/*-----------------------------------------------------------Delete----------------------------------------------------------------------------*/
 SelectedTable.addEventListener("click", function (e) {
     if (e.target.classList.contains('fa-trash')) {
         $('#ConfirmDelete').modal('show');
@@ -359,7 +389,7 @@ function findProductIndexById(id) {
     return -1;
 }
 
-/*--------------------------------Search Table---------------------------------------------------*/
+/*-----------------------------------------------------------Search Table---------------------------------------------------------*/
 SearchedProduct.addEventListener("keyup", function () {
     let inputValue = SearchedProduct.value.toLowerCase();
     let filterProduct = [];
@@ -378,16 +408,24 @@ SearchedProduct.addEventListener("keyup", function () {
     drawTable(filterProduct, SelectedTable, true);
 });
 
-/*-----------------------------------------------------entry for table-------------------------------------------------*/
-SelectedEntry.addEventListener("change", function () {
-    let size = parseInt(SelectedEntry.value)
+/*-----------------------------------------------------entry for table----------------------------------------------------------*/
+SelectedEntry.addEventListener("change", ShowEntry)
+
+    function ShowEntry () {
+    let size=0
+    if(SelectedEntry.value=="Full"){
+        size=SellerProduct.length
+    }
+    else{
+        size = parseInt(SelectedEntry.value)
+    }
     let ShownArrayEntry = []
     for (let i = 0; i < size; i++) {
-        ShownArrayEntry[i] = SellerProduct[i];
+        ShownArrayEntry.push( SellerProduct[i]);
     }
-    console.log(ShownArrayEntry)
+    // console.log(ShownArrayEntry)
     drawTable(ShownArrayEntry, SelectedTable, true);
-})
+}
 
 /*----------------------------------------------------sort table----------------------------------------------------------------*/
 SelectedTable.addEventListener("click", function (e) {
@@ -447,12 +485,10 @@ let Prod_Stats = {
     },
 }
 
-
 let modifiedProdStats = {
     No_Of_Product: Prod_Stats.No_Of_Product,
     productQuantityData: Prod_Stats.each_product_quantity(),
 };
-
 
 localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
 console.log(modifiedProdStats.productQuantityData.map(item => item.productname))
