@@ -272,17 +272,18 @@ function filterTableChecked(criteria){
     for(let i = 0; i < tableRows.length; i++){
         let tableData = tableRows[i].children;
         // console.log(tableData[6].innerHTML);
-        if(tableData[7].innerHTML == criteria){
+        if(tableData[6].innerHTML == criteria){
             tableRows[i].classList.remove("d-none");
         }
     }
 }
 function filterTableUnChecked(criteria){
+    debugger;
     let tableRows = document.getElementsByTagName("tbody")[0].children;
     for(let i = 0; i < tableRows.length; i++){
         let tableData = tableRows[i].children;
         // console.log(tableData[6].innerHTML);
-        if(tableData[7].innerHTML == criteria){
+        if(tableData[6].innerHTML == criteria){
             tableRows[i].classList.add("d-none");
         }
     }
