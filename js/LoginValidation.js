@@ -1,12 +1,12 @@
-import {  persons } from "./data.js";
+import { persons } from "./data.js";
 // Load Array of users
-if (localStorage.getItem("Persons")==null) {
-    var Persons =[];
+if (localStorage.getItem("Persons") == null) {
+    var Persons = [];
     for (let i = 0; i < persons.length; i++) {
         Persons.push(persons[i].getPerson());
     }
-    localStorage.setItem("Persons",JSON.stringify(Persons))
-}else{
+    localStorage.setItem("Persons", JSON.stringify(Persons))
+} else {
     var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
 
@@ -28,6 +28,22 @@ window.addEventListener("load", function () {
         }
         else {
             em = 1
+            document.getElementById("")
+            let userEmail = document.getElementById("email").value;
+            let userIndex = checkEmail(userEmail) - 1;
+            let userpass = usersArr[userIndex].password;
+            let password = document.getElementById("password")
+
+            // user didn't enter the correct password
+            if (password.value != userpass) {
+                p = 0;
+                password.classList.add("is-invalid");
+                password.classList.remove("is-valid");
+            } else {
+                p = 1;
+                password.classList.add("is-valid");
+                password.classList.remove("is-invalid");
+            }
             this.classList.add("is-valid");
             this.classList.remove("is-invalid");
         }

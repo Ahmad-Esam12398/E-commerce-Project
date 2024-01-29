@@ -1,35 +1,42 @@
-
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 }
-body{
+
+body {
     background-color: rgba(245, 245, 245, 0.822);
 }
-.customer{
-  height: 100%;
-   margin: auto;
-   margin-top: 4vh;
-  margin-left: 3vw;
+
+.customer {
+    height: 100%;
+    margin: auto;
+    margin-top: 4vh;
+    margin-left: 3vw;
 }
+
 .invalid-feedback {
     color: red;
 }
+
 .valid-feedback {
     color: green;
 }
-.username{
+
+.username {
     display: grid;
-    grid-template-columns: repeat(3,2fr);
+    grid-template-columns: repeat(3, 2fr);
 }
-.housenumber{
+
+.housenumber {
     display: grid;
-    grid-template-columns: repeat(3,2fr);
+    grid-template-columns: repeat(3, 2fr);
 }
-.city{
+
+.city {
     display: grid;
-    grid-template-columns: repeat(3,2fr);
+    grid-template-columns: repeat(3, 2fr);
 }
+
 hr {
     width: 37vw;
     font-size: 50px;
@@ -37,66 +44,76 @@ hr {
     color: black;
     margin-top: 2vh;
 }
-.form-control{
-  
+
+.form-control {
+
     width: 21vw;
     margin-top: 3vh;
 }
-.flow-control2{
+
+.flow-control2 {
     width: 45vw;
 }
-.form-controlnodes{
+
+.form-controlnodes {
     margin-left: 0.5vw;
     width: 42vw;
     margin-top: 3vh;
 }
-.payment{
+
+.payment {
     border-top: 2px solid black;
     border-bottom: none;
     border-left: none;
     border-right: none;
     width: 37vw;
-     margin-left: 2vw;
-     margin-top: 2vh;
-     background-color:rgba(245, 245, 245, 0.822);
-}
-.table-container {
-    margin-top: 30px;
-    border-radius: 50px; 
-}
-table {
-    border-collapse: collapse;
-    width:40%;
-    margin-left:800px;
-    margin-top: -900px;
-    border: 2px solid rgb(176, 173, 173);
-   
+    margin-left: 2vw;
+    margin-top: 2vh;
+    background-color: rgba(245, 245, 245, 0.822);
 }
 
-th, td {
+.table-container {
+    margin-top: 30px;
+    border-radius: 50px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: 800px;
+    margin-top: -900px;
+    border: 2px solid rgb(176, 173, 173);
+
+}
+
+th,
+td {
     padding: 8px;
     text-align: left;
 }
 
 td {
-    border-top: 1px solid  rgb(176, 173, 173); 
-    border-bottom: 1px solid  rgb(176, 173, 173); 
+    border-top: 1px solid rgb(176, 173, 173);
+    border-bottom: 1px solid rgb(176, 173, 173);
 }
-.btn{
-    margin-top:630px !important;
+
+.btn {
+    margin-top: 750px !important;
     padding: 0.5vw 15vw;
     margin-left: 0.23vw;
     background-color: #EDB932;
     border-radius: none;
-    border: 1px solid #EDB932 ;
+    border: 1px solid #EDB932;
     cursor: pointer;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #EDB932;
     color: white;
     cursor: pointer;
 }
-.popup{
+
+.popup {
     width: 400px;
     background-color: white;
     border-radius: 5px;
@@ -109,27 +126,31 @@ td {
     color: black;
     visibility: hidden;
     transition: transform 0.4s, top 0.4s;
-    z-index: 1000; 
+    z-index: 1000;
 
-    
+
 }
+
 .popup.open-popup {
     visibility: visible;
     top: 80%;
     transform: translate(-50%, -50%) scale(1);
 }
-.popup img{
+
+.popup img {
     width: 100px;
     margin-top: -50px;
     border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.popup h2{
+
+.popup h2 {
     font-size: 38px;
     font-weight: 500;
     margin: 30px 0 10px;
 }
-.popup button{
+
+.popup button {
     width: 100%;
     margin-top: 50px;
     padding: 10px 0;
@@ -138,41 +159,46 @@ td {
     border: none;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.footer1{
+
+.footer1 {
     margin-top: 20px;
     padding: 1vw 1vw;
     width: 100.8%;
 }
-@media screen and (max-width: 576px){
-    nav{
+
+@media screen and (max-width: 576px) {
+    nav {
         width: 100%;
     }
+
     /* .customer{
         width: 80%;
         margin-left: -1vw;
     } */
-    .customerandorder{
+    .customerandorder {
         background-color: white;
         margin-left: 15px !important;
         width: 90% !important;
-        height: 100% ;
- 
+        height: 100%;
+    }
 
-    }
-    .username{
+    .username {
         display: grid;
-        grid-template-columns: repeat(1,2fr);
+        grid-template-columns: repeat(1, 2fr);
     }
-    .housenumber{
+
+    .housenumber {
         display: grid;
-        grid-template-columns: repeat(1,2fr);
+        grid-template-columns: repeat(1, 2fr);
     }
-    .city{
+
+    .city {
         display: grid;
-        grid-template-columns: repeat(1,2fr);
+        grid-template-columns: repeat(1, 2fr);
     }
+
     hr {
         width: 70vw;
         font-size: 50px;
@@ -180,71 +206,86 @@ td {
         color: black;
         margin-top: 2vh;
     }
-    .form-control{
+
+    .form-control {
         width: 80vw;
         margin-top: 3vh;
         margin-left: 1px !important;
     }
-    .form-controlnodes{
+
+    .form-controlnodes {
         margin-left: 1px;
-        width:90vw;
+        width: 90vw;
         margin-top: 3vh;
     }
-    .payment{
+
+    .payment {
         border-top: 2px solid black;
         border-bottom: none;
         border-left: none;
         border-right: none;
         width: 85vw;
-         margin-left: 2vw;
-         margin-top: 2vh;
-         background-color:rgba(245, 245, 245, 0.822);
+        margin-left: 2vw;
+        margin-top: 2vh;
+        background-color: rgba(245, 245, 245, 0.822);
     }
-    .btn{
+
+    .btn {
         padding: 0.5vw 25vw;
         margin-left: -2vw;
         margin-top: -338vw !important;
         background-color: #EDB932;
         border-radius: none;
-        border: 1px solid #EDB932 ;
+        border: 1px solid #EDB932;
         cursor: pointer;
     }
-    .btn:hover{
+
+    .btn:hover {
         background-color: #EDB932;
         color: white;
         cursor: pointer;
     }
-    .footer1{
+
+    .footer1 {
         margin-top: 10vw;
         padding: 1vw 4vw;
         width: 100%;
     }
+
     table {
         border-collapse: collapse;
-        width:80vw !important;
+        width: 80vw !important;
         margin-left: 1vw;
         margin-top: 50px;
-        border: 2px solid rgb(176, 173, 173); 
+        border: 2px solid rgb(176, 173, 173);
     }
-    .flow-control2{
+
+    .flow-control2 {
         width: 85%;
 
     }
-    
+
 }
-@media screen and (min-width: 577px) and (max-width: 1366px){
-    .username{
-        display: grid;
-        grid-template-columns: repeat(1,2fr);
+
+@media screen and (min-width: 577px) and (max-width: 1366px) {
+    body{
+        overflow-x: none;
     }
-    .housenumber{
+    .username {
         display: grid;
-        grid-template-columns: repeat(1,2fr);
+        grid-template-columns: repeat(1, 2fr);
     }
-    .city{
+
+    .housenumber {
         display: grid;
-        grid-template-columns: repeat(1,2fr);
+        grid-template-columns: repeat(1, 2fr);
     }
+
+    .city {
+        display: grid;
+        grid-template-columns: repeat(1, 2fr);
+    }
+
     hr {
         width: 80vw;
         font-size: 50px;
@@ -252,54 +293,61 @@ td {
         color: black;
         margin-top: 2vh;
     }
-    .form-control{
+
+    .form-control {
         width: 55vw;
         margin-top: 3vh;
         margin-left: 1px !important;
     }
-    .form-controlnodes{
+
+    .form-controlnodes {
         margin-left: 0.5vw;
         width: 60vw;
         margin-top: 3vh;
     }
-    .payment{
+
+    .payment {
         border-top: 2px solid black;
         border-bottom: none;
         border-left: none;
         border-right: none;
         width: 60vw;
-         margin-left: 2vw;
-         margin-top: 2vh;
-         background-color:rgba(245, 245, 245, 0.822);
+        margin-left: 2vw;
+        margin-top: 2vh;
+        background-color: rgba(245, 245, 245, 0.822);
     }
-    .btn{
+
+    .btn {
+        border: 5px solid red;
         padding: 0.5vw 25vw;
         margin-left: 1vw;
+        margin-top: 1vh !important;
         background-color: #EDB932;
         border-radius: none;
-        border: 1px solid #EDB932 ;
+        border: 1px solid #EDB932;
         cursor: pointer;
     }
-    .btn:hover{
+
+    .btn:hover {
         background-color: #EDB932;
         color: white;
         cursor: pointer;
     }
-    .footer1{
+
+    .footer1 {
         padding: 1vw 5vw;
     }
-    .flow-control2{
+
+    .flow-control2 {
         width: 100% !important;
 
     }
+
     table {
         border-collapse: collapse;
-        width:60vw !important;
+        width: 60vw !important;
         margin-left: 1vw !important;
         margin-top: 50px;
-        border: 2px solid rgb(176, 173, 173); 
+        border: 2px solid rgb(176, 173, 173);
     }
 }
-
-
-

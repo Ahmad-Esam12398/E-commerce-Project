@@ -199,26 +199,26 @@ window.search = function () {
     }
   });
 }
-
 window.display = function (e) {
   var target = e.target;
   if (target.tagName === 'P' && target.id === 'poption') {
     var categoryName = target.innerText.toLowerCase();
     var productDivs = document.querySelectorAll('.product-details');
+    var found = false;
+
     productDivs.forEach(productDiv => {
       var productCategory = productDiv.querySelector('p').innerText.toLowerCase();
       if (productCategory.includes(categoryName)) {
         productDiv.style.display = "block";
+        found = true;
       } else {
         productDiv.style.display = "none";
       }
     });
+    if (!found) {
+      productDivs.forEach(productDiv => {
+        productDiv.style.display = "block";
+      });
+    }
   }
 }
-
-
-
-
-
-
-
