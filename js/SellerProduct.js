@@ -205,11 +205,13 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
     let OutOfForum = false;
     if (!IsEdit) {
         if (validatename(ProductName.value, ProductName) ||
-            validatename(ProductCatagory.value, ProductCatagory) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
-            validatDescription(ProductDescription.value, ProductDescription) ||
-            validateImagePath(ProductImage.value, ProductImage)
+            validatename(ProductCatagory.value, ProductCatagory) ||
+            validateImagePath(ProductImage.value,ProductImage||
+            validatDescription(ProductDescription.value, ProductDescription)
+            )
+
         ) {
             event.preventDefault();
         } else {
@@ -264,7 +266,7 @@ function SetProduct(pro) {
 }
 
 function validatename(_name, input) {
-    let name = /^[A-Za-z\s]{3,}$/;
+    let name = /^[A-Za-z\s]{4,}$/;
     if (_name.match(name)) {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
@@ -317,7 +319,7 @@ function validateQuantity(_num, input) {
 
 
 function validateImagePath(text, input) {
-    let descriptionPattern = /^images\/.*\.png$/;
+    let descriptionPattern = ".*\.[a-zA-Z]{3,4}$";
     if (text.match(descriptionPattern)) {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
@@ -353,7 +355,8 @@ SelectedTable.addEventListener("click", function (e) {
     stbBtn.value = "Save"
     if (e.target.classList.contains('fa-pen')) {
         $('#form').modal('show')
-        CurrentIndex = parseInt(e.target.parentNode.parentNode.parentNode.firstChild.innerHTML) - 1
+        let CurrentId = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
+        CurrentIndex = findProductIndexById(CurrentId)
         console.log(products[CurrentIndex])
         document.getElementById("floatingname").value = products[CurrentIndex].name
         document.getElementById("floatingcatagory").value = products[CurrentIndex].category
