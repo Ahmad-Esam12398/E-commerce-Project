@@ -1,3 +1,7 @@
+// import { createTableOrders } from "./deleteme.js";
+
+// // import { createTableOrders } from "./AdminOrders";
+// createTableOrders();
 let activeUser = JSON.parse(localStorage.getItem("Active User"));
 
 let custname = document.getElementById("customerName");

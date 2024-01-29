@@ -1,5 +1,5 @@
-import { persons } from "../data.js";
-import { Person } from "../person.js";
+import { persons } from "../js/data.js";
+import { Person } from "../js/person.js";
 
 if (localStorage.getItem("Persons")==null) {
     var Persons =[];
