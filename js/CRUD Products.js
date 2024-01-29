@@ -12,6 +12,7 @@ if(localStorage.getItem("Persons") == null){
     // console.log(JSON.parse(localStorage.getItem("Persons")));
 }
 if(localStorage.getItem("products") == null){
+    debugger;
     let plainProducts = originalProducts.map((item)=>item.getProduct());
     localStorage.setItem("products", JSON.stringify(plainProducts));
 }
@@ -149,10 +150,11 @@ let id = -1;
 function editRow(e) {
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
+    debugger;
     let rowChildrenLength = rowChildren.length;
     let rowChildrenValues = [];
     for(let i = 0; i < rowChildrenLength - 1; i++) {
-        if(i == 5){
+        if(i == 4){
             let img = rowChildren[i].children[0];
             rowChildrenValues.push(img.src);
         }

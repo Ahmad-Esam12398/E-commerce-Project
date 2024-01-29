@@ -16,7 +16,6 @@ if(localStorage.getItem("products") == null){
 }
 let persons = JSON.parse(localStorage.getItem("Persons"));
 let products = JSON.parse(localStorage.getItem("products"));
-
 let noOfProducts = products.length;
 let noOfPersons = persons.length;
 let noOfGoingOrders = originalOrders.length;
@@ -132,3 +131,38 @@ document.getElementById("shipped").innerText = (shipped/originalOrders.length*10
 document.getElementById("shipped").style.width = shipped/originalOrders.length*100 + "%";
 document.getElementById("delivered").innerText = (delivered/originalOrders.length*100).toFixed(2) + "%";
 document.getElementById("delivered").style.width = delivered/originalOrders.length*100 + "%";
+
+// let ordersDates = new Set();
+// originalOrders.forEach(order => { ordersDates.add(order.date.toLocaleDateString())});
+// let dataOrders = {
+//     labels: ['a', 'b', 'c', 'd', 'e'],
+//     datasets: [{
+//         label: 'Orders Demands',
+//         data: [100, 200, 100, 250, 350],
+//         fill: false,
+//         borderColor: 'rgb(75, 192, 192)',
+//         tension: 0.1
+//     }]
+// };
+
+// ctx = document.getElementById('myFourthChart').getContext('2d');
+// let fourthChart = new Chart(ctx, {
+//     type: 'line',
+//     data: dataOrders
+// })
+
+// const config = {
+//   type: 'line',
+//   data: data,
+// };
+// const labels = Utils.months({count: 7});
+// const data = {
+//   labels: labels,
+//   datasets: [{
+//     label: 'Orders Demands',
+//     data: [65, 59, 80, 81, 56, 55, 40],
+//     fill: false,
+//     borderColor: 'rgb(75, 192, 192)',
+//     tension: 0.1
+//   }]
+// };

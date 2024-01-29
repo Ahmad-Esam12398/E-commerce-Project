@@ -24,6 +24,9 @@ let products = JSON.parse(localStorage.getItem("products"));
 function updatePersonsLocalStorage() {
     localStorage.setItem("Persons", JSON.stringify(persons));
 }
+function updateProductsLocalStorage(){
+    localStorage.setItem("products", JSON.stringify(products));
+}
 
 
 

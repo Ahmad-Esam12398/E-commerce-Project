@@ -4,7 +4,8 @@ import { products } from './data.js';
 document.addEventListener('DOMContentLoaded', () => {
 
     function updateProductDetailPage(productDetails) {
-        document.getElementById('product-category').innerText = `${productDetails.categorypath}`;
+        debugger;
+        document.getElementById('product-category').innerText = `${productDetails.categoryPath}`;
         document.getElementById('product-name').innerText = productDetails.name;
         document.getElementById('product-price').innerText = `Price: $${productDetails.price}`;
         document.getElementById('product-description').innerText = ` ${productDetails.description}`;
