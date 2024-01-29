@@ -1,9 +1,10 @@
 class Person {
     static lastID = localStorage.getItem("lastIDPerson") ? +(localStorage.getItem("lastIDPerson")) : 0;
     #id; #name; #email; #password; #address; #phone; #role;
-    constructor(_name, _email, _password, _address, _phone, _role) {
+    constructor(id, _name, _email, _password, _address, _phone, _role) {
         // debugger;
-        this.#id = ++(Person.lastID);
+        // this.#id = ++(Person.lastID);
+        this.id = id;
         localStorage.setItem("lastIDPerson", Person.lastID);
         this.name = _name;
         this.email = _email;
@@ -11,6 +12,9 @@ class Person {
         this.address = _address;
         this.phone = _phone;
         this.role = _role;
+    }
+    set id(_id){
+        this.#id = _id;
     }
     set name(_name) {
         if (_name.trim() == "") {
