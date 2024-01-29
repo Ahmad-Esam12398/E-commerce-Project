@@ -2,7 +2,12 @@
 import { Person } from "./person.js";
 import { products as originalProducts, persons as originalPersons } from "./data.js";
 import { Product } from "./productsmodule.js"
-import {orders} from "./data.js"
+import { orders } from "./data.js"
+// Authentications
+if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
+    alert("You are not authorized to access this page.")
+    window.location.href = "./home.html";
+}
 
 if (localStorage.getItem("Persons") == null) {
     let plainPersons = originalPersons.map((item) => item.getPerson());
@@ -14,7 +19,7 @@ if (localStorage.getItem("products") == null) {
 }
 if (localStorage.getItem("Orders") == null) {
     localStorage.setItem("Orders", JSON.stringify(orders));
-    }
+}
 
 
 let persons = JSON.parse(localStorage.getItem("Persons"));
@@ -110,11 +115,11 @@ function drawTable(_array, Parent) {
         Parent.innerHTML = "";
         let thead = document.createElement("thead");
         let tbody = document.createElement("tbody");
-        drawHeaderRow(_array, thead, true, "description", "sellerID","categoryPath","otherCategory");        // draw header of table
+        drawHeaderRow(_array, thead, true, "description", "sellerID", "categoryPath", "otherCategory");        // draw header of table
         Parent.appendChild(thead);
         for (let i = 0; i < _array.length; i++) {
             let row = document.createElement("tr");
-            drawRow(_array, i, row, true, "description", "sellerID","categoryPath","otherCategory");             // draw each Row of table
+            drawRow(_array, i, row, true, "description", "sellerID", "categoryPath", "otherCategory");             // draw each Row of table
             tbody.appendChild(row);
         }
         Parent.appendChild(tbody);
@@ -154,7 +159,7 @@ function drawHeaderRow(_array, RowParent, DrawOptionColumn, ...excludeColumns) {
     RowParent.appendChild(head_row);
 }
 
-    /*-------------------------------------draw Table Row for product-------------------------------------------------------------*/
+/*-------------------------------------draw Table Row for product-------------------------------------------------------------*/
 function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumns) {
     for (let key in _array[RowIndex]) {
         if (!excludeColumns.includes(key)) {
@@ -189,7 +194,7 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
 }
 
 //  /*------ --------------------------------------------render Table -----------------------------------------------------*/
-                                        drawTable(SellerProduct, SelectedTable, true);
+drawTable(SellerProduct, SelectedTable, true);
 //   /*--------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -203,8 +208,8 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
             validatename(ProductCatagory.value, ProductCatagory) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
-            validatDescription(ProductDescription.value, ProductDescription)||
-            validateImagePath(ProductImage.value,ProductImage)
+            validatDescription(ProductDescription.value, ProductDescription) ||
+            validateImagePath(ProductImage.value, ProductImage)
         ) {
             event.preventDefault();
         } else {
@@ -232,8 +237,8 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
             validatename(ProductCatagory.value, ProductCatagory) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
-            validatDescription(ProductDescription.value, ProductDescription)||
-            validateImagePath(ProductImage.value,ProductImage)
+            validatDescription(ProductDescription.value, ProductDescription) ||
+            validateImagePath(ProductImage.value, ProductImage)
         ) {
             event.preventDefault();
         } else {
@@ -247,14 +252,14 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
         }
     }
 });
-/*----------------------------------------Make Validition-----------------------------------------------------------------*/ 
+/*----------------------------------------Make Validition-----------------------------------------------------------------*/
 function SetProduct(pro) {
     pro.name = document.getElementById("floatingname").value;
     pro.category = document.getElementById("floatingcatagory").value;
     pro.price = document.getElementById("floatingprice").value;
     pro.quantity = document.getElementById("floatingQuantity").value;
     pro.description = document.getElementById("floatingdescription").value;
-    pro.image=document.getElementById("floatingImage").value;
+    pro.image = document.getElementById("floatingImage").value;
     pro.sellerID = activeUser.id;
 }
 
@@ -414,17 +419,17 @@ SearchedProduct.addEventListener("keyup", function () {
 /*-----------------------------------------------------entry for table----------------------------------------------------------*/
 SelectedEntry.addEventListener("change", ShowEntry)
 
-    function ShowEntry () {
-    let size=0
-    if(SelectedEntry.value=="Full"){
-        size=SellerProduct.length
+function ShowEntry() {
+    let size = 0
+    if (SelectedEntry.value == "Full") {
+        size = SellerProduct.length
     }
-    else{
+    else {
         size = parseInt(SelectedEntry.value)
     }
     let ShownArrayEntry = []
     for (let i = 0; i < size; i++) {
-        ShownArrayEntry.push( SellerProduct[i]);
+        ShownArrayEntry.push(SellerProduct[i]);
     }
     // console.log(ShownArrayEntry)
     drawTable(ShownArrayEntry, SelectedTable, true);

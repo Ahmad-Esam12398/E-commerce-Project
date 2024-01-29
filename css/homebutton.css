@@ -1,0 +1,175 @@
+#cartsss {
+    margin-left: -10px !important;
+}
+
+#cartsss .cardquantity {
+    background-color: #efc040;
+    color: white;
+    padding: 0px 5px;
+    border-radius: 30%;
+    position: absolute;
+    font-size: 12px;
+    transform: translateY(-35%);
+}
+
+.card {
+    position: relative;
+    margin-top: 50px;
+    flex-direction: column;
+    /* width: 100%; */
+    border: none !important;
+}
+
+
+.card .total {
+    border: none;
+    color: black;
+    bottom: 80px;
+    right: 60px;
+    position: fixed;
+}
+
+.card .subtotal {
+    border: none;
+    color: black;
+    bottom: 80px;
+    margin-left: 30px;
+    position: fixed;
+}
+
+
+.card .checkbtn {
+    background-color: #efc040;
+    border: none;
+    width: 350px;
+    bottom: 20px;
+    right: 10px;
+    padding: 10px 10px;
+    position: fixed;
+}
+.offcanvas-body{
+    background-color: red;
+}
+.card .checkbtn a {
+    color: black;
+    text-decoration: none;
+}
+
+.card .checkbtn a:hover {
+    color: white;
+}
+
+
+
+.listCard {
+    list-style-type: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    display: block;
+    border: none !important;
+}
+
+.listCard .minus {
+    margin-left: 20px;
+}
+
+.listCard img {
+    width: 60px;
+    height: 60px;
+    margin-left: 2px;
+    margin-top: 0px;
+    position: absolute;
+    margin-bottom: 15px;
+}
+
+.listCard p,
+.listCard h2 {
+    margin: 0;
+}
+
+
+
+.listCard h2 {
+    color: #333;
+    font-size: 12px;
+    margin-left: 100px;
+
+
+}
+
+.listCard p {
+    font-style: italic;
+    margin-left: 290px;
+    margin-top: -30px;
+    position: absolute;
+    margin-bottom: 10px;
+}
+
+.listCard .remove-button {
+    margin-left: 290px;
+    position: absolute;
+    background-color: white;
+    color: #efc040;
+    font-size: 25px;
+    margin-top: -65px;
+    border: none;
+
+}
+
+.listCard .minus {
+    margin-top: 50px;
+    border-radius: 1px;
+    text-align: center;
+    color: gray;
+    border: 1px solid gray;
+    padding: 10px 10px;
+    margin-left: 4px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.listCard .minus:hover {
+    background-color: #efc040;
+}
+
+.listCard .plus:hover {
+    background-color: #efc040;
+}
+
+.listCard .num {
+    margin-top: 50px;
+    border-radius: 1px;
+    text-align: center;
+    color: gray;
+    border: 1px solid gray;
+    padding: 10px 10px;
+    margin-left: -4px;
+
+    cursor: pointer;
+    background-color: white;
+}
+
+.listCard .plusevent {
+    margin-left: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.btn-close {
+    margin-left: 30px !important;
+}
+
+.listCard .plus {
+    margin-top: 50px;
+    border-radius: 1px;
+    text-align: center;
+    color: gray;
+    border: 1px solid gray;
+    padding: 10px 10px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: white
+}

@@ -1,3 +1,8 @@
+// Authentications
+if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
+    alert("You are not authorized to access this page.")
+    window.location.href = "./home.html";
+}
 
 let Wallet=document.getElementsByClassName("wallet")[0]
 let All_product=document.getElementsByClassName("allproduct")[0]
