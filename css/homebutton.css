@@ -20,36 +20,14 @@
     border: none !important;
 }
 
-
-.card .total {
-    border: none;
-    color: black;
-    bottom: 80px;
-    right: 60px;
-    position: fixed;
-}
-
-.card .subtotal {
-    border: none;
-    color: black;
-    bottom: 80px;
-    margin-left: 30px;
-    position: fixed;
-}
-
-
-.card .checkbtn {
-    background-color: #efc040;
-    border: none;
-    width: 350px;
-    bottom: 20px;
+.card-img-bottom .total {
     right: 10px;
-    padding: 10px 10px;
-    position: fixed;
+    bottom: 25px;
+    border: none;
+    color: black;
+    position: absolute;
 }
-.offcanvas-body{
-    background-color: red;
-}
+
 .card .checkbtn a {
     color: black;
     text-decoration: none;
@@ -58,8 +36,6 @@
 .card .checkbtn a:hover {
     color: white;
 }
-
-
 
 .listCard {
     list-style-type: none;
