@@ -348,7 +348,8 @@ SelectedTable.addEventListener("click", function (e) {
     stbBtn.value = "Save"
     if (e.target.classList.contains('fa-pen')) {
         $('#form').modal('show')
-        CurrentIndex = parseInt(e.target.parentNode.parentNode.parentNode.firstChild.innerHTML) - 1
+        let CurrentId = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
+        CurrentIndex = findProductIndexById(CurrentId)
         console.log(products[CurrentIndex])
         document.getElementById("floatingname").value = products[CurrentIndex].name
         document.getElementById("floatingcatagory").value = products[CurrentIndex].category
