@@ -1,9 +1,10 @@
 import {products as originalProducts, persons as originalPersons} from "./data.js";
 import {Product} from "./productsmodule.js";
 
-// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
-//     window.location.href = "./home.html";
-// }
+if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+    alert("You are not authorized to access this page.")
+    window.location.href = "./home.html";
+  }
 
 if(localStorage.getItem("Persons") == null){
     let plainPersons = originalPersons.map((item)=> item.getPerson());

@@ -1,9 +1,10 @@
 import { persons as originalPersons } from "./data.js";
 import { Person } from "./person.js";
 
-// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
-//     window.location.href = "./home.html";
-// }
+if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+    alert("You are not authorized to access this page.")
+    window.location.href = "./home.html";
+  }
 
 if(localStorage.getItem("Persons") == null){
     let plainPersons = originalPersons.map((item)=> item.getPerson());
@@ -46,6 +47,16 @@ function createTablePersons(){
         let tableData = document.createElement("td");
         tableData.style.alignItems = "center";
         tableData.style.height = "100%";
+        // debugger;
+        // console.log(JSON.parse(localStorage.getItem("Active User")));
+        if(JSON.parse(localStorage.getItem("Active User")).email != persons[i].email){
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "btn btn-outline-danger";
+            deleteButton.innerHTML = "Delete";
+            deleteButton.style.cursor = "pointer";
+            deleteButton.addEventListener("click", deleteRow);
+            tableData.appendChild(deleteButton);
+        }
         let editButton = document.createElement("button");
         editButton.className = "btn btn-outline-warning";
         editButton.innerHTML = "Edit";
@@ -54,13 +65,7 @@ function createTablePersons(){
         editButton.addEventListener("click", editRow);
         editButton.setAttribute("data-bs-toggle", "modal");
         editButton.setAttribute("data-bs-target", "#staticBackdrop");
-        let deleteButton = document.createElement("button");
-        deleteButton.className = "btn btn-outline-danger";
-        deleteButton.innerHTML = "Delete";
-        deleteButton.style.cursor = "pointer";
-        deleteButton.addEventListener("click", deleteRow);
         tableData.appendChild(editButton);
-        tableData.appendChild(deleteButton);
         tableRow.appendChild(tableData);
         tableBody.appendChild(tableRow);
         myTable.appendChild(tableBody);
