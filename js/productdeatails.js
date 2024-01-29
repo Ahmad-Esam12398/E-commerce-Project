@@ -1,6 +1,12 @@
 import { Product } from './productsmodule.js';
 import { products } from './data.js';
 
+const total = document.querySelector('.total');
+const cardquantity = document.querySelector('.cardquantity');
+const addtocart = document.getElementById('addToCartButton');
+const checkoutButton = document.querySelector('.checkbtn');
+let listCard;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     function updateProductDetailPage(productDetails) {
@@ -8,48 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('product-name').innerText = productDetails.name;
         document.getElementById('product-price').innerText = `Price: $${productDetails.price}`;
         document.getElementById('product-description').innerText = ` ${productDetails.description}`;
-        document.getElementById('product-image').src = productDetails.image;
-
-      
-        displayRelatedProducts(productDetails.category, productDetails.id);
+        document.getElementById('product-image').src = productDetails.image; 
     }
-
-    function displayRelatedProducts(category, currentProductId) {
-        const relatedProductsContainer = document.getElementById('related-products');
-        relatedProductsContainer.innerHTML = '';
-
-        const relatedProducts = products.filter(product => product.category === category && product.id !== currentProductId);
-
-        let relatedProductDiv;
-
-        
-        relatedProducts.forEach(relatedProduct => {
-            if(relatedProduct.id !== currentProductId)
-            {
-                relatedProductDiv = document.createElement('div');
-            relatedProductDiv.classList.add('related-product');
-            relatedProductDiv.innerHTML = `
-                <img src="${relatedProduct.image}" />
-                <p>${relatedProduct.category}</p>
-                <h2>${relatedProduct.name}</h2>
-                <p>Price: $${relatedProduct.price}</p>`;
-            }
-            else{
-                return;
-            }
-
-            const hoverIcon = document.createElement('div');
-            hoverIcon.classList.add('hover-icon');
-            hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
-
-            hoverIcon.addEventListener('click', function () {
-                addToCart(relatedProduct.id);
-            });
-
-            relatedProductDiv.appendChild(hoverIcon);
-            relatedProductsContainer.appendChild(relatedProductDiv);
-        });
-    }
+    
 
     let productDetails;
     let cart = {};
@@ -64,14 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Can't get cart from localStorage:", error);
     }
 
-    const total = document.querySelector('.total');
-    const cardquantity = document.querySelector('.cardquantity');
-    const addtocart = document.getElementById('addToCartButton');
-    const checkoutButton = document.querySelector('.checkbtn');
-    let listCard;
 
-    const productId = getProductIdFromLocalStorage();
-
+    let productId = getProductIdFromLocalStorage();
     if (productId) {
         productDetails = getProductDetails(productId);
 
@@ -115,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     listCard = document.querySelector('.ulCard');
     addtocart.addEventListener('click', function () {
         const productId = productDetails.id;
-
-        
         if (!cart[productId]) {
             cart[productId] = {
                 id: productDetails.id,
@@ -136,7 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     reloadCard();
-
+    function changequantity(productId, quantityChange) {
+        const product = cart[productId];
+        if (product) {
+            if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
+                console.log("Cannot add more.");
+            } else {
+                product.cardquantity += quantityChange;
+                if (product.cardquantity <= 0) {
+                    delete cart[productId];
+                }
+                saveCartToLocalStorage();
+                reloadCard();
+            }
+        }
+    }
     function reloadCard() {
         let count = 0;
         let totalprice = 0;
@@ -176,21 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 changequantity(productId, 1);
             });
 
-            function changequantity(productId, quantityChange) {
-                const product = cart[productId];
-                if (product) {
-                    if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
-                        console.log("Cannot add more.");
-                    } else {
-                        product.cardquantity += quantityChange;
-                        if (product.cardquantity <= 0) {
-                            delete cart[productId];
-                        }
-                        saveCartToLocalStorage();
-                        reloadCard();
-                    }
-                }
-            }
+
 
             listCard.appendChild(newDiv);
         }
