@@ -53,34 +53,57 @@ products.forEach(productInfo => {
   productDiv.appendChild(hoverIcon);
 
   const productDetailsContainer = document.createElement('div');
-  productDetailsContainer.innerHTML = `
-    <a href="productdetail.html?" style="text-decoration: none;">
-      <img src="${productDetails.image}" />
-      <p>${productDetails.category}</p>
-      <h2>${productDetails.name}</h2>
-      <p>Price: $${productDetails.price}</p>
-    </a>
-  `;
-  productDiv.appendChild(productDetailsContainer);
+productDetailsContainer.innerHTML = `
+  <a href="productdetail.html?" style="text-decoration: none;">
+    <img src="${productDetails.image}" />
+    <p>${productDetails.category}</p>
+    <h2>${productDetails.name}</h2>
+    <p>Price: $${productDetails.price}</p>
+  </a>
+`;
 
-  listProduct.appendChild(productDiv);
-  function addToCart(productId) {
-    if (!cart[productId]) {
-      cart[productId] = {
-        id: productDetails.id,
-        name: productDetails.name,
-        price: productDetails.price,
-        image: productDetails.image,
-        cardquantity: 1
-      };
-    } else if (cart[productId].cardquantity >= productDetails.quantity) {
-      console.log("Can't add more.");
-    } else {
-      cart[productId].cardquantity++;
-    }
-    saveCartToLocalStorage();
-    reloadCard();
+// Create and append the <p> element for availability status
+const stockElement = document.createElement('p');
+stockElement.textContent = productDetails.quantity > 0 ? '' : 'Out of Stock';
+productDetailsContainer.appendChild(stockElement);
+
+// Move "Out of Stock" message to the top of the product details
+productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+
+productDiv.appendChild(productDetailsContainer);
+
+listProduct.appendChild(productDiv);
+
+function addToCart(productId) {
+  if (!cart[productId]) {
+    cart[productId] = {
+      id: productDetails.id,
+      name: productDetails.name,
+      price: productDetails.price,
+      image: productDetails.image,
+      cardquantity: 1
+    };
+  } else if (cart[productId].cardquantity >= productDetails.quantity) {
+    console.log("Can't add more.");
+    stockElement.textContent = 'Out of Stock';
+    stockElement.style.marginTop = "-14px"; 
+    stockElement.style.marginLeft = "10px"; 
+    stockElement.style.border = "1px solid black";
+    stockElement.style.borderRadius = "10px";
+    stockElement.style.color = "#efc040";
+    stockElement.style.width = "100px";
+    stockElement.style.textAlign = "center";
+    stockElement.style.padding = "5px";
+    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)"; 
+    
+
+  } else {
+    cart[productId].cardquantity++;
   }
+  saveCartToLocalStorage();
+  reloadCard();
+}
+
 
 });
 
