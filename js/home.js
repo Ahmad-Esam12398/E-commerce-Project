@@ -70,7 +70,7 @@ function reloadCard() {
         listCard.appendChild(newDiv);
     }
 
-    total.innerText = totalprice.toLocaleString();
+    total.innerText = `$${totalprice.toLocaleString()}`;
     cardquantity.innerText = count;
 
     const removeButtons = document.querySelectorAll('.remove-button');

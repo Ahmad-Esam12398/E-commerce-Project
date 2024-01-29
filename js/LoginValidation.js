@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
                 password.classList.remove("is-valid");
             } else {
                 p = 1;
-                password.classList.add("is-valid"); 
+                password.classList.add("is-valid");
                 password.classList.remove("is-invalid");
             }
             this.classList.add("is-valid");
