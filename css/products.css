@@ -1,3 +1,13 @@
+
+#carouselExampleSlidesOnly .carousel-caption p,
+#carouselExampleSlidesOnly .carousel-caption h5{
+  color: #9a7005;
+  font-size: larger;
+  position: relative;
+  right: 300px;
+  filter: brightness(250%);
+  text-shadow: 2px -2px  black;
+}
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +27,7 @@
 body {
   overflow-x: hidden;
 }
+
 .container {
   width: 800px;
   height: 100%;
@@ -62,12 +73,14 @@ margin-top: -80px !important;
 
 
 }
-.hover-icon{
+
+.hover-icon {
   transform: scale(0);
-} 
+}
+
 .listProduct .product-details .hover-icon {
   transform: scale(0);
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
   margin-left: 22vw;
   margin-top: 10px;
   background-color: white;
@@ -78,7 +91,7 @@ margin-top: -80px !important;
 }
 
 .listProduct .product-details:hover .hover-icon {
-   transform: scale(1);
+  transform: scale(1);
   transition: transform 0.3s ease;
 }
 
@@ -188,8 +201,9 @@ margin-left: 10vw;
 } */
 
 #cartsss {
-  margin-left: -10px !important ;
+  margin-left: -10px !important;
 }
+
 #cartsss .cardquantity {
   background-color: #efc040;
   color: white;
@@ -408,15 +422,16 @@ margin-left: 10vw;
 }
 
 @media screen and (min-width: 290px) and (max-width: 576px) {
+
   /* nav {
     width: 100;
   } */
   body {
-    overflow-x:hidden;
+    overflow-x: hidden;
   }
- 
-  
-  .carousel-inner{
+
+
+  .carousel-inner {
     width: 85vw;
   }
 
@@ -432,14 +447,16 @@ margin-left: 10vw;
   .offcanvas-body {
     width: 260px !important;
   }
+
   .listProduct .product-details {
     width: 80%;
     height: 80%;
 
   }
+
   .listProduct .product-details .hover-icon {
     transform: scale(0);
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
     margin-left: 21vw !important;
     margin-top: 0px !important;
     background-color: white;
@@ -448,7 +465,7 @@ margin-left: 10vw;
     border-radius: 50%;
     cursor: pointer;
   }
-  
+
 
   .listCard img {
     width: 60px;
@@ -496,7 +513,7 @@ margin-left: 10vw;
     margin-top: 165%;
     position: absolute;
     margin-left: 30px;
-   
+
 
   }
 
@@ -511,7 +528,8 @@ margin-left: 10vw;
   .divbutton {
     margin-left: 615px;
   }
-  .container{
+
+  .container {
     height: 100% !important;
   }
 
@@ -524,7 +542,7 @@ margin-left: 10vw;
 
   .listProduct .product-details {
     width: 30vw !important;
-  
+
     padding: 10px 10px !important;
   }
 
@@ -532,7 +550,7 @@ margin-left: 10vw;
     transform: scale(1);
     transition: all 0.6s;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-   
+
 
   }
 
@@ -545,6 +563,7 @@ margin-left: 10vw;
     padding: 10px 10px;
     position: fixed;
   }
+
   .container {
     width: 850px !important;
     max-width: 85vw;
@@ -553,7 +572,8 @@ margin-left: 10vw;
     text-align: center;
     margin-left: 28px !important;
   }
-  .sidenav .offcanvas-body h3{
+
+  .sidenav .offcanvas-body h3 {
     margin-left: 1px;
   }
 
@@ -590,14 +610,14 @@ margin-left: 10vw;
     background-color: #efc040;
     border-radius: 5px;
   }
-  
+
 
   .listProduct .product-details {
     width: 80%;
     height: 70%;
 
   }
-  
+
 
   .offcanvas-start {
     width: 50% !important;
@@ -641,6 +661,7 @@ margin-left: 10vw;
     position: absolute;
     margin-bottom: 10px;
   }
+
   /* .listProduct .product-details {
     width: calc(75% - 30px);
     padding: 20px 20px;
@@ -654,19 +675,21 @@ margin-left: 10vw;
     margin-top: -65px;
     border: none;
   }
+
   .listProduct .product-details {
     width: 80%;
     height: 75%;
 
   }
-  
+
   .listProduct .product-details:hover {
     transform: scale(1);
     transition: all 0.6s;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  
-  
+
+
   }
+
   .card .subtotal,
   .card .total {
     border: none;
@@ -677,12 +700,13 @@ margin-left: 10vw;
 
   .card .subtotal {
     margin-left: 0px;
-    
+
   }
 
   .card .total {
     margin-left: 200px;
   }
+
   .card .checkbtn {
     margin-top: 40%;
     background-color: #efc040;
@@ -732,27 +756,28 @@ margin-left: 10vw;
   }
 
   .listProduct .product-details .hover-icon {
-    margin-left: 18vw !important;  
+    margin-left: 18vw !important;
   }
 
-.offcanvas-body h3{
-  color:  gray;
-  margin-left: -100px;
-  font-size: 25px;
-  font-family: 'Poppins',sans-serif;
-}
-.offcanvas-body p{
+  .offcanvas-body h3 {
+    color: gray;
+    margin-left: -100px;
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
 
-  margin-top: 20px;
-  cursor: pointer;
-}
-.offcanvas-container{
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-}
-.offcanvas-body p:hover{
-  color: #efc040;
- }
+  .offcanvas-body p {
 
+    margin-top: 20px;
+    cursor: pointer;
+  }
 
+  .offcanvas-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .offcanvas-body p:hover {
+    color: #efc040;
+  }
 }
