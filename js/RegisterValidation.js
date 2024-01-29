@@ -7,9 +7,10 @@ if (localStorage.getItem("Persons") == null) {
         Persons.push(persons[i].getPerson());
     }
     localStorage.setItem("Persons", JSON.stringify(Persons))
-} else {
-    var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
+var usersArr = [];
+usersArr = JSON.parse(localStorage.getItem("Persons"));
+
 
 // function to check E-mail
 function checkEmail(mail) {
@@ -159,8 +160,8 @@ window.addEventListener("load", function () {
             let password = document.getElementById("password").value;
             let phone = document.getElementById("phone").value;
             let address = document.getElementById("address").value;
-            console.log(usersArr[this.length - 1].id + 1);
-            let newuser = new Person(name, email, password, address, phone, "Customer");
+
+            let newuser = new Person(usersArr[usersArr.length - 1].id + 1, name, email, password, address, phone, "Customer");
             usersArr.push({
                 id: newuser.id,
                 name: newuser.name,
