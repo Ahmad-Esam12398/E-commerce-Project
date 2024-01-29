@@ -38,23 +38,24 @@ let TrendPrdName=OrderStat.TrendOrder.Name
 let TrendPrdQtn=OrderStat.TrendOrder.quantity
 let DemandeOrder=OrderStat.MostOrderedProduct.quantity
 let productName=OrderStat.MostOrderedProduct.productName
-let Total_No_Order=OrderStat.NO_Order.Total
-let Pending_NO=OrderStat.NO_Order.pending
-let delivered_NO=OrderStat.NO_Order.delivered
-let Shipped_NO=OrderStat.NO_Order.shipped
+
 let Seller_Wallet=OrderStat.wallet
 let LowDemand_Name=OrderStat.LessOrderDemand.productname
 let LowDemand_No=OrderStat.LessOrderDemand.quantity
 /*------------------------------------------------------Assign Card Content----------------------------------------------------------------- */
-Wallet.innerHTML=Seller_Wallet+" $"
+Wallet.innerHTML=Seller_Wallet+" EGP"
 All_product.innerHTML=prod_No
 TrendName.innerHTML=TrendPrdName
-TrendNumber.innerHTML=TrendPrdQtn
+TrendNumber.innerHTML=TrendPrdQtn+" times"
 LessDemandName.innerHTML=LowDemand_Name
 LessDemandName.classList.add("small")
 if(LowDemand_No==0){
     LessDemandNum.innerHTML="Not Order Yet"
+}   
+else{
+    LessDemandNum.innerHTML=LowDemand_No
 }
+/*----------------------------------------------------Draw Charts-----------------------------------------------------------------------*/ 
 
 
 
@@ -131,5 +132,42 @@ var myChart = new Chart(ctx, {
             }
         },
         plugins: {},
+    }
+});
+
+
+
+
+
+let Total_No_Order=OrderStat.NO_Order.Total
+let Pending_NO=OrderStat.NO_Order.pending
+let delivered_NO=OrderStat.NO_Order.delivered
+let Shipped_NO=OrderStat.NO_Order.shipped
+
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ["Pending Order","Deliver Order","Shipped Order"],
+        datasets: [{
+            label: 'Number of Order',
+            data: [Pending_NO, delivered_NO, Shipped_NO],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: `Order Count (Total=${Total_No_Order})`,
+                fontSize: 16,
+            },
+        },
     }
 });
