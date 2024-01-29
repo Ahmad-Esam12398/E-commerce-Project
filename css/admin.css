@@ -70,3 +70,6 @@ border-radius: 5px;
 .input-group-text {
     padding: .375rem .4rem !important;
 }
+td button{
+    margin: 2px;
+}

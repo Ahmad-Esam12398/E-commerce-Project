@@ -103,11 +103,12 @@ let uniqueEmails = new Set();
 let uniquePhoneNumbers = new Set();
 
 function getLastId(arr){
-    return arr[arr.length - 1].id++;
+    return arr[arr.length - 1].id + 1;
 }
 
 function addPersonRow() {
-    let Id = addPersonRow(persons);
+    debugger;
+    let Id = getLastId(persons);
     let name = document.getElementById("floatingName").value;
     let email = document.getElementById("floatingEmail").value;
     let password = document.getElementById("floatingPassword").value;
