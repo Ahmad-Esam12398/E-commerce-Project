@@ -12,7 +12,7 @@ if (localStorage.getItem("Persons")==null) {
 
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
-        if (usersArr[i].email == mail) { return (i + 1); }
+        if (usersArr[i].email.toLowerCase() == mail.toLowerCase()) { return (i + 1); }
     }
     return false;
 }
