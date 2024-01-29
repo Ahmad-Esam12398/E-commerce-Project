@@ -13,7 +13,7 @@ class Person {
         this.phone = _phone;
         this.role = _role;
     }
-    set id(_id){
+    set id(_id) {
         this.#id = _id;
     }
     set name(_name) {
