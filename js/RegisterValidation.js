@@ -1,13 +1,13 @@
 import { persons } from "../js/data.js";
 import { Person } from "../js/person.js";
 
-if (localStorage.getItem("Persons")==null) {
-    var Persons =[];
+if (localStorage.getItem("Persons") == null) {
+    var Persons = [];
     for (let i = 0; i < persons.length; i++) {
         Persons.push(persons[i].getPerson());
     }
-    localStorage.setItem("Persons",JSON.stringify(Persons))
-}else{
+    localStorage.setItem("Persons", JSON.stringify(Persons))
+} else {
     var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
 
@@ -159,19 +159,18 @@ window.addEventListener("load", function () {
             let password = document.getElementById("password").value;
             let phone = document.getElementById("phone").value;
             let address = document.getElementById("address").value;
-
-
+            console.log(usersArr[this.length - 1].id + 1);
             let newuser = new Person(name, email, password, address, phone, "Customer");
             usersArr.push({
-                id:newuser.id,
-                name:newuser.name,
-                email:newuser.email,
-                password:newuser.password,
-                address:newuser.address,
-                phone:newuser.phone,
-                role:newuser.role
+                id: newuser.id,
+                name: newuser.name,
+                email: newuser.email,
+                password: newuser.password,
+                address: newuser.address,
+                phone: newuser.phone,
+                role: newuser.role
             });
-            localStorage.setItem("Persons",JSON.stringify(usersArr));
+            localStorage.setItem("Persons", JSON.stringify(usersArr));
 
             e.target.classList.add('was-validated');
 
