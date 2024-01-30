@@ -149,3 +149,54 @@
     cursor: pointer;
     background-color: white
 }
+
+.offcanvas-body .card-body {
+    scrollbar-width: thin;
+    background-color: whitesmoke;
+    height: 70vh;
+    width: 25vw;
+    overflow-y: auto;
+    position: fixed;
+}
+
+.offcanvas-body .card-img-bottom {
+    position: fixed;
+    bottom: 20px;
+    padding-top: 10px;
+}
+
+.offcanvas-body .card-img-bottom .total {
+    position: fixed;
+    right: 40px;
+    bottom: 135px;
+}
+
+.offcanvas-body .card-img-bottom .subtotal {
+    position: fixed;
+    bottom: 135px;
+}
+
+.offcanvas-body .card-img-bottom .checkbtn,
+.offcanvas-body .card-img-bottom .cartbtn {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: #edb932;
+    border: 0;
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 300px;
+}
+
+.offcanvas-body .card-img-bottom .cartbtn {
+    margin-top: 50px;
+    margin-left: 40px;
+}
+.offcanvas-body .card-img-bottom .cartbtn:hover,
+.offcanvas-body .card-img-bottom .checkbtn:hover {
+    background-color: #333;
+    color: white;
+    transition: all 0.5s;
+}
