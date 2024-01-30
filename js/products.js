@@ -72,6 +72,7 @@ function displayProducts() {
     productDetailsContainer.appendChild(stockElement);
 
     productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+    
 
     if (cart[product.id]) {
       product.quantity = cart[product.id].quantity;
@@ -82,13 +83,16 @@ function displayProducts() {
   });
 }
 
-function addToCart(productId, productQuantity) {
+function addToCart(productId) {
   const productDetails = getAllProducts().find(product => product.id == productId);
 
   if (!productDetails) {
-    console.error("Product details not found for productId:", productId);
+    // console.error("Product details not found for productId:", productId);
     return;
   }
+
+  let stockElement = document.createElement('p');
+
 
   if (!cart[productId]) {
     cart[productId] = {
@@ -101,8 +105,19 @@ function addToCart(productId, productQuantity) {
     };
   } else if (cart[productId].cardquantity >= productDetails.quantity) {
     console.log("Can't add more.");
+    stockElement.textContent = 'Out of Stock';
+    stockElement.style.marginTop = "-14px";
+    stockElement.style.marginLeft = "10px";
+    stockElement.style.border = "1px solid black";
+    stockElement.style.borderRadius = "10px";
+    stockElement.style.color = "yellow";
+    stockElement.style.width = "100px";
+    stockElement.style.textAlign = "center";
+    stockElement.style.padding = "5px";
+    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
   } else {
     cart[productId].cardquantity++;
+    // stockElement.textContent = '';
   }
   saveCartToLocalStorage();
   reloadCard();
@@ -277,7 +292,7 @@ window.addEventListener("load", function () {
         for (let i = 0; i < productsArr.length; i++) {
           if (productsArr[i]["id"] == this.id) {
             localStorage.setItem(this.id, JSON.stringify(productsArr[i]));
-            alert("Hello");
+            // alert("Hello");
             break;
           }
         }
@@ -285,4 +300,6 @@ window.addEventListener("load", function () {
     });
   }
 });
+
+
 
