@@ -6,7 +6,6 @@ const total = document.querySelector('.total');
 const cardquantity = document.querySelector('.cardquantity');
 
 let cart = {};
-
 try {
   const cartString = localStorage.getItem('cart');
 
@@ -14,35 +13,47 @@ try {
     cart = JSON.parse(cartString);
   }
 } catch (error) {
-  console.error("Can't get 'cart' from localStorage:", error);
+  console.error("can't get 'cart' from localStorage:", error);
 }
 
 function getAllProducts() {
-  return JSON.parse(localStorage.getItem('products')) || [];
+  let productsArr = [];
+  let products = []; 
+
+  
+
+  for (const productId in cart) {
+    const productDetails = products.find(product => product.id == productId);
+
+    if (productDetails) {
+      productDetails.quantity = cart[productId].quantity;
+    }
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  if (localStorage.getItem('products') == null) {
+    for (let i = 0; i < products.length; i++) {
+      productsArr.push(products[i].getProduct());
+    }
+    localStorage.setItem("products", JSON.stringify(productsArr));
+  } else {
+    productsArr = JSON.parse(localStorage.getItem('products'));
+  }
+
+  return productsArr;
 }
 
 function displayProducts() {
   const allProducts = getAllProducts();
 
-  allProducts.forEach(productData => {
-    const product = new Product(
-      productData.name,
-      productData.price,
-      productData.quantity,
-      productData.description,
-      productData.image,
-      productData.sellerID,
-      productData.category,
-      productData.categorypath
-    );
-
+  allProducts.forEach(product => {
     const productDiv = document.createElement('div');
     productDiv.classList.add('product-details');
-
+    productDiv.id = product.id;
     const hoverIcon = document.createElement('div');
     hoverIcon.classList.add('hover-icon');
     hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
-    hoverIcon.addEventListener('click', () => addToCart(product.id));
+    hoverIcon.addEventListener('click', () => addToCart(product.id, product.quantity));
 
     productDiv.appendChild(hoverIcon);
 
@@ -61,6 +72,11 @@ function displayProducts() {
     productDetailsContainer.appendChild(stockElement);
 
     productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+    
+
+    if (cart[product.id]) {
+      product.quantity = cart[product.id].quantity;
+    }
 
     productDiv.appendChild(productDetailsContainer);
     listProduct.appendChild(productDiv);
@@ -68,20 +84,40 @@ function displayProducts() {
 }
 
 function addToCart(productId) {
-  const productDetails = allLocalStorageData[productId];
+  const productDetails = getAllProducts().find(product => product.id == productId);
+
+  if (!productDetails) {
+    // console.error("Product details not found for productId:", productId);
+    return;
+  }
+
+  let stockElement = document.createElement('p');
+
+
   if (!cart[productId]) {
     cart[productId] = {
       id: productDetails.id,
       name: productDetails.name,
       price: productDetails.price,
       image: productDetails.image,
-      cardquantity: 1
+      cardquantity: 1,
+      quantity: productDetails.quantity
     };
   } else if (cart[productId].cardquantity >= productDetails.quantity) {
     console.log("Can't add more.");
-    
+    stockElement.textContent = 'Out of Stock';
+    stockElement.style.marginTop = "-14px";
+    stockElement.style.marginLeft = "10px";
+    stockElement.style.border = "1px solid black";
+    stockElement.style.borderRadius = "10px";
+    stockElement.style.color = "yellow";
+    stockElement.style.width = "100px";
+    stockElement.style.textAlign = "center";
+    stockElement.style.padding = "5px";
+    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
   } else {
     cart[productId].cardquantity++;
+    // stockElement.textContent = '';
   }
   saveCartToLocalStorage();
   reloadCard();
@@ -92,11 +128,23 @@ function reloadCard() {
   let count = 0;
   let totalprice = 0;
 
-  for (const productId in cart) {
-    const productDetails = cart[productId];
+  // Retrieve cart data from local storage on reload
+  if (localStorage.getItem('cart') !== null) {
+    cart = JSON.parse(localStorage.getItem('cart'));
+  }
 
-    totalprice += productDetails.price * productDetails.cardquantity;
-    count += productDetails.cardquantity;
+  const allProducts = getAllProducts();
+
+  for (const productId in cart) {
+    const productDetails = allProducts.find(product => product.id == productId);
+
+    if (!productDetails) {
+      console.error("Product details not found for productId:", productId);
+      continue;
+    }
+
+    totalprice += productDetails.price * cart[productId].cardquantity;
+    count += cart[productId].cardquantity;
 
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
@@ -106,10 +154,10 @@ function reloadCard() {
       <h2>${productDetails.name}</h2>
       <div class="plusevent">
         <span class="minus">-</span>
-        <span class="num">${productDetails.cardquantity}</span>
+        <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * productDetails.cardquantity}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
@@ -135,6 +183,7 @@ function reloadCard() {
   });
 }
 
+//////////////change quantity of product ///////////
 function changequantity(productId, quantityChange) {
   const productDetails = cart[productId];
 
@@ -153,7 +202,7 @@ function changequantity(productId, quantityChange) {
     }
   }
 }
-
+////////remove productfromcart ////////
 function removeProductFromCart(productId) {
   if (cart[productId]) {
     delete cart[productId];
@@ -161,14 +210,17 @@ function removeProductFromCart(productId) {
     reloadCard();
   }
 }
-
+//////////save cart to locatstorage
 function saveCartToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Display products when the page loads
+// Display products when the page and card loads
 displayProducts();
+reloadCard();
 
+
+// ------------------checkout -----------
 const checkoutButton = document.querySelector('.checkbtn');
 checkoutButton.addEventListener('click', () => {
   if (Object.keys(cart).length === 0) {
@@ -180,8 +232,7 @@ checkoutButton.addEventListener('click', () => {
   window.location.href = 'checkout.html';
 });
 
-var offcanvas = new bootstrap.Offcanvas(document.getElementById('demo'));
-
+/////////////// function for search ////////////
 window.search = function () {
   var searchtext = document.getElementsByTagName('input')[0].value.toLowerCase();
   var productDivs = document.querySelectorAll('.product-details');
@@ -204,6 +255,7 @@ window.search = function () {
   }
 };
 
+//////////// function for filter catogary ///////////////////////////
 window.display = function (e) {
   var target = e.target;
   if (target.tagName === 'P' && target.id === 'poption') {
@@ -228,3 +280,26 @@ window.display = function (e) {
     }
   }
 };
+
+
+window.addEventListener("load", function () {
+  let productsDIV = document.getElementsByClassName("product-details");
+  for (let i = 0; i < productsDIV.length; i++) {
+    productsDIV[i].addEventListener("click", function (e) {
+      if (this.nodeName != "I") {
+        localStorage.setItem("selectedProductId", this.id);
+        let productsArr = getAllProducts();
+        for (let i = 0; i < productsArr.length; i++) {
+          if (productsArr[i]["id"] == this.id) {
+            localStorage.setItem(this.id, JSON.stringify(productsArr[i]));
+            // alert("Hello");
+            break;
+          }
+        }
+      }
+    });
+  }
+});
+
+
+

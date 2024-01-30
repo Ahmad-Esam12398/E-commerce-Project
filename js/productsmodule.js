@@ -1,9 +1,9 @@
 class Product{
     static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 0;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath; #otherCategory;
-    constructor(name, price, quantity, description, image, sellerID, category, categorypath = 'Home / Home Office / Black Metal Lamp', otherCategory = category){
+    constructor(id,name, price, quantity, description, image, sellerID, category, categorypath = 'Home / Home Office / Black Metal Lamp', otherCategory = category){
         // debugger;
-        this.#id = ++Product.lastID;
+        this.id = id;
         localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;
         this.price = price;
@@ -14,6 +14,9 @@ class Product{
         this.category = category;
         this.categorypath = categorypath;
         this.otherCategory = otherCategory;
+    }
+    set id(_id){
+        this.#id = _id;
     }
     set quantity(_quantity){
         if(_quantity < 0){
@@ -32,29 +35,26 @@ class Product{
         }
     }
     set name(_name){
-        if (_name === undefined) {
+        if(_name == ""){
             this.#name = "No name";
-        } else if (_name.trim() === "") {
-            this.#name = "No name";
-        } else {
+        }
+        else{
             this.#name = _name.trim();
         }
     }
     set description(_description){
-        if (_description === undefined) {
+        if(_description.trim() == ""){
             this.#description = "No description";
-        } else if (_description.trim() === "") {
-            this.#description = "No description";
-        } else {
+        }
+        else{
             this.#description = _description.trim();
         }
     }
     set image(_image){
-        if (_image === undefined) {
+        if(_image.trim() == ""){
             this.#image = "No image";
-        } else if (_image.trim() === "") {
-            this.#image = "No image";
-        } else {
+        }
+        else{
             this.#image = _image.trim();
         }
     }
@@ -128,15 +128,5 @@ class Product{
         this.sellerID = sellerID;
         this.category = category;
     }
-    static saveAllProducts(products) {
-        localStorage.setItem("allProducts", JSON.stringify(products));
-      }
-    
-      static getAllProducts() {
-        const storedProducts = localStorage.getItem("allProducts");
-        return storedProducts ? JSON.parse(storedProducts) : [];
-      }
 }
 export { Product };
-
-
