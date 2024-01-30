@@ -152,9 +152,7 @@
 
 .offcanvas-body .card-body {
     scrollbar-width: thin;
-    background-color: whitesmoke;
-    height: 70vh;
-    width: 25vw;
+    width: 375px;
     overflow-y: auto;
     position: fixed;
 }
