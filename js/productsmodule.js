@@ -32,26 +32,29 @@ class Product{
         }
     }
     set name(_name){
-        if(_name == ""){
+        if (_name === undefined) {
             this.#name = "No name";
-        }
-        else{
+        } else if (_name.trim() === "") {
+            this.#name = "No name";
+        } else {
             this.#name = _name.trim();
         }
     }
     set description(_description){
-        if(_description.trim() == ""){
+        if (_description === undefined) {
             this.#description = "No description";
-        }
-        else{
+        } else if (_description.trim() === "") {
+            this.#description = "No description";
+        } else {
             this.#description = _description.trim();
         }
     }
     set image(_image){
-        if(_image.trim() == ""){
+        if (_image === undefined) {
             this.#image = "No image";
-        }
-        else{
+        } else if (_image.trim() === "") {
+            this.#image = "No image";
+        } else {
             this.#image = _image.trim();
         }
     }
@@ -125,6 +128,15 @@ class Product{
         this.sellerID = sellerID;
         this.category = category;
     }
+    static saveAllProducts(products) {
+        localStorage.setItem("allProducts", JSON.stringify(products));
+      }
+    
+      static getAllProducts() {
+        const storedProducts = localStorage.getItem("allProducts");
+        return storedProducts ? JSON.parse(storedProducts) : [];
+      }
 }
 export { Product };
+
 

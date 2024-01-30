@@ -1,5 +1,4 @@
 import { Product } from './productsmodule.js';
-import { products } from './data.js';
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -15,66 +14,61 @@ try {
     cart = JSON.parse(cartString);
   }
 } catch (error) {
-  console.error("can't get 'cart' from localStorage:", error);
+  console.error("Can't get 'cart' from localStorage:", error);
 }
 
-products.forEach(productInfo => {
-  const product = new Product(
-    productInfo.name,
-    productInfo.price,
-    productInfo.quantity,
-    productInfo.description,
-    productInfo.image,
-    productInfo.sellerID,
-    productInfo.category,
-    productInfo.categorypath
-  );
+function getAllProducts() {
+  return JSON.parse(localStorage.getItem('products')) || [];
+}
 
-  const productDetails = product.getProduct();
+function displayProducts() {
+  const allProducts = getAllProducts();
 
-  const productDiv = document.createElement('div');
-  productDiv.classList.add('product-details');
+  allProducts.forEach(productData => {
+    const product = new Product(
+      productData.name,
+      productData.price,
+      productData.quantity,
+      productData.description,
+      productData.image,
+      productData.sellerID,
+      productData.category,
+      productData.categorypath
+    );
 
-  productDiv.addEventListener('click', function () {
-    const productId = productDetails.id;
-    localStorage.setItem('selectedProductId', productId);
-    localStorage.setItem(productId, JSON.stringify(productDetails));
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('product-details');
+
+    const hoverIcon = document.createElement('div');
+    hoverIcon.classList.add('hover-icon');
+    hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
+    hoverIcon.addEventListener('click', () => addToCart(product.id));
+
+    productDiv.appendChild(hoverIcon);
+
+    const productDetailsContainer = document.createElement('div');
+    productDetailsContainer.innerHTML = `
+      <a href="productdetail.html?" style="text-decoration: none;">
+        <img src="${product.image || 'path/to/default/image.jpg'}" alt="Product Image" />
+        <p>${product.category}</p>
+        <h2>${product.name}</h2>
+        <p>Price: $${product.price}</p>
+      </a>
+    `;
+
+    const stockElement = document.createElement('p');
+    stockElement.textContent = product.quantity > 0 ? '' : 'Out of Stock';
+    productDetailsContainer.appendChild(stockElement);
+
+    productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+
+    productDiv.appendChild(productDetailsContainer);
+    listProduct.appendChild(productDiv);
   });
-
-  const hoverIcon = document.createElement('div');
-  hoverIcon.classList.add('hover-icon');
-  hoverIcon.setAttribute('data-product-id', productDetails.id);
-  hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
-
-  hoverIcon.addEventListener('click', function () {
-    addToCart(productDetails.id);
-  });
-
-  productDiv.appendChild(hoverIcon);
-
-  const productDetailsContainer = document.createElement('div');
-productDetailsContainer.innerHTML = `
-  <a href="productdetail.html?" style="text-decoration: none;">
-    <img src="${productDetails.image}" />
-    <p>${productDetails.category}</p>
-    <h2>${productDetails.name}</h2>
-    <p>Price: $${productDetails.price}</p>
-  </a>
-`;
-
-// Create and append the <p> element for availability status
-const stockElement = document.createElement('p');
-stockElement.textContent = productDetails.quantity > 0 ? '' : 'Out of Stock';
-productDetailsContainer.appendChild(stockElement);
-
-// Move "Out of Stock" message to the top of the product details
-productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
-
-productDiv.appendChild(productDetailsContainer);
-
-listProduct.appendChild(productDiv);
+}
 
 function addToCart(productId) {
+  const productDetails = allLocalStorageData[productId];
   if (!cart[productId]) {
     cart[productId] = {
       id: productDetails.id,
@@ -85,27 +79,13 @@ function addToCart(productId) {
     };
   } else if (cart[productId].cardquantity >= productDetails.quantity) {
     console.log("Can't add more.");
-    stockElement.textContent = 'Out of Stock';
-    stockElement.style.marginTop = "-14px"; 
-    stockElement.style.marginLeft = "10px"; 
-    stockElement.style.border = "1px solid black";
-    stockElement.style.borderRadius = "10px";
-    stockElement.style.color = "#efc040";
-    stockElement.style.width = "100px";
-    stockElement.style.textAlign = "center";
-    stockElement.style.padding = "5px";
-    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)"; 
     
-
   } else {
     cart[productId].cardquantity++;
   }
   saveCartToLocalStorage();
   reloadCard();
 }
-
-
-});
 
 function reloadCard() {
   listCard.innerHTML = '';
@@ -115,13 +95,13 @@ function reloadCard() {
   for (const productId in cart) {
     const productDetails = cart[productId];
 
-    totalprice += (productDetails.price * productDetails.cardquantity);
+    totalprice += productDetails.price * productDetails.cardquantity;
     count += productDetails.cardquantity;
 
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
       <div>
-        <img src="${productDetails.image}" />
+        <img src="${productDetails.image || 'path/to/default/image.jpg'}" alt="Product Image" />
       </div>
       <h2>${productDetails.name}</h2>
       <div class="plusevent">
@@ -137,33 +117,8 @@ function reloadCard() {
     const minus = newDiv.querySelector('.minus');
     const plus = newDiv.querySelector('.plus');
 
-    minus.addEventListener('click', function () {
-      changequantity(productId, -1);
-    });
-
-    plus.addEventListener('click', function () {
-      changequantity(productId, 1);
-    });
-
-    function changequantity(productId, quantityChange) {
-      const product = cart[productId];
-
-      if (product) {
-        if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
-          console.log("Cannot add more.");
-        } else {
-          product.cardquantity += quantityChange;
-
-          if (product.cardquantity <= 0) {
-            delete cart[productId];
-            listCard.innerHTML = " ";
-          }
-
-          saveCartToLocalStorage();
-          reloadCard();
-        }
-      }
-    }
+    minus.addEventListener('click', () => changequantity(productId, -1));
+    plus.addEventListener('click', () => changequantity(productId, 1));
 
     listCard.appendChild(newDiv);
   }
@@ -173,11 +128,30 @@ function reloadCard() {
 
   const removeButtons = document.querySelectorAll('.remove-button');
   removeButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const productId = this.getAttribute('data-product-id');
+    button.addEventListener('click', () => {
+      const productId = button.getAttribute('data-product-id');
       removeProductFromCart(productId);
     });
   });
+}
+
+function changequantity(productId, quantityChange) {
+  const productDetails = cart[productId];
+
+  if (productDetails) {
+    if (quantityChange > 0 && productDetails.cardquantity >= productDetails.quantity) {
+      console.log("Cannot add more.");
+    } else {
+      productDetails.cardquantity += quantityChange;
+
+      if (productDetails.cardquantity <= 0) {
+        delete cart[productId];
+      }
+
+      saveCartToLocalStorage();
+      reloadCard();
+    }
+  }
 }
 
 function removeProductFromCart(productId) {
@@ -192,10 +166,11 @@ function saveCartToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-reloadCard();
+// Display products when the page loads
+displayProducts();
 
 const checkoutButton = document.querySelector('.checkbtn');
-checkoutButton.addEventListener('click', function () {
+checkoutButton.addEventListener('click', () => {
   if (Object.keys(cart).length === 0) {
     console.log("cart is empty");
     return;
@@ -221,7 +196,14 @@ window.search = function () {
       productDiv.style.display = "none";
     }
   });
-}
+
+  if (!found) {
+    productDivs.forEach(productDiv => {
+      productDiv.style.display = "block";
+    });
+  }
+};
+
 window.display = function (e) {
   var target = e.target;
   if (target.tagName === 'P' && target.id === 'poption') {
@@ -238,10 +220,11 @@ window.display = function (e) {
         productDiv.style.display = "none";
       }
     });
+
     if (!found) {
       productDivs.forEach(productDiv => {
         productDiv.style.display = "block";
       });
     }
   }
-}
+};
