@@ -197,5 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'checkout.html';
     });
 });
-
-

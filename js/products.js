@@ -1,3 +1,4 @@
+//product.js
 import { Product } from './productsmodule.js';
 
 const listProduct = document.querySelector('.listProduct');
