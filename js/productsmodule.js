@@ -1,9 +1,9 @@
 class Product{
     static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 0;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath; #otherCategory;
-    constructor(name, price, quantity, description, image, sellerID, category, categorypath = 'Home / Home Office / Black Metal Lamp', otherCategory = category){
+    constructor(id,name, price, quantity, description, image, sellerID, category, categorypath = 'Home / Home Office / Black Metal Lamp', otherCategory = category){
         // debugger;
-        this.#id = ++Product.lastID;
+        this.id = id;
         localStorage.setItem("lastIDProduct", Product.lastID);
         this.name = name;
         this.price = price;
@@ -14,6 +14,9 @@ class Product{
         this.category = category;
         this.categorypath = categorypath;
         this.otherCategory = otherCategory;
+    }
+    set id(_id){
+        this.#id = _id;
     }
     set quantity(_quantity){
         if(_quantity < 0){

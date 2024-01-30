@@ -10,7 +10,6 @@ let listCard;
 document.addEventListener('DOMContentLoaded', () => {
 
     function updateProductDetailPage(productDetails) {
-        debugger;
         document.getElementById('product-category').innerText = `${productDetails.categoryPath}`;
         document.getElementById('product-name').innerText = productDetails.name;
         document.getElementById('product-price').innerText = `Price: $${productDetails.price}`;
