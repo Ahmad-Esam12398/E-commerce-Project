@@ -1,22 +1,38 @@
-import { originalOrders as orders } from "./data.js";
-import { products } from "./data.js";
-// if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
-//     window.location.href = "./home.html";
-// }
+import { originalOrders as initialOrders } from "./data.js";
+import { products as initialProducts } from "./data.js";
 
-// if(localStorage.getItem("Orders") == null){
-//     localStorage.setItem("Orders", JSON.stringify(originalOrders));
-//     // console.log(JSON.parse(localStorage.getItem("Persons")));
-// }
-// let orders = JSON.parse(localStorage.getItem("Orders"));
+if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+    alert("You are not authorized to access this page.")
+    window.location.href = "./home.html";
+}
+if(JSON.parse(localStorage.getItem("products") == null)){
+    localStorage.setItem("products", JSON.stringify(initialProducts));
+}
 
-function updatePersonsLocalStorage(){
-    localStorage.setItem("Orders", JSON.stringify(orders));
+if(localStorage.getItem("originalOrders") == null){
+localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
+// if(localStorage.getItem("products") == null){
+// let plainProducts = originalProducts.map((item)=>item.getProduct());
+// localStorage.setItem("products", JSON.stringify(plainProducts));
+// }
+let orders = JSON.parse(localStorage.getItem("originalOrders"));
+let products = JSON.parse(localStorage.getItem("products"));
+console.log(orders);
+function updateOriginalOrdersLocalStorage(){
+    localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function breakOrdersIntoProducts(ordersRow){
     let target = [];
+    let productsId = ordersRow["products"];
+    let productsIndices = [];
+    // debugger;
+    for(let i = 0; i < productsId.length; i++){
+        productsIndices.push(products.findIndex(product => product.id == productsId[i]));
+    }
+    // console.log(productsIndices);
     for(let i = 0; i < ordersRow["products"].length; i++){
-        let result = {id: ordersRow["id"], product: ordersRow["products"][i], quantity: ordersRow["quantities"][i], date: ordersRow["date"], status: ordersRow["status"]}
+        let result = {id: ordersRow["id"], product: products[productsIndices[i]], quantity: ordersRow["quantities"][i], date: ordersRow["date"], status: ordersRow["status"]}
         target.push(result);}
     return target;
 }
@@ -27,15 +43,16 @@ function createTableOrders(){
     // debugger;
     // console.log(breakOrdersIntoProducts(orders[0]));
     for(let i = 0; i < orders.length; i++){
+        // debugger;
         let tableBody = document.getElementsByTagName("tbody")[0];
         let result = breakOrdersIntoProducts(orders[i]);
-        // debugger;
+        debugger;
         for(let j = 0; j < result.length; j++){
             let tableRow = document.createElement("tr");
             let id = result[j]["id"];
             let productName = result[j]["product"].name;
             let quantity = result[j]["quantity"];
-            let date = result[j]["date"].toLocaleDateString();
+            let date = result[j]["date"];
             let status = result[j]["status"];
             let unitPrice = result[j]["product"].price;
             let tableData = document.createElement("td");

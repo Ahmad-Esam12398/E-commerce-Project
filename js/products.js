@@ -1,5 +1,6 @@
 //product.js
 import { Product } from './productsmodule.js';
+import{products}from './data.js'
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -19,9 +20,6 @@ try {
 
 function getAllProducts() {
   let productsArr = [];
-  let products = []; 
-
-  
 
   for (const productId in cart) {
     const productDetails = products.find(product => product.id == productId);
@@ -30,18 +28,22 @@ function getAllProducts() {
       productDetails.quantity = cart[productId].quantity;
     }
   }
+
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  if (localStorage.getItem('products') == null) {
+
+  let localStorageProducts = JSON.parse(localStorage.getItem('products'));
+
+  if (!localStorageProducts || localStorageProducts.length === 0) {
+    // If not found or empty, use products from data.js
     for (let i = 0; i < products.length; i++) {
       productsArr.push(products[i].getProduct());
     }
+    localStorageProducts = productsArr;
     localStorage.setItem("products", JSON.stringify(productsArr));
-  } else {
-    productsArr = JSON.parse(localStorage.getItem('products'));
   }
 
-  return productsArr;
+  return localStorageProducts;
 }
 
 function displayProducts() {
@@ -64,7 +66,7 @@ function displayProducts() {
         <img src="${product.image || 'path/to/default/image.jpg'}" alt="Product Image" />
         <p>${product.category}</p>
         <h2>${product.name}</h2>
-        <p>Price: $${product.price}</p>
+        <p>Price: $${product.price.toFixed(2)}</p>
       </a>
     `;
 
@@ -73,7 +75,6 @@ function displayProducts() {
     productDetailsContainer.appendChild(stockElement);
 
     productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
-    
 
     if (cart[product.id]) {
       product.quantity = cart[product.id].quantity;
@@ -81,8 +82,18 @@ function displayProducts() {
 
     productDiv.appendChild(productDetailsContainer);
     listProduct.appendChild(productDiv);
+
+    if (product.quantity <= 0) {
+      stockElement.textContent = 'Out of Stock';
+      stockElement.style.color = 'red';
+
+    
+  
+    }
   });
 }
+
+
 
 function addToCart(productId) {
   const productDetails = getAllProducts().find(product => product.id == productId);
@@ -158,7 +169,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * cart[productId].cardquantity}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity.toFixed(2)}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
