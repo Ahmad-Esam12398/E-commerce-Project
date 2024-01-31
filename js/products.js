@@ -178,7 +178,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * cart[productId].cardquantity.ti}</p>
+      <p>$${Number(productDetails.price * cart[productId].cardquantity)}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
