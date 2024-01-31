@@ -31,7 +31,7 @@ function getAllProducts() {
 
   localStorage.setItem('cart', JSON.stringify(cart));
 
-
+  // Parse the localStorage item back to an array
   let localStorageProducts = JSON.parse(localStorage.getItem('products'));
 
   if (!localStorageProducts || localStorageProducts.length === 0) {
@@ -88,7 +88,14 @@ function displayProducts() {
       stockElement.style.color = 'red';
 
     
-  
+      const quantityLabel = document.createElement('p');
+      quantityLabel.textContent = `Quantity: ${product.quantity}`;
+      quantityLabel.style.color = 'red';
+      quantityLabel.style.position = 'absolute';
+      quantityLabel.style.top = '70%';
+      quantityLabel.style.left = '50%';
+      quantityLabel.style.transform = 'translateX(-50%)';
+      productDiv.appendChild(quantityLabel);
     }
   });
 }
@@ -169,7 +176,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * cart[productId].cardquantity.toFixed(2)}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity.ti}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
