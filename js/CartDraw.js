@@ -1,3 +1,99 @@
+import { products } from "./data.js";
+let productsArr = [];
+if (localStorage.getItem("products") == null) {
+    for (let i = 0; i < products.length; i++) {
+        productsArr.push(products[i].getProduct());
+    }
+    localStorage.setItem("products", JSON.stringify(productsArr))
+}
+productsArr = localStorage.getItem("products");
+
+let cart=null;
+if (localStorage.getItem("cart") != null) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+}
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+function changequantity(productId, quantityChange) {
+    const product = cart[productId];
+
+    if (product) {
+        if (quantityChange > 0 && product.cardquantity >= product.quantity) {
+            console.log("Cannot add more.");
+        } else {
+            product.cardquantity += quantityChange;
+
+            if (product.cardquantity <= 0) {
+                delete cart[productId];
+                listCard.innerHTML = " ";
+            }
+            saveCartToLocalStorage();
+            reloadCard();
+            
+        }
+    }
+}
+function reloadCard() {
+    listCard.innerHTML = '';
+    let count = 0;
+    let totalprice = 0;
+
+    for (const productId in cart) {
+        const productDetails = cart[productId];
+
+        totalprice += productDetails.price * productDetails.cardquantity;
+        count += productDetails.cardquantity;
+
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = `
+        <div>
+          <img src="${productDetails.image}" />
+        </div>
+        <h2>${productDetails.name}</h2>
+        <div class="plusevent">
+          <span class="minus">-</span>
+          <span class="num">${productDetails.cardquantity}</span>
+          <span class="plus">+</span>
+        </div>
+        <p>$${productDetails.price * productDetails.cardquantity}</p>
+        <button class="remove-button" data-product-id="${productId}">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+      `;
+        const minuss = newDiv.querySelector('.minus');
+        const pluss = newDiv.querySelector('.plus');
+
+        minuss.addEventListener('click', function () {
+            changequantity(productId, -1);
+        });
+
+        pluss.addEventListener('click', function () {
+            changequantity(productId, 1);
+        });
+
+        listCard.appendChild(newDiv);
+    }
+
+    total.innerText = `$${totalprice.toLocaleString()}`;
+    cardquantity.innerText = count;
+
+    const removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            removeProductFromCart(productId);
+        });
+    });
+    reloadTable();
+}
+function removeProductFromCart(productId) {
+    if (cart[productId]) {
+        delete cart[productId];
+        saveCartToLocalStorage();
+        reloadCard();
+    }
+}
 function CreateTable(targetTable, orderObjects) {
     targetTable.innerHTML = '';
     for (const key in orderObjects) {
@@ -13,7 +109,7 @@ function CreateTable(targetTable, orderObjects) {
         let closebtn = document.createElement("td");
         // setting photo source
         img.setAttribute("src", `${orderObjects[key].image}`);
-        img.setAttribute("width", "50px");
+        img.style.width = "100px"
         imgholder.appendChild(img);
         // name
         name.innerText = orderObjects[key].name;
@@ -22,7 +118,21 @@ function CreateTable(targetTable, orderObjects) {
         //price
         price.innerText = `$${orderObjects[key].price}`;
         //quantity
-        quantity.innerText = orderObjects[key].cardquantity
+        quantity.innerHTML = `<div class="d-flex plusevent">
+                                <span class="d-inline-block minus">-</span>
+                                <span class="d-inline-block num">${orderObjects[key].cardquantity}</span>
+                                <span class="d-inline-block plus">+</span>
+                            </div>`
+        const minuss = quantity.querySelector('.minus');
+        const pluss = quantity.querySelector('.plus');
+
+        minuss.addEventListener('click', function () {
+            changequantity(orderObjects[key].id, -1);
+        });
+
+        pluss.addEventListener('click', function () {
+            changequantity(orderObjects[key].id, 1);
+        });
         //subtotal
         subtotal.innerText = `$${orderObjects[key].price * orderObjects[key].cardquantity}`;
         subtotal.classList.add("subtotalV");
@@ -30,7 +140,7 @@ function CreateTable(targetTable, orderObjects) {
         closebtn.innerHTML =
             `<button class="border-0 rounded-5 bg-body">
             <i class="fa-regular fa-circle-xmark"></i>
-            </button>`
+            </button>`;
         // appending them all to the row
         tr.appendChild(imgholder);
         tr.appendChild(name);
@@ -38,14 +148,13 @@ function CreateTable(targetTable, orderObjects) {
         tr.appendChild(quantity);
         tr.appendChild(subtotal);
         tr.appendChild(closebtn);
+        closebtn.addEventListener("click", () => removeProductFromCart(orderObjects[key].id));
         // appending the row to the table body
         targetTable.appendChild(tr);
     }
 }
 
-function generateCard(containerId, productDetails) {
-    // Get the container element
-    var container = document.getElementById("ProductsCards");
+function generateCard(cardContainer, productDetails) {
     // Create a new div element with the card structure
     var cardDiv = document.createElement('div');
     cardDiv.className = 'card d-block d-lg-none productContainer';
@@ -62,10 +171,9 @@ function generateCard(containerId, productDetails) {
     // Product Image
     let imgholder = document.createElement("div");
     var img = document.createElement('img');
+    img.classList.add("w-50")
     img.src = productDetails.image;
-    img.style.width = "100px";
-    img.alt = '';
-    imgholder.classList.add("d-flex", "justify-content-between")
+    imgholder.classList.add("d-flex", "justify-content-center")
     imgholder.appendChild(img);
     cardBody.appendChild(imgholder);
     // Product Name
@@ -81,7 +189,21 @@ function generateCard(containerId, productDetails) {
     // Product Quantity
     var productQuantity = document.createElement('div');
     productQuantity.classList.add("d-flex", "justify-content-between")
-    productQuantity.innerHTML = 'Quantity<p class="d-flex justify-content-end">' + productDetails.cardquantity + '</p>';
+    productQuantity.innerHTML = `Quantity<div class="plusevent d-flex justify-content-end">
+                                <span class="d-inline-block minus">-</span>
+                                <span class="d-inline-block num">${productDetails.cardquantity}</span>
+                                <span class="d-inline-block plus">+</span>
+                            `
+    const minuss = productQuantity.querySelector('.minus');
+    const pluss = productQuantity.querySelector('.plus');
+
+    minuss.addEventListener('click', function () {
+        changequantity(productDetails.id, -1);
+    });
+
+    pluss.addEventListener('click', function () {
+        changequantity(productDetails.id, 1);
+    });
     cardBody.appendChild(productQuantity);
     // Subtotal
     var subtotal = document.createElement('div');
@@ -91,27 +213,37 @@ function generateCard(containerId, productDetails) {
     cardBody.appendChild(subtotal);
     // appending cardbody with the product details to the card div
     cardDiv.appendChild(cardBody);
-    // Append the card to the container
-    container.appendChild(cardDiv);
+    // return the card
+    return cardDiv
 }
-
+function generateAllCards(cart) {
+    var container = document.getElementById("ProductsCards");
+    container.innerHTML = "";
+    for (const key in cart) {
+        container.appendChild(generateCard(container, cart[key]));
+    }
+}
+function reloadTable() {
+    let newtablebody = document.getElementsByTagName("tbody")[0];
+    CreateTable(newtablebody, cart);
+    generateAllCards(cart);
+}
+const listCard = document.querySelector('.listCard');
+const total = document.querySelector('.total');
+const cardquantity = document.querySelector('.cardquantity');
+reloadCard();
 window.addEventListener("load", () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    if (!cart) {
+    if (!Object.keys(cart).length || !cart) {
         alert("Nothing in the Cart!");
         window.location.href = "home.html";
     }
     let tablebody = document.getElementsByTagName("tbody")[0];
     CreateTable(tablebody, cart);
-    for (const key in cart) {
-        generateCard(ProductsCards, cart[key]);
-    }
+    generateAllCards(cart);
     let subtotals = document.getElementsByClassName("subtotalV");
     let subtotalAddition = 0;
     for (let i = 0; i < subtotals.length; i++) {
         subtotalAddition += Number((subtotals[i].innerText).substr(1));
-        // console.log((subtotals[i].innerText).substr(1));
-        // console.log(subtotalAddition)
     }
     document.getElementsByClassName("subtotalVal")[0].innerText += ` ${subtotalAddition}`;
     document.getElementsByClassName("totalVal")[0].innerText += ` ${subtotalAddition}`;

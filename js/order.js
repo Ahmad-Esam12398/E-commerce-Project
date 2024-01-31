@@ -38,6 +38,10 @@ collapsed_button.addEventListener("click", function () {
     content.classList.toggle("col-lg-10");
     })
     console.log(_orders)
+
+
+
+
     let separatedOrders = [];
     
     /*---------------------------------------------map order Array to each seller---------------*/
@@ -340,3 +344,5 @@ let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
             console.log(LessOrder.map(item=>item.productname))
 
 localStorage.setItem("OrderStat",JSON.stringify(OrderStat))
+
+
