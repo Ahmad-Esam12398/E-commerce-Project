@@ -1,4 +1,4 @@
-import {products as originalProducts, persons as originalPersons} from "./data.js";
+import {products as originalProducts, persons as originalPersons, originalOrders as initialOrders} from "./data.js";
 import {Product} from "./productsmodule.js";
 
 if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
@@ -16,6 +16,10 @@ if(localStorage.getItem("products") == null){
     let plainProducts = originalProducts.map((item)=>item.getProduct());
     localStorage.setItem("products", JSON.stringify(plainProducts));
 }
+if(localStorage.getItem("originalOrders") == null){
+    localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
+let originalOrders = JSON.parse(localStorage.getItem("originalOrders"));
 // let plainProducts = products.map((item)=>item.getProduct());
 // localStorage.setItem("products", JSON.stringify(plainProducts));
 let persons = JSON.parse(localStorage.getItem("Persons"));
@@ -207,13 +211,22 @@ function saveNewRow() {
 }
 function deleteRow(e) {
     if(confirm("Are you sure you want to delete this product?")) {
+        debugger;
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
         let index = products.findIndex(product => product.id == id);
         // console.log(index);
-        products.splice(index, 1);
-        updateProductsLocalStorage();
-        createTableProducts();
+        let flag = false;
+        if(originalOrders.forEach(order => {order["products"].forEach (product => {if(product == id) flag = true;})}));
+        if(flag == true){
+            alert("You can't delete this product because it has orders. Plz Delete them First");
+            return;
+        }
+        else{
+            products.splice(index, 1);
+            updateProductsLocalStorage();
+            createTableProducts();
+        }
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
