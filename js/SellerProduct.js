@@ -39,6 +39,7 @@ let IsEdit = false
 let CurrentIndex = 0
 let SellerProduct = []
 let SwapSort = true
+let created=false;
 let collapsed_button = document.getElementsByClassName("btn-collapse-sidebar")[0];
 let side_bar = document.getElementById("sidebar");
 let content = document.getElementById("content");
@@ -117,8 +118,10 @@ function drawTable(_array, Parent) {
         let tbody = document.createElement("tbody");
         drawHeaderRow(_array, thead, true, "description", "sellerID", "categoryPath", "otherCategory");        // draw header of table
         Parent.appendChild(thead);
+        
         for (let i = 0; i < _array.length; i++) {
             let row = document.createElement("tr");
+            
             drawRow(_array, i, row, true, "description", "sellerID", "categoryPath", "otherCategory");             // draw each Row of table
             tbody.appendChild(row);
         }
@@ -161,10 +164,13 @@ function drawHeaderRow(_array, RowParent, DrawOptionColumn, ...excludeColumns) {
 
 /*-------------------------------------draw Table Row for product-------------------------------------------------------------*/
 function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumns) {
+    let counter=0;
     for (let key in _array[RowIndex]) {
+        
         if (!excludeColumns.includes(key)) {
             let cell = document.createElement("td");
-            if (typeof _array[RowIndex][key] === "string" && _array[RowIndex][key].includes("image")) {
+            if (typeof _array[RowIndex][key] === "string" && _array[RowIndex][key].includes("image")||counter==4) {
+                console.log(counter)
                 cell.classList.add("img-center", "position-relative");
                 let Createdimg = document.createElement("img");
                 let source = _array[RowIndex][key];
@@ -176,6 +182,7 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
                 cell.classList.add("text-center");
             }
             RowParent.appendChild(cell);
+            counter++;
         }
     }
     if (DrawOptionColumn) {
@@ -223,6 +230,8 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
                 0,
                 "DefaultCategory"
             );
+            created=true
+            createobj.id=products[products.length-1].id+1
             SetProduct(createobj);
             products.push(createobj.getProduct());
             OutOfForum = true;
@@ -263,7 +272,6 @@ function SetProduct(pro) {
     pro.description = document.getElementById("floatingdescription").value;
     pro.image = document.getElementById("floatingImage").value;
     pro.sellerID = activeUser.id;
-    pro.id=products.length+1
 }
 
 function validatename(_name, input) {
@@ -430,25 +438,6 @@ SearchedProduct.addEventListener("keyup", function () {
     console.log(filterProduct)
     drawTable(filterProduct, SelectedTable, true);
 });
-
-/*-----------------------------------------------------entry for table----------------------------------------------------------*/
-SelectedEntry.addEventListener("change", ShowEntry)
-
-function ShowEntry() {
-    let size = 0
-    if (SelectedEntry.value == "Full") {
-        size = SellerProduct.length
-    }
-    else {
-        size = parseInt(SelectedEntry.value)
-    }
-    let ShownArrayEntry = []
-    for (let i = 0; i < size; i++) {
-        ShownArrayEntry.push(SellerProduct[i]);
-    }
-    // console.log(ShownArrayEntry)
-    drawTable(ShownArrayEntry, SelectedTable, true);
-}
 
 /*----------------------------------------------------sort table----------------------------------------------------------------*/
 SelectedTable.addEventListener("click", function (e) {

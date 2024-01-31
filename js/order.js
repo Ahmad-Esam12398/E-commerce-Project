@@ -1,10 +1,13 @@
 // Authentications
+import { orders } from "./data.js"
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
 }
 
+
 let SwapSort=true
+let _orders=[]
 let OrderPerSeller=[]
 let SellerProduct=[]
 let activeUser=JSON.parse(localStorage.getItem("activeuser"))
@@ -14,13 +17,23 @@ let side_bar = document.getElementById("sidebar");
 let products=JSON.parse(localStorage.getItem("products"))
 let persons=JSON.parse(localStorage.getItem("Persons"))
 
+
+
 if (localStorage.getItem("Orders") == null) {
     localStorage.setItem("Orders", JSON.stringify(orders));
     }
+   
+     _orders = JSON.parse(localStorage.getItem("Orders"));
 
-    let _orders = JSON.parse(localStorage.getItem("Orders"));
+    console.log(_orders)
+    
+    
+    
+ 
+    
+   
 /* make collapsed button to narrow side bar and wide table*/
-
+console.log(_orders)
 
 collapsed_button.addEventListener("click", function () {
     side_bar.classList.toggle("active");
@@ -172,6 +185,7 @@ function drawHeaderRow(_array,RowParent,DrawOptionColumn,...excludeColumns){
                         let Createdimg = document.createElement("img");
                         let source = _array[RowIndex][key];
                         Createdimg.src = source;
+                        createdimg.setAttribute("alt", "");
                         Createdimg.classList.add("center-img");
                         cell.appendChild(Createdimg);
                     } else {
@@ -242,24 +256,6 @@ TableIcon.addEventListener("click",function(){
     drawTable(modifiedOrder, SelectedTable, true);
     TableIcon.style.display="none"
 })
-/*-----------------------------------------------------------Entry---------------------------------------------------- */
-let SelectedEntry=document.getElementById("entry")
-                SelectedEntry.addEventListener("change", ShowEntry)
-                function ShowEntry () {
-                    let size=0
-                    if(SelectedEntry.value=="Full"){
-                        size=modifiedOrder.length
-                    }
-                    else{
-                        size = parseInt(SelectedEntry.value)
-                    }
-                    let ShownArrayEntry = []
-                    for (let i = 0; i < size; i++) {
-                        ShownArrayEntry.push( modifiedOrder[i]);
-                    }
-                    drawTable(ShownArrayEntry, SelectedTable, true);
-            
-                }
 /*-----------------------------------------------------------Search---------------------------------------------------- */
 let SearchedProduct = document.getElementsByClassName("search-input")[0]
 SearchedProduct.addEventListener("keyup", function () {
