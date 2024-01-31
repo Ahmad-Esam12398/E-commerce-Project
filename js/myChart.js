@@ -4,6 +4,39 @@ if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     window.location.href = "./home.html";
 }
 
+/*-----------------------------------------------------Get Poduct Statictics----------------------------------------------------------------------*/ 
+window.addEventListener("load",GetSellerProduct)
+function GetSellerProduct(){
+    let products=JSON.parse(localStorage.getItem("products"))
+    let activeUser = JSON.parse(localStorage.getItem("Active User"))
+    let SellerId = activeUser.id
+    let SellerProducts = products.filter(item => item.sellerID == SellerId)
+    return SellerProducts
+}
+
+let Prod_Stats = {
+    No_Of_Product: GetSellerProduct().length,
+    each_product_quantity: function () {
+        let No_Of_Product = GetSellerProduct().length
+        let arr = [];
+        for (let i = 0; i < No_Of_Product; i++) {
+            let obj = {
+                productname: GetSellerProduct()[i].name,
+                productQuantity: GetSellerProduct()[i].quantity
+            }
+            arr.push(obj)
+        }
+        return arr
+    },
+}
+
+let modifiedProdStats = {
+    No_Of_Product: Prod_Stats.No_Of_Product,
+    productQuantityData: Prod_Stats.each_product_quantity(),
+};
+
+// localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
+
 let Wallet=document.getElementsByClassName("wallet")[0]
 let All_product=document.getElementsByClassName("allproduct")[0]
 let TrendName=document.getElementsByClassName("TrendName")[0]
@@ -33,9 +66,9 @@ collapsed_button.addEventListener("click", function () {
 
 
 /*----------------------------------------------------------Get Object Product Statictics-------------------------------------------*/
-let Prod_Stats=JSON.parse(localStorage.getItem("Prod_Stats"))
-let prod_name=Prod_Stats.productQuantityData.map(item => item.productname)
-let prod_quantity=Prod_Stats.productQuantityData.map(item => item.productQuantity)
+// let Prod_Stats=JSON.parse(localStorage.getItem("Prod_Stats"))
+let prod_name=modifiedProdStats.productQuantityData.map(item => item.productname)
+let prod_quantity=modifiedProdStats.productQuantityData.map(item => item.productQuantity)
 let prod_No=Prod_Stats.No_Of_Product
 /*----------------------------------------------------------Get Object Order Statictics-------------------------------------------*/
 let OrderStat=JSON.parse(localStorage.getItem("OrderStat"))

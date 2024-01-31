@@ -38,6 +38,10 @@ collapsed_button.addEventListener("click", function () {
     content.classList.toggle("col-lg-10");
     })
     console.log(_orders)
+
+
+
+
     let separatedOrders = [];
     
     /*---------------------------------------------map order Array to each seller---------------*/

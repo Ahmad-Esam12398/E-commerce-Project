@@ -89,10 +89,10 @@ btn_show_sidebar.addEventListener("click", function () {
 /*get seller information from persons*/
 let activeUser = JSON.parse(localStorage.getItem("Active User"))
 // let activeUser=persons[4]
-console.log(activeUser.id);
+//console.log(activeUser.id);
 
 localStorage.setItem("activeuser", JSON.stringify(activeUser));
-console.log(activeUser.id)
+//console.log(activeUser.id)
 /*get seller product it will return whole array of product*/
 function GetSellerProduct() {
     let SellerId = activeUser.id
@@ -207,15 +207,14 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
         if (validatename(ProductName.value, ProductName) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
-            validatename(ProductCatagory.value, ProductCatagory) ||
-            validateImagePath(ProductImage.value,ProductImage||
+            validatecatgory(ProductCatagory)||
+            validateImagePath(ProductImage.value,ProductImage)||
             validatDescription(ProductDescription.value, ProductDescription)
             )
-
-        ) {
+            {
             event.preventDefault();
         } else {
-            let createobj = new Product(
+            let createobj = new Product(0,
                 "DefaultName",
                 0,
                 0,
@@ -236,9 +235,9 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
         }
     } else {                                                        //here Update
         if (validatename(ProductName.value, ProductName) ||
-            validatename(ProductCatagory.value, ProductCatagory) ||
             validatePrice(ProductPrice.value, ProductPrice) ||
             validateQuantity(ProductQuantity.value, ProductQuantity) ||
+            (ProductCatagory.value===""||ProductCatagory.value=="Other")||
             validatDescription(ProductDescription.value, ProductDescription) ||
             validateImagePath(ProductImage.value, ProductImage)
         ) {
@@ -258,12 +257,13 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
 /*----------------------------------------Make Validition-----------------------------------------------------------------*/
 function SetProduct(pro) {
     pro.name = document.getElementById("floatingname").value;
-    pro.category = document.getElementById("floatingcatagory").value;
+    pro.category = document.getElementById("floatingcatagory").value
     pro.price = document.getElementById("floatingprice").value;
     pro.quantity = document.getElementById("floatingQuantity").value;
     pro.description = document.getElementById("floatingdescription").value;
     pro.image = document.getElementById("floatingImage").value;
     pro.sellerID = activeUser.id;
+    pro.id=products.length+1
 }
 
 function validatename(_name, input) {
@@ -279,8 +279,20 @@ function validatename(_name, input) {
     }
 }
 
+function validatecatgory(input) {
+    if(input.value===""||input.value=="Other") {
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        return true;
+    } else {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+        return false;
+    }
+}
+
 function validatDescription(_name, input) {
-    let descriptionPattern = /^[A-Za-z0-9\s.,'"!?()-]+$/;
+    let descriptionPattern = /^[a-zA-Z0-9\s,\.!]+$/;
     if (_name.match(descriptionPattern)) {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
@@ -331,7 +343,6 @@ function validateImagePath(text, input) {
         return true;
     }
 }
-// ProductImage
 /*delete input value after submit*/
 function deleteInput(form) {
     document.getElementById("floatingname").value = "";
@@ -379,7 +390,7 @@ SelectedTable.addEventListener("click", function (e) {
             DeleteBtn.addEventListener("click", handleDelete);
         }
         function handleDelete() {
-            console.log(CurrentIndex);
+            //console.log(CurrentIndex);
             notifaction("delete", products[CurrentIndex].name)
             if (CurrentIndex !== -1) {
                 products.splice(CurrentIndex, 1);
@@ -406,7 +417,7 @@ SearchedProduct.addEventListener("keyup", function () {
     let inputValue = SearchedProduct.value.toLowerCase();
     let filterProduct = [];
     if (inputValue.trim() !== "") {
-        filterProduct = SellerProduct.filter(function (item) {
+        filterProduct = GetSellerProduct().filter(function (item) {
             if (item.name.toLowerCase().includes(inputValue) || item.category.toLowerCase().includes(inputValue)) {
                 return item;
             }
@@ -414,7 +425,7 @@ SearchedProduct.addEventListener("keyup", function () {
 
     }
     else {
-        filterProduct = SellerProduct
+        filterProduct = GetSellerProduct()
     }
     console.log(filterProduct)
     drawTable(filterProduct, SelectedTable, true);
@@ -484,7 +495,7 @@ let Prod_Stats = {
     No_Of_Product: GetSellerProduct().length,
     each_product_quantity: function () {
         let SellerProduct = GetSellerProduct();
-        let No_Of_Product = SellerProduct.length
+        let No_Of_Product = GetSellerProduct().length
         let arr = [];
         for (let i = 0; i < No_Of_Product; i++) {
             let obj = {
@@ -503,6 +514,6 @@ let modifiedProdStats = {
 };
 
 localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
-console.log(modifiedProdStats.productQuantityData.map(item => item.productname))
-console.log(modifiedProdStats.productQuantityData.map(item => item.productQuantity))
+//console.log(modifiedProdStats.productQuantityData.map(item => item.productname))
+//console.log(modifiedProdStats.productQuantityData.map(item => item.productQuantity))
 
