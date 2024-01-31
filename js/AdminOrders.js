@@ -10,7 +10,7 @@ if(localStorage.getItem("Orders") == null){
     localStorage.setItem("Orders", JSON.stringify(sellerOrders));
 }
 
-if(JSON.parse(localStorage.getItem("products") == null)){
+if(localStorage.getItem("products") == null){
     localStorage.setItem("products", JSON.stringify(initialProducts));
 }
 
@@ -28,6 +28,7 @@ function updateOriginalOrdersLocalStorage(){
     localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function breakOrdersIntoProducts(ordersRow){
+    debugger;
     let target = [];
     let productsId = ordersRow["products"];
     let productsIndices = [];

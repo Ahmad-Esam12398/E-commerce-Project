@@ -12,7 +12,6 @@ if(localStorage.getItem("Persons") == null){
     // console.log(JSON.parse(localStorage.getItem("Persons")));
 }
 if(localStorage.getItem("products") == null){
-    debugger;
     let plainProducts = originalProducts.map((item)=>item.getProduct());
     localStorage.setItem("products", JSON.stringify(plainProducts));
 }
@@ -29,6 +28,7 @@ function updateProductsLocalStorage(){
 }
 
 function createTableProducts(){
+    debugger;
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
     let tableBody = document.getElementsByTagName("tbody")[0];
