@@ -140,7 +140,7 @@ function addProductRow() {
     let sellerID = document.getElementById("sellerID").value;
     let category = document.getElementById("Room").value;
     // debugger;
-    let newProduct = new Product(name, price, quantity, image, sellerID, category);
+    let newProduct = new Product(name, price, quantity, "", image, sellerID, category);
     products.push(newProduct.getProduct());
     updateProductsLocalStorage();
     createTableProducts();

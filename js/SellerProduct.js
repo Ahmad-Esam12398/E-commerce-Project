@@ -250,6 +250,7 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
             drawTable(GetSellerProduct(), SelectedTable, true);
             $('#form').modal('hide');
             deleteInput(ProductName, ProductCatagory, ProductPrice, ProductDescription, ProductQuantity);
+            deleteInput(form);
             IsEdit = false;
         }
     }
