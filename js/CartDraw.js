@@ -56,7 +56,7 @@ function reloadCard() {
           <span class="num">${productDetails.cardquantity}</span>
           <span class="plus">+</span>
         </div>
-        <p>$${productDetails.price * productDetails.cardquantity}</p>
+        <p>$${(productDetails.price * productDetails.cardquantity).toFixed(2)}</p>
         <button class="remove-button" data-product-id="${productId}">
           <i class="fa-regular fa-circle-xmark"></i>
         </button>
@@ -75,7 +75,7 @@ function reloadCard() {
         listCard.appendChild(newDiv);
     }
 
-    total.innerText = `$${totalprice.toLocaleString()}`;
+    total.innerText = `$${totalprice.toFixed(2)}`;
     cardquantity.innerText = count;
 
     const removeButtons = document.querySelectorAll('.remove-button');
@@ -116,7 +116,7 @@ function CreateTable(targetTable, orderObjects) {
         name.style.color = "black";
         name.style.fontWeight = "bold";
         //price
-        price.innerText = `$${orderObjects[key].price}`;
+        price.innerText = `$${orderObjects[key].price.toFixed(2)}`;
         //quantity
         quantity.innerHTML = `<div class="d-flex plusevent">
                                 <span class="d-inline-block changenum minus">-</span>
@@ -134,7 +134,7 @@ function CreateTable(targetTable, orderObjects) {
             changequantity(orderObjects[key].id, 1);
         });
         //subtotal
-        subtotal.innerText = `$${orderObjects[key].price * orderObjects[key].cardquantity}`;
+        subtotal.innerText = `$${(orderObjects[key].price * orderObjects[key].cardquantity).toFixed(2)}`;
         subtotal.classList.add("subtotalV");
         // close button
         closebtn.innerHTML =
@@ -184,15 +184,15 @@ function generateCard(cardContainer, productDetails) {
     // Product Price
     var productPrice = document.createElement('div');
     productPrice.classList.add("d-flex", "justify-content-between")
-    productPrice.innerHTML = 'Price<p class="d-flex justify-content-end">' + productDetails.price + '</p>';
+    productPrice.innerHTML = 'Price<p class="d-flex justify-content-end">' + (productDetails.price).toFixed(2) + '</p>';
     cardBody.appendChild(productPrice);
     // Product Quantity
     var productQuantity = document.createElement('div');
     productQuantity.classList.add("d-flex", "justify-content-between")
     productQuantity.innerHTML = `Quantity<div class="plusevent d-flex justify-content-end">
-                                <span class="d-inline-block minus">-</span>
-                                <span class="d-inline-block num">${productDetails.cardquantity}</span>
-                                <span class="d-inline-block plus">+</span>
+                                <span class="d-inline-block changenum minus">-</span>
+                                <span class="d-inline-block changenum num">${productDetails.cardquantity}</span>
+                                <span class="d-inline-block changenum plus">+</span>
                             `
     const minuss = productQuantity.querySelector('.minus');
     const pluss = productQuantity.querySelector('.plus');
@@ -209,7 +209,7 @@ function generateCard(cardContainer, productDetails) {
     var subtotal = document.createElement('div');
     console.log(productDetails.price)
     subtotal.classList.add("d-flex", "justify-content-between")
-    subtotal.innerHTML = `Subtotal<p class="d-flex justify-content-end">$${productDetails.price * productDetails.cardquantity}</p>`;
+    subtotal.innerHTML = `Subtotal<p class="d-flex justify-content-end">$${(productDetails.price * productDetails.cardquantity).toFixed(2)}</p>`;
     cardBody.appendChild(subtotal);
     // appending cardbody with the product details to the card div
     cardDiv.appendChild(cardBody);
@@ -235,8 +235,8 @@ function updateTotal() {
     for (let i = 0; i < subtotals.length; i++) {
         subtotalAddition += Number((subtotals[i].innerText).substr(1));
     }
-    document.getElementsByClassName("subtotalVal")[0].innerText = ` $${subtotalAddition}`;
-    document.getElementsByClassName("totalVal")[0].innerText = ` $${subtotalAddition}`;
+    document.getElementsByClassName("subtotalVal")[0].innerText = ` $${subtotalAddition.toFixed(2)}`;
+    document.getElementsByClassName("totalVal")[0].innerText = ` $${subtotalAddition.toFixed(2)}`;
 }
 
 const listCard = document.querySelector('.listCard');
