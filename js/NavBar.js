@@ -3,7 +3,7 @@ import { Person } from "./person.js";
 window.addEventListener("load", function () {
     // get the active user if found and set to guest if not
     if (localStorage.getItem("Active User") == null) {
-        let guest = new Person("-1","", "", "", "", "", "Guest");
+        let guest = new Person(-1, "", "", "", "", "", "Guest");
         localStorage.setItem("Active User", JSON.stringify(guest.getPerson()));
     } else {
         var activeUser = JSON.parse(localStorage.getItem("Active User"));
