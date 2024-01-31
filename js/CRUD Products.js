@@ -131,16 +131,20 @@ function getOptions(){
         document.getElementById("sellerID").appendChild(option);
     });
 }
+function getLastProductId(arr){
+    return arr[arr.length - 1].id + 1;
+}
 function addProductRow() {
+    let id = getLastProductId(products);
     let name = document.getElementById("floatingName").value;
     let price = document.getElementById("floatingPrice").value;
     let quantity = document.getElementById("floatingQuantity").value;
-    // let description = document.getElementById("floatingDescription").value;
+    let description = document.getElementById("floatingDescription").value;
     let image = document.getElementById("floatingImage").value;
     let sellerID = document.getElementById("sellerID").value;
     let category = document.getElementById("Room").value;
     // debugger;
-    let newProduct = new Product(name, price, quantity, "", image, sellerID, category);
+    let newProduct = new Product(id, name, price, quantity, description, image, sellerID, category);
     products.push(newProduct.getProduct());
     updateProductsLocalStorage();
     createTableProducts();

@@ -1,4 +1,31 @@
+import { originalOrders as initialOrders } from "./data.js"
+import { products as initialProducts } from "./data.js";
+if(localStorage.getItem("originalOrders") == null){
+    localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
+if(localStorage.getItem("products") == null){
+    localStorage.setItem("products", JSON.stringify(initialProducts));
+}
+
+let originalOrders = JSON.parse(localStorage.getItem("originalOrders"));
+let products = JSON.parse(localStorage.getItem("products"));
+
+function updateOriginalOrdersLocalStorage(){
+    localStorage.setItem("originalOrders", JSON.stringify(originalOrders));
+}
+function updateProductsLocalStorage(){
+    localStorage.setItem("products", JSON.stringify(products));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+    if(localStorage.getItem("Active User")){
+        if(JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
+            window.location.href = "login.html";
+        }
+    }
+    else{
+        window.location.href = "login.html";
+    };
     const countries = document.getElementById("validationCustomcountry");
     fetch('https://restcountries.com/v3.1/all').then(res => {
         return res.json();
@@ -48,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!validateEmail() || !validatefname() || !validatelname() || !validteCompanyname() || !validateHOusennameandnumber() || !validateTown() || !validateZip() || !validatephone()) {
             event.preventDefault();
         } else {
+            saveOriginalOrdersData();
+            reduceQuantities();
             saveFormData();
             openpop();
             clearForm();
@@ -55,7 +84,50 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
+    function reduceQuantities(){
+        let cartData = JSON.parse(localStorage.getItem("cart"));
+        let quantities = [];
+        for(var key in cartData){
+            quantities.push(cartData[key].cardquantity);
+        }
+        let indices = [];
+        for(var key in cartData){
+            indices.push(products.findIndex(product => product.id == cartData[key].id));
+        }
+        for(let i = 0; i < indices.length; i++){
+            products[indices[i]].quantity -= quantities[i];
+        }
+        updateProductsLocalStorage();
+    }
+    function getOrderId(){
+        return originalOrders[originalOrders.length - 1]["id"] + 1;
+    }
+    function saveOriginalOrdersData() {
+        // { id: 1, products: [1, 2, 6], quantities:[4, 5, 6], date: '15/01/2024', status: 'pending', customerId: 2 }
+        let id = getOrderId();
+        let productsIds = [];
+        let quantities = [];
+        let date = getCurrentDayFormatted();
+        let status = "pending";
+        let customerId = JSON.parse(localStorage.getItem("Active User")).id;
+        let cartData = JSON.parse(localStorage.getItem("cart"));
+        for(var key in cartData){
+            productsIds.push(+key);
+            quantities.push(+cartData[key].cardquantity);
+        }
+        // console.log(productsIds);
+        // console.log(quantities);
+        let newOrder = {id: id, products: productsIds, quantities: quantities, date: date, status: status, customerId: customerId};
+        originalOrders.push(newOrder);
+        updateOriginalOrdersLocalStorage();
+    }
+    function getCurrentDayFormatted(){
+        let date = new Date();
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
 
 
 

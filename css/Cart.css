@@ -1,3 +1,6 @@
+*{
+    user-select: none;
+}
 body {
     background-color: rgba(245, 245, 245, 0.822);
     align-items: center;
@@ -12,7 +15,9 @@ table {
     overflow-y: auto;
     color: #6c6c6c;
 }
-
+tr{
+    text-align: center;
+}
 thead {
     border-bottom: 1px solid silver;
     background-color: #eeeeee;
@@ -67,4 +72,10 @@ td {
 .productContainer img:hover{
     box-shadow: -2px 2px 5px gray,2px -2px 5px gray;
     transition: 0.2s;
+}
+.changenum{
+    cursor: pointer;
+    border: 1px groove #d5d1d1;
+    padding: 5px;
+    background-color: white;
 }

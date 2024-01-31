@@ -122,9 +122,9 @@ let orders = [
     {
         orderId:8,
         _products_: [
-            { id: products[2].id, name: products[2].name, quantity:4 },
-            { id: products[8].id, name: products[8].name, quantity: 5 },
-            { id: products[14].id, name: products[14].name, quantity: 2 }
+            { id: products[2].id, name: products[2].name, quantity:2 },
+            { id: products[8].id, name: products[8].name, quantity: 1 },
+            { id: products[14].id, name: products[14].name, quantity: 1 }
         ],
         Order_date: new Date('2024-01-2'),
         Delivered_date:new Date('2024-01-5'),
@@ -132,18 +132,18 @@ let orders = [
         customerId: 4
     }];
     let originalOrders = [
-    { id: 1, products: [products[1], products[2], products[6]], quantities:[1, 2, 3], date: new Date('2024-01-20'), status: 'pending', customerName: 'ahmed' },
-    { id: 2, products: [products[4], products[9], products[14]], quantities:[2, 3, 4], date: new Date('2024-01-22'), status: 'pending', customerName: 'ali' },
-    { id: 3, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'pending', customerName: 'mohamed' },
-    { id: 4, products: [products[10], products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'ismail' },
-    { id: 5, products: [products[17]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'pending', customerName: 'hatem' },
-    { id: 6, products: [products[15], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
-    { id: 7, products: [products[0], products[3], products[5]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
-    { id: 8, products: [products[11], products[12], products[13]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
-    { id: 9, products: [products[16]], quantities: [2, 1, 1], date: new Date('2024-01-27'), status: 'delivered', customerName: 'hassan' },
-    { id: 10, products: [products[1], products[2], products[6]], quantities: [2, 1, 1], date: new Date('2024-01-20'), status: 'shipped', customerName: 'ahmed' },
-    { id: 11, products: [products[4], products[9], products[14]], quantities: [2, 1, 1], date: new Date('2024-01-22'), status: 'shipped', customerName: 'ali' },
-    { id: 12, products: [products[7], products[8]], quantities: [2, 1, 1], date: new Date('2024-01-05'), status: 'shipped', customerName: 'mohamed' },
+    { id: 1, products: [1, 2, 6], quantities:[4, 5, 6], date: '15/01/2024', status: 'pending', customerId: 2 },
+    { id: 2, products: [3, 4, 5], quantities:[2, 3, 4], date: '18/01/2024', status: 'pending', customerId: 4 },
+    { id: 3, products: [7, 9, 10], quantities: [1, 2, 3], date: '19/01/2024', status: 'pending', customerId: 2 },
+    { id: 4, products: [11, 12, 16], quantities: [4, 5, 2], date: '20/01/2024', status: 'pending', customerId: 4 },
+    { id: 5, products: [3, 7, 6], quantities: [1, 3, 2], date: '15/01/2024', status: 'pending', customerId: 2 },
+    { id: 6, products: [11, 12, 15], quantities: [2, 3, 4], date: '02/01/2024', status: 'delivered', customerId: 4 },
+    { id: 7, products: [10, 9, 1], quantities: [4, 5, 2], date: '10/01/2024', status: 'delivered', customerId: 2 },
+    { id: 8, products: [2, 8, 14], quantities: [2, 1, 1], date: '27/01/2024', status: 'delivered', customerId: 4 },
+    { id: 9, products: [16], quantities: [2, 1, 1], date: '27/01/2024', status: 'delivered', customerId: 2 },
+    { id: 10, products: [1, 2, 6], quantities: [2, 1, 1], date: '20/01/2024', status: 'shipped', customerId: 4 },
+    { id: 11, products: [4, 9, 14], quantities: [2, 1, 1], date: '22/01/2024', status: 'shipped', customerId: 2 },
+    { id: 12, products: [7, 8], quantities: [2, 1, 1], date: '22/01/2024', status: 'shipped', customerId: 4 },
 ];
 export {products, persons,orders, originalOrders};
 
