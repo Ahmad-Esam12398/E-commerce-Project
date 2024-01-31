@@ -6,9 +6,9 @@ if (localStorage.getItem("Persons") == null) {
         Persons.push(persons[i].getPerson());
     }
     localStorage.setItem("Persons", JSON.stringify(Persons))
-} else {
-    var usersArr = JSON.parse(localStorage.getItem("Persons"));
 }
+let usersArr = [];
+usersArr = JSON.parse(localStorage.getItem("Persons"));
 
 function checkEmail(mail) {
     for (let i = 0; i < usersArr.length; i++) {
