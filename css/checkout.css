@@ -177,7 +177,8 @@ td {
         background-color: white;
         margin-left: 15px !important;
         width: 90% !important;
-        height: 240vh;
+        height: 280vh !important;
+        margin-bottom: 20px;
     }
 
     .username {
@@ -273,7 +274,8 @@ td {
     }
     .customerandorder {
         margin-left: 25px !important ;
-        height: 240vh;
+        height: 290vh;
+        margin-bottom: 20px;
     }
 
     .housenumber {
@@ -318,7 +320,7 @@ td {
     }
 
     .btn {
-        border: 5px solid red;
+       position: absolute;
         padding: 0.5vw 25vw;
         margin-left: 1vw;
         margin-top: 2vh !important;

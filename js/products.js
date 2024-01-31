@@ -1,6 +1,12 @@
-//product.js
+
 import { Product } from './productsmodule.js';
-import{products}from './data.js'
+import { products } from './data.js';
+
+/////////////////////////checkProductQuantity function///////////////////////////
+ function checkProductQuantity(productId) {
+  const product = products.find(product => product.id == productId);
+  return product && product.quantity > 0;
+}
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -31,7 +37,7 @@ function getAllProducts() {
 
   localStorage.setItem('cart', JSON.stringify(cart));
 
-
+  // Parse the localStorage item back to an array
   let localStorageProducts = JSON.parse(localStorage.getItem('products'));
 
   if (!localStorageProducts || localStorageProducts.length === 0) {
@@ -66,15 +72,12 @@ function displayProducts() {
         <img src="${product.image || 'path/to/default/image.jpg'}" alt="Product Image" />
         <p>${product.category}</p>
         <h2>${product.name}</h2>
-        <p>Price: $${product.price.toFixed(2)}</p>
+        <p>Price: $${product.price}</p>
       </a>
     `;
 
-    const stockElement = document.createElement('p');
-    stockElement.textContent = product.quantity > 0 ? '' : 'Out of Stock';
-    productDetailsContainer.appendChild(stockElement);
 
-    productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+
 
     if (cart[product.id]) {
       product.quantity = cart[product.id].quantity;
@@ -83,28 +86,20 @@ function displayProducts() {
     productDiv.appendChild(productDetailsContainer);
     listProduct.appendChild(productDiv);
 
-    if (product.quantity <= 0) {
-      stockElement.textContent = 'Out of Stock';
-      stockElement.style.color = 'red';
-
-    
+    if (!checkProductQuantity(product.id)) {
   
     }
   });
 }
-
-
-
 function addToCart(productId) {
   const productDetails = getAllProducts().find(product => product.id == productId);
 
   if (!productDetails) {
-    // console.error("Product details not found for productId:", productId);
+    console.error("Product details not found for productId:", productId);
     return;
   }
 
   let stockElement = document.createElement('p');
-
 
   if (!cart[productId]) {
     cart[productId] = {
@@ -118,7 +113,7 @@ function addToCart(productId) {
   } else if (cart[productId].cardquantity >= productDetails.quantity) {
     console.log("Can't add more.");
     stockElement.textContent = 'Out of Stock';
-    stockElement.style.marginTop = "-14px";
+    stockElement.style.marginTop = "-350px"
     stockElement.style.marginLeft = "10px";
     stockElement.style.border = "1px solid black";
     stockElement.style.borderRadius = "10px";
@@ -127,13 +122,25 @@ function addToCart(productId) {
     stockElement.style.textAlign = "center";
     stockElement.style.padding = "5px";
     stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
+
+    // Append the stockElement to the product details container
+    const productDiv = document.getElementById(productId);
+    productDiv.appendChild(stockElement);
+
+   
+
   } else {
     cart[productId].cardquantity++;
-    // stockElement.textContent = '';
+
+   
+    
   }
+
   saveCartToLocalStorage();
   reloadCard();
 }
+
+
 
 function reloadCard() {
   listCard.innerHTML = '';
@@ -158,6 +165,8 @@ function reloadCard() {
     totalprice += productDetails.price * cart[productId].cardquantity;
     count += cart[productId].cardquantity;
 
+
+
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
       <div>
@@ -169,7 +178,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * cart[productId].cardquantity.toFixed(2)}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity.ti}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
@@ -177,8 +186,16 @@ function reloadCard() {
     const minus = newDiv.querySelector('.minus');
     const plus = newDiv.querySelector('.plus');
 
+
     minus.addEventListener('click', () => changequantity(productId, -1));
     plus.addEventListener('click', () => changequantity(productId, 1));
+
+    if (count === 0) {
+ 
+      products.forEach(product => product.quantity = 0);
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+    
 
     listCard.appendChild(newDiv);
   }
