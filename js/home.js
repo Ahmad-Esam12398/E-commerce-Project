@@ -4,11 +4,32 @@ const listCard = document.querySelector('.listCard');
 const total = document.querySelector('.total');
 const cardquantity = document.querySelector('.cardquantity');
 let cart = {};
+if (localStorage.getItem("cart") != null) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+}
 
 function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+function changequantity(productId, quantityChange) {
+    const product = cart[productId];
 
+    if (product) {
+        if (quantityChange > 0 && product.cardquantity >= product.quantity) {
+            console.log("Cannot add more.");
+        } else {
+            product.cardquantity += quantityChange;
+
+            if (product.cardquantity <= 0) {
+                delete cart[productId];
+                listCard.innerHTML = " ";
+            }
+
+            saveCartToLocalStorage();
+            reloadCard();
+        }
+    }
+}
 function reloadCard() {
     listCard.innerHTML = '';
     let count = 0;
@@ -47,26 +68,6 @@ function reloadCard() {
             changequantity(productId, 1);
         });
 
-        function changequantity(productId, quantityChange) {
-            const product = cart[productId];
-
-            if (product) {
-                if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
-                    console.log("Cannot add more.");
-                } else {
-                    product.cardquantity += quantityChange;
-
-                    if (product.cardquantity <= 0) {
-                        delete cart[productId];
-                        listCard.innerHTML = " ";
-                    }
-
-                    saveCartToLocalStorage();
-                    reloadCard();
-                }
-            }
-        }
-
         listCard.appendChild(newDiv);
     }
 
@@ -89,7 +90,7 @@ function removeProductFromCart(productId) {
     }
 }
 
-
+reloadCard();
 // array of products
 const arrProducts = [];
 for (let i = 0; i < products.length; i++) {
@@ -230,6 +231,5 @@ window.onscroll = function () {
 document.getElementById("UpButton").addEventListener("click", function () {
     document.documentElement.scrollTop = 0;
 });
-
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

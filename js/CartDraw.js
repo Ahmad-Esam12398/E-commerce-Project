@@ -13,7 +13,7 @@ function CreateTable(targetTable, orderObjects) {
         let closebtn = document.createElement("td");
         // setting photo source
         img.setAttribute("src", `${orderObjects[key].image}`);
-        img.setAttribute("width", "50px");
+        img.style.width = "100px"
         imgholder.appendChild(img);
         // name
         name.innerText = orderObjects[key].name;
@@ -30,7 +30,7 @@ function CreateTable(targetTable, orderObjects) {
         closebtn.innerHTML =
             `<button class="border-0 rounded-5 bg-body">
             <i class="fa-regular fa-circle-xmark"></i>
-            </button>`
+            </button>`;
         // appending them all to the row
         tr.appendChild(imgholder);
         tr.appendChild(name);
@@ -38,6 +38,7 @@ function CreateTable(targetTable, orderObjects) {
         tr.appendChild(quantity);
         tr.appendChild(subtotal);
         tr.appendChild(closebtn);
+        closebtn.addEventListener("click",)
         // appending the row to the table body
         targetTable.appendChild(tr);
     }
@@ -62,10 +63,9 @@ function generateCard(containerId, productDetails) {
     // Product Image
     let imgholder = document.createElement("div");
     var img = document.createElement('img');
+    img.classList.add("w-50")
     img.src = productDetails.image;
-    img.style.width = "100px";
-    img.alt = '';
-    imgholder.classList.add("d-flex", "justify-content-between")
+    imgholder.classList.add("d-flex", "justify-content-center")
     imgholder.appendChild(img);
     cardBody.appendChild(imgholder);
     // Product Name
@@ -95,6 +95,93 @@ function generateCard(containerId, productDetails) {
     container.appendChild(cardDiv);
 }
 
+if (localStorage.getItem("cart") != null) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+}
+
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+function changequantity(productId, quantityChange) {
+    const product = cart[productId];
+
+    if (product) {
+        if (quantityChange > 0 && product.cardquantity >= product.quantity) {
+            console.log("Cannot add more.");
+        } else {
+            product.cardquantity += quantityChange;
+
+            if (product.cardquantity <= 0) {
+                delete cart[productId];
+                listCard.innerHTML = " ";
+            }
+
+            saveCartToLocalStorage();
+            reloadCard();
+        }
+    }
+}
+function reloadCard() {
+    listCard.innerHTML = '';
+    let count = 0;
+    let totalprice = 0;
+
+    for (const productId in cart) {
+        const productDetails = cart[productId];
+
+        totalprice += productDetails.price * productDetails.cardquantity;
+        count += productDetails.cardquantity;
+
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = `
+        <div>
+          <img src="${productDetails.image}" />
+        </div>
+        <h2>${productDetails.name}</h2>
+        <div class="plusevent">
+          <span class="minus">-</span>
+          <span class="num">${productDetails.cardquantity}</span>
+          <span class="plus">+</span>
+        </div>
+        <p>$${productDetails.price * productDetails.cardquantity}</p>
+        <button class="remove-button" data-product-id="${productId}">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+      `;
+        const minuss = newDiv.querySelector('.minus');
+        const pluss = newDiv.querySelector('.plus');
+
+        minuss.addEventListener('click', function () {
+            changequantity(productId, -1);
+        });
+
+        pluss.addEventListener('click', function () {
+            changequantity(productId, 1);
+        });
+
+        listCard.appendChild(newDiv);
+    }
+
+    total.innerText = `$${totalprice.toLocaleString()}`;
+    cardquantity.innerText = count;
+
+    const removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            removeProductFromCart(productId);
+        });
+    });
+}
+function removeProductFromCart(productId) {
+    if (cart[productId]) {
+        delete cart[productId];
+        saveCartToLocalStorage();
+        reloadCard();
+    }
+}
+
+reloadCard();
 window.addEventListener("load", () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (!cart) {
