@@ -1,3 +1,4 @@
+//products module .js
 class Product{
     static lastID = localStorage.getItem("lastIDProduct") ? +(localStorage.getItem("lastIDProduct")) : 0;
     #id; #name; #price; #quantity; #description; #image; #sellerID; #category; #categorypath; #otherCategory;
@@ -130,4 +131,6 @@ class Product{
     }
 }
 export { Product };
+
+
 
