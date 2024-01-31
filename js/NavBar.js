@@ -40,6 +40,7 @@ window.addEventListener("load", function () {
     for (let i = 0; i < logout.length; i++) {
         logout[i].addEventListener("click", function () {
             activeUser.role = "Guest";
+            localStorage.removeItem("cart");
             localStorage.setItem("Active User", JSON.stringify(activeUser));
         });// end of logout
     }
