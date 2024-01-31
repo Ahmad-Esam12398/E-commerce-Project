@@ -1,4 +1,4 @@
-import { products as originalProducts, persons as originalPersons, originalOrders as originalOrders } from "./data.js";
+import { products as originalProducts, persons as originalPersons, originalOrders as initialOrders } from "./data.js";
 
 if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
   alert("You are not authorized to access this page.")
@@ -14,6 +14,10 @@ if(localStorage.getItem("products") == null){
   let plainProducts = originalProducts.map((item)=>item.getProduct());
   localStorage.setItem("products", JSON.stringify(plainProducts));
 }
+if(localStorage.getItem("originalOrders") == null){
+  localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
+let originalOrders = JSON.parse(localStorage.getItem("originalOrders"));
 let persons = JSON.parse(localStorage.getItem("Persons"));
 let products = JSON.parse(localStorage.getItem("products"));
 let noOfProducts = products.length;

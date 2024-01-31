@@ -27,6 +27,9 @@ body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) i
 body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input:hover, #lowerTable > i:hover{
     color: white !important;
 }
+#lowerTable{
+    margin: 2px 0 20px 0;
+}
 .searchbutton{
     margin-top: 0 2vw;
     /* margin-left: 55vw; */

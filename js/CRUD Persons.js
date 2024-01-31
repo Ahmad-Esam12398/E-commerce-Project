@@ -1,5 +1,6 @@
-import { persons as originalPersons } from "./data.js";
+import { persons as originalPersons, originalOrders as initialOrders } from "./data.js";
 import { Person } from "./person.js";
+
 
 if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
@@ -11,10 +12,17 @@ if(localStorage.getItem("Persons") == null){
     localStorage.setItem("Persons", JSON.stringify(plainPersons));
     // console.log(JSON.parse(localStorage.getItem("Persons")));
 }
+if(localStorage.getItem("originalOrders") == null){
+    localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
 let persons = JSON.parse(localStorage.getItem("Persons"));
-
+let orders = JSON.parse(localStorage.getItem("originalOrders"));
+let products = JSON.parse(localStorage.getItem("products"));
 function updatePersonsLocalStorage(){
     localStorage.setItem("Persons", JSON.stringify(persons));
+}
+function updateOrdersLocalStorage(){
+    localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function createTablePersons(){
     let myTable = document.getElementById("myTable");
@@ -186,32 +194,56 @@ function saveNewRow() {
 
 }
 function deleteRow(e) {
-    if(confirm("Are you sure you want to delete this product?")) {
+    if(confirm("Are you sure you want to delete this Person?")) {
+        debugger;
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
         let index = persons.findIndex(product => product.id == id);
         // console.log(index);
+        if(persons[index].role == "Seller"){
+            let sellerProducts = products.filter(product => product.sellerID == persons[index].id);
+            if(sellerProducts.length != 0){
+                alert("This seller has products. Please delete them first.");
+                return;
+            }
+            else if(!confirm("This seller has no products. Do you want to delete it?")){
+                return;
+            }
+        }
+        else if(persons[index].role == "Customer"){
+            let customerOrders = orders.filter(order => order.customerId == persons[index].id);
+            let flag = false;
+            if(customerOrders.length != 0){
+                alert("This customer has orders. Please delete them first.");
+                return;
+            }
+            else{
+                if(!confirm("This customer has no orders. Do you want to delete it?")){
+                    return;
+                }
+            }
+        }
         persons.splice(index, 1);
         updatePersonsLocalStorage();
         createTablePersons();
     }
 }
-function addCustomValidation(element, conditionFun){
-    if(conditionFun()){
-        element.setCustomValidity("invalid");
-    }
-    else{
-        element.setCustomValidity("");
-    }
-    element.addEventListener('input', function(event) {
-        if(conditionFun()){
-            element.setCustomValidity('invalid');
-        }
-        else{
-            element.setCustomValidity('');
-        }
-    }, false);
-}
+// function addCustomValidation(element, conditionFun){
+//     if(conditionFun()){
+//         element.setCustomValidity("invalid");
+//     }
+//     else{
+//         element.setCustomValidity("");
+//     }
+//     element.addEventListener('input', function(event) {
+//         if(conditionFun()){
+//             element.setCustomValidity('invalid');
+//         }
+//         else{
+//             element.setCustomValidity('');
+//         }
+//     }, false);
+// }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
     // Check if the form is valid
 
@@ -234,6 +266,8 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         else if(operation == "add"){
             addPersonRow();
         }
+        var myModal = document.getElementById('staticBackdrop');
+        myModal
     }
 });
 
