@@ -92,6 +92,9 @@ function removeProductFromCart(productId) {
 
 reloadCard();
 // array of products
+if (!localStorage.getItem("products")) {
+    
+}
 const arrProducts = [];
 for (let i = 0; i < products.length; i++) {
     arrProducts.push(products[i].getProduct());
@@ -100,7 +103,7 @@ for (let i = 0; i < products.length; i++) {
 function createProductCard(product) {
     // Create card
     const card = document.createElement("div");
-    card.classList.add("card", "col-8", "my-3", "mx-3", "mx-lg-3", "col-md")
+    card.classList.add("card", "col-8", "my-3", "mx-3", "mx-lg-3", "col-md-3")
 
     // Create img to hold product image
     const cardImg = document.createElement("img");
