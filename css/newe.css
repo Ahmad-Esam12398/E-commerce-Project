@@ -270,12 +270,13 @@
             }
             #create{
                 width:30%;
-                height: 55px;
-                font-size: 30px;
-                padding: 0 2px;
+                padding:  2px;
                 text-align: center;
                 vertical-align: middle;
-                
+                font-size: 0.75rem;
+                font-weight: 900;
+                height: 50px;
+                line-height: 2;
             }
             .table-entry {
                 margin: 10px auto;
@@ -411,13 +412,10 @@
         }
         .shopButton {
             font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            font-size: 12px;
-            font-size: 0.75rem;
-            line-height: 1em;
+            
             text-transform: uppercase;
             background-color: #edb932;
-            height: 40px;
+          
             border: 0;
         }
         #order-table{

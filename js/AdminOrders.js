@@ -1,10 +1,15 @@
 import { originalOrders as initialOrders } from "./data.js";
 import { products as initialProducts } from "./data.js";
+import { orders as sellerOrders} from "./data.js";
 
 if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
 }
+if(localStorage.getItem("Orders") == null){
+    localStorage.setItem("Orders", JSON.stringify(sellerOrders));
+}
+
 if(JSON.parse(localStorage.getItem("products") == null)){
     localStorage.setItem("products", JSON.stringify(initialProducts));
 }
@@ -85,8 +90,7 @@ function createTableOrders(){
                 tableData.innerHTML = sum;
                 tableData.classList.add("table-secondary");
                 tableRow.appendChild(tableData);
-            }
-            if(j == 0){
+
                 tableData = document.createElement("td");
                 tableData.innerHTML = date;
                 tableData.setAttribute("rowspan", result.length);
@@ -100,14 +104,31 @@ function createTableOrders(){
                 if(status == "delivered"){
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-success");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    let deleteButton = document.createElement("button");
+                    deleteButton.classList.add("btn");
+                    deleteButton.classList.add("btn-danger");
+                    deleteButton.innerText = "Delete";
+                    deleteButton.addEventListener("click", deleteOrder);
+                    tableData.appendChild(deleteButton);
+                    tableData.setAttribute("rowspan", result.length);
                 }
                 else if(status == "shipped"){
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-warning");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.setAttribute("rowspan", result.length);
+                    tableData.innerHTML = "N/A";
                 }
                 else{
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-danger");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.setAttribute("rowspan", result.length);
+                    tableData.innerHTML = "N/A";
                 }
                 tableRow.appendChild(tableData);
             }
@@ -117,6 +138,23 @@ function createTableOrders(){
     }
 };
 createTableOrders();
+
+function deleteOrder(){
+    let tableRow = this.parentElement.parentElement;
+    let rowSpan = tableRow.children[0].getAttribute("rowspan");
+    let id = tableRow.children[0].innerHTML;
+    let index = orders.findIndex(order => order.id == id);
+    orders.splice(index, 1);
+    updateOriginalOrdersLocalStorage();
+    tableRow.parentElement.removeChild(tableRow);
+    if(rowSpan){
+        for(let i = 0; i < rowSpan - 1; i++){
+            tableRow = tableRow.nextElementSibling;
+            tableRow.parentElement.removeChild(tableRow);
+        }
+    }
+    createTableOrders();
+}
 let searchdiv = document.getElementsByClassName("searchbutton")[0];
 searchdiv.children[0].addEventListener("keyup", function(event){
     if(event.keyCode == 13){

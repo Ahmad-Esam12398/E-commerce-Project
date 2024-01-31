@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const numbe = document.querySelector(".num");
 
     let number = 1;
-
+/////plus quantity//////////////
     pluspro.addEventListener("click", () => {
         if (productDetails && number < productDetails.quantity) {
             number++;
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         reloadCard();
     });
-
+///////////////////minus quantity
     minuspro.addEventListener("click", () => {
         if (number === 1) {
             console.log("Can't decrease below 1");
