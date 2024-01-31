@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getProductDetails(productId) {
-        const productJSON = localStorage.getItem(productId);
-        return productJSON ? JSON.parse(productJSON) : null;
+        const productJSON = JSON.parse(localStorage.getItem(productId));
+        return productJSON ? (productJSON) : null;
     }
 
     checkoutButton.addEventListener('click', function () {
@@ -197,4 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'checkout.html';
     });
 });
-

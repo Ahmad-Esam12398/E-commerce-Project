@@ -1,4 +1,3 @@
-// main .js
 import { Product } from "./productsmodule.js";
 import { Person } from "./person.js";
 // debugger;
