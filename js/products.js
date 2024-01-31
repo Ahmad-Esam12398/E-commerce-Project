@@ -1,5 +1,5 @@
+//product.js
 import { Product } from './productsmodule.js';
-import { products } from './data.js';
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -7,7 +7,6 @@ const total = document.querySelector('.total');
 const cardquantity = document.querySelector('.cardquantity');
 
 let cart = {};
-
 try {
   const cartString = localStorage.getItem('cart');
 
@@ -18,118 +17,148 @@ try {
   console.error("can't get 'cart' from localStorage:", error);
 }
 
-products.forEach(productInfo => {
-  const product = new Product(
-    productInfo.name,
-    productInfo.price,
-    productInfo.quantity,
-    productInfo.description,
-    productInfo.image,
-    productInfo.sellerID,
-    productInfo.category,
-    productInfo.categorypath
-  );
+function getAllProducts() {
+  let productsArr = [];
+  let products = []; 
 
-  const productDetails = product.getProduct();
+  
 
-  const productDiv = document.createElement('div');
-  productDiv.classList.add('product-details');
+  for (const productId in cart) {
+    const productDetails = products.find(product => product.id == productId);
 
-  productDiv.addEventListener('click', function () {
-    const productId = productDetails.id;
-    localStorage.setItem('selectedProductId', productId);
-    localStorage.setItem(productId, JSON.stringify(productDetails));
+    if (productDetails) {
+      productDetails.quantity = cart[productId].quantity;
+    }
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  if (localStorage.getItem('products') == null) {
+    for (let i = 0; i < products.length; i++) {
+      productsArr.push(products[i].getProduct());
+    }
+    localStorage.setItem("products", JSON.stringify(productsArr));
+  } else {
+    productsArr = JSON.parse(localStorage.getItem('products'));
+  }
+
+  return productsArr;
+}
+
+function displayProducts() {
+  const allProducts = getAllProducts();
+
+  allProducts.forEach(product => {
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('product-details');
+    productDiv.id = product.id;
+    const hoverIcon = document.createElement('div');
+    hoverIcon.classList.add('hover-icon');
+    hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
+    hoverIcon.addEventListener('click', () => addToCart(product.id, product.quantity));
+
+    productDiv.appendChild(hoverIcon);
+
+    const productDetailsContainer = document.createElement('div');
+    productDetailsContainer.innerHTML = `
+      <a href="productdetail.html?" style="text-decoration: none;">
+        <img src="${product.image || 'path/to/default/image.jpg'}" alt="Product Image" />
+        <p>${product.category}</p>
+        <h2>${product.name}</h2>
+        <p>Price: $${product.price}</p>
+      </a>
+    `;
+
+    const stockElement = document.createElement('p');
+    stockElement.textContent = product.quantity > 0 ? '' : 'Out of Stock';
+    productDetailsContainer.appendChild(stockElement);
+
+    productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
+    
+
+    if (cart[product.id]) {
+      product.quantity = cart[product.id].quantity;
+    }
+
+    productDiv.appendChild(productDetailsContainer);
+    listProduct.appendChild(productDiv);
   });
-
-  const hoverIcon = document.createElement('div');
-  hoverIcon.classList.add('hover-icon');
-  hoverIcon.setAttribute('data-product-id', productDetails.id);
-  hoverIcon.innerHTML = `<i class="fa-solid fa-basket-shopping"></i>`;
-
-  hoverIcon.addEventListener('click', function () {
-    addToCart(productDetails.id);
-  });
-
-  productDiv.appendChild(hoverIcon);
-
-  const productDetailsContainer = document.createElement('div');
-productDetailsContainer.innerHTML = `
-  <a href="productdetail.html?" style="text-decoration: none;">
-    <img src="${productDetails.image}" />
-    <p>${productDetails.category}</p>
-    <h2>${productDetails.name}</h2>
-    <p>Price: $${productDetails.price}</p>
-  </a>
-`;
-
-// Create and append the <p> element for availability status
-const stockElement = document.createElement('p');
-stockElement.textContent = productDetails.quantity > 0 ? '' : 'Out of Stock';
-productDetailsContainer.appendChild(stockElement);
-
-// Move "Out of Stock" message to the top of the product details
-productDetailsContainer.insertBefore(stockElement, productDetailsContainer.firstChild);
-
-productDiv.appendChild(productDetailsContainer);
-
-listProduct.appendChild(productDiv);
+}
 
 function addToCart(productId) {
+  const productDetails = getAllProducts().find(product => product.id == productId);
+
+  if (!productDetails) {
+    // console.error("Product details not found for productId:", productId);
+    return;
+  }
+
+  let stockElement = document.createElement('p');
+
+
   if (!cart[productId]) {
     cart[productId] = {
       id: productDetails.id,
       name: productDetails.name,
       price: productDetails.price,
       image: productDetails.image,
-      cardquantity: 1
+      cardquantity: 1,
+      quantity: productDetails.quantity
     };
   } else if (cart[productId].cardquantity >= productDetails.quantity) {
     console.log("Can't add more.");
     stockElement.textContent = 'Out of Stock';
-    stockElement.style.marginTop = "-14px"; 
-    stockElement.style.marginLeft = "10px"; 
+    stockElement.style.marginTop = "-14px";
+    stockElement.style.marginLeft = "10px";
     stockElement.style.border = "1px solid black";
     stockElement.style.borderRadius = "10px";
-    stockElement.style.color = "#efc040";
+    stockElement.style.color = "yellow";
     stockElement.style.width = "100px";
     stockElement.style.textAlign = "center";
     stockElement.style.padding = "5px";
-    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)"; 
-    
-
+    stockElement.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
   } else {
     cart[productId].cardquantity++;
+    // stockElement.textContent = '';
   }
   saveCartToLocalStorage();
   reloadCard();
 }
-
-
-});
 
 function reloadCard() {
   listCard.innerHTML = '';
   let count = 0;
   let totalprice = 0;
 
-  for (const productId in cart) {
-    const productDetails = cart[productId];
+  // Retrieve cart data from local storage on reload
+  if (localStorage.getItem('cart') !== null) {
+    cart = JSON.parse(localStorage.getItem('cart'));
+  }
 
-    totalprice += (productDetails.price * productDetails.cardquantity);
-    count += productDetails.cardquantity;
+  const allProducts = getAllProducts();
+
+  for (const productId in cart) {
+    const productDetails = allProducts.find(product => product.id == productId);
+
+    if (!productDetails) {
+      console.error("Product details not found for productId:", productId);
+      continue;
+    }
+
+    totalprice += productDetails.price * cart[productId].cardquantity;
+    count += cart[productId].cardquantity;
 
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
       <div>
-        <img src="${productDetails.image}" />
+        <img src="${productDetails.image || 'path/to/default/image.jpg'}" alt="Product Image" />
       </div>
       <h2>${productDetails.name}</h2>
       <div class="plusevent">
         <span class="minus">-</span>
-        <span class="num">${productDetails.cardquantity}</span>
+        <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * productDetails.cardquantity}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
@@ -137,33 +166,8 @@ function reloadCard() {
     const minus = newDiv.querySelector('.minus');
     const plus = newDiv.querySelector('.plus');
 
-    minus.addEventListener('click', function () {
-      changequantity(productId, -1);
-    });
-
-    plus.addEventListener('click', function () {
-      changequantity(productId, 1);
-    });
-
-    function changequantity(productId, quantityChange) {
-      const product = cart[productId];
-
-      if (product) {
-        if (quantityChange > 0 && product.cardquantity >= productDetails.quantity) {
-          console.log("Cannot add more.");
-        } else {
-          product.cardquantity += quantityChange;
-
-          if (product.cardquantity <= 0) {
-            delete cart[productId];
-            listCard.innerHTML = " ";
-          }
-
-          saveCartToLocalStorage();
-          reloadCard();
-        }
-      }
-    }
+    minus.addEventListener('click', () => changequantity(productId, -1));
+    plus.addEventListener('click', () => changequantity(productId, 1));
 
     listCard.appendChild(newDiv);
   }
@@ -173,13 +177,33 @@ function reloadCard() {
 
   const removeButtons = document.querySelectorAll('.remove-button');
   removeButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const productId = this.getAttribute('data-product-id');
+    button.addEventListener('click', () => {
+      const productId = button.getAttribute('data-product-id');
       removeProductFromCart(productId);
     });
   });
 }
 
+//////////////change quantity of product ///////////
+function changequantity(productId, quantityChange) {
+  const productDetails = cart[productId];
+
+  if (productDetails) {
+    if (quantityChange > 0 && productDetails.cardquantity >= productDetails.quantity) {
+      console.log("Cannot add more.");
+    } else {
+      productDetails.cardquantity += quantityChange;
+
+      if (productDetails.cardquantity <= 0) {
+        delete cart[productId];
+      }
+
+      saveCartToLocalStorage();
+      reloadCard();
+    }
+  }
+}
+////////remove productfromcart ////////
 function removeProductFromCart(productId) {
   if (cart[productId]) {
     delete cart[productId];
@@ -187,15 +211,19 @@ function removeProductFromCart(productId) {
     reloadCard();
   }
 }
-
+//////////save cart to locatstorage
 function saveCartToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+// Display products when the page and card loads
+displayProducts();
 reloadCard();
 
+
+// ------------------checkout -----------
 const checkoutButton = document.querySelector('.checkbtn');
-checkoutButton.addEventListener('click', function () {
+checkoutButton.addEventListener('click', () => {
   if (Object.keys(cart).length === 0) {
     console.log("cart is empty");
     return;
@@ -205,8 +233,7 @@ checkoutButton.addEventListener('click', function () {
   window.location.href = 'checkout.html';
 });
 
-var offcanvas = new bootstrap.Offcanvas(document.getElementById('demo'));
-
+/////////////// function for search ////////////
 window.search = function () {
   var searchtext = document.getElementsByTagName('input')[0].value.toLowerCase();
   var productDivs = document.querySelectorAll('.product-details');
@@ -221,7 +248,15 @@ window.search = function () {
       productDiv.style.display = "none";
     }
   });
-}
+
+  if (!found) {
+    productDivs.forEach(productDiv => {
+      productDiv.style.display = "block";
+    });
+  }
+};
+
+//////////// function for filter catogary ///////////////////////////
 window.display = function (e) {
   var target = e.target;
   if (target.tagName === 'P' && target.id === 'poption') {
@@ -238,10 +273,34 @@ window.display = function (e) {
         productDiv.style.display = "none";
       }
     });
+
     if (!found) {
       productDivs.forEach(productDiv => {
         productDiv.style.display = "block";
       });
     }
   }
-}
+};
+
+
+window.addEventListener("load", function () {
+  let productsDIV = document.getElementsByClassName("product-details");
+  for (let i = 0; i < productsDIV.length; i++) {
+    productsDIV[i].addEventListener("click", function (e) {
+      if (this.nodeName != "I") {
+        localStorage.setItem("selectedProductId", this.id);
+        let productsArr = getAllProducts();
+        for (let i = 0; i < productsArr.length; i++) {
+          if (productsArr[i]["id"] == this.id) {
+            localStorage.setItem(this.id, JSON.stringify(productsArr[i]));
+            // alert("Hello");
+            break;
+          }
+        }
+      }
+    });
+  }
+});
+
+
+
