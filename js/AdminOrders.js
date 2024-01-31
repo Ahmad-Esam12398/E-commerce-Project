@@ -23,6 +23,7 @@ localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
 // }
 let orders = JSON.parse(localStorage.getItem("originalOrders"));
 let products = JSON.parse(localStorage.getItem("products"));
+let _orders = JSON.parse(localStorage.getItem("Orders"));
 console.log(orders);
 function updateOriginalOrdersLocalStorage(){
     localStorage.setItem("originalOrders", JSON.stringify(orders));
@@ -140,11 +141,17 @@ function createTableOrders(){
 };
 createTableOrders();
 
+//Ahmad Mostafa Function
+function deleteOrdersByorderId(orderid) {
+    _orders = _orders.filter(order => order.orderId !== orderid);
+}
+
 function deleteOrder(){
     let tableRow = this.parentElement.parentElement;
     let rowSpan = tableRow.children[0].getAttribute("rowspan");
     let id = tableRow.children[0].innerHTML;
     let index = orders.findIndex(order => order.id == id);
+    deleteOrdersByorderId(id);
     orders.splice(index, 1);
     updateOriginalOrdersLocalStorage();
     tableRow.parentElement.removeChild(tableRow);

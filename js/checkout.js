@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
         total += productDetails.price * productDetails.cardquantity;
     }
 
-    subtotalValue.textContent = "PlaceOrder" + " " + total.toLocaleString();
+    subtotalValue.textContent = "PlaceOrder" + "  $" + total.toLocaleString()  ;
 });
 
 function AddToOrder(){
