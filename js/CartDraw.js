@@ -8,7 +8,7 @@ if (localStorage.getItem("products") == null) {
 }
 productsArr = localStorage.getItem("products");
 
-let cart=null;
+let cart = null;
 if (localStorage.getItem("cart") != null) {
     cart = JSON.parse(localStorage.getItem("cart"));
 }
@@ -25,12 +25,12 @@ function changequantity(productId, quantityChange) {
             product.cardquantity += quantityChange;
 
             if (product.cardquantity <= 0) {
-                delete cart[productId];
-                listCard.innerHTML = " ";
+                product.cardquantity = 1;
+                listCard.innerHTML = "";
             }
             saveCartToLocalStorage();
             reloadCard();
-            
+
         }
     }
 }
@@ -119,9 +119,9 @@ function CreateTable(targetTable, orderObjects) {
         price.innerText = `$${orderObjects[key].price}`;
         //quantity
         quantity.innerHTML = `<div class="d-flex plusevent">
-                                <span class="d-inline-block minus">-</span>
-                                <span class="d-inline-block num">${orderObjects[key].cardquantity}</span>
-                                <span class="d-inline-block plus">+</span>
+                                <span class="d-inline-block changenum minus">-</span>
+                                <span class="d-inline-block changenum num">${orderObjects[key].cardquantity}</span>
+                                <span class="d-inline-block changenum plus">+</span>
                             </div>`
         const minuss = quantity.querySelector('.minus');
         const pluss = quantity.querySelector('.plus');
@@ -227,24 +227,25 @@ function reloadTable() {
     let newtablebody = document.getElementsByTagName("tbody")[0];
     CreateTable(newtablebody, cart);
     generateAllCards(cart);
+    updateTotal();
 }
-const listCard = document.querySelector('.listCard');
-const total = document.querySelector('.total');
-const cardquantity = document.querySelector('.cardquantity');
-reloadCard();
-window.addEventListener("load", () => {
-    if (!Object.keys(cart).length || !cart) {
-        alert("Nothing in the Cart!");
-        window.location.href = "home.html";
-    }
-    let tablebody = document.getElementsByTagName("tbody")[0];
-    CreateTable(tablebody, cart);
-    generateAllCards(cart);
+function updateTotal() {
     let subtotals = document.getElementsByClassName("subtotalV");
     let subtotalAddition = 0;
     for (let i = 0; i < subtotals.length; i++) {
         subtotalAddition += Number((subtotals[i].innerText).substr(1));
     }
-    document.getElementsByClassName("subtotalVal")[0].innerText += ` ${subtotalAddition}`;
-    document.getElementsByClassName("totalVal")[0].innerText += ` ${subtotalAddition}`;
+    document.getElementsByClassName("subtotalVal")[0].innerText = ` $${subtotalAddition}`;
+    document.getElementsByClassName("totalVal")[0].innerText = ` $${subtotalAddition}`;
+}
+
+const listCard = document.querySelector('.listCard');
+const total = document.querySelector('.total');
+const cardquantity = document.querySelector('.cardquantity');
+reloadCard();
+window.addEventListener("load", () => {
+    let tablebody = document.getElementsByTagName("tbody")[0];
+    CreateTable(tablebody, cart);
+    generateAllCards(cart);
+    updateTotal();
 })// end of load
