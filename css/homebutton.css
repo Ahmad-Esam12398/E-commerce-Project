@@ -11,6 +11,15 @@
     font-size: 12px;
     transform: translateY(-35%);
 }
+#HomeCart {
+    background-color: #efc040;
+    color: white;
+    padding: 0px 5px;
+    border-radius: 30%;
+    position: absolute;
+    font-size: 12px;
+    transform: translateY(-35%);
+}
 
 .card {
     position: relative;
@@ -192,6 +201,7 @@
     margin-top: 50px;
     margin-left: 40px;
 }
+
 .offcanvas-body .card-img-bottom .cartbtn:hover,
 .offcanvas-body .card-img-bottom .checkbtn:hover {
     background-color: #333;

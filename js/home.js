@@ -148,7 +148,8 @@ function createProductCard(product) {
                     name: product.name,
                     price: product.price,
                     image: product.image,
-                    cardquantity: 1
+                    cardquantity: 1,
+                    quantity:product.quantity
                 }
             }
         } else if (cart[productId].cardquantity >= product.quantity) {
