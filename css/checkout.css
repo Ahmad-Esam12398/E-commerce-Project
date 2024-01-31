@@ -98,7 +98,7 @@ td {
 }
 
 .btn {
-    margin-top: 750px !important;
+    margin-top: 800px !important;
     padding: 0.5vw 15vw;
     margin-left: 0.23vw;
     background-color: #EDB932;
@@ -127,8 +127,6 @@ td {
     visibility: hidden;
     transition: transform 0.4s, top 0.4s;
     z-index: 1000;
-
-
 }
 
 .popup.open-popup {
@@ -168,20 +166,18 @@ td {
     width: 100.8%;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 290px)  and (max-width: 576px) {
     nav {
         width: 100%;
     }
-
-    /* .customer{
-        width: 80%;
-        margin-left: -1vw;
-    } */
+    body{
+        overflow-x: hidden;
+    }
     .customerandorder {
         background-color: white;
         margin-left: 15px !important;
         width: 90% !important;
-        height: 100%;
+        height: 240vh;
     }
 
     .username {
@@ -231,9 +227,9 @@ td {
     }
 
     .btn {
-        padding: 0.5vw 25vw;
-        margin-left: -2vw;
-        margin-top: -338vw !important;
+        padding: 1vw 25vw;
+        margin-left: 1vw;
+        margin-top: 5vw !important;
         background-color: #EDB932;
         border-radius: none;
         border: 1px solid #EDB932;
@@ -269,11 +265,15 @@ td {
 
 @media screen and (min-width: 577px) and (max-width: 1366px) {
     body{
-        overflow-x: none;
+        overflow-x: hidden;
     }
     .username {
         display: grid;
         grid-template-columns: repeat(1, 2fr);
+    }
+    .customerandorder {
+        margin-left: 25px !important ;
+        height: 240vh;
     }
 
     .housenumber {
@@ -321,7 +321,7 @@ td {
         border: 5px solid red;
         padding: 0.5vw 25vw;
         margin-left: 1vw;
-        margin-top: 1vh !important;
+        margin-top: 2vh !important;
         background-color: #EDB932;
         border-radius: none;
         border: 1px solid #EDB932;

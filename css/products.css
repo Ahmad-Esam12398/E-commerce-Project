@@ -223,7 +223,7 @@ margin-left: 10vw;
 .card .total {
   border: none;
   color: black;
-  margin-top: 135%;
+  margin-top: 145%;
   position: absolute;
   margin-left: 30px;
 
@@ -235,7 +235,7 @@ margin-left: 10vw;
 
 
 .card .checkbtn {
-  margin-top: 34%;
+  margin-top: 35%;
   background-color: #efc040;
   border: none;
   width: 24%;
@@ -296,14 +296,14 @@ margin-left: 10vw;
 
 .listCard p {
   font-style: italic;
-  margin-left: 310px;
+  margin-left: 290px;
   margin-top: -30px;
   position: absolute;
   margin-bottom: 10px;
 }
 
 .listCard .remove-button {
-  margin-left: 320px;
+  margin-left: 300px;
   position: absolute;
   background-color: white;
   color: #efc040;
@@ -414,7 +414,9 @@ margin-left: 10vw;
   body {
     overflow-x:hidden;
   }
- 
+ #cartsss{
+  overflow: hidden;
+ }
   
   .carousel-inner{
     width: 85vw;
@@ -634,16 +636,14 @@ margin-left: 10vw;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .listCard p {
-    font-style: italic;
-    margin-left: 270px;
-    margin-top: -30px;
-    position: absolute;
-    margin-bottom: 10px;
-  }
+  
   /* .listProduct .product-details {
     width: calc(75% - 30px);
     padding: 20px 20px;
+  } */
+  /* .listCard p{
+    margin-top: 150px !important;
+    position: absolute;
   } */
   .listCard .remove-button {
     margin-left: 280px;
@@ -654,9 +654,14 @@ margin-left: 10vw;
     margin-top: -65px;
     border: none;
   }
+  /* .listProduct{
+    width: 115%;
+    margin-left: -25px !important;
+  } */
   .listProduct .product-details {
     width: 80%;
     height: 75%;
+    margin-left: 1px;
 
   }
   
@@ -671,8 +676,8 @@ margin-left: 10vw;
   .card .total {
     border: none;
     color: black;
-    margin-top: 90%;
-    position: absolute;
+    margin-top: 70vh;
+    position: fixed;
   }
 
   .card .subtotal {
@@ -681,10 +686,11 @@ margin-left: 10vw;
   }
 
   .card .total {
-    margin-left: 200px;
+    margin-left: 300px;
   }
   .card .checkbtn {
-    margin-top: 40%;
+    margin-top: 75vh;
+    position: fixed;
     background-color: #efc040;
     border: none;
     width: 35%;
@@ -726,8 +732,8 @@ margin-left: 10vw;
 
   .divandsearch {
     background-color: white;
-    width: 70vw;
-    margin-left: 1px !important;
+    width:70vw;
+    /* margin-left: -25px !important; */
     padding: 10px;
   }
 
@@ -741,11 +747,11 @@ margin-left: 10vw;
   font-size: 25px;
   font-family: 'Poppins',sans-serif;
 }
-.offcanvas-body p{
+/* .offcanvas-body p{
 
   margin-top: 20px;
   cursor: pointer;
-}
+} */
 .offcanvas-container{
   display: grid;
   grid-template-columns: repeat(2,1fr);

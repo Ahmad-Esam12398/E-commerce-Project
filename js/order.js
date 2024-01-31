@@ -340,3 +340,5 @@ let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
             console.log(LessOrder.map(item=>item.productname))
 
 localStorage.setItem("OrderStat",JSON.stringify(OrderStat))
+
+
