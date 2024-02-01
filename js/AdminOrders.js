@@ -2,16 +2,17 @@ import { originalOrders as initialOrders } from "./data.js";
 import { products as initialProducts } from "./data.js";
 import { orders as sellerOrders} from "./data.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
-}
+}  
 if(localStorage.getItem("Orders") == null){
     localStorage.setItem("Orders", JSON.stringify(sellerOrders));
 }
 
 if(localStorage.getItem("products") == null){
-    localStorage.setItem("products", JSON.stringify(initialProducts));
+    let plainProducts = initialProducts.map((item)=>item.getProduct());
+    localStorage.setItem("products", JSON.stringify(plainProducts));
 }
 
 if(localStorage.getItem("originalOrders") == null){

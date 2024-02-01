@@ -1,6 +1,6 @@
 import { products as originalProducts, persons as originalPersons, originalOrders as initialOrders } from "./data.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
   alert("You are not authorized to access this page.")
   window.location.href = "./home.html";
 }
@@ -93,7 +93,7 @@ let firstChart = new Chart(ctx, {
         }
     }
 });
-const data = {
+let data = {
     labels: [
       'Admins',
       'Sellers',
@@ -136,31 +136,40 @@ document.getElementById("shipped").style.width = shipped/originalOrders.length*1
 document.getElementById("delivered").innerText = (delivered/originalOrders.length*100).toFixed(2) + "%";
 document.getElementById("delivered").style.width = delivered/originalOrders.length*100 + "%";
 
-// let ordersDates = new Set();
-// originalOrders.forEach(order => { ordersDates.add(order.date.toLocaleDateString())});
-// let dataOrders = {
-//     labels: ['a', 'b', 'c', 'd', 'e'],
-//     datasets: [{
-//         label: 'Orders Demands',
-//         data: [100, 200, 100, 250, 350],
-//         fill: false,
-//         borderColor: 'rgb(75, 192, 192)',
-//         tension: 0.1
-//     }]
-// };
 
-// ctx = document.getElementById('myFourthChart').getContext('2d');
-// let fourthChart = new Chart(ctx, {
-//     type: 'line',
-//     data: dataOrders
-// })
+let numberOfOrdersInEachDay = [];
+let ordersDates = new Set();
+originalOrders.forEach(order => { ordersDates.add(order.date);});
+ordersDates = Array.from(ordersDates);
+ordersDates.sort();
+ordersDates.forEach(date => {
+  let count = 0;
+  originalOrders.forEach(order => {if(order.date == date) count++;});
+  numberOfOrdersInEachDay.push(count);
+});
+let dataOrders = {
+    labels: ordersDates,
+    datasets: [{
+        label: 'Orders Demands',
+        data: numberOfOrdersInEachDay,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.4
+    }]
+};
+
+ctx = document.getElementById('myFourthChart').getContext('2d');
+let fourthChart = new Chart(ctx, {
+    type: 'line',
+    data: dataOrders
+})
 
 // const config = {
 //   type: 'line',
 //   data: data,
 // };
-// const labels = Utils.months({count: 7});
-// const data = {
+// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+// data = {
 //   labels: labels,
 //   datasets: [{
 //     label: 'Orders Demands',

@@ -1,10 +1,10 @@
 import {products as originalProducts, persons as originalPersons, originalOrders as initialOrders} from "./data.js";
 import {Product} from "./productsmodule.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
-  }
+  }  
 
 if(localStorage.getItem("Persons") == null){
     let plainPersons = originalPersons.map((item)=> item.getPerson());
@@ -28,7 +28,7 @@ function updateProductsLocalStorage(){
 }
 
 function createTableProducts(){
-    debugger;
+    // debugger;
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
     let tableBody = document.getElementsByTagName("tbody")[0];
