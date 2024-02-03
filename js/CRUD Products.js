@@ -243,8 +243,8 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         }
         // var myModal = bootstrap.Modal.getInstance(document.getElementById('staticBackdrop'));
         // myModal.hide();
-        const myModal = new bootstrap.Modal('#staticBackdrop', {});
-        myModal.hide();
+        // const myModal = new bootstrap.Modal('#staticBackdrop', {});
+        // myModal.hide();
     }
     this.classList.add('was-validated');
 });

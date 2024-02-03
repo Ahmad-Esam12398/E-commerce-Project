@@ -267,8 +267,8 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         else if(operation == "add"){
             addPersonRow();
         }
-        var myModal = document.getElementById('staticBackdrop');
-        myModal
+        // var myModal = document.getElementById('staticBackdrop');
+        // myModal
     }
 });
 

@@ -83,7 +83,6 @@ table {
     margin-left: 800px;
     margin-top: -900px;
     border: 2px solid rgb(176, 173, 173);
-
 }
 
 th,
@@ -98,7 +97,7 @@ td {
 }
 
 .btn {
-    margin-top: 800px !important;
+    /* margin-top: 800px !important; */
     padding: 0.5vw 15vw;
     margin-left: 0.23vw;
     background-color: #EDB932;
@@ -164,6 +163,9 @@ td {
     margin-top: 20px;
     padding: 1vw 1vw;
     width: 100.8%;
+}
+body > div > div > form > div.col-12 > div.cart-details{
+    display: inline-block;
 }
 
 @media screen and (min-width: 290px)  and (max-width: 576px) {
