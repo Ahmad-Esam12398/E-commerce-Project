@@ -91,3 +91,10 @@ border-radius: 5px;
 td button{
     margin: 2px;
 }
+#lowerTable > i{
+    border-color: #edb932 !important;
+}
+#lowerTable > i{
+    margin-top: 10px;
+    width: 100%;
+}
