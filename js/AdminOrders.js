@@ -161,14 +161,16 @@ function deleteOrder(){
         updateOriginalOrdersLocalStorage();
         _orders.splice(index,1);
         localStorage.setItem("Orders",JSON.stringify(_orders))
-        tableRow.parentElement.removeChild(tableRow);
         debugger;
         if(rowSpan){
-            for(let i = 0; i < rowSpan - 1; i++){
-                tableRow = tableRow.nextElementSibling;
-                tableRow.parentElement.removeChild(tableRow);
+            for(let i = 0; i < rowSpan; i++){
+                let tmpRow = tableRow.nextElementSibling;
+                tableRow.remove();
+                tableRow = tmpRow;
             }
-
+        }
+        else{
+            tableRow.remove();
         }
         createTableOrders();
     }
