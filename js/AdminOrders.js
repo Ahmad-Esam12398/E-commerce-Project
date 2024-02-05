@@ -1,4 +1,4 @@
-import { originalOrders as initialOrders } from "./data.js";
+import { originalOrders as initialOrders, originalOrders } from "./data.js";
 import { products as initialProducts } from "./data.js";
 import { orders as sellerOrders} from "./data.js";
 
@@ -156,12 +156,13 @@ function deleteOrder(){
         let rowSpan = tableRow.children[0].getAttribute("rowspan");
         let id = tableRow.children[0].innerHTML;
         let index = orders.findIndex(order => order.id == id);
-        deleteOrdersByorderId(id);
+        originalOrders.splice(index, 1);
         orders.splice(index, 1);
         updateOriginalOrdersLocalStorage();
         _orders.splice(index,1);
         localStorage.setItem("Orders",JSON.stringify(_orders))
         tableRow.parentElement.removeChild(tableRow);
+        debugger;
         if(rowSpan){
             for(let i = 0; i < rowSpan - 1; i++){
                 tableRow = tableRow.nextElementSibling;
