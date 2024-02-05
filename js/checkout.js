@@ -1,12 +1,17 @@
 import { originalOrders as initialOrders } from "./data.js"
 import { products as initialProducts } from "./data.js";
+import { orders } from "./data.js"
 if(localStorage.getItem("originalOrders") == null){
     localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
 }
+
 if(localStorage.getItem("products") == null){
     localStorage.setItem("products", JSON.stringify(initialProducts));
 }
 
+if (localStorage.getItem("Orders") == null) {
+    localStorage.setItem("Orders", JSON.stringify(orders));
+    }
 let originalOrders = JSON.parse(localStorage.getItem("originalOrders"));
 let products = JSON.parse(localStorage.getItem("products"));
 
@@ -78,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             saveOriginalOrdersData();
             reduceQuantities();
             saveFormData();
+            AddToOrder()
             openpop();
             clearForm();
             clearValidationClasses();
@@ -292,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function validatephone() {
         var phone = phoneinput.value;
-        var phoneNumberRegex = /^\d{10}$/;
+        var phoneNumberRegex =/^(010|011|012|015)[0-9]{8}$/;
 
         if (phoneNumberRegex.test(phone)) {
             phoneinput.classList.add("is-valid");
@@ -357,6 +363,75 @@ document.addEventListener("DOMContentLoaded", function () {
         total += productDetails.price * productDetails.cardquantity;
     }
 
-    subtotalValue.textContent = "PlaceOrder" + " " + total.toLocaleString();
+    subtotalValue.textContent = "PlaceOrder" + "  $" + total.toLocaleString()  ;
 });
 
+function AddToOrder(){
+    let _cart=JSON.parse(localStorage.getItem("cart"))
+    console.log(_cart)
+    if(_cart!=null){
+        let activeUser=JSON.parse(localStorage.getItem("Active User"))
+        let MapCardOrder={
+            _content:Object.keys(_cart).map(cartorder => _cart[cartorder]).map(item => {
+                    delete item.image;
+                    delete item.price;
+                    item["quantity"]=item['cardquantity']
+                    delete item.cardquantity;
+                    return item
+                }),
+            _customerid:activeUser.id,
+            _status:"pending",
+            _dateorder:Date().now
+        }
+        console.log(MapCardOrder._content)
+
+        let ord={
+            content:MapCardOrder._content,
+            userid:MapCardOrder._customerid,
+            _status:MapCardOrder._status,
+            dateorder:MapCardOrder._dateorder
+        }
+            
+            console.log(ord)
+            let _orders=JSON.parse(localStorage.getItem("Orders"))
+            console.log(_orders.length)
+
+            let NewOrder={
+                orderId:_orders.length+1,
+                _products_:Object.values(ord.content),
+                Order_date:Date.now(),
+                Delivered_date: new Date(new Date(Date.now()).setDate(new Date().getDate() + 3)),
+                status:ord._status,
+                customerId:ord.userid}
+                _orders.push(NewOrder)
+            //     let updateQuantity=NewOrder._products_.map(item=>{
+            //         let obj={}
+            //         obj.id=item.id
+            //         obj.quantity=item.quantity
+            //         return(obj)
+            //     })
+            //     console.log(updateQuantity)
+            //     let PRODUCT=JSON.parse(localStorage.getItem("products"))
+            //     let repeated=[]
+            //     PRODUCT.forEach(item=>console.log(item.quantity))
+            //     // for(let i=0;i<updateQuantity.length;i++){
+            //     //         if(repeated.includes(updateQuantity[i])){
+            //     //             continue;
+            //     //         }
+            //     //     for(let j=0;j<PRODUCT.length;j++){
+            //     //         if(updateQuantity[i].id==PRODUCT[j].id){
+            //     //             PRODUCT[j].quantity=PRODUCT[j].quantity-updateQuantity[i].quantity
+            //     //             repeated.push(updateQuantity[i])
+            //     //         }
+            //     //     }
+            //     // } 
+            //     PRODUCT.forEach(item=>console.log(item.quantity))
+            // console.log(NewOrder)
+           
+           // console.log(_orders)
+            //localStorage.setItem("products",JSON.stringify(PRODUCT))
+            localStorage.setItem("Orders",JSON.stringify(_orders))
+    }
+    }
+
+    
