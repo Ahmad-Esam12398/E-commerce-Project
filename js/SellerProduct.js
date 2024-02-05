@@ -178,7 +178,8 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
 }
 
 //  /*------ --------------------------------------------render Table -----------------------------------------------------*/
-drawTable(SellerProduct, SelectedTable);
+document.addEventListener("DOMContentLoaded",function(){
+drawTable(SellerProduct, SelectedTable);})
 //   /*--------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -381,7 +382,7 @@ SelectedTable.addEventListener("click", function (e) {
             let isDeletable = true;
             console.log(CurrentId)
             if (CurrentIndex !== -1) {
-                let pendingProducts = generatePendingProduct();
+                let pendingProducts = generatePendingProduct(_orders);
                 for (let i = 0; i < pendingProducts.length; i++) {
                     if (CurrentId==pendingProducts[i]) {
                         alert("cant delete")
@@ -436,8 +437,12 @@ SelectedTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("sort-up")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            console.log(x[key] + "" + y[key])
-            return x[key] - y[key];
+            if (typeof x[key] == "string"){
+                return x[key].localeCompare(y[key]);
+            }
+            else{
+                return x[key] - y[key];
+            }
         });
         SwapSort = false
         drawTable(SellerProduct, SelectedTable, true);
@@ -446,8 +451,12 @@ SelectedTable.addEventListener("click", function (e) {
     else if (e.target.classList.contains("sort-down")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            console.log(x[key] + "" + y[key])
-            return y[key] - x[key];
+            if (typeof x[key] == "string"){
+                return y[key].localeCompare(x[key]);
+            }
+            else{
+                return y[key] - x[key];
+            }
         });
         SwapSort = true
         drawTable(SellerProduct, SelectedTable, true);
@@ -496,10 +505,10 @@ let modifiedProdStats = {
 localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
 
 /*pending  product*/
-function generatePendingProduct(){
+function generatePendingProduct(_array){
     let pendingProductId=[]
 let repetedPendingProduct=[]
-_orders.filter(order=>{
+    _array.filter(order=>{
         if(order.status=='pending'){
             for(let i=0;i<order._products_.length;i++){
                 if(repetedPendingProduct.includes(order._products_[i].id)){
@@ -511,13 +520,7 @@ _orders.filter(order=>{
                     }
                 }
         }
-    })
-    products.forEach(product=>{
-        if(repetedPendingProduct.includes(product.id)){
-            //console.log(product)
-        }
-    })
-    
+    })    
     return pendingProductId
 }
 //console.log(generatePendingProduct())

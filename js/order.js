@@ -49,14 +49,14 @@ btn_show_sidebar.addEventListener("click", ShowSideBar)
         Parent.innerHTML = "";
         let thead = document.createElement("thead");
         let tbody = document.createElement("tbody");
-            drawHeaderRow(_array, thead, true,"productId","dateDeliver");
+            drawHeaderRow(_array, thead, true,"productId","dateDeliver","customerName");
                // draw header of table
         Parent.appendChild(thead);
         for (let i = 0; i < _array.length; i++) {
             let row = document.createElement("tr");
             row.setAttribute("data-index",i+1)
                            // draw each Row of table
-                drawRow(_array, i, row, true,"productId","dateDeliver"); 
+                drawRow(_array, i, row, true,"productId","dateDeliver","customerName"); 
             tbody.appendChild(row);
         }
         Parent.appendChild(tbody);
@@ -150,45 +150,55 @@ function drawHeaderRow(_array,RowParent,DrawOptionColumn,...excludeColumns){
 //   /*------------------------------------- - --------------------------------------------------------------------------------------------------------*/
 
 let TableIcon=document.getElementsByClassName("floatingTable")[0]
-SelectedTable.addEventListener("click", function (e) {
-    let PendingOrder = OrderForSeller(_orders).filter(item => item.status == "pending");
-    if (e.target.classList.contains("sort-up") || e.target.classList.contains("sort-down")) {
-        TableIcon.style.display = "inline-block";
-        let keyElement = e.target.parentNode.parentNode; 
-        let key = keyElement.textContent.trim(); 
-        if(key=="dateOrder"||key=="dateDeliver"){
-            PendingOrder.sort(function (x, y) {
-                let dateX = new Date(x.dateOrder);
-                let dateY = new Date(y.dateOrder);
-                if (SwapSort) {
-                    return dateX - dateY;
-                } else {
-                    return dateY - dateX;
-                }
-            });         
-        }
-        PendingOrder.sort(function (x, y) {
-                console.log(key)
-                if(typeof(x[key])=="string"){
+    SelectedTable.addEventListener("click", function (e) {
+        let modifiedOrder = OrderForSeller(_orders);
+        console.log(modifiedOrder)
+        let PendingOrder = OrderForSeller(_orders).filter(item => item.status == "pending");
+        if (e.target.classList.contains("sort-up") || e.target.classList.contains("sort-down")) {
+            TableIcon.style.display = "inline-block";
+            let keyElement = e.target.parentNode.parentNode;
+            let key = keyElement.textContent.trim();
+            if (key == "dateOrder" || key == "dateDeliver") {
+                modifiedOrder.sort(function (x, y) {
+                    let dateX = new Date(x.dateOrder);
+                    let dateY = new Date(y.dateOrder);
+                    if (SwapSort) {
+                        return dateX - dateY;
+                    } else {
+                        return dateY - dateX;
+                    }
+                });
+            }
+            modifiedOrder.sort(function (x, y) {
+                console.log(key);
+                if (typeof x[key] == "string") {
                     if (SwapSort) {
                         return x[key].localeCompare(y[key]);
                     } else {
                         return y[key].localeCompare(x[key]);
                     }
-                }
-                else{
+                } else {
                     if (SwapSort) {
                         return x[key] - y[key];
                     } else {
                         return y[key] - x[key];
                     }
                 }
-                });
-        
-        SwapSort = !SwapSort;  
-        drawTable(PendingOrder, SelectedTable, true);
-    }
-});
+            });
+
+            SwapSort = !SwapSort;
+             let PrioritySort = modifiedOrder;
+             let priority = { "pending": 1, "shipped": 2, "delivered": 3 };
+             console.log(PrioritySort);
+             PrioritySort.sort((a, b) => {
+                 let statusA = a.status.toLowerCase();
+                 let statusB = b.status.toLowerCase();
+
+                 return priority[statusA] - priority[statusB];
+             });
+            drawTable(modifiedOrder, SelectedTable, true);
+        }
+    });
 TableIcon.addEventListener("click",function(){
     drawTable(OrderForSeller(_orders), SelectedTable, true);
     TableIcon.style.display="none"
@@ -234,19 +244,20 @@ SelectedTable.addEventListener("click",function(e){
 
 SelectedTable.addEventListener("click",function(e){
     if(e.target.classList.contains("fa-eye")){
-        let CurrentRowIndex = parseInt(e.target.parentNode.parentNode.parentNode.getAttribute("data-index"))-1;
+        let CurrentID = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
         let modifiedOrder=OrderForSeller(_orders)
-        let CurrentElement=modifiedOrder[CurrentRowIndex]
-        console.log(CurrentElement)
+        console.log(modifiedOrder)
+        let CurrentOrder=modifiedOrder.find(order=>order.OrderID==CurrentID)
+        console.log(CurrentOrder)
         $('#form').modal('show')
-        document.getElementById("orderId").value=CurrentElement.OrderID
-        document.getElementById("productName").value=CurrentElement.productName
-        document.getElementById("quantityOrdered").value=CurrentElement.QuantityOrdered
-        document.getElementById("status").value= CurrentElement.status
-        document.getElementById("dateOrder").value= CurrentElement.dateOrder
-        document.getElementById("dateDeliver").value= CurrentElement.dateDeliver
-        document.getElementById("customerName").value= CurrentElement.customerName
-        document.getElementById("totalPrice").value= CurrentElement.TotalPrice
+        document.getElementById("orderId").value=CurrentOrder.OrderID
+        document.getElementById("productName").value=CurrentOrder.productName
+        document.getElementById("quantityOrdered").value=CurrentOrder.QuantityOrdered
+        document.getElementById("status").value= CurrentOrder.status
+        document.getElementById("dateOrder").value= CurrentOrder.dateOrder
+        document.getElementById("dateDeliver").value= CurrentOrder.dateDeliver
+        document.getElementById("customerName").value= CurrentOrder.customerName
+        document.getElementById("totalPrice").value= CurrentOrder.TotalPrice
         //console.log(_orders)
     }   
 
@@ -272,71 +283,7 @@ SearchedProduct.addEventListener("keyup", function () {
     drawTable(filterProduct, SelectedTable, true);
 });
 
-/*-----------------------------------------------------------Statistics---------------------------------------------------- */
-// let modifiedOrder=OrderForSeller(_orders)
-// let orderedProduct = [];
-// let repeated = [];
 
-// for (let i = 0; i < modifiedOrder.length ; i++) {
-    
-//     if (repeated.includes(modifiedOrder[i].productName)) {
-//         continue;
-//     }
-//     let quantity = parseInt(modifiedOrder[i].QuantityOrdered);
-//     for (let j = i+1; j < modifiedOrder.length; j++) {
-//         if (modifiedOrder[i].productName === modifiedOrder[j].productName) {
-//             quantity += parseInt(modifiedOrder[j].QuantityOrdered);
-//         }
-//     }
-//     orderedProduct.push({ productName: modifiedOrder[i].productName, quantity });
-//     repeated.push(modifiedOrder[i].productName);
-// }
-
-// console.log(orderedProduct)
-// let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
-//                               .reduce((total, order) => total + order.TotalPrice-50,0)   //assume 50$ for each poduct for expense(transport+paltfrom fee)
-                    
-//     let LessOrder=[]
-//     let found=false
-
-//     SellerProduct.forEach(Product=>{
-//         if(!(orderedProduct.map(item=>item.productName).includes(Product.name))){
-//             found=true
-//             LessOrder.push({productname:Product.name,
-//                                     quantity:0})
-//                                     return;
-//         }})
-//         if(!found){
-//             LessOrder.push({
-//                 productname:orderedProduct.find(item=>item.quantity==Math.min(...orderedProduct.map(order=>order.quantity))).productName,
-//                 quantity:Math.min(...orderedProduct.map(order=>order.quantity))
-//             })
-//         }
-//     let OrderStat={
-//         TrendOrder:{
-//             quantity:Math.max(...orderedProduct.map(order=>order.quantity)),
-//             Name:orderedProduct.find(item=>item.quantity==Math.max(...orderedProduct.map(order=>order.quantity))).productName
-//             },
-//         MostOrderedProduct:{
-//             productName:orderedProduct.map(item=>item.productName),
-//             quantity:orderedProduct.map(item=>item.quantity)
-//         },
-//         wallet:SellerWallet,
-//         NO_Order:{
-//             Total:modifiedOrder.length,
-//             pending:modifiedOrder.filter((item=>item.status=="pending")).length,
-//             delivered:modifiedOrder.filter((item=>item.status=="delivered")).length,
-//             shipped:modifiedOrder.filter((item=>item.status=="shipped")).length,
-//             },
-//             LessOrderDemand:{
-//                 productname:LessOrder.map(item=>item.productname)[0],
-//                 quantity:LessOrder.map(item=>item.quantity)[0]
-//             }
-//         }
-
-//             console.log(LessOrder.map(item=>item.productname))
-
-// localStorage.setItem("OrderStat",JSON.stringify(OrderStat))
 
 export { OrderForSeller};
 
