@@ -321,3 +321,45 @@ function resetValidation(){
 }
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);
+
+// to sort the table
+let sortDirection = false; // false = ascending, true = descending
+function sortTable(columnIndex) {
+    const table = document.querySelector('table');
+    const tbody = table.querySelector('tbody');
+    let rows = Array.from(tbody.querySelectorAll('tr'));
+    rows = rows.filter(tr => tr.classList.contains("d-none") == false);
+    rows = rows.filter(tr => tr.style.display != "none");
+
+
+    // Sort rows based on the content of the specified column
+    const sortedRows = rows.sort((a, b) => {
+        const aColText = a.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+        const bColText = b.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+
+        // Convert to number if possible, otherwise compare as string
+        const aValue = isNaN(aColText) ? aColText : Number(aColText);
+        const bValue = isNaN(bColText) ? bColText : Number(bColText);
+
+        return (aValue > bValue ? 1 : -1) * (sortDirection ? -1 : 1);
+    });
+
+    // Remove all existing rows from the table
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+
+    // Append the sorted rows to the table
+    tbody.append(...sortedRows);
+
+    // Reverse the sort direction for the next sort
+    sortDirection = !sortDirection;
+}
+
+// Add click event listeners to all th elements
+const headers = document.querySelectorAll('th');
+headers.forEach((header, index) => {
+    if(index < headers.length - 1 && index != 4){
+        header.addEventListener('click', () => sortTable(index));
+    }
+});
