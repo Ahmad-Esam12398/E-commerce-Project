@@ -109,6 +109,7 @@ function drawHeaderRow(_array,RowParent,DrawOptionColumn,...excludeColumns){
                     } else if (key === "status" && _array[RowIndex][key] === "shipped") {
                         cell.classList.add("text-info");
                     }
+                    
                     cell.innerHTML = _array[RowIndex][key];
                     cell.classList.add("text-center");
                     RowParent.appendChild(cell);
@@ -201,7 +202,7 @@ SelectedTable.addEventListener("click",function(e){
         let CurrentOrder=_orders.find(order=>order.orderId==CurrentID)
         CurrentOrder.status="shipped"
         localStorage.setItem("Orders",JSON.stringify(_orders))
-        let currentorder=_orders_.find(order=>order.id==CurrentID)
+        let currentorder=_orders_.find(order=>order.orderId==CurrentID)
         currentorder.status="shipped"
         localStorage.setItem("originalOrders",JSON.stringify(_orders_))
         let modifiedOrder=OrderForSeller(_orders)
@@ -219,8 +220,8 @@ SelectedTable.addEventListener("click",function(e){
         console.log(CurrentOrder)
         CurrentOrder.status="delivered"
         localStorage.setItem("Orders",JSON.stringify(_orders))
-        let currentorder=_orders_.find(order=>order.id==CurrentID)
-        currentorder.status="shipped"
+        let currentorder=_orders_.find(order=>order.orderId==CurrentID)
+        currentorder.status="delivered"
         localStorage.setItem("originalOrders",JSON.stringify(_orders_))
         let modifiedOrder=OrderForSeller(_orders)
         drawTable(modifiedOrder,SelectedTable);
