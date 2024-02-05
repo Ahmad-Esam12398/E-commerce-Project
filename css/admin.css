@@ -101,3 +101,6 @@ td button{
 th:hover{
     cursor: pointer;
 }
+.sorted {
+    color: #f00; 
+}

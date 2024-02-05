@@ -132,6 +132,8 @@ function addPersonRow() {
     createTablePersons();
 }
 let id = -1;
+let currentEmail = "";
+let currentPhone = "";
 function editRow(e) {
     // debugger;
     document.forms[0].classList.remove("was-validated");
@@ -154,6 +156,8 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
+    currentEmail = document.getElementById("floatingEmail").value;
+    currentPhone = document.getElementById("floatingPhone").value;
     // console.log(products);
 }
 function setPerson(index, values){
@@ -251,14 +255,14 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         uniquePhoneNumbers.add(person.phone);
     });
     if(this.checkValidity()){
-        if(uniqueEmails.has(email.toLowerCase())){
+        if(uniqueEmails.has(email.toLowerCase()) && currentEmail.toLowerCase() != email.toLowerCase()){
             event.preventDefault();
             event.stopPropagation();
             alert("This email is already in use.");
             resetValidation();
             return;
         }
-        else if(uniquePhoneNumbers.has(phone)){
+        else if(uniquePhoneNumbers.has(phone) && currentPhone != phone){
             event.preventDefault();
             event.stopPropagation();
             alert("This phone number is already in use.");
@@ -272,6 +276,8 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             else if(operation == "add"){
                 addPersonRow();
             }
+            currentEmail = "";
+            currentPhone = "";
         }
         // var myModal = document.getElementById('staticBackdrop');
         // myModal
