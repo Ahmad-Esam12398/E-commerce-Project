@@ -156,6 +156,7 @@ function addProductRow() {
 
 let id = -1;
 function editRow(e) {
+    debugger;
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
     debugger;
@@ -176,9 +177,11 @@ function editRow(e) {
     id = -1;
     id = rowChildrenValues[0];
     debugger;
-    for(let i = 0; i < inputs.length; i++) {
+    for(let i = 0; i < inputs.length - 1; i++) {
         inputs[i].value = rowChildrenValues[i + 1];
     }
+    let index = products.findIndex(product => product.id == id);
+    inputs[inputs.length - 1].value = products[index].description;
     // inputs[5].value = 6;
     // console.log(inputs[5]);
     // console.log(inputs[5]);
@@ -190,10 +193,10 @@ function setProduct(index, rowChildrenValues){
     products[index].name = rowChildrenValues[0];
     products[index].price = rowChildrenValues[1];
     products[index].quantity = rowChildrenValues[2];
-    products[index].description = rowChildrenValues[3];
-    products[index].image = rowChildrenValues[4];
-    products[index].sellerID = rowChildrenValues[5];
-    products[index].category = rowChildrenValues[6];
+    products[index].image = rowChildrenValues[3];
+    products[index].sellerID = rowChildrenValues[4];
+    products[index].category = rowChildrenValues[5];
+    products[index].description = rowChildrenValues[6];
 }
 function saveNewRow() {
     if(confirm("Are you sure you want to save this product?")) {
@@ -230,10 +233,7 @@ function deleteRow(e) {
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Check if the form is 
-    event.preventDefault();
-    event.stopPropagation();
+    // Check if the form is valid
     if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
@@ -243,8 +243,12 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         }
         // var myModal = bootstrap.Modal.getInstance(document.getElementById('staticBackdrop'));
         // myModal.hide();
-        const myModal = new bootstrap.Modal('#staticBackdrop', {});
-        myModal.hide();
+        // const myModal = new bootstrap.Modal('#staticBackdrop', {});
+        // myModal.hide();
+    }
+    else{
+        event.preventDefault();
+        event.stopPropagation();
     }
     this.classList.add('was-validated');
 });

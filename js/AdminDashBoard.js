@@ -55,7 +55,7 @@ products.forEach(product => {
 	if(product.category == category[4]) noOfProductsInEachCategory[4]++;
 	if(product.category == category[5]) noOfProductsInEachCategory[5]++;
 });
-console.log(noOfProductsInEachCategory);
+// console.log(noOfProductsInEachCategory);
 let ctx = document.getElementById('myFirstChart').getContext('2d');
 
 let firstChart = new Chart(ctx, {
@@ -163,6 +163,17 @@ let fourthChart = new Chart(ctx, {
     type: 'line',
     data: dataOrders
 })
+
+// function getProductDataInOrders(_id){
+//   let orderDates = new Set();
+//   let productsInOrder = [];
+//   originalOrders.forEach(order => {
+//     if(order.products.find(product => product._id == _id)){
+//       orderDates.add(order.date);
+//       productsInOrder.push(order.products.find(product => product._id == _id));
+//     }
+//   });
+// }
 
 // const config = {
 //   type: 'line',

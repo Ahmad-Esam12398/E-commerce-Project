@@ -160,10 +160,12 @@ function generateCard(cardContainer, productDetails) {
     cardDiv.className = 'card d-block d-lg-none productContainer';
     // Card Header
     var cardHeader = document.createElement('div');
+    let closebtn = document.createElement("button");
+    closebtn.classList.add('d-flex', 'border-0', 'rounded-5', 'bg-transparent')
     cardHeader.className = 'card-header';
-    cardHeader.innerHTML = `<button class="d-flex  border-0 rounded-5 bg-transparent">
-    <i class="fa-regular fa-circle-xmark"></i>
-    </button>`
+    closebtn.innerHTML = `<i class="fa-regular fa-circle-xmark"></i>`;
+    closebtn.addEventListener("click", () => removeProductFromCart(productDetails.id));
+    cardHeader.appendChild(closebtn);
     cardDiv.appendChild(cardHeader);
     // Card Body
     var cardBody = document.createElement('div');

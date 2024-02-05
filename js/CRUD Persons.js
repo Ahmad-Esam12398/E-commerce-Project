@@ -125,19 +125,6 @@ function addPersonRow() {
     let phone = document.getElementById("floatingPhone").value;
     let role = document.getElementById("PersonRole").value;
     // debugger;
-    persons.forEach(person => {uniqueEmails.add(person.email.toLowerCase());
-        uniquePhoneNumbers.add(person.phone);
-    })
-    if(uniqueEmails.has(email.toLowerCase())){
-        resetValidation();
-        alert("Email already exists");
-        return;
-    }
-    if(uniquePhoneNumbers.has(phone)){
-        resetValidation();
-        alert("Phone number already exists");
-        return;
-    }
     let newPerson = new Person(Id, name, email, password, address, phone, role);
     // console.log(newPerson.getPerson());
     persons.push(newPerson.getPerson());
@@ -256,19 +243,42 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
     // let phoneInput = document.getElementById("floatingPhone");
     // let roleInput = document.getElementById("PersonRole");
     // addCustomValidation(nameInput, ()=> namePattern.test(nameInput.value) == false);
-    event.preventDefault();
-    event.stopPropagation();
-    // debugger;
+    debugger;
     this.classList.add('was-validated');
+    let email = document.getElementById("floatingEmail").value;
+    let phone = document.getElementById("floatingPhone").value;
+    persons.forEach(person => {uniqueEmails.add(person.email.toLowerCase());
+        uniquePhoneNumbers.add(person.phone);
+    });
     if(this.checkValidity()){
-        if(operation == "edit"){
-            saveNewRow(event);
+        if(uniqueEmails.has(email.toLowerCase())){
+            event.preventDefault();
+            event.stopPropagation();
+            alert("This email is already in use.");
+            resetValidation();
+            return;
         }
-        else if(operation == "add"){
-            addPersonRow();
+        else if(uniquePhoneNumbers.has(phone)){
+            event.preventDefault();
+            event.stopPropagation();
+            alert("This phone number is already in use.");
+            resetValidation();
+            return;
         }
-        var myModal = document.getElementById('staticBackdrop');
-        myModal
+        else{
+            if(operation == "edit"){
+                saveNewRow(event);
+            }
+            else if(operation == "add"){
+                addPersonRow();
+            }
+        }
+        // var myModal = document.getElementById('staticBackdrop');
+        // myModal
+    }
+    else{
+        event.preventDefault();
+        event.stopPropagation();
     }
 });
 
