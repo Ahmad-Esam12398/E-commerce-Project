@@ -48,14 +48,15 @@
                                 <a class="nav-link" href="#Footer">Contact Us</a>
                             </li>
                             <!-- Varies depends on the active user -->
-                            <!-- guest -->
-                            <li id="Guest" class="d-none nav-item mx-2">
+                              <!-- guest -->
+                              <li id="Guest" class="d-none nav-item mx-2">
                                 <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
                             </li>
                             <!-- customer -->
                             <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
+                                    <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
@@ -63,9 +64,6 @@
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Customer
                                         </p>
-                                    </li>
-                                    <li>
-                                        <p id="CustomerName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -78,17 +76,15 @@
                             </li>
                             <!-- admin -->
                             <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
+                                    <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
                                         <p style="font-size: small;"
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Admin</p>
-                                    </li>
-                                    <li>
-                                        <p id="AdminName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -105,17 +101,15 @@
                             </li>
                             <!-- seller -->
                             <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
+                                    <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
                                         <p style="font-size: small;"
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Seller</p>
-                                    </li>
-                                    <li>
-                                        <p id="SellerName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -133,9 +127,9 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="btn me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+                    <button class="btn me-3  " type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
                         aria-controls="staticBackdrop">
-                        <span id="HomeCart" class="mb-5 ms-3 cardquantity">0</span>
+                        <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </div>
@@ -222,7 +216,7 @@
                                 <p class="text-start" id="poption">Home Office</p>
                                 <p style="color: gray;">(3)</p>
                                 <p class="text-start" id="poption">Cabinet</p>
-                                <p style="color: gray;">(3)</p>
+                                <p style="color: gray;">(2)</p>
                                 <p class="text-start" id="poption">Kitchen</p>
                                 <p style="color: gray;">(2)</p>
                                 <p id="poption" class="text-start">All Products</p>
@@ -235,8 +229,8 @@
                     <div class="divandsearch">
 
                         <div class="searchbutton">
-                            <input type="text" placeholder="search">
-                            <input type="button" value="S R E A C H" onclick="search()">
+                            <input type="text" placeholder="search By Name">
+                            <input type="button" value="S E A R C H" onclick="search()">
                         </div>
                         <div class="divbutton">
                             <button class="btnopen btn-primary" type="button" data-bs-toggle="offcanvas"
