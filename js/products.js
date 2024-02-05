@@ -2,11 +2,7 @@
 import { Product } from './productsmodule.js';
 import { products } from './data.js';
 
-/////////////////////////checkProductQuantity function///////////////////////////
- function checkProductQuantity(productId) {
-  const product = products.find(product => product.id == productId);
-  return product && product.quantity > 0;
-}
+
 
 const listProduct = document.querySelector('.listProduct');
 const listCard = document.querySelector('.listCard');
@@ -27,15 +23,6 @@ try {
 function getAllProducts() {
   let productsArr = [];
 
-  for (const productId in cart) {
-    const productDetails = products.find(product => product.id == productId);
-
-    if (productDetails) {
-      productDetails.quantity = cart[productId].quantity;
-    }
-  }
-
-  localStorage.setItem('cart', JSON.stringify(cart));
 
   // Parse the localStorage item back to an array
   let localStorageProducts = JSON.parse(localStorage.getItem('products'));
@@ -79,16 +66,12 @@ function displayProducts() {
 
 
 
-    if (cart[product.id]) {
-      product.quantity = cart[product.id].quantity;
-    }
+  
 
     productDiv.appendChild(productDetailsContainer);
     listProduct.appendChild(productDiv);
 
-    if (!checkProductQuantity(product.id)) {
-  
-    }
+   
   });
 }
 function addToCart(productId) {
@@ -178,7 +161,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${productDetails.price * cart[productId].cardquantity.ti}</p>
+      <p>$${productDetails.price * cart[productId].cardquantity}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
@@ -262,7 +245,7 @@ checkoutButton.addEventListener('click', () => {
 });
 
 /////////////// function for search ////////////
-window.search = function () {
+window.addEventListener('input', function () {
   var searchtext = document.getElementsByTagName('input')[0].value.toLowerCase();
   var productDivs = document.querySelectorAll('.product-details');
   var found = false;
@@ -274,6 +257,7 @@ window.search = function () {
       found = true;
     } else {
       productDiv.style.display = "none";
+  
     }
   });
 
@@ -282,33 +266,49 @@ window.search = function () {
       productDiv.style.display = "block";
     });
   }
-};
+});
 
 //////////// function for filter catogary ///////////////////////////
 window.display = function (e) {
   var target = e.target;
-  if (target.tagName === 'P' && target.id === 'poption') {
+  if (target.tagName === 'P' && target.classList.contains('option')) {
     var categoryName = target.innerText.toLowerCase();
-    var productDivs = document.querySelectorAll('.product-details');
-    var found = false;
+    updateDisplayCount(categoryName);
+  }
+};
+
+function updateDisplayCount(clickedCategory) {
+  var productDivs = document.querySelectorAll('.product-details');
+  var categories = document.querySelectorAll('.category-container');
+
+  categories.forEach(categoryContainer => {
+    var category = categoryContainer.querySelector('.option');
+    var countElement = categoryContainer.querySelector('.count');
+    var count = 0;
 
     productDivs.forEach(productDiv => {
       var productCategory = productDiv.querySelector('p').innerText.toLowerCase();
-      if (productCategory.includes(categoryName)) {
-        productDiv.style.display = "block";
-        found = true;
+
+      if (clickedCategory === 'all products' || productCategory.includes(clickedCategory)) {
+        productDiv.style.display = "block"; 
+        count++;
       } else {
-        productDiv.style.display = "none";
+        productDiv.style.display = "none"; 
       }
     });
 
-    if (!found) {
-      productDivs.forEach(productDiv => {
-        productDiv.style.display = "block";
-      });
+    if (category.innerText.toLowerCase() === clickedCategory) {
+      countElement.innerText = `(${count})`;
+      // console.log(count);
+    } else {
+      countElement.innerText = ``;
     }
-  }
-};
+  });
+}
+
+
+
+
 
 
 window.addEventListener("load", function () {

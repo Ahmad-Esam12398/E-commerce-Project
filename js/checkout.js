@@ -151,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         localStorage.setItem("formData", JSON.stringify(formData));
+        localStorage.removeItem("cart");
     }
 
     function localeForm() {
