@@ -274,7 +274,7 @@ td {
     }
     .customerandorder {
         margin-left: 25px !important ;
-        height: 290vh;
+        /* height: 290vh; */
         margin-bottom: 20px;
     }
 
@@ -320,7 +320,7 @@ td {
     }
 
     .btn {
-       position: absolute;
+       /* position: absolute; */
         padding: 0.5vw 25vw;
         margin-left: 1vw;
         margin-top: 2vh !important;
