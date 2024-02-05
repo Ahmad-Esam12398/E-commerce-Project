@@ -1,4 +1,5 @@
 import{OrderForSeller,GetSellerProduct} from "./function.js"
+import{SideBarCollpse,ShowSideBar} from "./function.js"
 // Authentications
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     alert("You are not authorized to access this page.")

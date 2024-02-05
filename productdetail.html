@@ -50,14 +50,15 @@
                                 <a class="nav-link" href="#Footer">Contact Us</a>
                             </li>
                             <!-- Varies depends on the active user -->
-                            <!-- guest -->
-                            <li id="Guest" class="d-none nav-item mx-2">
+                              <!-- guest -->
+                              <li id="Guest" class="d-none nav-item mx-2">
                                 <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
                             </li>
                             <!-- customer -->
                             <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
+                                    <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
@@ -65,9 +66,6 @@
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Customer
                                         </p>
-                                    </li>
-                                    <li>
-                                        <p id="CustomerName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -80,17 +78,15 @@
                             </li>
                             <!-- admin -->
                             <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
+                                    <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
                                         <p style="font-size: small;"
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Admin</p>
-                                    </li>
-                                    <li>
-                                        <p id="AdminName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -107,17 +103,15 @@
                             </li>
                             <!-- seller -->
                             <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
+                                    <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
                                 </button>
                                 <ul style="left: auto; right: 50px;" class="dropdown-menu">
                                     <li>
                                         <p style="font-size: small;"
                                             class="pe-none fw-bold bg-warning text-white dropdown-item">
                                             Seller</p>
-                                    </li>
-                                    <li>
-                                        <p id="SellerName" class="pe-none fw-bold dropdown-item"></p>
                                     </li>
                                     <li>
                                         <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -135,7 +129,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+                    <button class="btn me-3 " type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
                         aria-controls="staticBackdrop">
                         <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -185,15 +179,15 @@
         </div>
         <div class="row">
      <!-- Footer -->
-     <footer  id="Footer">
+     <footer id="Footer">
         <div id="FooterTop" class="row">
             <div class="col-1"></div>
             <div id="ContactInfo" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
-                <img style="width: 150px; " src="images/kayuu-logo-white.svg" alt="">
+                <img style="width: 150px;" src="images/kayuu-logo-white.svg" alt="">
                 <div class="mt-5">
                     <div class="mt-2">3538 Torrance Blvd, Torrance, CA 90503, USA</div>
-                    <div class="mt-2">+20 101 234 5678</div>
-                    <div class="mt-2">info@example.com</div>
+                    <div class="mt-2">+20 101 532 8933</div>
+                    <div class="mt-2">Ahmad.esam1231998@gmail.com</div>
                     <div class="mt-2">Visit Our Store</div>
                 </div>
             </div>
@@ -207,8 +201,9 @@
                     <div class="mt-2"><a href="#Footer">Contact Us</a> </div>
                 </div>
             </div>
-            <div id="Rooms" class="col-12 col-sm-5  ms-sm-5  ms-lg-0  col-lg mt-5 mt-md-1">
-                <p class="fs-5 fw-bold mt-3">Rooms</p>
+            <div class="col-1 d-md-none"></div>
+            <div id="Rooms" class="col-12 px-md-5 ms-sm-3 ms-md-3 col-sm-5 col-lg mt-5 mt-md-1">
+                <p class="fs-5 fw-bold">Rooms</p>
                 <div class="mt-4">
                     <div class="mt-2"><a href="home.html"> Living Room</a></div>
                     <div class="mt-2"><a href="products.html">Bedroom</a> </div>
@@ -218,15 +213,20 @@
                 </div>
             </div>
             <div id="StayInTouch" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
-                <p class="fs-5 fw-bold mt-3">Stay In Touch</p>
+                <p class="fs-5 fw-bold">Stay In Touch</p>
                 <p class="col-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn" id="contactUs" data-bs-toggle="modal" data-bs-target="#contactUsModal">
+                    Contact Us
+                </button>
                 <div class="Socials Footer input-group mt-3">
                     <a href="https://www.instagram.com/"> <i
                             class="input-group-text me-1 fa-brands fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/"> <i class="input-group-text me-1 fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/"> <i
+                            class="input-group-text me-1 fa-brands fa-youtube"></i></a>
                     <a href="https://www.x.com/"> <i
                             class="input-group-text me-1 fa-brands fa-square-x-twitter"></i></a>
-                    <a href="https://www.facebook.com/"> <i class="input-group-text fa-brands fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/"> <i
+                            class="input-group-text fa-brands fa-facebook"></i></a>
                 </div>
             </div>
             <div class="col-1"></div>
