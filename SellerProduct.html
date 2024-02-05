@@ -85,8 +85,6 @@
                                 <input type="text" class="search-input" placeholder="Search for name or catagory">
                                 <button class="search-button"><i class="fas fa-search"></i></button>
                             </div>
-                      
-                        
                     </div>
 
                     <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
@@ -103,21 +101,21 @@
                                             <input type="text" class="form-control is" id="floatingname" placeholder="productname">
                                             <label for="floatingname">Product name</label>
                                             <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid product name.</div>
+                                            <div class="invalid-feedback">Please enter a valid product name(contain at least 3 letters)</div>
                                         </div>
 
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control " id="floatingprice" placeholder="price">
                                             <label for="floatingprice">price</label>
                                             <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid price.</div>
+                                            <div class="invalid-feedback">Please enter a valid price between (1:1000000)</div>
                                         </div>
 
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control " id="floatingQuantity" placeholder="Quantitiy">
                                             <label for="floatingQuantity">Quantitiy</label>
                                             <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid quantity.</div>
+                                            <div class="invalid-feedback">Please enter a valid quantity between (1:5000)</div>
                                         </div>
 
                                         <div class="form-floating mb-3">
@@ -180,7 +178,9 @@
                         <table class="table align-top table-hover" id="product">
                         </table>
                     </div>  
+                    <div>
                         
+                </div>    
                 </div>    
             </div>
         </div>
@@ -247,6 +247,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="js/SellerProduct.js" type="module"></script>
     <script src="js/data.js" type="module"></script>
+    <script src="js/function.js" type="module"></script>
     <script>
 
 </script>
