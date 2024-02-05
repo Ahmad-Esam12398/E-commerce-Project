@@ -191,10 +191,10 @@ function initCarousel(targetdiv, type, start, end, step) {
     else if (type != "sell" && end > productsArr.length - 1)
         end = productsArr.length - 1;
     // if the step is larger than the products to show then set it to that number
-    if ((end - start) % step == 0) {
+    if ((end - start) / step == 0) {
         step = end - start;
     }
-    for (let i = start; i <= end; i += step) {
+    for (let i = start; i < end; i += step) {
         let productSlice = [];
         // Adjust the step to avoid repeating the products or going outside the bouandries
 
@@ -294,8 +294,9 @@ console.log(mostSellerProducts);
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
 
-initCarousel(mostSellingCarousel, "sell", 0, mostSellerProducts.length / 2, 3);
-initCarousel(mostSellingCarouselSmall, "sell", 0, mostSellerProducts.length / 2, 1);
+initCarousel(mostSellingCarousel, "sell", 0, 4, 3);
+initCarousel(mostSellingCarouselSmall, "sell", 0, 6, 1);
+
 //subscription
 document.querySelector("form").addEventListener("submit", function (e) {
     document.getElementById("liveToast").classList.add("show");
