@@ -1,8 +1,30 @@
 import { products } from "./data.js";
+import { orders } from "./data.js";
+
+// load products Arr
+let productsArr = [];
+if (localStorage.getItem("products") == null) {
+    for (let i = 0; i < products.length; i++) {
+        productsArr.push(products[i].getProduct());
+    }
+    localStorage.setItem("products", JSON.stringify(productsArr))
+}
+productsArr = JSON.parse(localStorage.getItem("products"));
+console.log(products)
+
+// load Orders Arr
+let orderArr = [];
+if (localStorage.getItem("Orders") == null) {
+    localStorage.setItem("Orders", JSON.stringify(orders));
+}
+orderArr = JSON.parse(localStorage.getItem("Orders"));
+console.log(orderArr)
+
 // add to cart functions from Bothina
 const listCard = document.querySelector('.listCard');
 const total = document.querySelector('.total');
 const cardquantity = document.querySelector('.cardquantity');
+
 let cart = {};
 if (localStorage.getItem("cart") != null) {
     cart = JSON.parse(localStorage.getItem("cart"));
@@ -91,14 +113,7 @@ function removeProductFromCart(productId) {
 }
 
 reloadCard();
-// array of products
-if (!localStorage.getItem("products")) {
-    
-}
-const arrProducts = [];
-for (let i = 0; i < products.length; i++) {
-    arrProducts.push(products[i].getProduct());
-}
+
 // Function to create a product card
 function createProductCard(product) {
     // Create card
@@ -152,7 +167,7 @@ function createProductCard(product) {
                     price: product.price,
                     image: product.image,
                     cardquantity: 1,
-                    quantity:product.quantity
+                    quantity: product.quantity
                 }
             }
         } else if (cart[productId].cardquantity >= product.quantity) {
@@ -170,10 +185,27 @@ function createProductCard(product) {
 }
 
 // Function to initialize the new Collection Carousel with product cards
-function initCarousel(targetdiv, start, end, step) {
-    // loop by three to avoid repeating the same product
-    for (let i = start; i + step <= end; i += step) {
-        const productSlice = arrProducts.slice(i, i + step);// get array of three products
+function initCarousel(targetdiv, type, start, end, step) {
+    // if the step is larger than the products to show then set it to that number
+    if ((end - start) % step == 0) {
+        step = end - start;
+    }
+    for (let i = start; i <= end; i += step) {
+        // if new collection then use products Array
+        let productSlice = [];
+        // Adjust the step to avoid repeating the products or going outside the bouandries
+        if (i + step > end)
+            productSlice = productsArr.slice(i, end);
+        else
+            productSlice = productsArr.slice(i, i + step);
+
+        // if Most Selleer collection then use most seller Array
+        if (type == "sell") {
+            if (i + step > end)
+                productSlice = mostSellerProducts.slice(i, end);
+            else
+                productSlice = mostSellerProducts.slice(i, i + step);
+        }
 
         const carouselItem = document.createElement("div");
         carouselItem.classList.add("carousel-item");
@@ -204,13 +236,60 @@ function initCarousel(targetdiv, start, end, step) {
 
 const newCollectionCarousel = document.querySelector("#NewCollectionProducts .carousel-inner");
 const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
+
+initCarousel(newCollectionCarousel, "new", products.length / 2, products.length - 1, 3);
+initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length - 1, 3);
+
+// ============== Get the Best Seller Products and print them ==============
+let BestSellerProducts = {};
+// getting all products in orders and their quantity 
+for (let i = 0; i < orderArr.length; i++) {
+    let productsInOrder = orderArr[i]['_products_'];
+    for (let j = 0; j < productsInOrder.length; j++) {
+        let key = productsInOrder[j]['id'];
+        let quantity = Number(productsInOrder[j]['quantity']);
+        // console.log(BestSellerProducts[key]);
+        if (BestSellerProducts[key]) {
+            BestSellerProducts[key] += quantity;
+        } else {
+            BestSellerProducts[key] = quantity;
+        }
+    }
+}
+// mapping them into an array
+let BestSellerArr = [];
+for (const key in BestSellerProducts) {
+    BestSellerArr.push({
+        id: key,
+        quantity: BestSellerProducts[key]
+    })
+}
+// Sorting th eproducts desc according to the quantity selled
+BestSellerArr.sort(
+    (a, b) => {
+        let x = a['quantity'];
+        let y = b['quantity'];
+        return y - x;
+    });
+
+console.log(BestSellerArr);
+let mostSellerProducts = [];
+for (let i = 0; i < BestSellerArr.length; i++) {
+    mostSellerProducts.push(productsArr.find((product) => {
+        return product["id"] == Number(BestSellerArr[i]["id"]);
+    })
+    )
+}
+console.log(productsArr);
+console.log(mostSellerProducts);
+
+
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
 
-initCarousel(newCollectionCarousel, 0, 8, 3);
-initCarousel(newCollectionCarouselSmall, 0, 8, 1);
-initCarousel(mostSellingCarousel, 9, 20, 3);
-initCarousel(mostSellingCarouselSmall, 9, 20, 1);
+initCarousel(mostSellingCarousel, "sell", 0, mostSellerProducts.length / 2, 3);
+initCarousel(mostSellingCarouselSmall, "sell", 0, mostSellerProducts.length / 2, 1);
+//subscription
 document.querySelector("form").addEventListener("submit", function (e) {
     document.getElementById("liveToast").classList.add("show");
     e.preventDefault();
@@ -235,5 +314,6 @@ window.onscroll = function () {
 document.getElementById("UpButton").addEventListener("click", function () {
     document.documentElement.scrollTop = 0;
 });
+
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
