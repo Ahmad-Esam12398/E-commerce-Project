@@ -321,7 +321,7 @@ nav {
 
   .divandsearch {
     background-color: white;
-    width: 120vw;
+    width: 170vw;
     margin-left: -400px !important;
     padding: 10px;
   }
@@ -329,11 +329,12 @@ nav {
 
   .divbutton {
     margin-top: 10px !important;
+    margin-left: 70vw;
   }
 
   .searchbutton {
     margin-top: 2vw;
-    margin-left: 2vw;
+    margin-left:70vw;
     width: 75vw;
   }
 

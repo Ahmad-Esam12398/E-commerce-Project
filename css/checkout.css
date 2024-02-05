@@ -179,7 +179,7 @@ body > div > div > form > div.col-12 > div.cart-details{
         background-color: white;
         margin-left: 15px !important;
         width: 90% !important;
-        height: 280vh !important;
+    
         margin-bottom: 20px;
     }
 
@@ -263,7 +263,7 @@ body > div > div > form > div.col-12 > div.cart-details{
         width: 85%;
 
     }
-
+  
 }
 
 @media screen and (min-width: 577px) and (max-width: 1366px) {
@@ -276,7 +276,7 @@ body > div > div > form > div.col-12 > div.cart-details{
     }
     .customerandorder {
         margin-left: 25px !important ;
-        height: 290vh;
+        /* height: 290vh; */
         margin-bottom: 20px;
     }
 
@@ -322,7 +322,7 @@ body > div > div > form > div.col-12 > div.cart-details{
     }
 
     .btn {
-       position: absolute;
+       /* position: absolute; */
         padding: 0.5vw 25vw;
         margin-left: 1vw;
         margin-top: 2vh !important;
