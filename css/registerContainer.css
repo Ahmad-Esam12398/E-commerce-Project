@@ -1,3 +1,8 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 body {
     background-color: rgba(245, 245, 245, 0.822);
     align-items: center;
