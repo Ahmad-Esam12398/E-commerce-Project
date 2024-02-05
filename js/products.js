@@ -178,7 +178,7 @@ function reloadCard() {
         <span class="num">${cart[productId].cardquantity}</span>
         <span class="plus">+</span>
       </div>
-      <p>$${Number(productDetails.price * cart[productId].cardquantity)}</p>
+      <p>$${(productDetails.price * cart[productId].cardquantity).toFixed(2)}</p>
       <button class="remove-button" data-product-id="${productId}">
         <i class="fa-regular fa-circle-xmark"></i>
       </button>
@@ -200,7 +200,7 @@ function reloadCard() {
     listCard.appendChild(newDiv);
   }
 
-  total.innerText = totalprice.toLocaleString();
+  total.innerText = "$" + totalprice.toLocaleString();
   cardquantity.innerText = count;
 
   const removeButtons = document.querySelectorAll('.remove-button');

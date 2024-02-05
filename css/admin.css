@@ -18,8 +18,23 @@ thead{
 .btn:hover{
     background-color: #edb932 !important;
 }
-.btn{
+/* .btn{
     border-color:#edb932 !important;
+} */
+.list-group-item {
+    border: none !important;
+}
+button.btn.btn-outline-primary.w-100 {
+    border: none;
+    text-align: left;
+}
+body > div > div > aside > ul > li button{
+    color: #edb932 !important;
+    border-color: #edb932 !important;
+}
+body > div > div > aside > ul > li button:hover{
+    color: white !important;
+    background-color: #edb932 !important;
 }
 body > div > div.d-flex.flex-column.flex-md-row > aside > ul > li:nth-child(n) input, #lowerTable > i{
     color: #edb932 !important;
@@ -75,4 +90,11 @@ border-radius: 5px;
 }
 td button{
     margin: 2px;
+}
+#lowerTable > i{
+    border-color: #edb932 !important;
+}
+#lowerTable > i{
+    margin-top: 10px;
+    width: 100%;
 }

@@ -173,3 +173,6 @@ nav .cardquantity {
     transform: scale(1);
     transition: all 0.1s;
 }
+#contactUs{
+    color: white;
+}

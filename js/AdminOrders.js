@@ -2,16 +2,17 @@ import { originalOrders as initialOrders } from "./data.js";
 import { products as initialProducts } from "./data.js";
 import { orders as sellerOrders} from "./data.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
-}
+}  
 if(localStorage.getItem("Orders") == null){
     localStorage.setItem("Orders", JSON.stringify(sellerOrders));
 }
 
-if(JSON.parse(localStorage.getItem("products") == null)){
-    localStorage.setItem("products", JSON.stringify(initialProducts));
+if(localStorage.getItem("products") == null){
+    let plainProducts = initialProducts.map((item)=>item.getProduct());
+    localStorage.setItem("products", JSON.stringify(plainProducts));
 }
 
 if(localStorage.getItem("originalOrders") == null){
@@ -23,11 +24,13 @@ localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
 // }
 let orders = JSON.parse(localStorage.getItem("originalOrders"));
 let products = JSON.parse(localStorage.getItem("products"));
+let _orders = JSON.parse(localStorage.getItem("Orders"));
 console.log(orders);
 function updateOriginalOrdersLocalStorage(){
     localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function breakOrdersIntoProducts(ordersRow){
+    //debugger;
     let target = [];
     let productsId = ordersRow["products"];
     let productsIndices = [];
@@ -51,7 +54,7 @@ function createTableOrders(){
         // debugger;
         let tableBody = document.getElementsByTagName("tbody")[0];
         let result = breakOrdersIntoProducts(orders[i]);
-        debugger;
+        //debugger;
         for(let j = 0; j < result.length; j++){
             let tableRow = document.createElement("tr");
             let id = result[j]["id"];
@@ -59,6 +62,7 @@ function createTableOrders(){
             let quantity = result[j]["quantity"];
             let date = result[j]["date"];
             let status = result[j]["status"];
+            let customerId = orders[i]["customerId"];
             let unitPrice = result[j]["product"].price;
             let tableData = document.createElement("td");
             if(j == 0){
@@ -93,6 +97,11 @@ function createTableOrders(){
 
                 tableData = document.createElement("td");
                 tableData.innerHTML = date;
+                tableData.setAttribute("rowspan", result.length);
+                tableData.classList.add("table-secondary");
+                tableRow.appendChild(tableData);
+                tableData = document.createElement("td");
+                tableData.innerHTML = customerId;
                 tableData.setAttribute("rowspan", result.length);
                 tableData.classList.add("table-secondary");
                 tableRow.appendChild(tableData);
@@ -139,21 +148,29 @@ function createTableOrders(){
 };
 createTableOrders();
 
+
+
 function deleteOrder(){
-    let tableRow = this.parentElement.parentElement;
-    let rowSpan = tableRow.children[0].getAttribute("rowspan");
-    let id = tableRow.children[0].innerHTML;
-    let index = orders.findIndex(order => order.id == id);
-    orders.splice(index, 1);
-    updateOriginalOrdersLocalStorage();
-    tableRow.parentElement.removeChild(tableRow);
-    if(rowSpan){
-        for(let i = 0; i < rowSpan - 1; i++){
-            tableRow = tableRow.nextElementSibling;
-            tableRow.parentElement.removeChild(tableRow);
+    if(confirm("Are You sure. Delete this Order!")){
+        let tableRow = this.parentElement.parentElement;
+        let rowSpan = tableRow.children[0].getAttribute("rowspan");
+        let id = tableRow.children[0].innerHTML;
+        let index = orders.findIndex(order => order.id == id);
+        deleteOrdersByorderId(id);
+        orders.splice(index, 1);
+        updateOriginalOrdersLocalStorage();
+        _orders.splice(index,1);
+        localStorage.setItem("Orders",JSON.stringify(_orders))
+        tableRow.parentElement.removeChild(tableRow);
+        if(rowSpan){
+            for(let i = 0; i < rowSpan - 1; i++){
+                tableRow = tableRow.nextElementSibling;
+                tableRow.parentElement.removeChild(tableRow);
+            }
+
         }
+        createTableOrders();
     }
-    createTableOrders();
 }
 let searchdiv = document.getElementsByClassName("searchbutton")[0];
 searchdiv.children[0].addEventListener("keyup", function(event){
@@ -230,7 +247,7 @@ function filterTableChecked(criteria){
         rowSpan = tableRows[i].children[0].getAttribute("rowspan");
         if(rowSpan){
             let tableData = tableRows[i].children;
-            if(tableData[7].innerHTML == criteria){
+            if(tableData[8].innerHTML == criteria){
                 for(let j = i; j < i + +rowSpan; j++){
                     tableRows[j].classList.remove("d-none");
                 }
@@ -247,7 +264,7 @@ function filterTableUnChecked(criteria){
         rowSpan = tableRows[i].children[0].getAttribute("rowspan");
         if(rowSpan){
             let tableData = tableRows[i].children;
-            if(tableData[7].innerHTML == criteria){
+            if(tableData[8].innerHTML == criteria){
                 for(let j = i; j < i + +rowSpan; j++){
                     tableRows[j].classList.add("d-none");
                 }

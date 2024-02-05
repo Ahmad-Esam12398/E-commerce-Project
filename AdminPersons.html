@@ -10,17 +10,20 @@
     <script type="module" src="js/CRUD Persons.js"></script>
     <script>
         window.onload = function(){
-            document.querySelectorAll("input[value='DashBoard']")[0].addEventListener("click", function(){
-            location.href = "AdminHome.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[0].addEventListener("click", function(){
+                location.href = "AdminHome.html";
             });
-            document.querySelectorAll("input[value='Users']")[0].addEventListener("click", function(){
-            location.href = "AdminPersons.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[1].addEventListener("click", function(){
+                location.href = "AdminPersons.html";
             });
-            document.querySelectorAll("input[value='Products']")[0].addEventListener("click", function(){
-            location.href = "AdminProducts.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[2].addEventListener("click", function(){
+                location.href = "AdminProducts.html";
             });
-            document.querySelectorAll("input[value='Orders']")[0].addEventListener("click", function(){
-            location.href = "AdminOrders.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[3].addEventListener("click", function(){
+                location.href = "AdminOrders.html";
+            });
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[4].addEventListener("click", function(){
+                location.href = "AdminService.html";
             });
         }
     </script>
@@ -154,10 +157,38 @@
             <aside class="leftSide col-6 col-md-2 d-flex flex-md-column flex-row m-2">
                 <div class="p-3 mb-2 text-white text-center w-100" style="background-color: #edb932;">Menu</div>
                 <ul class="list-group list-group-flush flex-row flex-md-column">
-                    <li class="list-group-item"><input type="button" value="DashBoard" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Users" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Products" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Orders" class="btn btn-outline-primary w-100"></li>
+                    <!-- <div class="d-inline"><img src="images/Admin/1.svg"></div> -->
+                    
+                    <li class="list-group-item">
+                        <!-- <input type="button" value=" DashBoard" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-tachometer-alt"></i> DashBoard
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <!-- <input type="button" value="Users" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-users"></i> Users
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <!-- <input type="button" value="Products" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-box"></i> Products
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-shopping-bag"></i> Orders
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-headset"></i> Customer Support
+                        </button>
+                    </li>
                 </ul>
             </aside>
             <div class="content col-md-9 d-md-inline-block d-block m-auto ">

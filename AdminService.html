@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin DashBoard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <title>Admin's Person DashBoard</title>
     <link href="css/admin.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="js/AdminDashBoard.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script type="module" src="js/AdminService.js"></script>
     <script>
         window.onload = function(){
             document.querySelectorAll("body > div > div > aside > ul > li  button")[0].addEventListener("click", function(){
@@ -194,55 +192,63 @@
                 </ul>
             </aside>
             <div class="content col-md-9 d-md-inline-block d-block m-auto ">
-                <div class="container d-flex justify-content-around flex-wrap ">
-                    <div class="bg-primary text-center text-white mt-2 rounded" style="width: 200px; font-family: Georgia, 'Times New Roman', Times, serif">
-                        <span class="fs-2">Products</span> <br>
-                        <span class="fs-1" id="noOfProducts"> 100 </span>
-                    </div>
-                    <div class="bg-info text-center text-white mt-2 rounded" style="width: 200px; font-family: Georgia, 'Times New Roman', Times, serif">
-                        <span class="fs-2">Users</span> <br>
-                        <span class="fs-1" id="noOfUsers"> 120 </span>
-                    </div>
-                    <div class="bg-secondary  text-center text-white mt-2 rounded" style="width: 200px; font-family: Georgia, 'Times New Roman', Times, serif">
-                        <span class="fs-2">Orders</span> <br>
-                        <span class="fs-1" id="noOfOrders"> 300 </span>
+                <div class="d-flex justify-content-between mt-2 flex-row-reverse">
+                    <!-- <div class="form-check form-switch d-flex flex-column ">
+                        <div>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckAdmin" checked>
+                            <label class="form-check-label" for="flexSwitchCheckAdmin">Admin</label>
+                        </div>
+                        <div>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckSeller" checked>
+                            <label class="form-check-label" for="flexSwitchCheckSeller">Seller</label>
+                        </div>
+                        <div>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCustomer" checked>
+                            <label class="form-check-label" for="flexSwitchCheckCustomer">Customer</label>
+                        </div>
+                    </div> -->
+                    <div class="searchbutton align-self-end">
+                        <input type="text" placeholder="search">
+                        <input  type="button" value="S E A R C H">
                     </div>
                 </div>
-                <div class="d-block  d-md-flex  m-5 justify-content-between flex-md-wrap flex-md-row ">
-                    <div class="col-10 col-md-5 align-self-center ">
-                        <canvas id="myFirstChart"></canvas>
+                <section id="displayData">
+                    <div style="max-height: 80vh; overflow-y: auto; overflow-x: auto;">
+                        <table id="myTable" class="table text-center align-middle table-striped table-hover">
+                            <thead class="table-dark" id="tableHeader"></thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
                     </div>
-                    <div class="col-10 col-md-5 ">
-                        <canvas id="mySecondChart"></canvas>
-                    </div>
-                    <div class="col-10 mt-5 ">
-                        <canvas id="myFourthChart"></canvas>
-                    </div>
-                    <div class="col-10 col-md-6 mt-4">
-                        <h3 class="text-center ">Orders Status</h3>
-                        Pending
-                        <div class="progress mb-3 " role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 10%" id="pending"></div>
-                        </div>
-                        Shipped
-                        <div class="progress mb-3 " role="progressbar" aria-label="Success striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info " style="width: 25%" id="shipped"></div>
-                        </div>
-                        Delivered
-                        <div class="progress" role="progressbar" aria-label="Info striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
-                            <div class="progress-bar progress-bar-striped bg-success " style="width: 50%" id="delivered"></div>
-                        </div>
-                        <!-- <div class="progress mt-2 " role="progressbar" aria-label="Warning striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar progress-bar-striped bg-warning" style="width: 75%"></div>
-                        </div>
-                        <div class="progress" role="progressbar" aria-label="Danger striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar progress-bar-striped bg-danger" style="width: 100%"></div>
-                        </div> -->
-                    </div>
+                    <div id="lowerTable" class="text-end"></div>
+                </section>
             </div>
         </div>
         <div class="footer"></div>
     </div>
+  <!-- Modal -->
+  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Message details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalContent">
+            <div>
+                <label for="messageSubjectRead" class="form-label">Subject</label>
+                <input type="text" id="messageSubjectRead" class="form-control" placeholder="Subject" readonly>
+            </div>
+            <div class="mt-4">
+                <label for="messageContentRead" class="form-label">Message</label>
+                <textarea id="messageContentRead" class="form-control" placeholder="Message" readonly></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

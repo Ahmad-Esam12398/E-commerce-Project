@@ -256,7 +256,6 @@ function initCarousel(targetdiv, type, start, end, step) {
         console.log(BestSellerArr);
         console.log(mostSellerProducts);
 
-
         const carouselItem = document.createElement("div");
         carouselItem.classList.add("carousel-item");
 
