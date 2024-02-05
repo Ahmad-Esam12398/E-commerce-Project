@@ -294,7 +294,7 @@ console.log(mostSellerProducts);
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
 
-initCarousel(mostSellingCarousel, "sell", 0, 4, 3);
+initCarousel(mostSellingCarousel, "sell", 0, 6, 3);
 initCarousel(mostSellingCarouselSmall, "sell", 0, 6, 1);
 
 //subscription
