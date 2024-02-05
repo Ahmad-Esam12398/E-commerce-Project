@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function validatephone() {
         var phone = phoneinput.value;
-        var phoneNumberRegex = /^\d{10}$/;
+        var phoneNumberRegex =/^(010|011|012|015)[0-9]{8}$/;
 
         if (phoneNumberRegex.test(phone)) {
             phoneinput.classList.add("is-valid");

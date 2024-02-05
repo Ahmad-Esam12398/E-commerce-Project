@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- NavBar -->
+<!-- NavBar -->
     <nav class="navbar col-12 navbar-expand-md fs-5 fw-bold">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
@@ -45,7 +45,7 @@
             </button>
             <!-- Navigation Bar items -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto me-3">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-2">
                         <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                     </li>
@@ -65,8 +65,9 @@
                     </li>
                     <!-- customer -->
                     <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
+                            <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
@@ -74,9 +75,6 @@
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Customer
                                 </p>
-                            </li>
-                            <li>
-                                <p id="CustomerName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -89,17 +87,15 @@
                     </li>
                     <!-- admin -->
                     <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
+                            <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Admin</p>
-                            </li>
-                            <li>
-                                <p id="AdminName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -116,17 +112,15 @@
                     </li>
                     <!-- seller -->
                     <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
+                            <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Seller</p>
-                            </li>
-                            <li>
-                                <p id="SellerName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -147,7 +141,7 @@
             <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
                 aria-controls="staticBackdrop">
                 <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="CartIcon fa-solid fa-cart-shopping"></i>
             </button>
         </div>
     </nav>
