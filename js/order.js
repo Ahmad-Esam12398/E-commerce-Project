@@ -22,7 +22,7 @@ if (localStorage.getItem("Orders") == null) {
 
 
     if (localStorage.getItem("originalOrders") == null) {
-        localStorage.setItem("originalOrders", JSON.stringify(orders));
+        localStorage.setItem("originalOrders", JSON.stringify(originalOrders));
         }
 let _orders_=JSON.parse(localStorage.getItem("originalOrders"));
 console.log(_orders_)
@@ -202,7 +202,9 @@ SelectedTable.addEventListener("click",function(e){
         let CurrentOrder=_orders.find(order=>order.orderId==CurrentID)
         CurrentOrder.status="shipped"
         localStorage.setItem("Orders",JSON.stringify(_orders))
-        let currentorder=_orders_.find(order=>order.orderId==CurrentID)
+        console.log(_orders_)
+        let currentorder=_orders_.find(order=>order.id==CurrentID)
+        console.log(currentorder)
         currentorder.status="shipped"
         localStorage.setItem("originalOrders",JSON.stringify(_orders_))
         let modifiedOrder=OrderForSeller(_orders)
@@ -220,7 +222,7 @@ SelectedTable.addEventListener("click",function(e){
         console.log(CurrentOrder)
         CurrentOrder.status="delivered"
         localStorage.setItem("Orders",JSON.stringify(_orders))
-        let currentorder=_orders_.find(order=>order.orderId==CurrentID)
+        let currentorder=_orders_.find(order=>order.id==CurrentID)
         currentorder.status="delivered"
         localStorage.setItem("originalOrders",JSON.stringify(_orders_))
         let modifiedOrder=OrderForSeller(_orders)
