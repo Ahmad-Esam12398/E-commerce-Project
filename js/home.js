@@ -186,26 +186,33 @@ function createProductCard(product) {
 
 // Function to initialize the new Collection Carousel with product cards
 function initCarousel(targetdiv, type, start, end, step) {
+    if (type == "sell" && end > mostSellerProducts.length - 1)
+        end = mostSellerProducts.length - 1;
+    else if (type != "sell" && end > productsArr.length - 1)
+        end = productsArr.length - 1;
     // if the step is larger than the products to show then set it to that number
     if ((end - start) % step == 0) {
         step = end - start;
     }
     for (let i = start; i <= end; i += step) {
-        // if new collection then use products Array
         let productSlice = [];
         // Adjust the step to avoid repeating the products or going outside the bouandries
-        if (i + step > end)
-            productSlice = productsArr.slice(i, end);
-        else
-            productSlice = productsArr.slice(i, i + step);
 
-        // if Most Selleer collection then use most seller Array
+        // if Most Seller collection then use most seller Array
         if (type == "sell") {
             if (i + step > end)
                 productSlice = mostSellerProducts.slice(i, end);
             else
                 productSlice = mostSellerProducts.slice(i, i + step);
         }
+        else {
+            // if new collection then use products Array
+            if (i + step > end)
+                productSlice = productsArr.slice(i, end);
+            else
+                productSlice = productsArr.slice(i, i + step);
+        }
+
 
         const carouselItem = document.createElement("div");
         carouselItem.classList.add("carousel-item");
@@ -237,8 +244,8 @@ function initCarousel(targetdiv, type, start, end, step) {
 const newCollectionCarousel = document.querySelector("#NewCollectionProducts .carousel-inner");
 const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
 
-initCarousel(newCollectionCarousel, "new", products.length / 2, products.length - 1, 3);
-initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length - 1, 3);
+initCarousel(newCollectionCarousel, "new", products.length / 2, products.length, 3);
+initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length, 3);
 
 // ============== Get the Best Seller Products and print them ==============
 let BestSellerProducts = {};
