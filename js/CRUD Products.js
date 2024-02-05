@@ -360,6 +360,14 @@ function sortTable(columnIndex) {
 const headers = document.querySelectorAll('th');
 headers.forEach((header, index) => {
     if(index < headers.length - 1 && index != 4){
-        header.addEventListener('click', () => sortTable(index));
+        header.addEventListener('click', () => {
+            sortTable(index);
+            document.querySelectorAll("th").forEach(th=> {
+                th.classList.remove("sorted");
+                th.innerHTML = th.innerHTML.replace(/ ▲| ▼/g, '');
+            });
+            header.classList.add("sorted");
+            header.innerHTML += sortDirection ? ' ▼' : ' ▲';
+        });
     }
 });
