@@ -213,7 +213,6 @@ function initCarousel(targetdiv, type, start, end, step) {
                 productSlice = productsArr.slice(i, i + step);
         }
 
-
         const carouselItem = document.createElement("div");
         carouselItem.classList.add("carousel-item");
 

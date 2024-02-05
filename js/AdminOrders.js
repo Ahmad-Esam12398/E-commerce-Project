@@ -30,7 +30,7 @@ function updateOriginalOrdersLocalStorage(){
     localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function breakOrdersIntoProducts(ordersRow){
-    debugger;
+    //debugger;
     let target = [];
     let productsId = ordersRow["products"];
     let productsIndices = [];
@@ -54,7 +54,7 @@ function createTableOrders(){
         // debugger;
         let tableBody = document.getElementsByTagName("tbody")[0];
         let result = breakOrdersIntoProducts(orders[i]);
-        debugger;
+        //debugger;
         for(let j = 0; j < result.length; j++){
             let tableRow = document.createElement("tr");
             let id = result[j]["id"];
@@ -148,10 +148,7 @@ function createTableOrders(){
 };
 createTableOrders();
 
-//Ahmad Mostafa Function
-function deleteOrdersByorderId(orderid) {
-    _orders = _orders.filter(order => order.orderId !== orderid);
-}
+
 
 function deleteOrder(){
     if(confirm("Are You sure. Delete this Order!")){
@@ -162,12 +159,15 @@ function deleteOrder(){
         deleteOrdersByorderId(id);
         orders.splice(index, 1);
         updateOriginalOrdersLocalStorage();
+        _orders.splice(index,1);
+        localStorage.setItem("Orders",JSON.stringify(_orders))
         tableRow.parentElement.removeChild(tableRow);
         if(rowSpan){
             for(let i = 0; i < rowSpan - 1; i++){
                 tableRow = tableRow.nextElementSibling;
                 tableRow.parentElement.removeChild(tableRow);
             }
+
         }
         createTableOrders();
     }

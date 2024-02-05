@@ -9,12 +9,12 @@
         padding-left: 0;
     }
     #sidebar {
-        
         height:130vh!important;
         overflow:auto!important;
         overflow-y: auto!important;
         transition:all 0.3s ;
         box-shadow: 0 10px 30px -12px rgb(0 0 0 / 42%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+        
     }
     
         #sidebar .nav-item-overload{
@@ -89,6 +89,7 @@
         @media only screen and (min-width:992px) {
             #sidebar.active {
                 width: 100px;
+               
             }
         .fixed-width{
             width:200px;
@@ -115,6 +116,11 @@
                 text-align: center;
             }
         }
+        table thead{
+            position: sticky !important;
+            z-index: 1 !important;
+            color: #edb932 !important;
+        }
 
         @media only screen and (max-width:992px ){
             #sidebar {
@@ -125,6 +131,7 @@
                 width: 200px;
                 transform:translatex(-100%);
                 transition: all 150ms linear;
+                z-index: 10000;
             }	
         }
 
@@ -330,8 +337,9 @@
         }
         @media only screen and (max-width:576px ){
             .card {
-                width: 100%;
+                width: 60% !important;
                 text-align: center;
+                margin: 5px auto !important;
             }
             .cardRow,.container{
                 display: flex !important;
@@ -387,22 +395,16 @@
                 right:100px
             }
         }
-        @media only screen and (max-width:576px ){
-            .speciallabel{
-            width:200px;
-            }
-            .rightlabel{
-                position: absolute;
-                right:100px
-            }
-        }
+
         #myChart,#myChart2{
             min-height: 300px;
         }
         .product-tableContainer,.Order{
             height: 70vh;
             overflow-y: auto;
-           
+        }
+        .Order{
+            margin-top: 20px;
         }
         body{
             background-color: rgba(245, 245, 245, 0.822)
@@ -412,15 +414,14 @@
         }
         .shopButton {
             font-family: 'Poppins', sans-serif;
-            
             text-transform: uppercase;
-            background-color: #edb932;
-          
+            background-color: #edb932; 
             border: 0;
         }
         #order-table{
             width:98% !important;
             margin: 30px auto;
+            padding-top: 20px;
         }
         .card{
             height: 105px;
@@ -434,4 +435,17 @@
         .lessorderNumber{
             font-size: 12px;
             font-weight: bold;
+        }
+
+        .form-order {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+    
+        .label-order {
+            font-weight: bold;
+            padding-top: 10px;
         }
