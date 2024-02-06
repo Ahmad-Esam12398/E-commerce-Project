@@ -64,38 +64,38 @@ btn_show_sidebar.addEventListener("click", ShowSideBar)
 }
 
     /*----------------------------------------------------------------draw Table Header for product---------------------------------------------------------------------*/ 
-function drawHeaderRow(_array,RowParent,DrawOptionColumn,...excludeColumns){
-    let modifiedHeader = Object.keys(_array[0]).filter(key => !excludeColumns.includes(key));
-    RowParent.classList.add("table-light")
-    let head_row = document.createElement("tr");
-    if (DrawOptionColumn) {
-        modifiedHeader.push("operation");
-    }
-    for (let i = 0; i < modifiedHeader.length; i++) {
-        let head = document.createElement("th");
-        let sortSpan=document.createElement("span")
-        if(!(modifiedHeader[i]=="status"||modifiedHeader[i]=="customerName"||modifiedHeader[i]=="operation")){
-        sortSpan.classList.add("sort")
-        if(SwapSort){
-            let sortUP=document.createElement("i")
-            sortUP.classList.add("fa-solid","fa-sort-up","sort-up")
-            sortUP.classList.toggle("d-inline-block");
-            sortSpan.appendChild(sortUP)
+    function drawHeaderRow(_array, RowParent, DrawOptionColumn, ...excludeColumns) {
+        let modifiedHeader = Object.keys(_array[0]).filter(key => !excludeColumns.includes(key));
+        RowParent.classList.add("table-light")
+        let head_row = document.createElement("tr");
+        if (DrawOptionColumn) {
+            modifiedHeader.push("Action");
         }
-        else{
-            let sortdown=document.createElement("i")
-            sortdown.classList.add("fa-solid","fa-sort-down","sort-down")
-            sortSpan.appendChild(sortdown) 
+        for (let i = 0; i < modifiedHeader.length; i++) {
+            let head = document.createElement("th");
+            let sortSpan = document.createElement("span")
+            if (!(modifiedHeader[i] == "status" || modifiedHeader[i] == "customerName" || modifiedHeader[i] == "operation")) {
+                sortSpan.classList.add("sort")
+                if (SwapSort) {
+                    let sortUP = document.createElement("i")
+                    sortUP.classList.add("fa-solid", "fa-sort-up", "sort-up")
+                    sortUP.classList.toggle("d-inline-block");
+                    sortSpan.appendChild(sortUP)
+                } else {
+                    let sortdown = document.createElement("i")
+                    sortdown.classList.add("fa-solid", "fa-sort-down", "sort-down")
+                    sortSpan.appendChild(sortdown)
+                }
             }
+            head.innerHTML = modifiedHeader[i]
+            head.appendChild(sortSpan)
+            head.classList.add("text-center");
+            head.classList.add("sticky-top")
+            head_row.appendChild(head);
         }
-        head.innerHTML = modifiedHeader[i]
-        head.appendChild(sortSpan)
-        head.classList.add("text-center");
-        head.classList.add("sticky-top")
-        head_row.appendChild(head);
+        RowParent.appendChild(head_row);
     }
-    RowParent.appendChild(head_row);
-        }
+    
 
         /*-------------------------------------------------------------------draw Table Row for product-----------------------------------------------------------------------------------*/ 
         function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumns) {
@@ -109,34 +109,35 @@ function drawHeaderRow(_array,RowParent,DrawOptionColumn,...excludeColumns){
                     } else if (key === "status" && _array[RowIndex][key] === "shipped") {
                         cell.classList.add("text-info");
                     }
-                    
+        
                     cell.innerHTML = _array[RowIndex][key];
                     cell.classList.add("text-center");
                     RowParent.appendChild(cell);
                 }
             }
+        
             if (DrawOptionColumn) {
                 let cell = document.createElement("td");
                 let createdSpan = document.createElement("span");
+                let moreDetails = document.createElement("i");
+                moreDetails.classList.add("fa-solid", "fa-eye", "px-2", "text-center", "w-50");
+                createdSpan.appendChild(moreDetails)
+                cell.appendChild(createdSpan);
                 createdSpan.classList.add("text-center");
                 if (_array[RowIndex]["status"] === "pending") {
                     let shipped = document.createElement("i");
                     shipped.classList.add("fa-solid", "fa-truck", "px-2", "text-center", "w-50");
                     createdSpan.appendChild(shipped);
-                }
-                else if (_array[RowIndex]["status"] === "pending" || _array[RowIndex]["status"] === "shipped") {
+                } else if (_array[RowIndex]["status"] === "pending" || _array[RowIndex]["status"] === "shipped") {
                     let delivered = document.createElement("i");
                     delivered.classList.add("fa-solid", "fa-circle-check", "px-2", "text-center");
                     createdSpan.appendChild(delivered);
+                } else if (_array[RowIndex]["status"] == "delivered") {
+                    let done = document.createElement("i");
+                    done.classList.add("fa-solid", "fa-check", "px-2", "text-center", "text-success");
+                    createdSpan.appendChild(done);
                 }
-                else if(_array[RowIndex]["status"]=="delivered"){
-                    createdSpan.innerHTML="done"
-                    createdSpan.classList.add("text-success","text-center")
-                }
-                let moreDetails = document.createElement("i");
-                moreDetails.classList.add("fa-solid", "fa-eye", "px-2", "text-center", "w-50");
-                createdSpan.appendChild(moreDetails)
-                cell.appendChild(createdSpan);
+                
                 RowParent.appendChild(cell);
             }
         }
@@ -170,7 +171,6 @@ let TableIcon=document.getElementsByClassName("floatingTable")[0]
                 });
             }
             modifiedOrder.sort(function (x, y) {
-                console.log(key);
                 if (typeof x[key] == "string") {
                     if (SwapSort) {
                         return x[key].localeCompare(y[key]);
@@ -185,17 +185,16 @@ let TableIcon=document.getElementsByClassName("floatingTable")[0]
                     }
                 }
             });
+                SwapSort = !SwapSort;
+                let PrioritySort = modifiedOrder;
+                let priority = { "pending": 1, "shipped": 2, "delivered": 3 };
+                console.log(PrioritySort);
+                PrioritySort.sort((a, b) => {
+                    let statusA = a.status.toLowerCase();
+                    let statusB = b.status.toLowerCase();
 
-            SwapSort = !SwapSort;
-             let PrioritySort = modifiedOrder;
-             let priority = { "pending": 1, "shipped": 2, "delivered": 3 };
-             console.log(PrioritySort);
-             PrioritySort.sort((a, b) => {
-                 let statusA = a.status.toLowerCase();
-                 let statusB = b.status.toLowerCase();
-
-                 return priority[statusA] - priority[statusB];
-             });
+                    return priority[statusA] - priority[statusB];
+                });
             drawTable(modifiedOrder, SelectedTable, true);
         }
     });
@@ -252,7 +251,7 @@ SelectedTable.addEventListener("click",function(e){
         $('#form').modal('show')
         document.getElementById("orderId").value=CurrentOrder.OrderID
         document.getElementById("productName").value=CurrentOrder.productName
-        document.getElementById("quantityOrdered").value=CurrentOrder.QuantityOrdered
+        document.getElementById("Quantity").value=CurrentOrder.Quantity
         document.getElementById("status").value= CurrentOrder.status
         document.getElementById("dateOrder").value= CurrentOrder.dateOrder
         document.getElementById("dateDeliver").value= CurrentOrder.dateDeliver
