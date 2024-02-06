@@ -95,6 +95,7 @@ function AddButton(){
     addButton.setAttribute("data-bs-toggle", "modal");
     addButton.setAttribute("data-bs-target", "#staticBackdrop");
     addButton.addEventListener("click", function(){
+        debugger;
         // console.log(document.forms[0]);
         document.forms[0].classList.remove("was-validated");
         operation = "add";
