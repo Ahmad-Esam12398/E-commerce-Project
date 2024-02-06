@@ -82,6 +82,8 @@ window.addEventListener("load", function () {
         if (!valid) {
             e.preventDefault();
             e.stopPropagation();
+            if (!p) document.getElementById("password").classList.add("is-invalid");
+            if(!em)document.getElementById("email").classList.add("is-invalid");
         }
         else {
             let userEmail = document.getElementById("email").value;
