@@ -56,3 +56,13 @@ th{
 #myTable {
     background-color: #f2bf4aee;
 }
+#staticBackdrop > div > div > div.modal-body > div:nth-child(3){
+    display: flex;
+}
+#staticBackdrop > div > div > div.modal-body > div:nth-child(3) > div.d-flex.justify-content-center.align-items-center{
+    transform: translate(-52px, 0px);;
+}
+#staticBackdrop > div > div > div.modal-body > div:nth-child(3) > div.d-flex.justify-content-center.align-items-center > span{
+    border: none;
+    background-color: white;
+}

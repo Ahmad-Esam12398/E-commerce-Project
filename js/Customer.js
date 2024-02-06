@@ -1,4 +1,4 @@
-import { persons as plainPersons } from "./data.js";
+import { persons as originalPersons } from "./data.js";
 import { originalOrders as initialOrders, originalOrders } from "./data.js";
 
 let activeUser = JSON.parse(localStorage.getItem("Active User"));
@@ -192,7 +192,7 @@ function createTableOrders() {
     for (let i = 0; i < usersOrders.length; i++) {
         let tableBody = document.getElementsByTagName("tbody")[0];
         let result = breakOrdersIntoProducts(usersOrders[i]);
-
+        
         for (let j = 0; j < result.length; j++) {
             let tableRow = document.createElement("tr");
             let id = result[j]["id"];
