@@ -4,7 +4,7 @@ import { orders as sellerOrders} from "./data.js";
 
 if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
-    window.location.href = "./home.html";
+    window.location.href = "../home.html";
 }  
 if(localStorage.getItem("Orders") == null){
     localStorage.setItem("Orders", JSON.stringify(sellerOrders));

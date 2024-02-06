@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Product</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"  href="./css/newe.css">
-        <link rel="stylesheet"  href="./css/Footer.css">
+    <title>Seller Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"  href="../css/newe.css">
+    <link rel="stylesheet"  href="../css/Footer.css">    
+    
 </head>
 <body>
     <div class="container-fluid">
@@ -17,7 +18,7 @@
                 <nav class=" mx-auto">
                     <div class="sidebar-header">
                         <div class="logo py-4 ">
-                            <img src="./images/kayuu-logo-dark.svg" class="w-50 ms-3  ">
+                            <img src="../images/kayuu-logo-dark.svg" class="w-50 ms-3  ">
                         </div>   
                     </div>
                     <div class="nav flex-column" id="nav-tab" role="tablist" aria-orientation="vertical">
@@ -39,15 +40,17 @@
             
             <!-- main part -->
             <div class="main-part  min-vh-100 px-0 col-dm-12 col-lg-10 "id="content">
-                <!---Nav-->
-                <nav class="navbar navbar-expand  main-nav bg-white">
+                <div id="NavContainer">
+
+                </div>
+                <nav class="navbar navbar-expand  main-nav">
                     <button type="button"   class="d-lg-inline-block d-none btn-collapse-sidebar d-none" >
                         <i class="fa-solid fa-chevron-left d-block    text-dark   "></i>
                     </button>
-                    <div class=" navbar-collapse main-nav-icons justify-content-md-center justify-content-center mr-4 text-dark " id="navbarNav">
+                    <div class=" navbar-collapse main-nav-icons justify-content-md-center justify-content-center mr-4 " id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link mr-3" href="home.html">
+                                <a class="nav-link mr-3" href="../home.html">
                                     <i class="fa-solid fa-house fas"></i>
                                 </a>
                             </li>
@@ -74,115 +77,82 @@
                     </div>
                 </nav>
 
-                <div class="tab-Container container-fluid" >
-                    <!-- Modal -->
-                    <div class="controls container">
-                        <button type="button" id="create" class="btn shopButton m-5 btn-lg" data-bs-toggle="modal" data-bs-target="#form" data-bs-backdrop="static" data-bs-keyboard="false" >
-                            create
-                        </button>
-                        <!-- <search -->
-                            <div class="search-container">
-                                <input type="text" class="search-input" placeholder="Search for name or catagory">
-                                <button class="search-button"><i class="fas fa-search"></i></button>
+
+
+                <div class="container ">
+                    <div class="row cardRow">
+                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
+                            <div class="card my-2 mx-1 row">
+                                <span class=" pr-0 py-2 col-4 d-inline-block">
+                                    <i class="fas fa-wallet  card-icon pl-3 "></i>
+                                </span>
+                                <div class=" card-content px-2 py-2 col-8">
+                                    <div class=" card-type">Wallet</div>
+                                    <div class=" card-number wallet"></div>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
+                            <div class="card my-2 mx-1 row">
+                                <span class=" pr-0 py-2 col-4 d-inline-block">
+                                    <i class="fas fa-shopping-cart card-icon pl-3"></i>
+                                </span>
+                                <div class="card-content px-2 py-2 col-8">
+                                    <div class="card-type">Product Count</div>
+                                    <div class="card-number  allproduct"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
+                            <div class="card my-2 mx-1 row">
+                                <span class=" pr-0 py-2 col-4 d-inline-block">
+                                    <i class="fa-solid fa-arrow-trend-up  card-icon pl-3"></i>
+                                </span>
+                                <div class="card-content px-2 py-2 col-8">
+                                    <div class="card-type TrendName"></div>
+                                    <div class="card-number TrendNumber"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-container col-sm-6 col-lg-3 col-12">
+                            <div class="card my-2 mx-1 row">
+                                <span class=" pr-0 py-2 col-4 d-inline-block">
+                                    <i class="fa-solid fa-arrow-trend-down card-icon pl-3"></i>
+                                </span>
+                                <div class="card-content px-2 py-2 col-8">
+                                    <div class="card-number lessorderName"></div>
+                                    <div class="card-type lessorderNumber text-danger "> </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="needs-validation" id="form-product" novalidate>
 
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control is" id="floatingname" placeholder="productname">
-                                            <label for="floatingname">Product name</label>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid product name(contain at least 3 letters)</div>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control " id="floatingprice" placeholder="price">
-                                            <label for="floatingprice">price</label>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid price between (1:1000000)</div>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control " id="floatingQuantity" placeholder="Quantitiy">
-                                            <label for="floatingQuantity">Quantitiy</label>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid quantity between (1:5000)</div>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <select class="form-select form-select-sm inputs"  id="floatingcatagory" required>
-                                                <option value="" selected disabled>Room</option>
-                                                <option value="Bathroom">Bathroom</option>
-                                                <option value="Bedroom">Bedroom</option>
-                                                <option value="Home Office">Home Office</option>
-                                                <option value="Kitchen">Kitchen</option>
-                                                <option value="Living Room">Living Room</option>
-                                                <option value="Cabinet">Cabinet</option>
-                                            </select>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid product category.</div>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control " id="floatingImage" placeholder="imgage">
-                                            <label for="floatingImage">Image path</label>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid image path.</div>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <textarea class="form-control" placeholder="Description of your product" id="floatingdescription" style="height: 100px"></textarea>
-                                            <label for="floatingdescription">Description of your product</label>
-                                            <div class="valid-feedback">Looks good!</div>
-                                            <div class="invalid-feedback">Please enter a valid product description.</div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
-                                    <input type="submit" value="save" class="btn btn-primary submitBtn" id="submit">
-                                </div>
+                    
+                        <div class="box col-12  mx-auto my-5">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="row cardRow my-5">
+                            <div class="box col-md-8 col-12 ">
+                                <canvas id="myChart2">    
+                                </canvas>
+                            </div>
+                            <div class="box col-md-4 col-12">
+                                <canvas id="myChart3">    
+                                </canvas>
                             </div>
                         </div>
-                    </div>      
-                    <!-- Modal -->
-                    <div class="modal fade" id="ConfirmDelete" tabindex="-1">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="ConfirmDelete">Confirm Delete</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                            Are you sure to delete ?
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="delete">Delete</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <!-- Table -->        
-                    <div class="product-tableContainer">
-                        <table class="table align-top table-hover" id="product">
-                        </table>
-                    </div>  
-                    <div>
                         
-                </div>    
-                </div>    
-            </div>
+                        
+
+                    
+
+                </div>
+            </div>    
         </div>
 
 
@@ -232,7 +202,7 @@
                 <div id="FooterTop" class="row">
                     <div class="col-1"></div>
                     <div id="ContactInfo" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
-                        <img style="width: 150px;" src="images/kayuu-logo-white.svg" alt="">
+                        <img style="width: 150px;" src="../images/kayuu-logo-white.svg" alt="">
                         <div class="mt-5">
                             <div class="mt-2">3538 Torrance Blvd, Torrance, CA 90503, USA</div>
                             <div class="mt-2">+20 101 532 8933</div>
@@ -243,7 +213,7 @@
                     <div id="UsefulLinks" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
                         <p class="fs-5 fw-bold">Useful Links</p>
                         <div class="mt-4">
-                            <div class="mt-2"><a href="home.html">Home</a> </div>
+                            <div class="mt-2"><a href="../home.html">Home</a> </div>
                             <div class="mt-2"><a href="products.html">Products</a> </div>
                             <div class="mt-2"><a href="products.html">Rooms</a> </div>
                             <div class="mt-2"><a href="#Footer">About Us</a> </div>
@@ -254,7 +224,7 @@
                     <div id="Rooms" class="col-12 px-md-5 ms-sm-3 ms-md-3 col-sm-5 col-lg mt-5 mt-md-1">
                         <p class="fs-5 fw-bold">Rooms</p>
                         <div class="mt-4">
-                            <div class="mt-2"><a href="home.html"> Living Room</a></div>
+                            <div class="mt-2"><a href="../home.html"> Living Room</a></div>
                             <div class="mt-2"><a href="products.html">Bedroom</a> </div>
                             <div class="mt-2"><a href="products.html">Kitchen</a> </div>
                             <div class="mt-2"><a href="#Footer"> Bathroom</a> </div>
@@ -294,15 +264,20 @@
     </div>
     </div>
 
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="js/SellerProduct.js" type="module"></script>
-    <script src="js/data.js" type="module"></script>
-    <script src="js/function.js" type="module"></script>
-    <script src="./js/customerService.js" type="module"></script>
+    <script src="../js/myChart.js" type="module"></script>
+    <script src="../js/data.js" type="module"></script>
+    <script src="../js/customerService.js" type="module"></script>
     <script>
-
 </script>
     </script>
 </body>

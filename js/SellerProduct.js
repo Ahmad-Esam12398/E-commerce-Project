@@ -7,7 +7,7 @@ import { orders } from "./data.js"
 // Authentications
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     alert("You are not authorized to access this page.")
-    window.location.href = "./home.html";
+    window.location.href = "../home.html";
 }
 
 if (localStorage.getItem("Persons") == null) {

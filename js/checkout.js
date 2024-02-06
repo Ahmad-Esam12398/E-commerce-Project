@@ -25,11 +25,11 @@ function updateProductsLocalStorage(){
 document.addEventListener("DOMContentLoaded", function () {
     if(localStorage.getItem("Active User")){
         if(JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
-            window.location.href = "login.html";
+            window.location.href = "../login.html";
         }
     }
     else{
-        window.location.href = "login.html";
+        window.location.href = "../login.html";
     };
     const countries = document.getElementById("validationCustomcountry");
     fetch('https://restcountries.com/v3.1/all').then(res => {

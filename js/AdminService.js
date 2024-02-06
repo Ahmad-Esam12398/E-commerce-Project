@@ -3,7 +3,7 @@ if(localStorage.getItem("messages") == null){
 }
 if(localStorage.getItem("Active User") == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
-    window.location.href = "./home.html";
+    window.location.href = "../home.html";
 }
 let messages = JSON.parse(localStorage.getItem("messages"));
 

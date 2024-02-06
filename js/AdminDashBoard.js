@@ -2,7 +2,7 @@ import { products as originalProducts, persons as originalPersons, originalOrder
 
 if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
   alert("You are not authorized to access this page.")
-  window.location.href = "./home.html";
+  window.location.href = "../home.html";
 }
 
 if(localStorage.getItem("Persons") == null){

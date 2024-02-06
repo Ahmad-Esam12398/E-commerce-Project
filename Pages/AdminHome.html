@@ -7,9 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="css/admin.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="js/AdminDashBoard.js"></script>
+    <script type="module" src="../js/AdminDashBoard.js"></script>
     <script>
         window.onload = function(){
             document.querySelectorAll("body > div > div > aside > ul > li  button")[0].addEventListener("click", function(){
@@ -35,7 +35,7 @@
 <!-- NavBar -->
 <nav class="navbar navbar-expand-md fs-5 fw-bold">
     <div class="container-fluid">
-        <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
+        <a class="navbar-brand" href="../home.html"><img class="ms-5" src="../images/kayuu-logo-dark.svg"
                 alt="logo"></a>
         <!-- Toggle button for good response in small media -->
         <button style="position: absolute; right: 80px;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,7 +53,7 @@
                     <a class="nav-link" href="products.html">Products</a>
                 </li>
                 <li class="nav-item col-auto ms-2">
-                    <a class="nav-link" href="home.html#Testimonials">About Us</a>
+                    <a class="nav-link" href="../home.html#Testimonials">About Us</a>
                 </li>
                 <li class="nav-item col-auto ms-2">
                     <a class="nav-link" href="#Footer">Contact Us</a>
@@ -61,7 +61,7 @@
                 <!-- Varies depends on the active user -->
                 <!-- guest -->
                 <li id="Guest" class="d-none nav-item mx-2">
-                    <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
+                    <a class="nav-link" href="../login.html"><i class="fa-solid fa-user"></i></a>
                 </li>
                 <!-- customer -->
                 <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
@@ -82,7 +82,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                        <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                     </ul>
                 </li>
                 <!-- admin -->
@@ -107,7 +107,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                        <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                     </ul>
                 </li>
                 <!-- seller -->
@@ -133,7 +133,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                        <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,5 +1,5 @@
 // if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
-//         window.location.href = "./login.html";
+//         window.location.href = "../login.html";
 // }
 if(localStorage.getItem("messages") == null){
     localStorage.setItem("messages", JSON.stringify([]));
@@ -7,7 +7,7 @@ if(localStorage.getItem("messages") == null){
 document.querySelector("#contactUs").addEventListener('click', function(){
     debugger;
     if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
-        window.location.href = "./login.html";
+        window.location.href = "../login.html";
     }
 })
 let messages = JSON.parse(localStorage.getItem("messages"));

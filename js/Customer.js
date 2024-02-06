@@ -3,7 +3,7 @@ import { originalOrders as initialOrders, originalOrders } from "./data.js";
 
 let activeUser = JSON.parse(localStorage.getItem("Active User"));
 if (activeUser.role == null || activeUser.role == "Guest") {
-    location = "home.html";
+    location = "../home.html";
 }
 
 if (localStorage.getItem("Persons") == null) {

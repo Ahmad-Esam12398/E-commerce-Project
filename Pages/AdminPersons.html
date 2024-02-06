@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Products DashBoard</title>
-    <link href="css/admin.css" rel="stylesheet">
+    <title>Admin's Person DashBoard</title>
+    <link href="../css/admin.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <script type="module" src="js/CRUD Products.js"></script>
+    <script type="module" src="../js/CRUD Persons.js"></script>
     <script>
         window.onload = function(){
             document.querySelectorAll("body > div > div > aside > ul > li  button")[0].addEventListener("click", function(){
@@ -27,14 +27,13 @@
             });
         }
     </script>
-    <script src="./js/NavBar.js" type="module"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- NavBar -->
+<!-- NavBar -->
     <nav class="navbar col-12 navbar-expand-md fs-5 fw-bold">
         <div class="container-fluid">
-            <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
+            <a class="navbar-brand" href="../home.html"><img class="ms-5" src="../images/kayuu-logo-dark.svg"
                     alt="logo"></a>
             <!-- Toggle button for good response in small media -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -46,13 +45,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-2">
-                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../home.html">Home</a>
                     </li>
                     <li class="nav-item ms-2">
                         <a class="nav-link" href="products.html">Products</a>
                     </li>
                     <li class="nav-item col-auto ms-2">
-                        <a class="nav-link" href="home.html#Testimonials">About Us</a>
+                        <a class="nav-link" href="../home.html#Testimonials">About Us</a>
                     </li>
                     <li class="nav-item col-auto ms-2">
                         <a class="nav-link" href="#Footer">Contact Us</a>
@@ -60,7 +59,7 @@
                     <!-- Varies depends on the active user -->
                     <!-- guest -->
                     <li id="Guest" class="d-none nav-item mx-2">
-                        <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
+                        <a class="nav-link" href="../login.html"><i class="fa-solid fa-user"></i></a>
                     </li>
                     <!-- customer -->
                     <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
@@ -81,7 +80,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                            <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                         </ul>
                     </li>
                     <!-- admin -->
@@ -106,7 +105,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                            <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                         </ul>
                     </li>
                     <!-- seller -->
@@ -132,7 +131,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                            <li><a class="logout dropdown-item" href="../home.html">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -144,6 +143,7 @@
             </button>
         </div>
     </nav>
+    <hr>
     <div class="mainWrapper">
         <div class="d-flex flex-column flex-md-row">
             <div class="header">
@@ -151,7 +151,7 @@
             <aside class="leftSide col-md-2 d-flex flex-md-column flex-row col-12 flex-wrap">
                 <div class="p-3 mb-2 text-white text-center w-100 d-flex align-items-center justify-content-center " style="background-color: #edb932;">Menu</div>
                 <ul class="list-group list-group-flush flex-column d-flex flex-nowrap">
-                    <!-- <div class="d-inline"><img src="images/Admin/1.svg"></div> -->
+                    <!-- <div class="d-inline"><img src="../images/Admin/1.svg"></div> -->
                     
                     <li class="list-group-item w-100">
                         <!-- <input type="button" value=" DashBoard" class="btn btn-outline-primary w-100"> -->
@@ -187,31 +187,18 @@
             </aside>
             <div class="content col-md-9 d-md-inline-block d-block m-auto ">
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check form-switch d-flex flex-column flex-wrap flex-grow-1" style="max-height: 80px;">
-                        <!-- const validRooms = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet']; -->
+                    <div class="form-check form-switch d-flex flex-column ">
                         <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBathroom" checked value="Bathroom">
-                            <label class="form-check-label" for="flexSwitchCheckBathroom">Bathroom</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckAdmin" checked>
+                            <label class="form-check-label" for="flexSwitchCheckAdmin">Admin</label>
                         </div>
                         <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBedroom" checked value="Bedroom">
-                            <label class="form-check-label" for="flexSwitchCheckBedroom">Bedroom</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckSeller" checked>
+                            <label class="form-check-label" for="flexSwitchCheckSeller">Seller</label>
                         </div>
                         <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckHomeOffice" checked value="Home Office">
-                            <label class="form-check-label" for="flexSwitchCheckHomeOffice">Home Office</label>
-                        </div>
-                        <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchKitchen" checked value="Kitchen">
-                            <label class="form-check-label" for="flexSwitchKitchen">Kitchen</label>
-                        </div>
-                        <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckLivingRoom" checked value="Living Room">
-                            <label class="form-check-label" for="flexSwitchCheckLivingRoom">Living Room</label>
-                        </div>
-                        <div>
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCabinet" checked value="Cabinet">
-                            <label class="form-check-label" for="flexSwitchCheckCabinet">Cabinet</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCustomer" checked>
+                            <label class="form-check-label" for="flexSwitchCheckCustomer">Customer</label>
                         </div>
                     </div>
                     <div class="searchbutton align-self-end">
@@ -239,90 +226,76 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">ِAdd Product</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">ِAdd Person</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control inputs" id="floatingName" placeholder="Product Name" required pattern="[a-z A-Z0-9]{4,}">
-                        <label for="floatingName">Product Name</label>
+                        <input type="text" class="form-control inputs w-75" id="floatingName" placeholder="User Name" required pattern="^[a-zA-Z]+[a-z_A-Z]{3,}[a-zA-Z0-9]+$">
+                        <label for="floatingName">User Name</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Name can't be less than 4 chars and can have only chars, digits and spaces.
+                            Name can't be less than 5 chars And can have only ( _ ) no spaces or special characters.
                         </div>
                     </div>
-                    <div class="mb-3 w-50 form-floating input-group">
-                        <input type="number" class="form-control inputs" id="floatingPrice" placeholder="Product Price" min="0" required>
-                        <label for="floatingPrice">Product Price</label>
-                        <span class="input-group-text" id="basic-addon2">EGP</span>
+                    <div class="mb-3 form-floating input-group">
+                        <input type="email" class="form-control inputs w-75" id="floatingEmail" placeholder="Person E-mail" min="0" required pattern="^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$">
+                        <label for="floatingEmail">Person E-mail</label>
+                        <!-- <span class="input-group-text" id="basic-addon2">EGP</span> -->
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Please Enter valid Unit price.
+                            Please Enter valid E-mail Address.
                         </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control w-50 inputs" min="0" id="floatingQuantity" placeholder="Quantity" required>
-                        <label for="floatingQuantity">Quantity</label>
+                    <div class="form-floating mb-3 input-group ">
+                        <input type="password" class="form-control w-75 inputs" id="floatingPassword" placeholder="Password" required minlength="8">
+                        <span class="eye col-1 me-3 input-group-text ">
+                            <i id="ShowPassword" class="fs-4 fa-solid fa-eye text-center "></i>
+                        </span>
+                        <label for="floatingPassword">Password</label>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Please Enter valid  Quantity.
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control w-50 inputs" id="floatingImage" placeholder="Image" required pattern=".*\.[a-zA-Z]{3,4}$">
-                        <label for="floatingImage">Image(with extension)</label>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Plz Enter valid photo with extension Added.(like .png)
+                            Password must be at least 8 characters.
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <!-- <input type="number" class="form-control w-25 " id="floatingSellerId" placeholder="seller ID" min="1" step="1" required>
-                        <label for="floatingSellerId">seller ID</label> -->
-                        <select class="form-select form-select-sm inputs" aria-label="Small select example" id="sellerID" required>
-                            <!-- <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option> -->
+                        <input type="text" class="form-control inputs w-75" id="floatingAddress" placeholder="Address" required pattern="^[a-z_ \-A-Z0-9]{10,}$">
+                        <label for="floatingAddress">Address</label>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Adress can't be less than 10 characters & can't have special chars(except _ and -).
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control w-75 inputs" id="floatingPhone" placeholder="Phone Number" required pattern="^(010|011|012|015)[0-9]{8}$">
+                        <label for="floatingPhone">Phone Number </label>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Phone Number must be 11 digits and start with 010|011|012|015.
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select form-select-sm inputs" aria-label="Small select example" id="PersonRole" required>
+                            <option selected disabled value="">Person's Role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Seller">Seller</option>
+                            <option value="Customer">Customer</option>
+                            <option value="Guest">Guest</option>
                           </select>
                         </select>
                         <div class="invalid-feedback">
-                            Please select a valid Seller ID.
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <!-- <input type="number" class="form-control w-25 " id="floatingSellerId" placeholder="seller ID" min="1" step="1" required>
-                        <label for="floatingSellerId">seller ID</label> -->
-                        <select class="form-select form-select-sm inputs" aria-label="Small select example" id="Room" required>
-                            <!-- const validRooms = ['Bathroom', 'Bedroom', 'Home Office', 'Kitchen', 'Living Room', 'Cabinet']; -->
-                            <option value="" selected disabled>Room</option>
-                            <option value="Bathroom">Bathroom</option>
-                            <option value="Bedroom">Bedroom</option>
-                            <option value="Home Office">Home Office</option>
-                            <option value="Kitchen">Kitchen</option>
-                            <option value="Living Room">Living Room</option>
-                            <option value="Cabinet">Cabinet</option>
-                          </select>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid Room.
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <textarea  rows="4" class="form-control inputs overflow-auto" id="floatingDescription" placeholder="Product Description" required pattern="[a-zA-Z-_ ]{10,}"></textarea>
-                        <label for="floatingDescription">Description</label>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Description Can only have alphabetical chars, spaces, -, _ and can't be less than 10 chars length.
+                          Please select a valid Person's Role.
                         </div>
                     </div>
                 </div>

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"  href="./css/newe.css">
-    <link rel="stylesheet"  href="./css/Footer.css">    
-    
+    <title>Seller Order</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet"  href="../css/newe.css">
+        <link rel="stylesheet"  href="../css/Footer.css">  
+       
 </head>
 <body>
     <div class="container-fluid">
@@ -18,7 +19,7 @@
                 <nav class=" mx-auto">
                     <div class="sidebar-header">
                         <div class="logo py-4 ">
-                            <img src="./images/kayuu-logo-dark.svg" class="w-50 ms-3  ">
+                            <img src="./../images/kayuu-logo-dark.svg" class="w-50 ms-3  ">
                         </div>   
                     </div>
                     <div class="nav flex-column" id="nav-tab" role="tablist" aria-orientation="vertical">
@@ -50,7 +51,7 @@
                     <div class=" navbar-collapse main-nav-icons justify-content-md-center justify-content-center mr-4 " id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link mr-3" href="home.html">
+                                <a class="nav-link mr-3" href="../home.html">
                                     <i class="fa-solid fa-house fas"></i>
                                 </a>
                             </li>
@@ -76,85 +77,77 @@
                         </ul>
                     </div>
                 </nav>
+                    <div class="tab-content" id="nav-tabContent">
+            
 
 
-
-                <div class="container ">
-                    <div class="row cardRow">
-                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
-                            <div class="card my-2 mx-1 row">
-                                <span class=" pr-0 py-2 col-4 d-inline-block">
-                                    <i class="fas fa-wallet  card-icon pl-3 "></i>
-                                </span>
-                                <div class=" card-content px-2 py-2 col-8">
-                                    <div class=" card-type">Wallet</div>
-                                    <div class=" card-number wallet"></div>
+                        <div class="row mt-5 mx-auto">
+                            <!-- Modal -->
+                            <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Order Details
+                                        </div>
+                                            <div class="modal-body form-order">
+                                                <form class="row">
+                                                    <div class="col-md-3 ">
+                                                        <label for="orderId" class="form-label label-order">Order ID</label>
+                                                        <input type="text" class="form-control text-center" id="orderId" readonly>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <label for="productName" class="form-label label-order">Product Name</label>
+                                                        <input type="text" class="form-control text-center " id="productName" readonly>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="Quantity" class="form-label label-order">Quantity Ordered</label>
+                                                        <input type="text" class="form-control text-center" id="Quantity" readonly>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label for="status" class="form-label label-order">Status</label>
+                                                        <input type="text" class="form-control text-center" id="status" readonly>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="dateOrder" class="form-label label-order">Date Order</label>
+                                                        <input type="text" class="form-control text-center" id="dateOrder" readonly>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="dateDeliver" class="form-label label-order">Date Deliver</label>
+                                                        <input type="text" class="form-control text-center" id="dateDeliver" readonly>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="customerName" class="form-label label-order">Customer Name</label>
+                                                        <input type="text" class="form-control text-center" id="customerName" readonly>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="totalPrice" class="form-label label-order">Total Price</label>
+                                                        <input type="text" class="form-control text-center" id="totalPrice" readonly>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <!-- Search -->
+                            <div class="col-md-6 mx-auto ml-5">
+                                <div class="search-container">
+                                    <input type="text" class="search-input form-control" placeholder="Search for name or status">
+                                    <button class="search-button btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
-                            <div class="card my-2 mx-1 row">
-                                <span class=" pr-0 py-2 col-4 d-inline-block">
-                                    <i class="fas fa-shopping-cart card-icon pl-3"></i>
-                                </span>
-                                <div class="card-content px-2 py-2 col-8">
-                                    <div class="card-type">Product Count</div>
-                                    <div class="card-number  allproduct"></div>
-                                    
-                                </div>
+                            <div class="Order">
+                                <table class="table align-top table-hover  " id="order-table">
+                                </table>
                             </div>
-                        </div>
-
-                        <div class="card-container col-sm-6 col-lg-3 col-12 ">
-                            <div class="card my-2 mx-1 row">
-                                <span class=" pr-0 py-2 col-4 d-inline-block">
-                                    <i class="fa-solid fa-arrow-trend-up  card-icon pl-3"></i>
-                                </span>
-                                <div class="card-content px-2 py-2 col-8">
-                                    <div class="card-type TrendName"></div>
-                                    <div class="card-number TrendNumber"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-container col-sm-6 col-lg-3 col-12">
-                            <div class="card my-2 mx-1 row">
-                                <span class=" pr-0 py-2 col-4 d-inline-block">
-                                    <i class="fa-solid fa-arrow-trend-down card-icon pl-3"></i>
-                                </span>
-                                <div class="card-content px-2 py-2 col-8">
-                                    <div class="card-number lessorderName"></div>
-                                    <div class="card-type lessorderNumber text-danger "> </div>
-                                </div>
-                            </div>
-                        </div>
+                            <span  class="floatingTable"><i class="fa fa-table" aria-hidden="true"></i></span>
                     </div>
-
-
-                    
-                        <div class="box col-12  mx-auto my-5">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                        <div class="row cardRow my-5">
-                            <div class="box col-md-8 col-12 ">
-                                <canvas id="myChart2">    
-                                </canvas>
-                            </div>
-                            <div class="box col-md-4 col-12">
-                                <canvas id="myChart3">    
-                                </canvas>
-                            </div>
-                        </div>
-                        
-                        
-
-                    
-
-                </div>
+                </p>
             </div>    
         </div>
-
 
 
         <!-- Modal -->
@@ -202,7 +195,7 @@
                 <div id="FooterTop" class="row">
                     <div class="col-1"></div>
                     <div id="ContactInfo" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
-                        <img style="width: 150px;" src="images/kayuu-logo-white.svg" alt="">
+                        <img style="width: 150px;" src="../images/kayuu-logo-white.svg" alt="">
                         <div class="mt-5">
                             <div class="mt-2">3538 Torrance Blvd, Torrance, CA 90503, USA</div>
                             <div class="mt-2">+20 101 532 8933</div>
@@ -213,7 +206,7 @@
                     <div id="UsefulLinks" class="col-12 col-sm-5 col-lg mt-5 mt-md-1">
                         <p class="fs-5 fw-bold">Useful Links</p>
                         <div class="mt-4">
-                            <div class="mt-2"><a href="home.html">Home</a> </div>
+                            <div class="mt-2"><a href="../home.html">Home</a> </div>
                             <div class="mt-2"><a href="products.html">Products</a> </div>
                             <div class="mt-2"><a href="products.html">Rooms</a> </div>
                             <div class="mt-2"><a href="#Footer">About Us</a> </div>
@@ -224,7 +217,7 @@
                     <div id="Rooms" class="col-12 px-md-5 ms-sm-3 ms-md-3 col-sm-5 col-lg mt-5 mt-md-1">
                         <p class="fs-5 fw-bold">Rooms</p>
                         <div class="mt-4">
-                            <div class="mt-2"><a href="home.html"> Living Room</a></div>
+                            <div class="mt-2"><a href="../home.html"> Living Room</a></div>
                             <div class="mt-2"><a href="products.html">Bedroom</a> </div>
                             <div class="mt-2"><a href="products.html">Kitchen</a> </div>
                             <div class="mt-2"><a href="#Footer"> Bathroom</a> </div>
@@ -263,21 +256,15 @@
         </div>
     </div>
     </div>
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="./js/myChart.js" type="module"></script>
-    <script src="js/data.js" type="module"></script>
-    <script src="./js/customerService.js" type="module"></script>
+    <script src="../js/order.js" type="module"></script>
+    <script src="../js/function.js" type="module"></script>
+    <script src="../js/customerService.js" type="module"></script>
+
     <script>
+    
 </script>
     </script>
 </body>

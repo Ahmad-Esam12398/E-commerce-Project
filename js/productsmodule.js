@@ -9,7 +9,7 @@ class Product{
         this.price = price;
         this.quantity = quantity;
         this.description = description;
-        this.image = image;
+        this.image = "../" + image;
         this.sellerID = sellerID;
         this.category = category;
         this.categorypath = categorypath;
