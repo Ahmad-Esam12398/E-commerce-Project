@@ -1,5 +1,8 @@
 import { products } from "./data.js";
 let productsArr = [];
+const listCard = document.querySelector('.listCard');
+const total = document.querySelector('.total');
+const cardquantity = document.querySelector('.cardquantity');
 if (localStorage.getItem("products") == null) {
     for (let i = 0; i < products.length; i++) {
         productsArr.push(products[i].getProduct());
@@ -241,9 +244,7 @@ function updateTotal() {
     document.getElementsByClassName("totalVal")[0].innerText = ` $${subtotalAddition.toFixed(2)}`;
 }
 
-const listCard = document.querySelector('.listCard');
-const total = document.querySelector('.total');
-const cardquantity = document.querySelector('.cardquantity');
+
 reloadCard();
 window.addEventListener("load", () => {
     let tablebody = document.getElementsByTagName("tbody")[0];
