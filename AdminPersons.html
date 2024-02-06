@@ -10,24 +10,27 @@
     <script type="module" src="js/CRUD Persons.js"></script>
     <script>
         window.onload = function(){
-            document.querySelectorAll("input[value='DashBoard']")[0].addEventListener("click", function(){
-            location.href = "AdminHome.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[0].addEventListener("click", function(){
+                location.href = "AdminHome.html";
             });
-            document.querySelectorAll("input[value='Users']")[0].addEventListener("click", function(){
-            location.href = "AdminPersons.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[1].addEventListener("click", function(){
+                location.href = "AdminPersons.html";
             });
-            document.querySelectorAll("input[value='Products']")[0].addEventListener("click", function(){
-            location.href = "AdminProducts.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[2].addEventListener("click", function(){
+                location.href = "AdminProducts.html";
             });
-            document.querySelectorAll("input[value='Orders']")[0].addEventListener("click", function(){
-            location.href = "AdminOrders.html";
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[3].addEventListener("click", function(){
+                location.href = "AdminOrders.html";
+            });
+            document.querySelectorAll("body > div > div > aside > ul > li  button")[4].addEventListener("click", function(){
+                location.href = "AdminService.html";
             });
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- NavBar -->
+<!-- NavBar -->
     <nav class="navbar col-12 navbar-expand-md fs-5 fw-bold">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
@@ -40,7 +43,7 @@
             </button>
             <!-- Navigation Bar items -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto me-3">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-2">
                         <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                     </li>
@@ -48,7 +51,7 @@
                         <a class="nav-link" href="products.html">Products</a>
                     </li>
                     <li class="nav-item col-auto ms-2">
-                        <a class="nav-link" href="#Testimonials">About Us</a>
+                        <a class="nav-link" href="home.html#Testimonials">About Us</a>
                     </li>
                     <li class="nav-item col-auto ms-2">
                         <a class="nav-link" href="#Footer">Contact Us</a>
@@ -60,8 +63,9 @@
                     </li>
                     <!-- customer -->
                     <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
+                            <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
@@ -69,9 +73,6 @@
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Customer
                                 </p>
-                            </li>
-                            <li>
-                                <p id="CustomerName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -84,17 +85,15 @@
                     </li>
                     <!-- admin -->
                     <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i></a>
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
+                            <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Admin</p>
-                            </li>
-                            <li>
-                                <p id="AdminName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -111,17 +110,15 @@
                     </li>
                     <!-- seller -->
                     <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
+                            <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
                         </button>
                         <ul style="left: auto; right: 50px;" class="dropdown-menu">
                             <li>
                                 <p style="font-size: small;"
                                     class="pe-none fw-bold bg-warning text-white dropdown-item">
                                     Seller</p>
-                            </li>
-                            <li>
-                                <p id="SellerName" class="pe-none fw-bold dropdown-item"></p>
                             </li>
                             <li>
                                 <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
@@ -141,8 +138,8 @@
             </div>
             <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
                 aria-controls="staticBackdrop">
-                <span class="mb-5 ms-4 cardquantity">0</span>
-                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
+                <i class="CartIcon fa-solid fa-cart-shopping"></i>
             </button>
         </div>
     </nav>
@@ -151,13 +148,41 @@
         <div class="d-flex flex-column flex-md-row">
             <div class="header">
             </div>
-            <aside class="leftSide col-6 col-md-2 d-flex flex-md-column flex-row m-2">
-                <div class="p-3 mb-2 text-white text-center w-100" style="background-color: #edb932;">Menu</div>
-                <ul class="list-group list-group-flush flex-row flex-md-column">
-                    <li class="list-group-item"><input type="button" value="DashBoard" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Users" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Products" class="btn btn-outline-primary w-100"></li>
-                    <li class="list-group-item"><input type="button" value="Orders" class="btn btn-outline-primary w-100"></li>
+            <aside class="leftSide col-md-2 d-flex flex-md-column flex-row col-12 flex-wrap">
+                <div class="p-3 mb-2 text-white text-center w-100 d-flex align-items-center justify-content-center " style="background-color: #edb932;">Menu</div>
+                <ul class="list-group list-group-flush flex-column d-flex flex-nowrap">
+                    <!-- <div class="d-inline"><img src="images/Admin/1.svg"></div> -->
+                    
+                    <li class="list-group-item w-100">
+                        <!-- <input type="button" value=" DashBoard" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-tachometer-alt"></i> DashBoard
+                        </button>
+                    </li>
+                    <li class="list-group-item w-100">
+                        <!-- <input type="button" value="Users" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-users"></i> Users
+                        </button>
+                    </li>
+                    <li class="list-group-item w-100">
+                        <!-- <input type="button" value="Products" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-box"></i> Products
+                        </button>
+                    </li>
+                    <li class="list-group-item w-100">
+                        <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-shopping-bag"></i> Orders
+                        </button>
+                    </li>
+                    <li class="list-group-item w-100">
+                        <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-headset"></i> Customer Support
+                        </button>
+                    </li>
                 </ul>
             </aside>
             <div class="content col-md-9 d-md-inline-block d-block m-auto ">
@@ -182,7 +207,7 @@
                     </div>
                 </div>
                 <section id="displayData">
-                    <div style="max-height: 80vh; overflow-y: auto; overflow-x: auto;">
+                    <div style="max-height: 80vh; max-width: 95vw; overflow-y: auto; overflow-x: auto;" class="table-responsive ">
                         <table id="myTable" class="table text-center align-middle table-striped table-hover">
                             <thead class="table-dark"></thead>
                             <tbody></tbody>

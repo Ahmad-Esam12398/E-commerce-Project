@@ -81,10 +81,13 @@ body {
     justify-content: first baseline;
 }
 
-.Socials {
+.firstphoto .Socials {
     display: flex;
     align-items: end;
     justify-content: end;
+}
+#StayInTouch .Socials{
+    width: 200px;
 }
 
 .firstphoto .Socials {
@@ -169,4 +172,7 @@ nav .cardquantity {
     /* display: block; */
     transform: scale(1);
     transition: all 0.1s;
+}
+#contactUs{
+    color: white;
 }

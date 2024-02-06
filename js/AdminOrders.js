@@ -1,12 +1,18 @@
-import { originalOrders as initialOrders } from "./data.js";
+import { originalOrders as initialOrders, originalOrders } from "./data.js";
 import { products as initialProducts } from "./data.js";
+import { orders as sellerOrders} from "./data.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
+}  
+if(localStorage.getItem("Orders") == null){
+    localStorage.setItem("Orders", JSON.stringify(sellerOrders));
 }
-if(JSON.parse(localStorage.getItem("products") == null)){
-    localStorage.setItem("products", JSON.stringify(initialProducts));
+
+if(localStorage.getItem("products") == null){
+    let plainProducts = initialProducts.map((item)=>item.getProduct());
+    localStorage.setItem("products", JSON.stringify(plainProducts));
 }
 
 if(localStorage.getItem("originalOrders") == null){
@@ -18,11 +24,13 @@ localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
 // }
 let orders = JSON.parse(localStorage.getItem("originalOrders"));
 let products = JSON.parse(localStorage.getItem("products"));
+let _orders = JSON.parse(localStorage.getItem("Orders"));
 console.log(orders);
 function updateOriginalOrdersLocalStorage(){
     localStorage.setItem("originalOrders", JSON.stringify(orders));
 }
 function breakOrdersIntoProducts(ordersRow){
+    //debugger;
     let target = [];
     let productsId = ordersRow["products"];
     let productsIndices = [];
@@ -46,7 +54,7 @@ function createTableOrders(){
         // debugger;
         let tableBody = document.getElementsByTagName("tbody")[0];
         let result = breakOrdersIntoProducts(orders[i]);
-        debugger;
+        //debugger;
         for(let j = 0; j < result.length; j++){
             let tableRow = document.createElement("tr");
             let id = result[j]["id"];
@@ -54,6 +62,7 @@ function createTableOrders(){
             let quantity = result[j]["quantity"];
             let date = result[j]["date"];
             let status = result[j]["status"];
+            let customerId = orders[i]["customerId"];
             let unitPrice = result[j]["product"].price;
             let tableData = document.createElement("td");
             if(j == 0){
@@ -85,10 +94,14 @@ function createTableOrders(){
                 tableData.innerHTML = sum;
                 tableData.classList.add("table-secondary");
                 tableRow.appendChild(tableData);
-            }
-            if(j == 0){
+
                 tableData = document.createElement("td");
                 tableData.innerHTML = date;
+                tableData.setAttribute("rowspan", result.length);
+                tableData.classList.add("table-secondary");
+                tableRow.appendChild(tableData);
+                tableData = document.createElement("td");
+                tableData.innerHTML = customerId;
                 tableData.setAttribute("rowspan", result.length);
                 tableData.classList.add("table-secondary");
                 tableRow.appendChild(tableData);
@@ -100,14 +113,31 @@ function createTableOrders(){
                 if(status == "delivered"){
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-success");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    let deleteButton = document.createElement("button");
+                    deleteButton.classList.add("btn");
+                    deleteButton.classList.add("btn-danger");
+                    deleteButton.innerText = "Delete";
+                    deleteButton.addEventListener("click", deleteOrder);
+                    tableData.appendChild(deleteButton);
+                    tableData.setAttribute("rowspan", result.length);
                 }
                 else if(status == "shipped"){
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-warning");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.setAttribute("rowspan", result.length);
+                    tableData.innerHTML = "N/A";
                 }
                 else{
                     // tableData.classList.add("text-white");
                     tableData.classList.add("table-danger");
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.setAttribute("rowspan", result.length);
+                    tableData.innerHTML = "N/A";
                 }
                 tableRow.appendChild(tableData);
             }
@@ -117,6 +147,34 @@ function createTableOrders(){
     }
 };
 createTableOrders();
+
+
+
+function deleteOrder(){
+    if(confirm("Are You sure. Delete this Order!")){
+        let tableRow = this.parentElement.parentElement;
+        let rowSpan = tableRow.children[0].getAttribute("rowspan");
+        let id = tableRow.children[0].innerHTML;
+        let index = orders.findIndex(order => order.id == id);
+        originalOrders.splice(index, 1);
+        orders.splice(index, 1);
+        updateOriginalOrdersLocalStorage();
+        _orders.splice(index,1);
+        localStorage.setItem("Orders",JSON.stringify(_orders))
+        debugger;
+        if(rowSpan){
+            for(let i = 0; i < rowSpan; i++){
+                let tmpRow = tableRow.nextElementSibling;
+                tableRow.remove();
+                tableRow = tmpRow;
+            }
+        }
+        else{
+            tableRow.remove();
+        }
+        createTableOrders();
+    }
+}
 let searchdiv = document.getElementsByClassName("searchbutton")[0];
 searchdiv.children[0].addEventListener("keyup", function(event){
     if(event.keyCode == 13){
@@ -192,7 +250,7 @@ function filterTableChecked(criteria){
         rowSpan = tableRows[i].children[0].getAttribute("rowspan");
         if(rowSpan){
             let tableData = tableRows[i].children;
-            if(tableData[7].innerHTML == criteria){
+            if(tableData[8].innerHTML == criteria){
                 for(let j = i; j < i + +rowSpan; j++){
                     tableRows[j].classList.remove("d-none");
                 }
@@ -209,7 +267,7 @@ function filterTableUnChecked(criteria){
         rowSpan = tableRows[i].children[0].getAttribute("rowspan");
         if(rowSpan){
             let tableData = tableRows[i].children;
-            if(tableData[7].innerHTML == criteria){
+            if(tableData[8].innerHTML == criteria){
                 for(let j = i; j < i + +rowSpan; j++){
                     tableRows[j].classList.add("d-none");
                 }

@@ -104,7 +104,7 @@ let orders = [
         ],
         Order_date: new Date('2024-01-2'),
         Delivered_date:new Date('2024-01-4'),
-        status: 'pending',
+        status: 'delivered',
         customerId: 4
     },
     {
@@ -126,11 +126,58 @@ let orders = [
             { id: products[8].id, name: products[8].name, quantity: 1 },
             { id: products[14].id, name: products[14].name, quantity: 1 }
         ],
-        Order_date: new Date('2024-01-2'),
-        Delivered_date:new Date('2024-01-5'),
+        Order_date: new Date('2024-01-27'),
+        Delivered_date:new Date('2024-01-29'),
         status: 'delivered',
         customerId: 4
-    }];
+    },
+    {
+        orderId:9,
+        _products_: [
+            { id: products[16].id, name: products[16].name, quantity:2 },
+        ],
+        Order_date: new Date('2024-01-27'),
+        Delivered_date:new Date('2024-01-29'),
+        status: 'delivered',
+        customerId: 2
+    },
+    {
+        orderId:10,
+        _products_: [
+            { id: products[1].id, name: products[1].name, quantity:2 },
+            { id: products[2].id, name: products[2].name, quantity: 1 },
+            { id: products[6].id, name: products[6].name, quantity: 1 }
+        ],
+        Order_date: new Date('2024-01-20'),
+        Delivered_date:new Date('2024-01-25'),
+        status: 'shipped',
+        customerId: 4
+    },
+    {
+        orderId:11,
+        _products_: [
+            { id: products[4].id, name: products[4].name, quantity:2 },
+            { id: products[9].id, name: products[9].name, quantity: 1 },
+            { id: products[14].id, name: products[14].name, quantity: 1 }
+        ],
+        Order_date: new Date('2024-01-22'),
+        Delivered_date:new Date('2024-01-25'),
+        status: 'shipped',
+        customerId: 2
+    },{
+        orderId:12,
+        _products_: [
+            { id: products[7].id, name: products[7].name, quantity:2 },
+            { id: products[8].id, name: products[8].name, quantity: 1 },
+        ],
+        Order_date: new Date('2024-01-22'),
+        Delivered_date:new Date('2024-01-25'),
+        status: 'shipped',
+        customerId: 4
+    }
+
+
+];
     let originalOrders = [
     { id: 1, products: [1, 2, 6], quantities:[4, 5, 6], date: '15/01/2024', status: 'pending', customerId: 2 },
     { id: 2, products: [3, 4, 5], quantities:[2, 3, 4], date: '18/01/2024', status: 'pending', customerId: 4 },

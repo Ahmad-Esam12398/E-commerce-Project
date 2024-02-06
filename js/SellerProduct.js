@@ -2,6 +2,7 @@
 import { Person } from "./person.js";
 import { products as originalProducts, persons as originalPersons } from "./data.js";
 import { Product } from "./productsmodule.js"
+import{SideBarCollpse,ShowSideBar,GetSellerProduct} from "./function.js"
 import { orders } from "./data.js"
 // Authentications
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
@@ -26,22 +27,13 @@ let persons = JSON.parse(localStorage.getItem("Persons"));
 
 let products = JSON.parse(localStorage.getItem("products"));
 
-function updatePersonsLocalStorage() {
-    localStorage.setItem("Persons", JSON.stringify(persons));
-}
-function updateProductsLocalStorage(){
-    localStorage.setItem("products", JSON.stringify(products));
-}
-
-
+let _orders=JSON.parse(localStorage.getItem("Orders"))
 
 let IsEdit = false
 let CurrentIndex = 0
 let SellerProduct = []
 let SwapSort = true
 let collapsed_button = document.getElementsByClassName("btn-collapse-sidebar")[0];
-let side_bar = document.getElementById("sidebar");
-let content = document.getElementById("content");
 let btn_show_sidebar = document.getElementById("toggle-sidebar")
 let stbBtn = document.querySelector("input[type='submit']")
 let ProductName = document.getElementById("floatingname")
@@ -54,7 +46,6 @@ let CloseButton = document.getElementById("close")
 let CloseIcon = document.getElementsByClassName("btn-close")[0]
 let DeleteBtn = document.getElementById("delete")
 let SearchedProduct = document.getElementsByClassName("search-input")[0];
-let SelectedEntry = document.getElementById("entry");
 let CreateBtn = document.getElementById("create")
 let SelectedTable = document.getElementById("product")
 
@@ -63,42 +54,28 @@ let SelectedTable = document.getElementById("product")
 
 /*change value of modal when Add new product*/
 CreateBtn.addEventListener("click", function () {
+    IsEdit = false
     stbBtn.value = "Add"
 })
 
 
 /* make collapsed button to narrow side bar and wide table*/
-collapsed_button.addEventListener("click", function () {
-    side_bar.classList.toggle("active");
-    side_bar.classList.toggle("col-lg-1");
-    side_bar.classList.toggle("col-lg-2");
-    content.classList.toggle("col-lg-10");
-    content.classList.toggle("col-lg-11");
-});
+collapsed_button.addEventListener("click",SideBarCollpse );
+
 
 /*make btn to show nav side bar in small screens */
-btn_show_sidebar.addEventListener("click", function () {
-    side_bar.classList.toggle("show-nav");
-    side_bar.classList.remove("col-lg-2");
-    side_bar.classList.add("fixed-width");
-    content.classList.toggle("col-lg-10");
-})
+btn_show_sidebar.addEventListener("click", ShowSideBar)
+
 
 /*---------------------------------------------Get Seller Product to show in table--------------------------------------------------------*/
 
 /*get seller information from persons*/
 let activeUser = JSON.parse(localStorage.getItem("Active User"))
-// let activeUser=persons[4]
-//console.log(activeUser.id);
 
 localStorage.setItem("activeuser", JSON.stringify(activeUser));
-//console.log(activeUser.id)
+
 /*get seller product it will return whole array of product*/
-function GetSellerProduct() {
-    let SellerId = activeUser.id
-    let SellerProducts = products.filter(item => item.sellerID == SellerId)
-    return SellerProducts
-}
+
 SellerProduct = GetSellerProduct()
 
 /*---------------------------------------------------------draw table for product------------------------------------------------------------*/
@@ -117,8 +94,10 @@ function drawTable(_array, Parent) {
         let tbody = document.createElement("tbody");
         drawHeaderRow(_array, thead, true, "description", "sellerID", "categoryPath", "otherCategory");        // draw header of table
         Parent.appendChild(thead);
+        
         for (let i = 0; i < _array.length; i++) {
             let row = document.createElement("tr");
+            
             drawRow(_array, i, row, true, "description", "sellerID", "categoryPath", "otherCategory");             // draw each Row of table
             tbody.appendChild(row);
         }
@@ -155,16 +134,20 @@ function drawHeaderRow(_array, RowParent, DrawOptionColumn, ...excludeColumns) {
         head.appendChild(sortSpan)
         head.classList.add("text-center");
         head_row.appendChild(head);
+        head.classList.add("sticky-top")
     }
     RowParent.appendChild(head_row);
 }
 
 /*-------------------------------------draw Table Row for product-------------------------------------------------------------*/
 function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumns) {
+    let counter=0;
     for (let key in _array[RowIndex]) {
+        
         if (!excludeColumns.includes(key)) {
             let cell = document.createElement("td");
-            if (typeof _array[RowIndex][key] === "string" && _array[RowIndex][key].includes("image")) {
+            if (counter==4) {
+                console.log(counter)
                 cell.classList.add("img-center", "position-relative");
                 let Createdimg = document.createElement("img");
                 let source = _array[RowIndex][key];
@@ -176,6 +159,7 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
                 cell.classList.add("text-center");
             }
             RowParent.appendChild(cell);
+            counter++;
         }
     }
     if (DrawOptionColumn) {
@@ -194,7 +178,7 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
 }
 
 //  /*------ --------------------------------------------render Table -----------------------------------------------------*/
-drawTable(SellerProduct, SelectedTable, true);
+drawTable(SellerProduct, SelectedTable);
 //   /*--------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -223,7 +207,9 @@ stbBtn.addEventListener("click", function (event) {                    //here cr
                 0,
                 "DefaultCategory"
             );
+            createobj.id=products[products.length-1].id+1
             SetProduct(createobj);
+            console.log(products)
             products.push(createobj.getProduct());
             OutOfForum = true;
         }
@@ -263,11 +249,10 @@ function SetProduct(pro) {
     pro.description = document.getElementById("floatingdescription").value;
     pro.image = document.getElementById("floatingImage").value;
     pro.sellerID = activeUser.id;
-    pro.id=products.length+1
 }
 
 function validatename(_name, input) {
-    let name = /^[A-Za-z\s]{4,}$/;
+    let name = /^[A-Za-z\s]{3,}$/;
     if (_name.match(name)) {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
@@ -332,7 +317,7 @@ function validateQuantity(_num, input) {
 
 
 function validateImagePath(text, input) {
-    let descriptionPattern = ".*\.[a-zA-Z]{3,4}$";
+    let descriptionPattern = ".*\.[a-zA-Z]{3,}$";
     if (text.match(descriptionPattern)) {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
@@ -386,19 +371,33 @@ SelectedTable.addEventListener("click", function (e) {
         $('#ConfirmDelete').modal('show');
         let CurrentId = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
         let CurrentIndex = findProductIndexById(CurrentId);
+        
         if (CurrentIndex !== -1) {
             DeleteBtn.addEventListener("click", handleDelete);
         }
+        
         function handleDelete() {
-            //console.log(CurrentIndex);
             notifaction("delete", products[CurrentIndex].name)
+            let isDeletable = true;
+            console.log(CurrentId)
             if (CurrentIndex !== -1) {
-                products.splice(CurrentIndex, 1);
-                localStorage.setItem('products', JSON.stringify(products));
-                drawTable(GetSellerProduct(), SelectedTable, true);
+                let pendingProducts = generatePendingProduct();
+                for (let i = 0; i < pendingProducts.length; i++) {
+                    if (CurrentId==pendingProducts[i]) {
+                        alert("cant delete")
+                        isDeletable = false;
+                        break; 
+                    }
+                }
+                if (isDeletable) {
+                    products.splice(CurrentIndex, 1);
+                    localStorage.setItem('products', JSON.stringify(products));
+                    drawTable(GetSellerProduct(), SelectedTable, true);
+                    isDeletable=true
+                }
+                $('#ConfirmDelete').modal('hide');
+                DeleteBtn.removeEventListener("click", handleDelete);
             }
-            $('#ConfirmDelete').modal('hide');
-            DeleteBtn.removeEventListener("click", handleDelete);
         }
     }
 });
@@ -430,25 +429,6 @@ SearchedProduct.addEventListener("keyup", function () {
     console.log(filterProduct)
     drawTable(filterProduct, SelectedTable, true);
 });
-
-/*-----------------------------------------------------entry for table----------------------------------------------------------*/
-SelectedEntry.addEventListener("change", ShowEntry)
-
-function ShowEntry() {
-    let size = 0
-    if (SelectedEntry.value == "Full") {
-        size = SellerProduct.length
-    }
-    else {
-        size = parseInt(SelectedEntry.value)
-    }
-    let ShownArrayEntry = []
-    for (let i = 0; i < size; i++) {
-        ShownArrayEntry.push(SellerProduct[i]);
-    }
-    // console.log(ShownArrayEntry)
-    drawTable(ShownArrayEntry, SelectedTable, true);
-}
 
 /*----------------------------------------------------sort table----------------------------------------------------------------*/
 SelectedTable.addEventListener("click", function (e) {
@@ -514,6 +494,30 @@ let modifiedProdStats = {
 };
 
 localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
-//console.log(modifiedProdStats.productQuantityData.map(item => item.productname))
-//console.log(modifiedProdStats.productQuantityData.map(item => item.productQuantity))
 
+/*pending  product*/
+function generatePendingProduct(){
+    let pendingProductId=[]
+let repetedPendingProduct=[]
+_orders.filter(order=>{
+        if(order.status=='pending'){
+            for(let i=0;i<order._products_.length;i++){
+                if(repetedPendingProduct.includes(order._products_[i].id)){
+                    continue;
+                }
+                else{
+                    pendingProductId.push(order._products_[i].id)
+                    repetedPendingProduct.push(order._products_[i].id)
+                    }
+                }
+        }
+    })
+    products.forEach(product=>{
+        if(repetedPendingProduct.includes(product.id)){
+            //console.log(product)
+        }
+    })
+    
+    return pendingProductId
+}
+//console.log(generatePendingProduct())

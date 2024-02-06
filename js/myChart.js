@@ -1,3 +1,5 @@
+import{OrderForSeller,GetSellerProduct} from "./function.js"
+import{SideBarCollpse,ShowSideBar} from "./function.js"
 // Authentications
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     alert("You are not authorized to access this page.")
@@ -5,15 +7,8 @@ if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
 }
 
 /*-----------------------------------------------------Get Poduct Statictics----------------------------------------------------------------------*/ 
-window.addEventListener("load",GetSellerProduct)
-function GetSellerProduct(){
-    let products=JSON.parse(localStorage.getItem("products"))
-    let activeUser = JSON.parse(localStorage.getItem("Active User"))
-    let SellerId = activeUser.id
-    let SellerProducts = products.filter(item => item.sellerID == SellerId)
-    return SellerProducts
-}
 
+let _orders=[]
 let Prod_Stats = {
     No_Of_Product: GetSellerProduct().length,
     each_product_quantity: function () {
@@ -34,6 +29,78 @@ let modifiedProdStats = {
     No_Of_Product: Prod_Stats.No_Of_Product,
     productQuantityData: Prod_Stats.each_product_quantity(),
 };
+/*-----------------------------------------------------orderStatics--------------------------------------*/
+if (localStorage.getItem("Orders") == null) {
+    localStorage.setItem("Orders", JSON.stringify(orders));
+    }
+   
+     _orders = JSON.parse(localStorage.getItem("Orders"));
+let modifiedOrder=OrderForSeller(_orders)
+let orderedProduct = [];
+let repeated = [];
+
+for (let i = 0; i < modifiedOrder.length ; i++) {
+    
+    if (repeated.includes(modifiedOrder[i].productName)) {
+        continue;
+    }
+    let quantity = parseInt(modifiedOrder[i].QuantityOrdered);
+    for (let j = i+1; j < modifiedOrder.length; j++) {
+        if (modifiedOrder[i].productName === modifiedOrder[j].productName) {
+            quantity += parseInt(modifiedOrder[j].QuantityOrdered);
+        }
+    }
+    orderedProduct.push({ productName: modifiedOrder[i].productName, quantity });
+    repeated.push(modifiedOrder[i].productName);
+}
+
+console.log(orderedProduct)
+let SellerWallet=modifiedOrder.filter(order=>order.status=="delivered")
+                              .reduce((total, order) => total + order.TotalPrice-50,0)   //assume 50$ for each poduct for expense(transport+paltfrom fee)
+                    
+    let LessOrder=[]
+    let found=false
+
+    GetSellerProduct().forEach(Product=>{
+        if(!(orderedProduct.map(item=>item.productName).includes(Product.name))){
+            found=true
+            LessOrder.push({productname:Product.name,
+                                    quantity:0})
+                                    return;
+        }})
+        if(!found){
+            LessOrder.push({
+                productname:orderedProduct.find(item=>item.quantity==Math.min(...orderedProduct.map(order=>order.quantity))).productName,
+                quantity:Math.min(...orderedProduct.map(order=>order.quantity))
+            })
+        }
+    let OrderStat={
+        TrendOrder:{
+            quantity:Math.max(...orderedProduct.map(order=>order.quantity)),
+            Name:orderedProduct.find(item=>item.quantity==Math.max(...orderedProduct.map(order=>order.quantity))).productName
+            },
+        MostOrderedProduct:{
+            productName:orderedProduct.map(item=>item.productName),
+            quantity:orderedProduct.map(item=>item.quantity)
+        },
+        wallet:SellerWallet,
+        NO_Order:{
+            Total:modifiedOrder.length,
+            pending:modifiedOrder.filter((item=>item.status=="pending")).length,
+            delivered:modifiedOrder.filter((item=>item.status=="delivered")).length,
+            shipped:modifiedOrder.filter((item=>item.status=="shipped")).length,
+            },
+            LessOrderDemand:{
+                productname:LessOrder.map(item=>item.productname)[0],
+                quantity:LessOrder.map(item=>item.quantity)[0]
+            }
+        }
+
+            console.log(LessOrder.map(item=>item.productname))
+
+localStorage.setItem("OrderStat",JSON.stringify(OrderStat))
+
+
 
 // localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
 
@@ -45,23 +112,14 @@ let LessDemandName=document.getElementsByClassName("lessorderName")[0]
 let LessDemandNum=document.getElementsByClassName("lessorderNumber")[0]
 let collapsed_button = document.getElementsByClassName("btn-collapse-sidebar")[0];
 let btn_show_sidebar=document.getElementById("toggle-sidebar")
-let side_bar = document.getElementById("sidebar");
 
-collapsed_button.addEventListener("click", function () {
-    side_bar.classList.toggle("active");
-    side_bar.classList.toggle("col-lg-1");
-    side_bar.classList.toggle("col-lg-2");
-    content.classList.toggle("col-lg-10");
-    content.classList.toggle("col-lg-11");
-    });
-    
-    /*make btn to show nav side bar in small screens */
-    btn_show_sidebar.addEventListener("click",function(){
-    side_bar.classList.toggle("show-nav");
-    side_bar.classList.remove("col-lg-2");
-    side_bar.classList.add("fixed-width");
-    content.classList.toggle("col-lg-10");
-    })
+
+/* make collapsed button to narrow side bar and wide table*/
+collapsed_button.addEventListener("click",SideBarCollpse );
+
+
+/*make btn to show nav side bar in small screens */
+btn_show_sidebar.addEventListener("click", ShowSideBar)
 
 
 
@@ -71,12 +129,11 @@ let prod_name=modifiedProdStats.productQuantityData.map(item => item.productname
 let prod_quantity=modifiedProdStats.productQuantityData.map(item => item.productQuantity)
 let prod_No=Prod_Stats.No_Of_Product
 /*----------------------------------------------------------Get Object Order Statictics-------------------------------------------*/
-let OrderStat=JSON.parse(localStorage.getItem("OrderStat"))
+//let OrderStat=JSON.parse(localStorage.getItem("OrderStat"))
 let TrendPrdName=OrderStat.TrendOrder.Name
 let TrendPrdQtn=OrderStat.TrendOrder.quantity
 let DemandeOrder=OrderStat.MostOrderedProduct.quantity
 let productName=OrderStat.MostOrderedProduct.productName
-
 let Seller_Wallet=OrderStat.wallet
 let LowDemand_Name=OrderStat.LessOrderDemand.productname
 let LowDemand_No=OrderStat.LessOrderDemand.quantity

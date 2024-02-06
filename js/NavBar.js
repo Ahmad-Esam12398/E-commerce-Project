@@ -20,21 +20,21 @@ window.addEventListener("load", function () {
         document.getElementById("Admin").classList.remove("d-none");
         document.getElementById("Seller").classList.add("d-none");
         // Print User's Name
-        this.document.getElementById("AdminName").innerText = "Welcome " + activeUser.name;
+        this.document.getElementById("AdminName").innerText += " " + activeUser.name;
     } else if (activeUser.role == "Seller") {
         document.getElementById("Guest").classList.add("d-none");
         document.getElementById("Customer").classList.add("d-none");
         document.getElementById("Admin").classList.add("d-none");
         document.getElementById("Seller").classList.remove("d-none");
         // Print User's Name
-        this.document.getElementById("SellerName").innerText = "Welcome " + activeUser.name;
+        this.document.getElementById("SellerName").innerText = " " + activeUser.name;
     } else if (activeUser.role == "Customer") {
         document.getElementById("Guest").classList.add("d-none");
         document.getElementById("Customer").classList.remove("d-none");
         document.getElementById("Admin").classList.add("d-none");
         document.getElementById("Seller").classList.add("d-none");
         // Print User's Name
-        this.document.getElementById("CustomerName").innerText = "Welcome " + activeUser.name;
+        this.document.getElementById("CustomerName").innerText = " " + activeUser.name;
     }
     let logout = document.getElementsByClassName("logout");
     for (let i = 0; i < logout.length; i++) {

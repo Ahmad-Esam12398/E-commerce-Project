@@ -1,10 +1,10 @@
-import {products as originalProducts, persons as originalPersons} from "./data.js";
+import {products as originalProducts, persons as originalPersons, originalOrders as initialOrders} from "./data.js";
 import {Product} from "./productsmodule.js";
 
-if(JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
+if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role != "Admin"){
     alert("You are not authorized to access this page.")
     window.location.href = "./home.html";
-  }
+  }  
 
 if(localStorage.getItem("Persons") == null){
     let plainPersons = originalPersons.map((item)=> item.getPerson());
@@ -12,10 +12,13 @@ if(localStorage.getItem("Persons") == null){
     // console.log(JSON.parse(localStorage.getItem("Persons")));
 }
 if(localStorage.getItem("products") == null){
-    debugger;
     let plainProducts = originalProducts.map((item)=>item.getProduct());
     localStorage.setItem("products", JSON.stringify(plainProducts));
 }
+if(localStorage.getItem("originalOrders") == null){
+    localStorage.setItem("originalOrders", JSON.stringify(initialOrders));
+}
+let originalOrders = JSON.parse(localStorage.getItem("originalOrders"));
 // let plainProducts = products.map((item)=>item.getProduct());
 // localStorage.setItem("products", JSON.stringify(plainProducts));
 let persons = JSON.parse(localStorage.getItem("Persons"));
@@ -25,6 +28,7 @@ function updateProductsLocalStorage(){
 }
 
 function createTableProducts(){
+    // debugger;
     let myTable = document.getElementById("myTable");
     let tableHead = document.getElementsByTagName("thead")[0];
     let tableBody = document.getElementsByTagName("tbody")[0];
@@ -152,6 +156,7 @@ function addProductRow() {
 
 let id = -1;
 function editRow(e) {
+    debugger;
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
     debugger;
@@ -172,9 +177,11 @@ function editRow(e) {
     id = -1;
     id = rowChildrenValues[0];
     debugger;
-    for(let i = 0; i < inputs.length; i++) {
+    for(let i = 0; i < inputs.length - 1; i++) {
         inputs[i].value = rowChildrenValues[i + 1];
     }
+    let index = products.findIndex(product => product.id == id);
+    inputs[inputs.length - 1].value = products[index].description;
     // inputs[5].value = 6;
     // console.log(inputs[5]);
     // console.log(inputs[5]);
@@ -186,10 +193,10 @@ function setProduct(index, rowChildrenValues){
     products[index].name = rowChildrenValues[0];
     products[index].price = rowChildrenValues[1];
     products[index].quantity = rowChildrenValues[2];
-    products[index].description = rowChildrenValues[3];
-    products[index].image = rowChildrenValues[4];
-    products[index].sellerID = rowChildrenValues[5];
-    products[index].category = rowChildrenValues[6];
+    products[index].image = rowChildrenValues[3];
+    products[index].sellerID = rowChildrenValues[4];
+    products[index].category = rowChildrenValues[5];
+    products[index].description = rowChildrenValues[6];
 }
 function saveNewRow() {
     if(confirm("Are you sure you want to save this product?")) {
@@ -207,20 +214,26 @@ function saveNewRow() {
 }
 function deleteRow(e) {
     if(confirm("Are you sure you want to delete this product?")) {
+        debugger;
         let row = e.target.parentElement.parentElement;
         let id = row.children[0].innerText;
         let index = products.findIndex(product => product.id == id);
         // console.log(index);
-        products.splice(index, 1);
-        updateProductsLocalStorage();
-        createTableProducts();
+        let flag = false;
+        if(originalOrders.forEach(order => {order["products"].forEach (product => {if(product == id) flag = true;})}));
+        if(flag == true){
+            alert("You can't delete this product because it has orders. Plz Delete them First");
+            return;
+        }
+        else{
+            products.splice(index, 1);
+            updateProductsLocalStorage();
+            createTableProducts();
+        }
     }
 }
 document.querySelectorAll('form')[0].addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Check if the form is 
-    event.preventDefault();
-    event.stopPropagation();
+    // Check if the form is valid
     if(this.checkValidity()){
         if(operation == "edit"){
             saveNewRow(event);
@@ -228,6 +241,14 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         else if(operation == "add"){
             addProductRow();
         }
+        // var myModal = bootstrap.Modal.getInstance(document.getElementById('staticBackdrop'));
+        // myModal.hide();
+        // const myModal = new bootstrap.Modal('#staticBackdrop', {});
+        // myModal.hide();
+    }
+    else{
+        event.preventDefault();
+        event.stopPropagation();
     }
     this.classList.add('was-validated');
 });
@@ -300,3 +321,53 @@ function resetValidation(){
 }
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-footer > button.btn.btn-secondary")[0].addEventListener("click", resetValidation);
 document.querySelectorAll("#staticBackdrop > div > div > div.modal-header > button")[0].addEventListener("click", resetValidation);
+
+// to sort the table
+let sortDirection = false; // false = ascending, true = descending
+function sortTable(columnIndex) {
+    const table = document.querySelector('table');
+    const tbody = table.querySelector('tbody');
+    let rows = Array.from(tbody.querySelectorAll('tr'));
+    rows = rows.filter(tr => tr.classList.contains("d-none") == false);
+    rows = rows.filter(tr => tr.style.display != "none");
+
+
+    // Sort rows based on the content of the specified column
+    const sortedRows = rows.sort((a, b) => {
+        const aColText = a.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+        const bColText = b.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+
+        // Convert to number if possible, otherwise compare as string
+        const aValue = isNaN(aColText) ? aColText : Number(aColText);
+        const bValue = isNaN(bColText) ? bColText : Number(bColText);
+
+        return (aValue > bValue ? 1 : -1) * (sortDirection ? -1 : 1);
+    });
+
+    // Remove all existing rows from the table
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+
+    // Append the sorted rows to the table
+    tbody.append(...sortedRows);
+
+    // Reverse the sort direction for the next sort
+    sortDirection = !sortDirection;
+}
+
+// Add click event listeners to all th elements
+const headers = document.querySelectorAll('th');
+headers.forEach((header, index) => {
+    if(index < headers.length - 1 && index != 4){
+        header.addEventListener('click', () => {
+            sortTable(index);
+            document.querySelectorAll("th").forEach(th=> {
+                th.classList.remove("sorted");
+                th.innerHTML = th.innerHTML.replace(/ ▲| ▼/g, '');
+            });
+            header.classList.add("sorted");
+            header.innerHTML += sortDirection ? ' ▼' : ' ▲';
+        });
+    }
+});
