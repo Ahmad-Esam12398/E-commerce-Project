@@ -39,117 +39,119 @@
         <div class="row">
             <div class="firstphoto">
                 <!-- NavBar -->
-                <div class="container-fluid">
                 <nav class="navbar navbar-expand-md fs-5 fw-bold">
-                        <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
-                                alt="logo"></a>
-                        <!-- Toggle button for good response in small media -->
-                        <button style="position: absolute; right: 80px;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <!-- Navigation Bar items -->
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item ms-2">
-                                    <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                                </li>
-                                <li class="nav-item ms-2">
-                                    <a class="nav-link" href="products.html">Products</a>
-                                </li>
-                                <li class="nav-item col-auto ms-2">
-                                    <a class="nav-link" href="home.html#Testimonials">About Us</a>
-                                </li>
-                                <li class="nav-item col-auto ms-2">
-                                    <a class="nav-link" href="#Footer">Contact Us</a>
-                                </li>
-                                <!-- Varies depends on the active user -->
-                                <!-- guest -->
-                                <li id="Guest" class="d-none nav-item mx-2">
-                                    <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
-                                </li>
-                                <!-- customer -->
-                                <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                                    <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
-                                        <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
-                                    </button>
-                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
-                                        <li>
-                                            <p style="font-size: small;"
-                                                class="pe-none fw-bold bg-warning text-white dropdown-item">
-                                                Customer
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
-                                    </ul>
-                                </li>
-                                <!-- admin -->
-                                <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                                    <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
-                                        <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
-                                    </button>
-                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
-                                        <li>
-                                            <p style="font-size: small;"
-                                                class="pe-none fw-bold bg-warning text-white dropdown-item">
-                                                Admin</p>
-                                        </li>
-                                        <li>
-                                            <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
-                                        </li>
-                                        <li>
-                                            <a class="fw-bold dropdown-item" href="AdminHome.html">
-                                                Dashboard <i class="text-danger fa-solid fa-chart-simple"></i></a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
-                                    </ul>
-                                </li>
-                                <!-- seller -->
-                                <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                                    <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
-                                        <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
-                                    </button>
-                                    <ul style="left: auto; right: 50px;" class="dropdown-menu">
-                                        <li>
-                                            <p style="font-size: small;"
-                                                class="pe-none fw-bold bg-warning text-white dropdown-item">
-                                                Seller</p>
-                                        </li>
-                                        <li>
-                                            <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
-                                        </li>
-                                        <li>
+                    <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
+                            alt="logo"></a>
+                    <!-- Toggle button for good response in small media -->
+                    <button style="position: absolute; right: 80px;" class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Navigation Bar items -->
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item ms-2">
+                                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item ms-2">
+                                <a class="nav-link" href="products.html">Products</a>
+                            </li>
+                            <li class="nav-item col-auto ms-2">
+                                <a class="nav-link" href="home.html#Testimonials">About Us</a>
+                            </li>
+                            <li class="nav-item col-auto ms-2">
+                                <a class="nav-link" href="#Footer">Contact Us</a>
+                            </li>
+                            <!-- Varies depends on the active user -->
+                            <!-- guest -->
+                            <li id="Guest" class="d-none nav-item mx-2">
+                                <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i></a>
+                            </li>
+                            <!-- customer -->
+                            <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
+                                <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
+                                    <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
+                                </button>
+                                <ul style="left: auto; right: 50px;" class="dropdown-menu">
+                                    <li>
+                                        <p style="font-size: small;"
+                                            class="pe-none fw-bold bg-warning text-white dropdown-item">
+                                            Customer
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <!-- admin -->
+                            <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
+                                <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
+                                    <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
+                                </button>
+                                <ul style="left: auto; right: 50px;" class="dropdown-menu">
+                                    <li>
+                                        <p style="font-size: small;"
+                                            class="pe-none fw-bold bg-warning text-white dropdown-item">
+                                            Admin</p>
+                                    </li>
+                                    <li>
+                                        <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a class="fw-bold dropdown-item" href="AdminHome.html">
+                                            Dashboard <i class="text-danger fa-solid fa-chart-simple"></i></a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <!-- seller -->
+                            <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
+                                <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
+                                    <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item">
+                                    </p>
+                                </button>
+                                <ul style="left: auto; right: 50px;" class="dropdown-menu">
+                                    <li>
+                                        <p style="font-size: small;"
+                                            class="pe-none fw-bold bg-warning text-white dropdown-item">
+                                            Seller</p>
+                                    </li>
+                                    <li>
+                                        <a class="fw-bold dropdown-item" href="CustomerProfile.html">Profile</a>
+                                    </li>
+                                    <li>
 
-                                            <a class="fw-bold dropdown-item" href="SellerProduct.html">Seller Dashboard
-                                                <i class="text-success fa-solid fa-chart-simple"></i></a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <button style="position: relative; right:5px;" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
-                            aria-controls="staticBackdrop">
-                            <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
-                            <i class="CartIcon fa-solid fa-cart-shopping"></i>
-                        </button>
+                                        <a class="fw-bold dropdown-item" href="SellerProduct.html">Seller Dashboard
+                                            <i class="text-success fa-solid fa-chart-simple"></i></a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="logout dropdown-item" href="home.html">Log Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
+                    <button style="position: relative; right:5px;" class="btn" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                        <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
+                        <i class="CartIcon fa-solid fa-cart-shopping"></i>
+                    </button>
                 </nav>
                 <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
                     aria-labelledby="staticBackdropLabel">
@@ -552,42 +554,44 @@
                 </div>
             </div>
         </div>
-  <!-- Modal -->
+        <!-- Modal -->
         <form class="needs-validation" novalidate>
-            <div class="modal fade" id="contactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="contactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Send Message For Customer Service</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" placeholder="Message Subject" required>
-                            <div class="invalid-feedback">
-                                Please enter a valid subject.
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Send Message For Customer Service</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" placeholder="Message Subject"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid subject.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                Looks good!
+                            <div class="mb-3">
+                                <label for="messageContent" class="form-label">Your Message</label>
+                                <textarea class="form-control" id="messageContent" rows="3" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter a valid message.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="messageContent" class="form-label">Your Message</label>
-                            <textarea class="form-control" id="messageContent" rows="3" required></textarea>
-                            <div class="invalid-feedback">
-                                Please enter a valid message.
-                            </div>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Confirm</button>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Confirm</button>
-                    </div>
-                </div>
                 </div>
             </div>
         </form>
