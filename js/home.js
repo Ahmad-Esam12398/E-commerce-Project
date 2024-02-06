@@ -228,6 +228,9 @@ for (let i = 0; i < BestSellerArr.length; i++) {
 
 // Function to initialize the new Collection Carousel with product cards
 function initCarousel(targetdiv, type, start, end, step) {
+    if (start < 0) {
+        start = 0
+    }
     if (type == "sell" && end >= mostSellerProducts.length - 1) { end = mostSellerProducts.length - 1; }
     else if (type != "sell" && end >= productsArr.length - 1)
         end = productsArr.length - 1;
@@ -284,8 +287,8 @@ function initCarousel(targetdiv, type, start, end, step) {
 const newCollectionCarousel = document.querySelector("#NewCollectionProducts .carousel-inner");
 const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
 
-initCarousel(newCollectionCarousel, "new", products.length / 2, products.length, 3);
-initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length, 1);
+initCarousel(newCollectionCarousel, "new", products.length - 6, products.length, 3);
+initCarousel(newCollectionCarouselSmall, "new", products.length - 6, products.length, 1);
 
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
