@@ -4,7 +4,7 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    background-color: #f8cd62;
+    background-color: #f3e5bd;
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -13,8 +13,8 @@ body {
 
 .register-container {
     border: 3px solid darkgoldenrod;
-    box-shadow: 5px 5px 20px darkgoldenrod, -5px 5px 20px rgb(255, 246, 144);
-    background-color:rgb(247, 225, 59);
+    box-shadow:  -5px 5px 20px rgb(255, 234, 0);
+    background-color:rgb(255, 246, 127);
     margin: 4% auto;
     border-radius: 10px;
     justify-content: center;
