@@ -91,7 +91,7 @@ function createTableProducts(){
         tableBody.appendChild(tableRow);
         myTable.appendChild(tableBody);
     }
-    myTable.appendChild(tableHead);
+    // myTable.appendChild(tableHead);
     AddButton();
 };
 createTableProducts();
