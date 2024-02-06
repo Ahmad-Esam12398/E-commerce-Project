@@ -251,8 +251,8 @@
                             Please Enter valid E-mail Address.
                         </div>
                     </div>
-                    <div class="form-floating mb-3 input-group ">
-                        <input type="password" class="form-control w-75 inputs" id="floatingPassword" placeholder="Password" required minlength="8">
+                    <div class="form-floating mb-3 input-group">
+                        <input type="password" class="form-control w-75 inputs" id="floatingPassword" placeholder="Password" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$">
                         <span class="eye col-1 me-3 input-group-text ">
                             <i id="ShowPassword" class="fs-4 fa-solid fa-eye text-center "></i>
                         </span>
@@ -261,7 +261,7 @@
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Password must be at least 8 characters.
+                            Password must be at least 8 characters, Have lower case, upper case letters, digits and have special Character.
                         </div>
                     </div>
                     <div class="form-floating mb-3">
