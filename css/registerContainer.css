@@ -4,6 +4,7 @@ input::-webkit-inner-spin-button {
 }
 
 body {
+    overflow-x: hidden;
     background-color: #f3e5bd;
     align-items: center;
     justify-content: center;
