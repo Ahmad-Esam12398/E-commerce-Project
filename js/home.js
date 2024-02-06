@@ -231,9 +231,9 @@ function initCarousel(targetdiv, type, start, end, step) {
     if (start < 0) {
         start = 0
     }
-    if (type == "sell" && end >= mostSellerProducts.length - 1) { end = mostSellerProducts.length - 1; }
-    else if (type != "sell" && end >= productsArr.length - 1)
-        end = productsArr.length - 1;
+    if (type == "sell" && end >= mostSellerProducts.length  ) { end = mostSellerProducts.length; }
+    else if (type != "sell" && end >= productsArr.length)
+        end = productsArr.length;
     // if the step is larger than the products to show then set it to that number
     if ((end - start) / step == 0) {
         step = end - start;
@@ -284,19 +284,7 @@ function initCarousel(targetdiv, type, start, end, step) {
     targetdiv.children[0].classList.add("active");
 }
 
-const newCollectionCarousel = document.querySelector("#NewCollectionProducts .carousel-inner");
-const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
 
-initCarousel(newCollectionCarousel, "new", products.length - 6, products.length, 3);
-initCarousel(newCollectionCarouselSmall, "new", products.length - 6, products.length, 1);
-
-const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
-const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
-if (mostSellerProducts.length != 0) {
-
-    initCarousel(mostSellingCarousel, "sell", 0, 6, 3);
-    initCarousel(mostSellingCarouselSmall, "sell", 0, 6, 1);
-}
 
 //subscription
 document.querySelector("form").addEventListener("submit", function (e) {
@@ -324,5 +312,20 @@ document.getElementById("UpButton").addEventListener("click", function () {
     document.documentElement.scrollTop = 0;
 });
 
+window.addEventListener("load", function () {
+    const newCollectionCarousel = document.querySelector("#NewCollectionProducts .carousel-inner");
+    const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
+
+    initCarousel(newCollectionCarousel, "new", productsArr.length - 6, productsArr.length, 3);
+    initCarousel(newCollectionCarouselSmall, "new", productsArr.length - 6, productsArr.length, 1);
+
+    const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
+    const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
+    if (mostSellerProducts.length != 0) {
+
+        initCarousel(mostSellingCarousel, "sell", 0, 6, 3);
+        initCarousel(mostSellingCarouselSmall, "sell", 0, 6, 1);
+    }
+})
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
