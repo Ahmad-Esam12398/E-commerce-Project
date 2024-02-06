@@ -285,12 +285,13 @@ let operation;
 function editRow(e) {
     document.forms[0].classList.remove("was-validated");
     let UserData = [activeUser.id, activeUser.name, activeUser.email, activeUser.password, activeUser.address, activeUser.phone, activeUser.role];
-    //want to replace the row with a form modal like one in add product
+    //want to replace the row with a form modal
     let inputs = document.querySelectorAll(".inputs");
-    // console.log(inputs);
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = UserData[i + 1];
     }
+    console.log(UserData);
+
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
@@ -320,24 +321,42 @@ function saveNewRow() {
         location = "CustomerProfile.html";
     }
 }
+let password = document.getElementById("floatingPassword");
+password.addEventListener("input", function () {
+    if (!password.value.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
+        password.classList.remove("is-valid");
+        password.classList.add("is-invalid");
+    }else{
+        password.classList.add("is-valid");
+        password.classList.remove("is-invalid");
+    }
+});
+
 document.querySelectorAll('form')[0].addEventListener('submit', function (event) {
-    this.classList.add('was-validated');
     let email = document.getElementById("floatingEmail").value;
     let phone = document.getElementById("floatingPhone").value;
+    this.classList.add('was-validated');
     if (this.checkValidity()) {
         if (checkEmail(email) && activeUser.email != email) {
             event.preventDefault();
             event.stopPropagation();
             alert("This email is already in use.");
-            resetValidation();
+            document.forms[0].classList.remove("was-validated");
             return;
         }
         else if (checkPhone(phone) && activeUser.phone != phone) {
             event.preventDefault();
             event.stopPropagation();
             alert("This phone number is already in use.");
-            resetValidation();
+            document.forms[0].classList.remove("was-validated");
             return;
+        }
+        else if (!password.value.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
+            event.preventDefault();
+            event.stopPropagation();
+            password.classList.remove("is-valid");
+            document.forms[0].classList.remove("was-validated");
+            password.classList.add("is-invalid");
         }
         else {
             saveNewRow(event);
@@ -348,4 +367,4 @@ document.querySelectorAll('form')[0].addEventListener('submit', function (event)
         event.stopPropagation();
     }
 });
-document.getElementById("editIcon").addEventListener("click", editRow()); // end of edit function
+document.getElementById("editIcon").addEventListener("click", function (e) { editRow(e); }); // end of edit function

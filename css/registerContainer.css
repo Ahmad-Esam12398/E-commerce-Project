@@ -4,7 +4,7 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    background-color: #d0a73f;
+    background-color: #f8cd62;
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -12,9 +12,9 @@ body {
 }
 
 .register-container {
-    border: 1px solid darkgoldenrod;
-    box-shadow: 5px 5px 20px darkgoldenrod, -5px 5px 20px black;
-    background-color:#f9bf2d;
+    border: 3px solid darkgoldenrod;
+    box-shadow: 5px 5px 20px darkgoldenrod, -5px 5px 20px rgb(255, 246, 144);
+    background-color:rgb(247, 225, 59);
     margin: 4% auto;
     border-radius: 10px;
     justify-content: center;

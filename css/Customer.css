@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(245, 245, 245, 0.822);
+    background-color: whitesmoke;
 }
 
 .sidebar {
@@ -24,11 +24,15 @@ body {
 
 th,
 td {
-    font-weight: 500;
+    font-weight: 400;
     border: 2px solid white;
     padding: 10px;
     text-align: center;
 
+}
+th{
+    font-weight: 600;
+    background-color: rgb(253, 235, 162);
 }
 .profileContainer {
 
