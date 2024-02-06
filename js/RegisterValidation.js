@@ -67,25 +67,25 @@ window.addEventListener("load", function () {
     });
     //password
     document.getElementById("password").addEventListener("input", function () {
-        if (this.value.trim().length < 8) {
+        if (!this.value.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
             p1 = 0;
             this.classList.add("is-invalid");
             this.classList.remove("is-valid");
         }
         else {
-            var passCheck = document.getElementById("passwordCheck");
-            if (passCheck.value != this.value) {
-                p2 = 0;
-                passCheck.classList.add("is-invalid");
-                passCheck.classList.remove("is-valid");
-            } else {
-                p2 = 1
-                passCheck.classList.add("is-valid");
-                passCheck.classList.remove("is-invalid");
-            }
             p1 = 1;
             this.classList.add("is-valid");
             this.classList.remove("is-invalid");
+        }
+        var passCheck = document.getElementById("passwordCheck");
+        if (passCheck.value != this.value) {
+            p2 = 0;
+            passCheck.classList.add("is-invalid");
+            passCheck.classList.remove("is-valid");
+        } else {
+            p2 = 1
+            passCheck.classList.add("is-valid");
+            passCheck.classList.remove("is-invalid");
         }
     });
     // passwordcheck
@@ -151,8 +151,12 @@ window.addEventListener("load", function () {
         if (!valid) {
             e.preventDefault();
             e.stopPropagation();
-            this.classList.add("is-invalid");
-            this.classList.remove("is-valid");
+            if (!n) document.getElementById("name").classList.add("is-invalid");
+            if (!em) document.getElementById("email").classList.add("is-invalid");
+            if (!p1) document.getElementById("password").classList.add("is-invalid");
+            if (!p2) document.getElementById("passwordCheck").classList.add("is-invalid");
+            if (!ph) document.getElementById("phone").classList.add("is-invalid");
+            if (!ad) document.getElementById("address").classList.add("is-invalid");
         }
         else {
             let name = document.getElementById("name").value;

@@ -240,7 +240,6 @@ function updateTotal() {
     for (let i = 0; i < subtotals.length; i++) {
         subtotalAddition += Number((subtotals[i].innerText).substr(1));
     }
-    document.getElementsByClassName("subtotalVal")[0].innerText = ` $${subtotalAddition.toFixed(2)}`;
     document.getElementsByClassName("totalVal")[0].innerText = ` $${subtotalAddition.toFixed(2)}`;
 }
 

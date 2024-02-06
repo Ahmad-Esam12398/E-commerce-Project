@@ -4,7 +4,7 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    background-color: rgba(245, 245, 245, 0.822);
+    background-color: #d0a73f;
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -12,9 +12,9 @@ body {
 }
 
 .register-container {
-    border: 1px solid black;
-    box-shadow: 5px 5px 20px gray, -5px 5px 20px gray;
-    background-color: white;
+    border: 1px solid darkgoldenrod;
+    box-shadow: 5px 5px 20px darkgoldenrod, -5px 5px 20px black;
+    background-color:#f9bf2d;
     margin: 4% auto;
     border-radius: 10px;
     justify-content: center;
@@ -41,7 +41,7 @@ body {
 }
 
 .input-group {
-    border: 1px solid black;
+    border: 2px solid gray;
     border-radius: 5px;
     margin: 2px;
 }
