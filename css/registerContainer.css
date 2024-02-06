@@ -5,7 +5,8 @@ input::-webkit-inner-spin-button {
 
 body {
     overflow-x: hidden;
-    background-color: #f3e5bd;
+    background-color: #edb832a7;
+
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -13,10 +14,9 @@ body {
 }
 
 .register-container {
-    filter: brightness(120%);
     border: 3px solid darkgoldenrod;
-    box-shadow:  -5px 5px 20px rgb(255, 234, 0);
-    background-color:rgb(255, 246, 127);
+    box-shadow: -5px 5px 20px rgb(153, 107, 0);
+    background-color: white;
     margin: 4% auto;
     border-radius: 10px;
     justify-content: center;
@@ -26,6 +26,13 @@ body {
 .register-container h2 {
     color: black;
     margin: 15px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=number] {
+    background-color: #edb83284;
 }
 
 .input-group i {
@@ -43,9 +50,12 @@ body {
 }
 
 .input-group {
+    color: white;
+    background-color: #edb832e7;
     border: 2px solid gray;
     border-radius: 5px;
     margin: 2px;
+    margin: 10px 0;
 }
 
 .input-group input {
@@ -55,12 +65,17 @@ body {
 
 .register-container button {
     margin: 10px auto;
-    background-color: rgb(0, 49, 226);
+    font-size: large;
+    font-weight: 500;
+    border: white;
+    background-color: #edb832e7;
     color: rgb(255, 255, 255);
 }
 
 .register-container button:hover {
-    background-color: #0056b3;
+    background-color: white;
+    color: #edb832e7;
+    border: 2px solid #edb832e7;
 }
 
 .register-container a {
