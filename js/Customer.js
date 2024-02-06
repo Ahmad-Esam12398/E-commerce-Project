@@ -229,21 +229,15 @@ function createTableOrders() {
                 tableData = document.createElement("td");
                 tableData.setAttribute("rowspan", result.length);
                 tableData.innerHTML = sum + " $";
-                // tableData.classList.add("table-secondary");
                 tableData.classList.add("fs-5", "fw-bold", "text-success");
                 tableRow.appendChild(tableData);
 
                 tableData = document.createElement("td");
                 tableData.innerHTML = date;
                 tableData.setAttribute("rowspan", result.length);
-                // tableData.classList.add("table-secondary");
                 tableData.classList.add("fw-bold");
                 tableRow.appendChild(tableData);
                 tableData = document.createElement("td");
-                // tableData.innerHTML = customerId;
-                // tableData.setAttribute("rowspan", result.length);
-                // tableData.classList.add("table-secondary");
-                // tableRow.appendChild(tableData);
                 tableData = document.createElement("td");
                 tableData.innerHTML = status;
                 tableData.setAttribute("rowspan", result.length);
@@ -251,32 +245,17 @@ function createTableOrders() {
                 tableData.classList.add("text-uppercase");
                 if (status == "delivered") {
                     tableData.classList.add("text-white");
-                    tableData.classList.add("table-success");
+                    tableData.classList.add("bg-success");
                     tableRow.appendChild(tableData);
-                    // tableData = document.createElement("td");
-                    // let deleteButton = document.createElement("button");
-                    // deleteButton.classList.add("btn");
-                    // deleteButton.classList.add("btn-danger");
-                    // deleteButton.innerText = "Delete";
-                    // // deleteButton.addEventListener("click", deleteOrder);
-                    // tableData.appendChild(deleteButton);
-                    // tableData.setAttribute("rowspan", result.length);
                 }
                 else if (status == "shipped") {
-                    // tableData.classList.add("text-white");
-                    tableData.classList.add("table-warning");
+                    tableData.classList.add("bg-warning");
                     tableRow.appendChild(tableData);
-                    // tableData = document.createElement("td");
-                    // tableData.setAttribute("rowspan", result.length);
-                    // tableData.innerHTML = "N/A";
                 }
                 else {
                     tableData.classList.add("text-white");
                     tableData.classList.add("bg-danger");
                     tableRow.appendChild(tableData);
-                    // tableData = document.createElement("td");
-                    // tableData.setAttribute("rowspan", result.length);
-                    // tableData.innerHTML = "N/A";
                 }
                 tableRow.appendChild(tableData);
             }
