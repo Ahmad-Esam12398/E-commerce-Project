@@ -208,7 +208,7 @@
                                     characters.
                                 </div>
                             </div>
-                            <div class="mb-3 form-floating input-group">
+                            <div class="mb-3 form-floating">
                                 <input type="email" class="form-control inputs w-75" id="floatingEmail"
                                     placeholder="Person E-mail" min="0" required
                                     pattern="^[a-zA-Z][a-zA-Z0-9_\.]*@[a-zA-Z]+.com$">
@@ -221,10 +221,11 @@
                                     Please Enter valid E-mail Address.
                                 </div>
                             </div>
-                            <div class="form-floating mb-3 input-group ">
-                                <input type="password" class="form-control w-75 inputs" id="floatingPassword"
+                            
+                            <div class="form-floating mb-3">
+                                <input type="password" style="width: 63%;" class="d-inline form-control inputs" id="floatingPassword"
                                     placeholder="Password" required>
-                                <span class="eye input-group-text ">
+                                <span class="eye d-inline  input-group-text">
                                     <i id="ShowPassword" class="fs-4 fa-solid fa-eye text-center "></i>
                                 </span>
                                 <label for="floatingPassword">Password</label>
@@ -236,6 +237,7 @@
                                     digit, one special character, and be at least 8 characters long
                                 </div>
                             </div>
+
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control inputs w-75" id="floatingAddress"
                                     placeholder="Address" required pattern="^[a-z_ \-A-Z0-9]{10,}$">

@@ -355,7 +355,7 @@ document.querySelectorAll('form')[0].addEventListener('submit', function (event)
             event.preventDefault();
             event.stopPropagation();
             password.classList.remove("is-valid");
-            document.forms[0].classList.remove("was-validated");
+            // document.forms[0].classList.remove("was-validated");
             password.classList.add("is-invalid");
         }
         else {
