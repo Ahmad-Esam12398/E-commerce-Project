@@ -132,6 +132,8 @@ function addPersonRow() {
     createTablePersons();
 }
 let id = -1;
+let currentEmail = "";
+let currentPhone = "";
 function editRow(e) {
     // debugger;
     document.forms[0].classList.remove("was-validated");
@@ -154,6 +156,8 @@ function editRow(e) {
     let saveButton = document.querySelectorAll("button[type='submit']")[0];
     saveButton.innerHTML = "Save";
     operation = "edit";
+    currentEmail = document.getElementById("floatingEmail").value;
+    currentPhone = document.getElementById("floatingPhone").value;
     // console.log(products);
 }
 function setPerson(index, values){
@@ -250,14 +254,14 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
         uniquePhoneNumbers.add(person.phone);
     });
     if(this.checkValidity()){
-        if(uniqueEmails.has(email.toLowerCase())){
+        if(uniqueEmails.has(email.toLowerCase()) && currentEmail.toLowerCase() != email.toLowerCase()){
             event.preventDefault();
             event.stopPropagation();
             alert("This email is already in use.");
             resetValidation();
             return;
         }
-        else if(uniquePhoneNumbers.has(phone)){
+        else if(uniquePhoneNumbers.has(phone) && currentPhone != phone){
             event.preventDefault();
             event.stopPropagation();
             alert("This phone number is already in use.");
@@ -271,6 +275,8 @@ document.querySelectorAll('form')[0].addEventListener('submit', function(event) 
             else if(operation == "add"){
                 addPersonRow();
             }
+            currentEmail = "";
+            currentPhone = "";
         }
         // var myModal = document.getElementById('staticBackdrop');
         // myModal
@@ -375,5 +381,54 @@ document.getElementById("ShowPassword").addEventListener("click", function () {
         x.type = "text";
     } else {
         x.type = "password";
+    }
+});
+// to sort the table
+let sortDirection = false; // false = ascending, true = descending
+function sortTable(columnIndex) {
+    const table = document.querySelector('table');
+    const tbody = table.querySelector('tbody');
+    let rows = Array.from(tbody.querySelectorAll('tr'));
+    rows = rows.filter(tr => tr.classList.contains("d-none") == false);
+    rows = rows.filter(tr => tr.style.display != "none");
+
+
+    // Sort rows based on the content of the specified column
+    const sortedRows = rows.sort((a, b) => {
+        const aColText = a.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+        const bColText = b.querySelector(`td:nth-child(${columnIndex + 1})`).textContent.trim();
+
+        // Convert to number if possible, otherwise compare as string
+        const aValue = isNaN(aColText) ? aColText : Number(aColText);
+        const bValue = isNaN(bColText) ? bColText : Number(bColText);
+
+        return (aValue > bValue ? 1 : -1) * (sortDirection ? -1 : 1);
+    });
+
+    // Remove all existing rows from the table
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+
+    // Append the sorted rows to the table
+    tbody.append(...sortedRows);
+
+    // Reverse the sort direction for the next sort
+    sortDirection = !sortDirection;
+}
+
+// Add click event listeners to all th elements
+const headers = document.querySelectorAll('th');
+headers.forEach((header, index) => {
+    if(index < headers.length - 1){
+        header.addEventListener('click', () => {
+            sortTable(index);
+            document.querySelectorAll("th").forEach(th=> {
+                th.classList.remove("sorted");
+                th.innerHTML = th.innerHTML.replace(/ ▲| ▼/g, '');
+            });
+            header.classList.add("sorted");
+            header.innerHTML += sortDirection ? ' ▼' : ' ▲';
+        });
     }
 });

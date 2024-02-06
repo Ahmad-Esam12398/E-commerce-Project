@@ -111,12 +111,12 @@ function drawHeaderRow(_array, RowParent, DrawOptionColumn, ...excludeColumns) {
     RowParent.classList.add("table-light")
     let head_row = document.createElement("tr");
     if (DrawOptionColumn) {
-        modifiedHeader.push("operation");
+        modifiedHeader.push("Action");
     }
     for (let i = 0; i < modifiedHeader.length; i++) {
         let head = document.createElement("th");
         let sortSpan = document.createElement("span")
-        if (!(modifiedHeader[i] == "image" || modifiedHeader[i] == "operation")) {
+        if (!(modifiedHeader[i] == "image" || modifiedHeader[i] == "Action")) {
             sortSpan.classList.add("sort")
             if (SwapSort) {
                 let sortUP = document.createElement("i")
@@ -166,8 +166,11 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
         let cell = document.createElement("td");
         let createdSpan = document.createElement("span");
         createdSpan.classList.add("text-center");
+        let moreDetails = document.createElement("i");
+        moreDetails.classList.add("fa-solid", "fa-eye", "px-2", "text-center", "w-50","d-sm-none");
+        createdSpan.appendChild(moreDetails)
         let update = document.createElement("i");
-        update.classList.add("fa-solid", "fa-pen", "px-2", "text-center", "w-50");
+        update.classList.add("fa-solid", "fa-pen", "px-2", "text-center", "w-50","d-block","py-1","d-sm-inline-block");
         let Delete = document.createElement("i");
         Delete.classList.add("fa-solid", "fa-trash", "px-2", "text-center");
         createdSpan.appendChild(update);
@@ -178,7 +181,8 @@ function drawRow(_array, RowIndex, RowParent, DrawOptionColumn, ...excludeColumn
 }
 
 //  /*------ --------------------------------------------render Table -----------------------------------------------------*/
-drawTable(SellerProduct, SelectedTable);
+document.addEventListener("DOMContentLoaded",function(){
+drawTable(SellerProduct, SelectedTable);})
 //   /*--------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -381,7 +385,7 @@ SelectedTable.addEventListener("click", function (e) {
             let isDeletable = true;
             console.log(CurrentId)
             if (CurrentIndex !== -1) {
-                let pendingProducts = generatePendingProduct();
+                let pendingProducts = generatePendingProduct(_orders);
                 for (let i = 0; i < pendingProducts.length; i++) {
                     if (CurrentId==pendingProducts[i]) {
                         alert("cant delete")
@@ -410,7 +414,15 @@ function findProductIndexById(id) {
     }
     return -1;
 }
-
+/*----------------------------------------------------------show id------------------------------------------------------------*/
+SelectedTable.addEventListener("click",function(e){
+    if(e.target.classList.contains("fa-eye")){
+        let CurrentID = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
+        let CurrentProduct=GetSellerProduct().find(product=>product.id==CurrentID)
+        console.log(CurrentProduct)
+        alert(`${CurrentProduct.name} Current ID is: ${CurrentID}`)
+    }   
+})
 /*-----------------------------------------------------------Search Table---------------------------------------------------------*/
 SearchedProduct.addEventListener("keyup", function () {
     let inputValue = SearchedProduct.value.toLowerCase();
@@ -436,8 +448,9 @@ SelectedTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("sort-up")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            console.log(x[key] + "" + y[key])
-            return x[key] - y[key];
+           
+                return x[key] - y[key];
+           
         });
         SwapSort = false
         drawTable(SellerProduct, SelectedTable, true);
@@ -446,8 +459,10 @@ SelectedTable.addEventListener("click", function (e) {
     else if (e.target.classList.contains("sort-down")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            console.log(x[key] + "" + y[key])
-            return y[key] - x[key];
+            
+           
+                return y[key] - x[key];
+            
         });
         SwapSort = true
         drawTable(SellerProduct, SelectedTable, true);
@@ -496,10 +511,10 @@ let modifiedProdStats = {
 localStorage.setItem('Prod_Stats', JSON.stringify(modifiedProdStats));
 
 /*pending  product*/
-function generatePendingProduct(){
+function generatePendingProduct(_array){
     let pendingProductId=[]
 let repetedPendingProduct=[]
-_orders.filter(order=>{
+    _array.filter(order=>{
         if(order.status=='pending'){
             for(let i=0;i<order._products_.length;i++){
                 if(repetedPendingProduct.includes(order._products_[i].id)){
@@ -511,13 +526,7 @@ _orders.filter(order=>{
                     }
                 }
         }
-    })
-    products.forEach(product=>{
-        if(repetedPendingProduct.includes(product.id)){
-            //console.log(product)
-        }
-    })
-    
+    })    
     return pendingProductId
 }
 //console.log(generatePendingProduct())

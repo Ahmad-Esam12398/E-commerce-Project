@@ -102,8 +102,8 @@ let orders = [
             { id: products[12].id, name: products[12].name, quantity: 3 },
             { id: products[15].id, name: products[15].name, quantity: 4 }
         ],
-        Order_date: new Date('2024-01-2'),
-        Delivered_date:new Date('2024-01-4'),
+        Order_date: new Date('2024-01-26'),
+        Delivered_date:new Date('2024-01-28'),
         status: 'delivered',
         customerId: 4
     },
@@ -184,7 +184,7 @@ let orders = [
     { id: 3, products: [7, 9, 10], quantities: [1, 2, 3], date: '19/01/2024', status: 'pending', customerId: 2 },
     { id: 4, products: [11, 12, 16], quantities: [4, 5, 2], date: '20/01/2024', status: 'pending', customerId: 4 },
     { id: 5, products: [3, 7, 6], quantities: [1, 3, 2], date: '15/01/2024', status: 'pending', customerId: 2 },
-    { id: 6, products: [11, 12, 15], quantities: [2, 3, 4], date: '02/01/2024', status: 'delivered', customerId: 4 },
+    { id: 6, products: [11, 12, 15], quantities: [2, 3, 4], date: '26/01/2024', status: 'delivered', customerId: 4 },
     { id: 7, products: [10, 9, 1], quantities: [4, 5, 2], date: '10/01/2024', status: 'delivered', customerId: 2 },
     { id: 8, products: [2, 8, 14], quantities: [2, 1, 1], date: '27/01/2024', status: 'delivered', customerId: 4 },
     { id: 9, products: [16], quantities: [2, 1, 1], date: '27/01/2024', status: 'delivered', customerId: 2 },

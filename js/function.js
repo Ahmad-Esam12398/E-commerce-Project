@@ -57,7 +57,7 @@ OrderPerSeller.forEach(order => {
         OrderID: order.OrderID,
         productId:order.productId,
         productName:  order.productName,
-        QuantityOrdered: order.productQuantity,
+        Quantity: order.productQuantity,
         dateOrder: order.dateOrder.toLocaleDateString(),
         dateDeliver: order.dateDeliver.toLocaleDateString(),
         status: order.status,

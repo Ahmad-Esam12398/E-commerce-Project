@@ -98,3 +98,17 @@ td button{
     margin-top: 10px;
     width: 100%;
 }
+th:hover{
+    cursor: pointer;
+}
+.sorted {
+    color: #EC4E20 !important; 
+}
+/* @media (max-width: 768px) {
+    aside{
+        max-width: 100vw !important;
+    }
+}
+aside{
+    max-width: 768px;
+} */
