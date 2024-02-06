@@ -1,6 +1,6 @@
-if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
-        window.location.href = "./login.html";
-}
+// if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
+//         window.location.href = "./login.html";
+// }
 if(localStorage.getItem("messages") == null){
     localStorage.setItem("messages", JSON.stringify([]));
 }
