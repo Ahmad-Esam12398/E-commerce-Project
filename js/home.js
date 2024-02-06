@@ -132,7 +132,7 @@ function createProductCard(product) {
     cardBody.style.fontSize = "14px";
 
     // create anchor to go to the product detail page
-    const anchor = document.createElement("a");
+    const anchor = document.createElement("i");
     anchor.classList.add("card-link")
     anchor.setAttribute("href", "productdetail.html");
 
@@ -157,19 +157,19 @@ function createProductCard(product) {
 
     icon.addEventListener("click", function (e) {
         const productId = product.id;
+
         if (!cart[productId]) {
-            if (!cart[productId]) {
-                cart[productId] = {
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: product.image,
-                    cardquantity: 1,
-                    quantity: product.quantity
-                }
+            cart[productId] = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                cardquantity: 1,
+                quantity: product.quantity
             }
-        } else if (cart[productId].cardquantity >= product.quantity) {
-            console.log("Can't add more.");
+        }
+        else if (cart[productId].cardquantity >= product.quantity) {
+            alert("Can't add more.");
         } else {
             cart[productId].cardquantity++;
         }
@@ -285,7 +285,7 @@ const newCollectionCarousel = document.querySelector("#NewCollectionProducts .ca
 const newCollectionCarouselSmall = document.querySelector("#NewCollectionProductsSmall .carousel-inner");
 
 initCarousel(newCollectionCarousel, "new", products.length / 2, products.length, 3);
-initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length, 3);
+initCarousel(newCollectionCarouselSmall, "new", products.length / 2, products.length, 1);
 
 const mostSellingCarousel = document.querySelector("#MostSellingProducts .carousel-inner");
 const mostSellingCarouselSmall = document.querySelector("#MostSellingProductsSmall .carousel-inner");
