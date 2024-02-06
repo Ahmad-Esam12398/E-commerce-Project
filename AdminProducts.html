@@ -32,12 +32,12 @@
 </head>
 <body>
     <!-- NavBar -->
-    <nav class="navbar col-12 navbar-expand-md fs-5 fw-bold">
+    <nav class="navbar navbar-expand-md fs-5 fw-bold">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.html"><img class="ms-5" src="images/kayuu-logo-dark.svg"
                     alt="logo"></a>
             <!-- Toggle button for good response in small media -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button style="position: absolute; right: 80px;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -64,7 +64,7 @@
                     </li>
                     <!-- customer -->
                     <li id="Customer" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4 text-light fa-solid fa-user"></i></a>
                             <p id="CustomerName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>
                         </button>
@@ -86,7 +86,7 @@
                     </li>
                     <!-- admin -->
                     <li id="Admin" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4 text-danger fa-solid fa-user"></i>
                             <p id="AdminName" style="font-size: 12px;" class="fw-bold dropdown-item"></p>    
                         </button>
@@ -111,7 +111,7 @@
                     </li>
                     <!-- seller -->
                     <li id="Seller" class="nav-item dropleft d-none nav-item ms-2">
-                        <button class="btn dropdown-toggle d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle me-5 d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="mt-1 fs-4  text-success fa-solid fa-user"></i></a>
                             <p id="SellerName" style="font-size: 12px;" class="pe-none fw-bold dropdown-item"></p>
                         </button>
@@ -137,47 +137,65 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+            <button style="position: relative; right:5px;" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
                 aria-controls="staticBackdrop">
                 <span id="HomeCart" class="mb-5 ms-4 cardquantity">0</span>
                 <i class="CartIcon fa-solid fa-cart-shopping"></i>
             </button>
         </div>
     </nav>
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+        aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Shopping Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="card">
+                <div class="listCard card-body h-50"></div>
+                <div class="card-img-bottom text-warning-emphasis bg-white">
+                    <div class="pt-2 subtotal text-warning-emphasis">Subtotal</div>
+                    <div class="total text-warning-emphasis fw-bold">0</div>
+                    <a class="cartbtn" href="Cart.html">View Cart</a>
+                    <a class="checkbtn" href="checkout.html">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mainWrapper">
         <div class="d-flex flex-column flex-md-row">
             <div class="header">
             </div>
-            <aside class="leftSide col-6 col-md-2 d-flex flex-md-column flex-row m-2">
-                <div class="p-3 mb-2 text-white text-center w-100" style="background-color: #edb932;">Menu</div>
-                <ul class="list-group list-group-flush flex-row flex-md-column">
+            <aside class="leftSide col-md-2 d-flex flex-md-column flex-row col-12 flex-wrap">
+                <div class="p-3 mb-2 text-white text-center w-100 d-flex align-items-center justify-content-center " style="background-color: #edb932;">Menu</div>
+                <ul class="list-group list-group-flush flex-column d-flex flex-nowrap">
                     <!-- <div class="d-inline"><img src="images/Admin/1.svg"></div> -->
                     
-                    <li class="list-group-item">
+                    <li class="list-group-item w-100">
                         <!-- <input type="button" value=" DashBoard" class="btn btn-outline-primary w-100"> -->
                         <button class="btn btn-outline-primary w-100">
                             <i class="fas fa-tachometer-alt"></i> DashBoard
                         </button>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item w-100">
                         <!-- <input type="button" value="Users" class="btn btn-outline-primary w-100"> -->
                         <button class="btn btn-outline-primary w-100">
                             <i class="fa-solid fa-users"></i> Users
                         </button>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item w-100">
                         <!-- <input type="button" value="Products" class="btn btn-outline-primary w-100"> -->
                         <button class="btn btn-outline-primary w-100">
                             <i class="fa-solid fa-box"></i> Products
                         </button>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item w-100">
                         <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
                         <button class="btn btn-outline-primary w-100">
                             <i class="fa-solid fa-shopping-bag"></i> Orders
                         </button>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item w-100">
                         <!-- <input type="button" value="Orders" class="btn btn-outline-primary w-100"> -->
                         <button class="btn btn-outline-primary w-100">
                             <i class="fas fa-headset"></i> Customer Support
@@ -220,7 +238,7 @@
                     </div>
                 </div>
                 <section id="displayData">
-                    <div style="max-height: 80vh; overflow-y: auto; overflow-x: auto;">
+                    <div style="max-height: 80vh; max-width: 95vw; overflow-y: auto; overflow-x: auto;" class="table-responsive ">
                         <table id="myTable" class="table text-center align-middle table-striped table-hover">
                             <thead class="table-dark"></thead>
                             <tbody></tbody>

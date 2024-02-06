@@ -132,7 +132,7 @@ function createProductCard(product) {
     cardBody.style.fontSize = "14px";
 
     // create anchor to go to the product detail page
-    const anchor = document.createElement("i");
+    const anchor = document.createElement("a");
     anchor.classList.add("card-link")
     anchor.setAttribute("href", "productdetail.html");
 

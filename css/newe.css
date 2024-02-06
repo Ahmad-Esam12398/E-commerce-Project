@@ -449,3 +449,29 @@
             font-weight: bold;
             padding-top: 10px;
         }
+        @media only screen and (max-width:768px ){
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 0px;
+                margin: 0;
+            }
+        }
+        .fa-truck{
+display: inline-block;
+transform:translateX(-10px)!important;
+        } 
+        @media only screen and (max-width:576px ){
+        .fa-truck{
+            display: block;
+            transform:translateX(0px)!important;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .table-light th:nth-child(1),
+        td:nth-child(1) {
+            display: none;
+        }
+    }
+    

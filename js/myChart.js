@@ -1,4 +1,5 @@
 import{OrderForSeller,GetSellerProduct} from "./function.js"
+import{SideBarCollpse,ShowSideBar} from "./function.js"
 // Authentications
 if (JSON.parse(localStorage.getItem("Active User")).role != "Seller") {
     alert("You are not authorized to access this page.")
@@ -28,12 +29,11 @@ let modifiedProdStats = {
     No_Of_Product: Prod_Stats.No_Of_Product,
     productQuantityData: Prod_Stats.each_product_quantity(),
 };
-/*-----------------------------------------------------orderStatics--------------------------------------*/
+/*------------------------------------------------------------------orderStatics--------------------------------------------------------------------*/
 if (localStorage.getItem("Orders") == null) {
     localStorage.setItem("Orders", JSON.stringify(orders));
     }
-   
-     _orders = JSON.parse(localStorage.getItem("Orders"));
+_orders = JSON.parse(localStorage.getItem("Orders"));
 let modifiedOrder=OrderForSeller(_orders)
 let orderedProduct = [];
 let repeated = [];
@@ -43,10 +43,10 @@ for (let i = 0; i < modifiedOrder.length ; i++) {
     if (repeated.includes(modifiedOrder[i].productName)) {
         continue;
     }
-    let quantity = parseInt(modifiedOrder[i].QuantityOrdered);
+    let quantity = parseInt(modifiedOrder[i].Quantity);
     for (let j = i+1; j < modifiedOrder.length; j++) {
         if (modifiedOrder[i].productName === modifiedOrder[j].productName) {
-            quantity += parseInt(modifiedOrder[j].QuantityOrdered);
+            quantity += parseInt(modifiedOrder[j].Quantity);
         }
     }
     orderedProduct.push({ productName: modifiedOrder[i].productName, quantity });
