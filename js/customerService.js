@@ -1,9 +1,15 @@
-if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
-        window.location.href = "./login.html";
-}
+// if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
+//         window.location.href = "./login.html";
+// }
 if(localStorage.getItem("messages") == null){
     localStorage.setItem("messages", JSON.stringify([]));
 }
+document.querySelector("#contactUs").addEventListener('click', function(){
+    debugger;
+    if(JSON.parse(localStorage.getItem("Active User")) == null || JSON.parse(localStorage.getItem("Active User")).role == "Guest"){
+        window.location.href = "./login.html";
+    }
+})
 let messages = JSON.parse(localStorage.getItem("messages"));
 let activeUser = JSON.parse(localStorage.getItem("Active User"));
 // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -11,7 +17,7 @@ const forms = document.querySelectorAll('.needs-validation')
 // console.log(forms);
 // Loop over them and prevent submission
 forms[0].addEventListener('submit', event => {
-    debugger;
+    // debugger;
     // console.log(this);
     // event.preventDefault()
 if (!forms[0].checkValidity()) {

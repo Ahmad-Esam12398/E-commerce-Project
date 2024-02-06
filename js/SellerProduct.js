@@ -448,12 +448,9 @@ SelectedTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("sort-up")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            if (typeof x[key] == "string"){
-                return x[key].localeCompare(y[key]);
-            }
-            else{
+           
                 return x[key] - y[key];
-            }
+           
         });
         SwapSort = false
         drawTable(SellerProduct, SelectedTable, true);
@@ -462,12 +459,10 @@ SelectedTable.addEventListener("click", function (e) {
     else if (e.target.classList.contains("sort-down")) {
         let key = e.target.parentNode.parentNode.textContent.trim();
         SellerProduct.sort(function (x, y) {
-            if (typeof x[key] == "string"){
-                return y[key].localeCompare(x[key]);
-            }
-            else{
+            
+           
                 return y[key] - x[key];
-            }
+            
         });
         SwapSort = true
         drawTable(SellerProduct, SelectedTable, true);

@@ -91,7 +91,7 @@ function createTableProducts(){
         tableBody.appendChild(tableRow);
         myTable.appendChild(tableBody);
     }
-    myTable.appendChild(tableHead);
+    // myTable.appendChild(tableHead);
     AddButton();
 };
 createTableProducts();
@@ -156,10 +156,10 @@ function addProductRow() {
 
 let id = -1;
 function editRow(e) {
-    debugger;
+    // debugger;
     let row = e.target.parentElement.parentElement;
     let rowChildren = row.children;
-    debugger;
+    // debugger;
     let rowChildrenLength = rowChildren.length;
     let rowChildrenValues = [];
     for(let i = 0; i < rowChildrenLength - 1; i++) {
