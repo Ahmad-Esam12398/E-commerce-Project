@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
     if (localStorage.getItem("Active User") == null) {
         let guest = new Person(-1, "", "", "", "", "", "Guest");
         localStorage.setItem("Active User", JSON.stringify(guest.getPerson()));
-        this.location="home.html"
+        this.location="home.html";
     } else {
         var activeUser = JSON.parse(localStorage.getItem("Active User"));
     }
